@@ -1,12 +1,6 @@
 <?php
 class Model extends CI_Model{
     
-//    private $table;
-//    
-//    public function __construct() {
-//        parent::__construct();
-//        $this->table="olaya_apartments";
-//    }
     
     public function save($table,$data)
     {
