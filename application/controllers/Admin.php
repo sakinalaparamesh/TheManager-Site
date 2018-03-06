@@ -16,6 +16,13 @@ class Admin extends CI_Controller {
     public function departments() {
         
         $this->load->view('layouts/header');
+        $this->load->view('departments');
+        $this->load->view('layouts/footer');
+    }
+    public function user() {
+        
+        $this->load->view('layouts/header');
+        $this->load->view('userRegistration');
         $this->load->view('layouts/footer');
     }
 
