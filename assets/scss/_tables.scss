@@ -6,12 +6,36 @@
   margin-bottom: 10px;
 }
 
+.table-striped>tbody>tr:nth-of-type(odd),.table-hover > tbody > tr:hover,
+.table > thead > tr > td.active, .table > tbody > tr > td.active, .table > tfoot > tr > td.active,
+.table > thead > tr > th.active, .table > tbody > tr > th.active, .table > tfoot > tr > th.active,
+.table > thead > tr.active > td, .table > tbody > tr.active > td, .table > tfoot > tr.active > td,
+.table > thead > tr.active > th, .table > tbody > tr.active > th, .table > tfoot > tr.active > th {
+  background-color: $lightdark !important;
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th,
+.table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td ,
+.table > thead > tr > th, .table-bordered{
+  border-top: 1px solid $light5;
+}
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+  border: 1px solid $light5;
+}
+
 .table > thead > tr > th {
   vertical-align: bottom;
   border-bottom: 2px solid $light5;
-  font-weight: 500;
 }
 
+.table-bordered {
+  border: 1px solid $light5;
+}
 table.focus-on {
   tbody {
     tr.focused {
@@ -27,8 +51,18 @@ table.focus-on {
   }
 }
 
+.table-wrapper {
+  .btn-toolbar {
+    display: block;
+  }
+  .dropdown-menu {
+    left: auto;
+    right: 0;
+  }
+}
+
 .fixed-table-container tbody .selected td {
-  background-color: darken($white,3%);
+  background-color: #F4F8FB;
 }
 
 .modal-block {
@@ -85,14 +119,6 @@ div.dataTables_info {
 .dt-buttons {
   float: left;
 }
-
-.dt-button-collection.dropdown-menu {
-  visibility: inherit;
-  opacity: 1;
-  display: none;
-  margin: 0 !important;
-}
-
 div#datatable-buttons_info {
   float: left;
 }
@@ -108,7 +134,7 @@ div#datatable-buttons_info {
   background-color: $white;
 }
 .footable-detail-show {
-  background-color: darken($white,5%);
+  background-color: $light5;
 }
 .footable-row-detail {
   background-color: #F0F4F7;
@@ -138,16 +164,19 @@ div#datatable-buttons_info {
 }
 
 /* Bootstrap Table */
+table[data-toggle="table"] {
+  display: none;
+}
 .fixed-table-pagination .pagination-detail, .fixed-table-pagination div.pagination {
   margin-top: 20px;
 }
 
 .fixed-table-container {
-  border: 1px solid darken($white,5%) !important;
+  border: 1px solid $light5 !important;
 }
 .bootstrap-table .table>thead>tr>th {
-  border-bottom: 2px solid darken($white,5%);
-  background: darken($white,5%);
+  border-bottom: 2px solid $light5;
+  background: #ebeff2;
 }
 .fixed-table-container thead th .th-inner {
   padding: 9px 12px;
@@ -178,7 +207,7 @@ div#datatable-buttons_info {
 
 /* Tablesaw */
 .tablesaw thead {
-  background: darken($white,5%);
+  background: $light5;
   background-image: none;
   border: none;
 }
@@ -237,28 +266,17 @@ div#datatable-buttons_info {
   background-image: none;
 }
 
-.tablesaw-columntoggle-popup {
-  .btn-group {
-    display: block;
-  }
-}
 
 /* Fixed table */
 .sticky-table-header {
-  top: 70px !important;
+  top: 147px !important;
 }
 
-.table-wrapper {
-  .btn-toolbar {
-    display: block;
-  }
-  .dropdown-menu {
-    left: auto;
-    right: 0;
+@media (max-width: 768px) {
+  .sticky-table-header {
+    display: none;
   }
 }
-
-
 /* Key Table */
 table.dataTable th.focus,table.dataTable td.focus{outline:3px solid $custom !important;outline-offset:-1px}
 
@@ -284,7 +302,7 @@ div.ColVis_collectionBackground {
   background-color: transparent;
 }
 ul.ColVis_collection {
-  padding: 10px 0 0 0;
+  padding: 10px 0px 0px 0px;
   background-color: $white;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
   border: none;
@@ -354,7 +372,7 @@ ul.ColVis_collection {
 .jsgrid-pager-nav-button {
   a{
     color: $lightdark7;
-    font-weight: 500;
+    font-weight: 600;
 
     &:hover {
       color: $custom;

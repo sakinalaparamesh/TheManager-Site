@@ -31,7 +31,15 @@
     min-width: 134px;
   }
   .checkbox {
+    margin-bottom: 0;
+    margin-top: 0;
+    vertical-align: middle;
     display: inline-block;
+    height: 17px;
+
+    label {
+      min-height: 16px;
+    }
   }
 }
 
@@ -39,7 +47,6 @@
   .list-group-item {
     background-color: transparent;
     color: $dark;
-    font-size: 0.95rem;
 
     &:hover {
       background-color: $lightdark;
@@ -55,7 +62,8 @@
 
 .unread {
   a{
-    font-weight: 500;
+    font-weight: 600;
     color: $lightdark4;
   }
 }
+

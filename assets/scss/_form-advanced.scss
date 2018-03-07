@@ -31,19 +31,9 @@
     font-size: 14px !important;
   }
 }
+
 .datepicker>div {
   display: inherit;
-}
-.datepicker-dropdown.dropdown-menu {
-  visibility: visible;
-  opacity: 1;
-  margin-top: 0 !important;
-}
-
-.daterangepicker.show-calendar,.bootstrap-timepicker-widget.open{
-  visibility: visible;
-  opacity: 1;
-  margin-top: 0 !important;
 }
 
 .datepicker table tr td.today, .datepicker table tr td.today:hover,
@@ -102,10 +92,6 @@
   background-color: $primary;
   border: 1px solid $primary;
   color: $white;
-}
-
-.daterangepicker.dropdown-menu.show-calendar,.daterangepicker.dropdown-menu {
-  display: none;
 }
 
 
@@ -177,8 +163,8 @@
   position: relative;
 
   .note-toolbar {
-    background-color: darken($white,8%);
-    border-bottom: 1px solid darken($white,12%);
+    background-color: $lightdark;
+    border-bottom: 1px solid $light;
     margin: 0;
   }
   .note-statusbar {
@@ -260,7 +246,7 @@
   padding: 3px 1.5rem;
   clear: both;
   font-weight: 400;
-  color: $dark;
+  color: #292b2c;
   text-align: inherit;
   white-space: nowrap;
   background: 0 0;
@@ -279,22 +265,11 @@
   margin-top: 0;
 }
 
-.bootstrap-select.show {
-  .dropdown-menu.open {
-    .dropdown-menu.inner {
-      visibility: visible;
-      opacity: 1;
-      margin-top: 0 !important;
-    }
-  }
-}
-
 
 /* Dropzone */
 .dropzone {
   min-height: 230px;
-  border: 2px dashed rgba($dark,0.3);
-  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+  border: 2px dashed rgba(0, 0, 0, 0.3);
   background: white;
   border-radius: 6px;
 
@@ -578,30 +553,7 @@
 }
 
 
-/* == Form Uploads == */
-
-.jFiler-input-dragDrop {
-  width: 100%;
-  background-color: #fafafa;
-}
-
-.jFiler-theme-default .jFiler-input {
-  width: 100%;
-}
-.jFiler-theme-default .jFiler-input-button {
-  background-color: $custom;
-  background-image: none !important;
-  color: $white;
-  border: 1px solid $custom !important;
-}
-
-
-
-/* == Colorpicker == */
-
-.colorpicker-visible {
-  visibility: visible;
-  opacity: 1;
+/* == X editable == */
+.editable-checklist label {
   display: block !important;
-  margin-top: 0 !important;
 }

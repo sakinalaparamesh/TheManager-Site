@@ -3,52 +3,51 @@
 ============= */
 
 div.hopscotch-bubble {
-  border: 3px solid $dark;
+  border: 3px solid $primary;
   border-radius: 5px;
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
 
   .hopscotch-next {
-    background-color: $dark !important;
+    background-color: $primary !important;
     background-image: none !important;
-    border-color: $dark !important;
+    border-color: $primary !important;
     text-shadow: none !important;
     margin: 0 0 0 5px !important;
   }
   .hopscotch-prev {
-    background-color: $dark !important;
+    background-color: $primary !important;
     background-image: none !important;
-    border-color: $dark !important;
+    border-color: $primary !important;
     text-shadow: none !important;
     color: $white !important;
   }
 }
 div.hopscotch-bubble .hopscotch-bubble-number {
-  background: $dark;
+  background: $custom;
   padding: 0;
   border-radius: 50%;
 }
 div.hopscotch-bubble .hopscotch-bubble-arrow-container.left .hopscotch-bubble-arrow-border {
-  border-right: 19px solid $dark;
+  border-right: 19px solid $primary;
 }
 div.hopscotch-bubble .hopscotch-bubble-arrow-container.right .hopscotch-bubble-arrow {
-  border-left: 19px solid $dark;
+  border-left: 19px solid $primary;
   left: -2px;
 }
 div.hopscotch-bubble .hopscotch-bubble-arrow-container.left .hopscotch-bubble-arrow {
   border: none;
 }
 div.hopscotch-bubble .hopscotch-bubble-arrow-container.right .hopscotch-bubble-arrow-border {
-  border-left: 0 solid $dark;
+  border-left: 0 solid $primary;
 }
 div.hopscotch-bubble .hopscotch-bubble-arrow-container.up .hopscotch-bubble-arrow {
-  border-bottom: 19px solid $dark;
+  border-bottom: 19px solid $primary;
   top: 0;
 }
 div.hopscotch-bubble .hopscotch-bubble-arrow-container.up .hopscotch-bubble-arrow-border {
   border-bottom: 0 solid rgba(0,0,0,.5);
 }
 div.hopscotch-bubble .hopscotch-bubble-arrow-container.down .hopscotch-bubble-arrow {
-  border-top: 19px solid $dark;
+  border-top: 19px solid $primary;
   top: -2px;
 }
 div.hopscotch-bubble .hopscotch-bubble-arrow-container.down .hopscotch-bubble-arrow-border {

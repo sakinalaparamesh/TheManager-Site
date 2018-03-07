@@ -9,7 +9,7 @@ $( document ).ready(function() {
     var DrawSparkline = function() {
         $('#sparkline1').sparkline([0, 23, 43, 35, 44, 45, 56, 37, 40], {
             type: 'line',
-            width: '100%',
+            width: "100%",
             height: '165',
             chartRangeMax: 50,
             lineColor: '#fb6d9d',
@@ -20,7 +20,7 @@ $( document ).ready(function() {
 
         $('#sparkline1').sparkline([25, 23, 26, 24, 25, 32, 30, 24, 19], {
             type: 'line',
-            width: '100%',
+            width: "100%",
             height: '165',
             chartRangeMax: 40,
             lineColor: '#5d9cec',

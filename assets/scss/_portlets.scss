@@ -4,9 +4,9 @@
 
 .portlet {
   background: $white;
-  border-radius: 3px;
-  margin-bottom: 30px;
-  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(54, 64, 74, 0.05);
+  border-radius: 5px;
+  margin-bottom: 20px;
   background-clip: padding-box;
 
   .portlet-heading {
@@ -16,12 +16,10 @@
     .portlet-title {
       color: $white;
       float: left;
-      font-size: 15px;
+      font-size: 18px;
       font-weight: 600;
       margin-bottom: 0;
-      margin-top: 0;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
+      margin-top: 5px;
     }
     .portlet-widgets {
       display: inline-block;

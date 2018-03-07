@@ -1,50 +1,38 @@
-/* Alert */
-
-.alert {
-  .btn {
-    margin-top: 10px;
-  }
-}
+/* =============
+   Alerts
+============= */
 .alert-success {
-  background-color: $success;
-  border-color: $success;
-  color: $white;
-
+  background-color: lighten($success, 30%) !important;
+  border-color: lighten($success, 10%) !important;
+  color: $success;
   .alert-link {
-    color: $white;
+    color: $success;
   }
 }
+
 .alert-info {
-  background-color: $info;
-  border-color: $info;
-  color: $white;
-
+  background-color: lighten($info, 35%) !important;
+  border-color: lighten($info, 10%) !important;
+  color: $info;
   .alert-link {
-    color: $white;
+    color: $info;
   }
-
 }
+
 .alert-warning {
-  background-color: $warning;
-  border-color: $warning;
-  color: $white;
-
+  background-color: lighten($warning, 30%) !important;
+  border-color: lighten($warning, 10%) !important;
+  color: $warning;
   .alert-link {
-    color: $white;
+    color: $warning;
   }
 }
+
 .alert-danger {
-  background-color: $danger;
-  border-color: $danger;
-  color: $white;
-
+  background-color: lighten($danger, 35%) !important;
+  border-color: lighten($danger, 10%) !important;
+  color: $danger;
   .alert-link {
-    color: $white;
+    color: $danger;
   }
-}
-
-
-//Notification
-.notifyjs-metro-base {
-  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15) !important;
 }

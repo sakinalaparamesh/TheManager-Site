@@ -106,13 +106,12 @@
   background-color: transparent;
   border-radius: 0;
   border: none;
-  color: #505461 !important;
+  color: $dark !important;
   cursor: pointer;
   line-height: 50px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 0 20px;
   letter-spacing: 0.03em;
-  font-weight: 500;
+  font-weight: 600;
 
   &:hover {
     color: $custom !important;
@@ -120,7 +119,7 @@
 }
 
 .tab-content {
-  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   color: #777777;
 }
 
@@ -138,7 +137,7 @@
 }
 
 .navtab-bg {
-  background-color: darken($white,7%);
+  background-color: $lightdark;
 }
 
 .nav-tabs.nav-justified > .active > a, .nav-tabs.nav-justified > .active > a:hover, .nav-tabs.nav-justified > .active > a:focus,
@@ -155,4 +154,10 @@
   .tab-content {
     margin-bottom: 0;
   }
+}
+
+.table > thead > tr > td.middle-align, .table > tbody > tr > td.middle-align,
+.table > .tfood > tr > td.middle-align, .table > thead > tr > th.middle-align,
+.table > tbody > tr > th.middle-align, .table > .tfood > tr > th.middle-align {
+  vertical-align: middle;
 }

@@ -1,151 +1,132 @@
- <div class="content-page">
-                <!-- Start content -->
-                <div class="content">
-                    <div class="container-fluid">
+<!-- Page-Title -->
+<div class="wrapper">
+<div class="container-fluid">
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="btn-group pull-right">
+                <ol class="breadcrumb hide-phone p-0 m-0">
+                    <li class="breadcrumb-item"><a href="administration.php">Administration</a></li>
+                    <li class="breadcrumb-item active">Departments</li>
+                </ol>
+            </div>
+            <h4 class="page-title">Departments</h4>
+        </div>
+    </div>
+</div>
+<div class="card-box">
+<div class="row">
+<!-- <label for="" class="col-md-1">Email<span class="text-danger">*</span></label> -->
+<div class="col-md-3">
+<input type="email" required=""  class="form-control input-sm" id="" placeholder="Search">
+</div>
+<div class="col-md-1 m-b-10">
+    <a class="btn btn-inverse btn-sm" href="javascript:">Search <i class="fa fa-search"></i></a>
+</div>
+<div class="col-md-8 text-right m-b-10">
+    <a class="btn btn-default btn-sm" href="department_form.php">Add <i class="fa fa-plus-add"></i></a>
+</div>
+<div class="col-md-12 test">                            
+<div class="table-responsive">
+<table     data-toggle="table"
+           data-page-size="10"
+           data-pagination="true" class="table-bordered table-condensed table-hovered" style="white-space: nowrap;">
+        <thead class="text-white">
+        <tr>
+            <th data-field="state" data-checkbox="true"></th>
+            <th data-field="id" data-switchable="false">S.No</th>
+            <th data-field="name">Name </th>
+            <th data-field="code">Department code</th>
+            <th data-field="data">Description </th>
+            <th data-field="status">Status</th>
+            
+        </tr>
+        </thead>
 
-                        <!-- Page-Title -->
-                        <!-- <div class="row">
-                            <div class="col-sm-12">
-                                <div class="btn-group pull-right m-t-15">
-                                    <button type="button" class="btn btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">Settings</button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
-                                        <a class="dropdown-item" href="#">Dropdown One</a>
-                                        <a class="dropdown-item" href="#">Dropdown Two</a>
-                                        <a class="dropdown-item" href="#">Dropdown Three</a>
-                                        <a class="dropdown-item" href="#">Dropdown Four</a>
-                                    </div>
-                                </div>
 
-                                <h4 class="page-title">Dashboard</h4>
-                                <p class="text-muted page-title-alt">Welcome to Ubold admin panel !</p>
-                            </div>
-                        </div> -->
-                        <!--row-->
-                        
-                        <div class="main-Scrren">
-                            <div class="Dept_Tiles">
-                        <div class="row">
-                            <div class="Department_heading">
-                                <h2 class="Dept_headng">User</h2>
-                            </div>
-                            </div>
-                            <div class="row tiles_border">
-                              
-                            <div class="col-md-2 ">
-                                <div class="widget-bg-color-icon card-box fadeInDown animated colorSix">
-                                    <div class="bg-icon bg-icon-info pull-left">
-                                      <i class="ion-person"></i>
+        <tbody>
+        <tr class="openView">
+            <td></td>
+            <td>1</td>
+            <td>Divya</td>
+            <td>PSV0009</td>
+            <td> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</td>
+            <td>Active</td>  
+        </tr>
+        <tr class="openView">
+            <td></td>
+            <td>2</td>
+            <td>Sruthi</td>
+            <td>PSV0008</td>
+            <td> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</td>
+            <td>Active</td>  
+        </tr>
+        <tr class="openView">
+            <td></td>
+            <td>3</td>
+            <td>Mahender</td>
+            <td>PSV0006</td>
+            <td> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</td>
+            <td>Active</td>  
+        </tr>
+       <tr class="openView">
+            <td></td>
+            <td>4</td>
+            <td>Sruthi</td>
+            <td>PSV0008</td>
+            <td> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</td>
+            <td>Active</td>  
+        </tr>
+        <tr class="openView">
+            <td></td>
+            <td>5</td>
+            <td>Divya</td>
+            <td>PSV0009</td>
+            <td> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</td>
+            <td>Active</td>  
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+<div class="col-md-3 mini" style="display: none">
+     <div class="panel ">
+      <div class="panel-heading color-dark">  
+        <div class="text-right"><span class="fa fa-close closemini"></span></div>
+        <p>Employee Details</p>
+    </div>
+      <div class="panel-body">
+                        <div class="modal-wrapper">
+                            <div class="modal-text">
+                                <form class="form-horizontal" role="form">
+                                <div class="action_icons"> 
+                                    <button class="btn btn-icon waves-effect color-dark waves-light"> <i class="fa fa-pencil"></i> </button>
+                                    <button class="btn btn-icon waves-effect color-dark waves-light"> <i class="fa fa-trash"></i> </button>
                                     </div>
-                                    <div class="text-right">
-                                        <h3 class="text-white f-16"><b>Employee Registration</b></h3>
+                                    <div>&nbsp;</div>
+                                <div class="form-group">
+                                     <label class="col-md-3 control-label"> Department </label>
                                         
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
+                                 </div>
+                                 <div class="form-group">
+                                     <label class="col-md-3 control-label">Code </label>
+                                        
+                                 </div>
+                                 <div class="form-group">
+                                     <label class="col-md-3 control-label f-w-normal">Description </label>
+                                        
+                                 </div>
+                                 
+                                </form>
                             </div>
+                        </div>
+                    </div>
+    </div>
 
-                            <div class="col-md-2  ">
-                                <div class="widget-bg-color-icon card-box colorFour">
-                                    <div class="bg-icon bg-icon-pink pull-left">
-                                        <i class="ion-man"></i>
-                                    </div>
-                                    <div class="text-right">
-                                        <h3 class="text-white f-16"><b>Agent Registration</b></h3>
-                                        
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                                </div>
-                            </div>
-                            <div class="Dept_Tiles">
-                        <div class="row">
-                            <div class="Department_heading">
-                                <h2 class="Dept_headng">Settings</h2>
-                            </div>
-                            </div>
-                            <div class="row tiles_border">
-                              
-                            <div class="col-md-2 ">
-                                <div class="widget-bg-color-icon card-box fadeInDown animated colorone">
-                                    <div class="bg-icon bg-icon-info pull-left">
-                                        <i class="ti-layout-grid2-alt"></i>
-                                    </div>
-                                    <div class="text-right">
-                                        <h3 class="text-white f-22"><b>Departments</b></h3>
-                                        
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-2  ">
-                                <div class="widget-bg-color-icon card-box colortwo">
-                                    <div class="bg-icon bg-icon-pink pull-left">
-                                        
-                                         <i class="ion-android-contacts"></i>
-                                    </div>
-                                    <div class="text-right">
-                                        <h3 class="text-white f-22"><b>Roles</b></h3>
-                                        
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-2  ">
-                                <div class="widget-bg-color-icon card-box colorthree">
-                                    <div class="bg-icon bg-icon-pink pull-left">
-                                       <i class="ion-ios7-people"></i>
-                                    </div>
-                                    <div class="text-right">
-                                        <h3 class="text-white f-22"><b> Sub Roles</b></h3>
-                                        
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-
-                           <div class="col-md-2  ">
-                                <div class="widget-bg-color-icon card-box colorFour">
-                                    <div class="bg-icon bg-icon-pink pull-left">
-                                        <i class="ion-paper-airplane"></i>
-                                    </div>
-                                    <div class="text-right">
-                                        <h3 class="text-white f-22"><b>Modules</b></h3>
-                                        
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                    <div class="col-md-2  ">
-                                <div class="widget-bg-color-icon card-box colorFive">
-                                    <div class="bg-icon bg-icon-pink pull-left">
-                                        <i class="ion-ios7-eye"></i>
-                                    </div>
-                                    <div class="text-right">
-                                        <h3 class="text-white f-22"><b>Actions</b></h3>
-                                        
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                                <div class="col-md-2  ">
-                                <div class="widget-bg-color-icon card-box colorSix">
-                                    <div class="bg-icon bg-icon-pink pull-left">
-                                       <i class="ion-ios7-personadd"></i>
-                                    </div>
-                                    <div class="text-right">
-                                        <h3 class="text-white f-22"><b>privileges</b></h3>
-                                        
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                                </div>
-                            </div>
-                            </div>
-						
-						<!-- end row -->
-					</div> 
-				<!-- content -->
+  </div>
+</div>
+</div>
+<!-- end page title end breadcrumb -->
+</div> <!-- end container -->
+</div>
+<!-- end wrapper -->

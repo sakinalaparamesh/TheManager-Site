@@ -4,9 +4,10 @@
 
 .faq-box {
   padding: 24px 0;
-  border-bottom: 1px solid darken($white,5%);
+  border-bottom: 1px solid #ebeff2;
 
   .question {
+    font-weight: 600;
     font-size: 16px;
     margin-top: 0;
   }

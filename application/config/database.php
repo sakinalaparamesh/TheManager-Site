@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'managers',
+	'hostname' => '166.62.6.66',
+	'username' => 'PrvAdminManager',
+	'password' => 'Prv_Admin_Manager',
+	'database' => 'Prv_Dev_TheManager',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

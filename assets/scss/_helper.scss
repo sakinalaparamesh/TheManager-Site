@@ -114,6 +114,12 @@
 .l-h-34 {
   line-height: 34px;
 }
+.font-600 {
+  font-weight: 600;
+}
+.font-bold {
+  font-weight: 700;
+}
 .font-normal {
   font-weight: normal;
 }
@@ -150,8 +156,9 @@
   border-radius: 0 !important;
 }
 .bx-shadow {
-  -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+  -moz-box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);
 }
 .mx-box {
   max-height: 380px;
@@ -188,10 +195,9 @@
 /* Card Box */
 .card-box{
   padding: 20px;
-  -webkit-box-shadow: 0 1px 4px 0 rgba(0,0,0,.1);
-  box-shadow: 0 1px 4px 0 rgba(0,0,0,.1);
-  border-radius: 3px;
-  margin-bottom: 30px;
+  border: 1px solid rgba(54, 64, 74, 0.05);
+  border-radius: 5px;
+  margin-bottom: 20px;
   background-clip: padding-box;
   background-color: $white;
 }

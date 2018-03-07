@@ -1,6 +1,6 @@
 /* Wysiwig */
 .mce-content-body p {
-  color: $dark;
+  color: #9398a0;
   font-size: 14px;
   font-weight: 300;
 }
@@ -9,7 +9,7 @@
 }
 .mce-popover .mce-colorbutton-grid {
   margin: 0;
-  border: 1px solid $muted !important;
+  border: 1px solid #d7dce5 !important;
   padding: 4px;
 }
 .mce-reset .mce-window-head {
@@ -51,24 +51,24 @@
   border-width: 0 !important;
 }
 .mce-container .mce-menubar {
-  background-color: darken($white,5%) !important;
-  border: 1px solid darken($white,5%) !important;
+  background-color: #f2f4f7 !important;
+  border: 1px solid #d7dce5 !important;
   padding: 2px;
 }
 .mce-container .mce-menubar .mce-btn button span {
-  color: $dark;
+  color: #707780;
   font-size: 14px;
   font-weight: 400;
   text-transform: capitalize;
 }
 .mce-container .mce-menubar .mce-btn button .mce-caret {
-  border-top-color: $dark;
+  border-top-color: #707780;
 }
 .mce-container .mce-menubar .mce-btn button:hover {
-  background-color: darken($white,5%);
+  background-color: #e8ebf1;
 }
 .mce-container .mce-menubar .mce-btn.mce-active button {
-  background-color: darken($white,5%);
+  background-color: #e8ebf1;
 }
 .mce-container .mce-btn {
   background-color: #d7dce5;
@@ -78,13 +78,13 @@
   border-radius: 0;
 }
 .mce-container .mce-btn button {
-  color: $white;
+  color: #ffffff;
   font-size: 14px;
   font-weight: 400;
   text-shadow: none;
 }
 .mce-container .mce-btn:hover {
-  background-color: darken($white,5%);
+  background-color: #b8c1d1;
   background-image: none;
 }
 .mce-container .mce-primary {
@@ -95,7 +95,7 @@
   border-radius: 0;
 }
 .mce-container .mce-primary button {
-  color: $white;
+  color: #ffffff;
   font-size: 14px;
   font-weight: 400;
   text-shadow: none;
@@ -105,17 +105,18 @@
   background-image: none;
 }
 .mce-container .mce-toolbar-grp {
-  background-color: darken($white,5%) !important;
-  border: 1px solid darken($white,5%) !important;
+  background-color: #f2f4f7 !important;
+  border: 1px solid #d7dce5 !important;
   border-top-width: 0 !important;
   padding: 6px;
 }
 .mce-container .mce-edit-area {
-  border: 2px solid darken($white,5%) !important;
+  border: 1px solid #d7dce5 !important;
+  border-width: 0px 1px !important;
 }
 .mce-container .mce-statusbar {
-  background-color: darken($white,5%) !important;
-  border: 1px solid darken($white,5%) !important;
+  background-color: #f2f4f7 !important;
+  border: 1px solid #d7dce5 !important;
 }
 .mce-container .mce-statusbar .mce-path .mce-path-item {
   color: #707780;
