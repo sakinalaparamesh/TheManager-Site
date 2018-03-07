@@ -16,5 +16,24 @@
       "ActionName": "Save",
       "ErrorCode": "3",
       "Message": "Technical Error occured while saving..Please contact admin"
+   },
+   {
+      "controlname": "Role",
+      "ActionName": "Save",
+      "ErrorCode": "1",
+      "Message": "Successfully saved Role"
+   },
+   {
+      "controlname": "Role",
+      "ActionName": "Save",
+      "ErrorCode": "1",
+      "Message": "Role Name Duplicated..Please check"
+   },
+   {
+      "controlname": "Role",
+      "ActionName": "Save",
+      "ErrorCode": "1",
+      "Message": "Technical Error occured while saving..Please contact admin"
    }
+   
 ]
