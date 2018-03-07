@@ -17,38 +17,31 @@
 <div class="card-box">
 <div class="row">
     <div class="col-md-12">
-        <form role="form" >
+        <form role="form" id="frmdepartment">
                                 <div class="form-group row">
-                                    <label for="inputEmail3" class="col-md-2">Name<span class="text-danger">*</span></label>
+                                    <label for="txtDepartmentName" class="col-md-2">Name<span class="text-danger">*</span></label>
                                     <div class="col-md-4">
-                                        <input type="text" required="" parsley-type="name" class="form-control input-sm" id="inputEmail3" placeholder="Name">
+                                        <input type="text" required="" name="departmentname" parsley-type="name" class="form-control input-sm" id="txtDepartmentName" placeholder="Name">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                
                                     <label for="Department_code" class="col-md-2">Department code<span class="text-danger">*</span></label>
                                     <div class="col-md-4">
-                                        <input id="Department_code" type="text" placeholder="Department code" required="" class="form-control input-sm">
+                                        <input id="txtDepartmentCode" name="departmentcode" type="text" placeholder="Department code" required="" class="form-control input-sm">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="hori-pass2" class="col-md-2">Description
                                         <span class="text-danger">*</span></label>
                                     <div class="col-md-4">
-                                        <textarea class="form-control" rows="3"></textarea>
+                                        <textarea class="form-control" id="txtDepartmentDescription" rows="3" name="departmentdescription"></textarea>
                                     </div>
                                 </div>
-                                <div class="form-group row">
                                
-                                    <label for="webSite" class="col-md-2">Status<span class="text-danger">*</span></label>
-                                    <div class="col-md-4">
-                                        <input type="Email" required="" parsley-type="url" class="form-control input-sm" id="webSite" placeholder="Status">
-                                    </div>
-                                </div>
                                 <div class="form-group row ">
-                                     <label class="col-md-2"></label>
                                     <div class=" col-md-4 col-md-offset-2">
-                                        <button type="submit" class="btn btn-default waves-effect waves-light btn-sm" id="success-alert">
+                                        <button type="button" class="btn btn-default waves-effect waves-light btn-sm" id="btnSubmit">
                                             SUBMIT
                                         </button>
                                         <button type="reset" class="btn btn-inverse waves-effect m-l-5 btn-sm">
@@ -64,3 +57,11 @@
 </div> <!-- end container -->
 </div>
 <!-- end wrapper -->
+ <script src="<?php echo base_url(); ?>assets/js/pages/administration/department_js.js" type="text/javascript"></script>
+ 
+ <script type="text/javascript">
+     $(document).ready(function(){
+         var _baseUrl ='<?php echo base_url(); ?>';
+         departmentjs.Load(_baseUrl);
+     })
+ </script>

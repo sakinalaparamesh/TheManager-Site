@@ -1,4 +1,5 @@
 <?php
+
 //Check Admin User loggedIN or not
 //if (!function_exists('is_admin_loggedin'))
 //{
@@ -16,16 +17,30 @@
 //    }	
 //}
 
-if (!function_exists('is_admin_loggedin'))
-{
-    function is_admin_loggedin()
-    {
-        try{
+if (!function_exists('is_admin_loggedin')) {
+
+    function is_admin_loggedin() {
+        try {
             return true;
-            
-        } catch (Exception $e){
+        } catch (Exception $e) {
             log_message('error', $e->getMessage());
-            redirect(base_url().$CI->config->item('admin_url_path'));
+            redirect(base_url() . $CI->config->item('admin_url_path'));
         }
-    }	
+    }
+
+}
+if (!function_exists('getErrorMessages')) {
+
+    function getErrorMessages($controller_name,$method,$error_code) {
+        $path= base_url()."data/error_details.json";
+       $res= file_get_contents($path);
+       $data= json_decode($res,TRUE);
+       for($i=0;count($data)>$i;$i++){
+           if($data[$i]['controlname']==$controller_name&&$data[$i]['ActionName']==$method&&$data[$i]['ErrorCode']==$error_code){
+               return $data[$i]['Message'];
+           }
+       }
+    }
+    
+
 }
