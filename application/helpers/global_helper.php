@@ -1,8 +1,8 @@
 <?php
 //Check Admin User loggedIN or not
-//if (!function_exists('is_admin_loggedin'))
+//if (!function_exists('is_user_loggedin'))
 //{
-//    function is_admin_loggedin()
+//    function is_user_loggedin()
 //    {
 //        try{
 //            $CI =& get_instance();
@@ -18,7 +18,7 @@
 
 if (!function_exists('is_admin_loggedin'))
 {
-    function is_admin_loggedin()
+    function is_user_loggedin()
     {
         try{
             return true;

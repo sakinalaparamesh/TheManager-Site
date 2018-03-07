@@ -21,33 +21,29 @@
     <a class="btn btn-inverse btn-sm" href="javascript:">Search <i class="fa fa-search"></i></a>
 </div>
 <div class="col-md-8 text-right m-b-10">
-    <a class="btn btn-default btn-sm" href="client_registration.php">Add Client <i class="fa fa-plus"></i></a>
-    <a class="btn btn-default btn-sm" href="branch_registration.php">Add Branch <i class="fa fa-plus"></i></a>
-    <a class="btn btn-default btn-sm" href="client_contact_registration.php">Add Contact <i class="fa fa-plus"></i></a>
+    <a class="btn btn-default btn-sm" href="<?php echo base_url('add-client'); ?>">Add Client <i class="fa fa-plus"></i></a>
+    <a class="btn btn-default btn-sm" href="<?php echo base_url('add-branch'); ?>">Add Branch <i class="fa fa-plus"></i></a>
+    <a class="btn btn-default btn-sm" href="<?php echo base_url('add-contact'); ?>">Add Contact <i class="fa fa-plus"></i></a>
 </div>
 
 <div class="col-md-12 test">                            
 <div class="table-responsive">
-<table     data-toggle="table"
-           data-page-size="10"
-           data-pagination="true" class="table-bordered table-condensed table-hovered" style="white-space: nowrap;">
+    <table id="tblId" data-toggle="table" data-page-size="10" data-pagination="true" class="table-bordered table-condensed table-hovered" style="white-space: nowrap;">
         <thead class="text-white">
-        <tr>
-            <th data-field="state" data-checkbox="true"></th>
-            <th data-field="id" data-switchable="false">S.No</th>
-            <th data-field="name">Name </th>
-             <th data-field="companyname">Company Name </th>
-            <th data-field="branch">Branch</th>
-           
-            <th data-field="mobile">Mobile </th>
-            
-            
-        </tr>
+            <tr>
+                <!--<th data-priority="1" data-field="state" data-checkbox="true"></th>-->
+                <th data-priority="1" data-switchable="false">S.No</th>
+                <th data-priority="2">Name</th>
+                <th data-priority="1">Company Name</th>
+                <th data-priority="1">Branch</th>
+                <th data-priority="1">Mobile</th>
+                <th data-priority="1">Mobile</th>
+                <th data-priority="3">Actions</th>
+            </tr>
         </thead>
 
-
         <tbody>
-        <tr class="openView">
+<!--        <tr class="openView">
             <td></td>
             <td>1</td>
             <td>Divya</td>
@@ -55,10 +51,8 @@
             <td>Provalley </td>
             <td>Kukatpally </td>
             <td>9658965412</td>  
-        </tr>
-       
-       
-        
+        </tr>-->
+
         </tbody>
     </table>
 </div>
@@ -116,3 +110,18 @@
 </div> <!-- end container -->
 </div>
 <!-- end wrapper -->
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+		
+        var url = "<?php echo base_url(); ?>";
+        var csrf_token_name = '<?php echo $this->security->get_csrf_token_name(); ?>';
+        var csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
+
+        GridJS.Load(url, csrf_token_name, csrf_hash);
+
+    });//ready
+
+</script>
+<script src="<?php echo base_url().'assets/datatables-grid/ClientsGridJS.js'; ?>"></script>
