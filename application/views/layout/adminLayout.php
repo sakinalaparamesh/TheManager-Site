@@ -12,7 +12,7 @@
 
         <!-- App css -->
         <link href="<?php echo base_url(); ?>assets/css/the-manager.css" rel="stylesheet" type="text/css" />
-        <link href="<?php echo base_url(); ?>plugins/bootstrap-table/css/bootstrap-table.min.css" rel="stylesheet" type="text/css" />
+<!--        <link href="<?php echo base_url(); ?>plugins/bootstrap-table/css/bootstrap-table.min.css" rel="stylesheet" type="text/css" />-->
         <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
          <!--<link href="<?php //echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet" type="text/css" />-->
         <link href="<?php echo base_url(); ?>assets/css/icons.css" rel="stylesheet" type="text/css" />
@@ -57,7 +57,7 @@
        <script src="<?php echo base_url(); ?>plugins/waypoints/lib/jquery.waypoints.min.js"></script>
         <script src="<?php echo base_url(); ?>plugins/counterup/jquery.counterup.min.js"></script>
         <script src="<?php echo base_url(); ?>plugins/jquery-knob/jquery.knob.js"></script>
-        <script src="<?php echo base_url(); ?>plugins/bootstrap-table/js/bootstrap-table.js"></script>
+<!--        <script src="<?php echo base_url(); ?>plugins/bootstrap-table/js/bootstrap-table.js"></script>-->
         <!--for form validation-->
         <script src="<?php echo base_url(); ?>assets/pages/jquery.bs-table.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>plugins/parsleyjs/parsley.min.js"></script>

@@ -2,7 +2,7 @@
 class Model extends CI_Model{
     
     
-    public function save($table,$data)
+    public function insert($table,$data)
     {
         return $this->db->insert($table, $data);
     }

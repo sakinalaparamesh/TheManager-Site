@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<root>
+  <Errors controlname="Department" ActionName="Save" ErrorCode="1" Message="Successfully saved department"/>  
+  <Errors controlname="Department" ActionName="Save" ErrorCode="2" Message="Department Name Duplicated..Please check"/>  
+  <Errors controlname="Department" ActionName="Save" ErrorCode="3" Message="Technical Error occured while saving..Please contact admin"/>  
+  
+</root>

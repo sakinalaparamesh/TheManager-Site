@@ -1,0 +1,20 @@
+[
+   {
+      "controlname": "Department",
+      "ActionName": "Save",
+      "ErrorCode": "1",
+      "Message": "Successfully saved department"
+   },
+   {
+      "controlname": "Department",
+      "ActionName": "Save",
+      "ErrorCode": "2",
+      "Message": "Department Name Duplicated..Please check"
+   },
+   {
+      "controlname": "Department",
+      "ActionName": "Save",
+      "ErrorCode": "3",
+      "Message": "Technical Error occured while saving..Please contact admin"
+   }
+]
