@@ -7,26 +7,23 @@ class Clients_model extends CI_model {
     { 
         try{
                 $data = array();
-                $data['totalFiltered'] = $this->getAllClientsCount($search);
+                $searchcols = "CONCAT(clientname,' ',clientcode,' ',CreatedOn)";
+                $data['totalFiltered'] = $this->getAllClientsCount($search, $searchcols);
                 //Filter records Data
-                $this->db->select("id as CompanyId,company_name as CompanyName,email,phone,description,registration_number,logo,is_active as Status,DATE_FORMAT(created_on,'%d-%m-%Y') as CreatedOn");
-                $this->db->from("company");
+                $this->db->select("clientid,clientname,clientcode,DATE_FORMAT(createdon,'%d-%m-%Y') as CreatedOn,isactive as Status");
+                $this->db->from("tbl_mng_clientmaster");
                 //Search
                 if($search){
-                    $this->db->like(array("CONCAT(company_name,' ',email,' ',phone,' ',description,' ',registration_number)" => $search));
+                    $this->db->like(array($searchcols => $search));
                 }
                 //OrderBy
                 if($dir == null) $dir = 'DESC';
                 if($order == 1){
-                    $this->db->order_by('company_name', $dir);
+                    $this->db->order_by('clientname', $dir);
                 }else if($order == 2){
-                    $this->db->order_by('email', $dir);
+                    $this->db->order_by('clientcode', $dir);
                 }else if($order == 3){
-                    $this->db->order_by('phone', $dir);
-                }else if($order == 4){
-                    $this->db->order_by('description', $dir);
-                }else if($order == 5){
-                    $this->db->order_by('registration_number', $dir);
+                    $this->db->order_by('CreatedOn', $dir);
                 }
                 $this->db->limit($limit, $start);
                 $query = $this->db->get();
@@ -40,12 +37,12 @@ class Clients_model extends CI_model {
             echo "ERROR: ".$e->getMessage();
         }
     }
-    public function getClientDetailsById($CompanyId)
+    public function getClientDetailsById($id)
     { 
         try{
-                $this->db->select("id as CompanyId,company_name,email,phone,fax_number,description,registration_number,logo,is_active as Status,DATE_FORMAT(created_on,'%d-%m-%Y') as CreatedOn");
+                $this->db->select("clientid,clientname,clientcode,DATE_FORMAT(createdon,'%d-%m-%Y') as CreatedOn,isactive as Status");
                 $this->db->from("tbl_mng_clientmaster");
-                $this->db->where('id', $CompanyId);
+                $this->db->where('id', $id);
                 $query = $this->db->get();
                 return $query->result_array();
         } catch (Exception $e){
@@ -57,9 +54,9 @@ class Clients_model extends CI_model {
     { 
         try{
                 $id = $data['clientid'];
-                unset($inputdata['clientid']);
+                unset($data['clientid']);
                 
-                if($data['clientid']){
+                if($id){
                     $data['updatedby'] = $this->session->userdata('UserId');
                     $data['updatedon'] = date('Y-m-d H:i:s');
                     $this->db->where('clientid', $id);
@@ -80,9 +77,9 @@ class Clients_model extends CI_model {
         try{
                 //Filtered Records Count
                 $this->db->select("*");
-                $this->db->from("company");
+                $this->db->from("tbl_mng_clientmaster");
                 if($search){
-                    $this->db->like(array("CONCAT(company_name,' ',email,' ',phone,' ',description,' ',registration_number)" => $search));
+                    $this->db->like(array($searchcols => $search));
                 }
                 $query = $this->db->get();
                 return  $query->num_rows(); 

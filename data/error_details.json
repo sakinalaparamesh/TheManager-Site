@@ -16,5 +16,23 @@
       "ActionName": "Save",
       "ErrorCode": "3",
       "Message": "Technical Error occured while saving..Please contact admin"
+   },
+   {
+      "controlname": "Clients",
+      "ActionName": "Save",
+      "ErrorCode": "1",
+      "Message": "Successfully Saved Client"
+   },
+   {
+      "controlname": "Clients",
+      "ActionName": "Save",
+      "ErrorCode": "2",
+      "Message": "Client Name Duplicated..Please check"
+   },
+   {
+      "controlname": "Clients",
+      "ActionName": "Save",
+      "ErrorCode": "3",
+      "Message": "Technical Error occured while saving..Please contact admin"
    }
 ]

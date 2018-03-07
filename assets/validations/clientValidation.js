@@ -1,5 +1,4 @@
-$(document).ready(function() { 
-        
+  function ValidateForm(){   
     $('#MyForm').bootstrapValidator({
         //container: '#messages',
         feedbackIcons: {
@@ -15,20 +14,6 @@ $(document).ready(function() {
                     }
                 }
             },
-//            clientcode: {
-//                validators: {
-//                    notEmpty: {
-//                        message: 'The Client Code is required and cannot be empty'
-//                    }
-//                }
-//            },
-//            clientdescription: {
-//                validators: {
-//                    notEmpty: {
-//                        message: 'The Description is required and cannot be empty'
-//                    }
-//                }
-//            },
             is_active: {
                 validators: {
                     notEmpty: {
@@ -38,4 +23,4 @@ $(document).ready(function() {
             }
         }
     });//bootstrapValidator
-});//ready
+  }

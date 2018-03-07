@@ -14,13 +14,13 @@
 <div class="card-box">
 <div class="row">
 <!-- <label for="" class="col-md-1">Email<span class="text-danger">*</span></label> -->
-<div class="col-md-3">
+<!--<div class="col-md-3">
 <input type="email" required=""  class="form-control input-sm" id="" placeholder="Search">
 </div>
 <div class="col-md-1 m-b-10">
     <a class="btn btn-inverse btn-sm" href="javascript:">Search <i class="fa fa-search"></i></a>
-</div>
-<div class="col-md-8 text-right m-b-10">
+</div>-->
+<div class="col-md-12 text-right m-b-10 pull-right">
     <a class="btn btn-default btn-sm" href="<?php echo base_url('add-client'); ?>">Add Client <i class="fa fa-plus"></i></a>
     <a class="btn btn-default btn-sm" href="<?php echo base_url('add-branch'); ?>">Add Branch <i class="fa fa-plus"></i></a>
     <a class="btn btn-default btn-sm" href="<?php echo base_url('add-contact'); ?>">Add Contact <i class="fa fa-plus"></i></a>
@@ -28,30 +28,20 @@
 
 <div class="col-md-12 test">                            
 <div class="table-responsive">
-    <table id="tblId" data-toggle="table" data-page-size="10" data-pagination="true" class="table-bordered table-condensed table-hovered" style="white-space: nowrap;">
-        <thead class="text-white">
+    <table id="tableId" data-toggle="table" data-page-size="10" data-pagination="true" class="table table-striped table-bordered dataTable no-footer dtr-inline table-condensed" style="white-space: nowrap;">
+        <thead>
             <tr>
                 <!--<th data-priority="1" data-field="state" data-checkbox="true"></th>-->
                 <th data-priority="1" data-switchable="false">S.No</th>
-                <th data-priority="2">Name</th>
-                <th data-priority="1">Company Name</th>
-                <th data-priority="1">Branch</th>
-                <th data-priority="1">Mobile</th>
-                <th data-priority="1">Mobile</th>
+                <th data-priority="2">Client Name</th>
+                <th data-priority="1">Client Code</th>
+                <th data-priority="1">Created On</th>
+                <th data-priority="1">Status</th>
                 <th data-priority="3">Actions</th>
             </tr>
         </thead>
 
         <tbody>
-<!--        <tr class="openView">
-            <td></td>
-            <td>1</td>
-            <td>Divya</td>
-           
-            <td>Provalley </td>
-            <td>Kukatpally </td>
-            <td>9658965412</td>  
-        </tr>-->
 
         </tbody>
     </table>
@@ -76,7 +66,7 @@
                                     </div>
                                     <div class="contact-card m-t-30">
                                 <a class="pull-left" href="#">
-                                    <img class="rounded-circle" src="assets/images/users/avatar-6.jpg" alt="">
+                                    <img class="rounded-circle" src="<?php echo base_url() ?>assets/images/users/avatar-6.jpg" alt="">
                                 </a>
 
                                 <div class="member-info">
@@ -114,13 +104,13 @@
 <script type="text/javascript">
 
     $(document).ready(function(){
-		
+
         var url = "<?php echo base_url(); ?>";
         var csrf_token_name = '<?php echo $this->security->get_csrf_token_name(); ?>';
         var csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
 
         GridJS.Load(url, csrf_token_name, csrf_hash);
-
+  
     });//ready
 
 </script>

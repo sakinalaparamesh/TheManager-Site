@@ -12,6 +12,9 @@
     </div>
 </div>
 <div class="card-box">
+    <div class="row">
+        <div class="col-md-12 text-center progress-loader">&nbsp;</div>
+    </div>
 <div class="row">
     <div class="col-md-12">
         <form id="MyForm" method="post" enctype="multipart/form-data" action="<?php echo base_url('clients/addClient'); ?>" class="form-horizontal" novalidate="" role="form">
@@ -66,8 +69,7 @@
             <div class="form-group row ">
                 <label class="col-md-2"></label>
                 <div class=" col-md-4">
-                    <!--<button type="submit" name="formSubmit" class="btn btn-default waves-effect waves-light btn-sm" id="success-alert">-->
-                    <button type="submit" name="formSubmit" class="btn btn-default waves-effect waves-light btn-sm" >
+                    <button type="submit" name="formSubmit" id="formSubmit" class="btn btn-default waves-effect waves-light btn-sm" onclick="ValidateMyForm();">
                         SUBMIT
                     </button>
                     <button type="reset" class="btn btn-inverse waves-effect m-l-5 btn-sm">
@@ -85,10 +87,52 @@
 <!-- end wrapper -->
 
 <script>
-     $(document).ready(function(){
-        //alert('Hello');
+$(document).ready(function(){
+   
+    ValidateForm();
 
+});//ready
+function ValidateMyForm(){
+        var validator = $('#MyForm').data('bootstrapValidator');
+              validator.validate();
+              //alert(validator.isValid()); return false;
+             if(validator.isValid()){
 
-});
+                  $("html").addClass( "loading" );
+                  $.ajax({
+                      type: "POST",
+                      url: "<?php echo base_url('clients/addClientAjax'); ?>", 
+                      data: $('#MyForm').serialize(),
+                      //data: form_data,
+                      success: function(response){ //alert(response); return false; 
+
+                          var json = $.parseJSON(response);
+                          //alert(json.isError);
+
+                         if(json.isError){ 
+                              $("html").removeClass( "loading" );
+                              swal({
+                                    title: "Client Registration!",
+                                    text: json.message,
+                                    type: "success",
+                                    showCancelButton: true,
+                                    confirmButtonClass: "btn-success",
+                                    confirmButtonText: "Ok",
+                                    closeOnConfirm: false
+                                  },
+                                  function(){
+                                    //window.location.reload();
+                                    window.location.href = "<?php echo base_url('clients'); ?>";
+                                  });
+                         }else{
+                            swal("Client Registration!", json.message, "error");
+                         }
+                      },
+                      error: function(){
+                          alert("failure");
+                      }   
+                  });
+             };
+      }
 </script>
 <script src="<?php echo base_url(); ?>assets/validations/clientValidation.js"></script>

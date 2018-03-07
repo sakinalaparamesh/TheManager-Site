@@ -19,7 +19,12 @@
         <link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>plugins/bootstrap-sweetalert/sweet-alert.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.css"/>
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.bootstrap.min.css">
+       <!--  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.bootstrap.min.css"> -->
+         <!-- DataTables -->
+        <link href="<?php echo base_url(); ?>plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url(); ?>plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <!-- Responsive datatable examples -->
+        <link href="<?php echo base_url(); ?>plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" /><!--select2 CSS-->
 
         <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
@@ -45,8 +50,8 @@
       <?php echo $content_for_layout; ?> 
       
       <?php $this->view('footer'); ?>
-
-        <script src="<?php echo base_url()?>assets/dists/js/jquery.validate.js"></script>
+        <script src="<?php echo base_url()?>assets/js/jquery.validate.js" type="text/javascript"></script>
+       
         <!-- jQuery  -->
         <script src="<?php echo base_url(); ?>assets/js/popper.min.js"></script><!-- Popper for Bootstrap -->
         <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
@@ -65,13 +70,20 @@
         <!--for sweet alert-->
         <script src="<?php echo base_url(); ?>plugins/bootstrap-sweetalert/sweet-alert.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/pages/jquery.sweet-alert.init.js"></script>
+         <!-- Required datatable js -->
+        <script src="<?php echo base_url(); ?>plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="<?php echo base_url(); ?>plugins/datatables/dataTables.bootstrap4.min.js"></script>
+        <!-- Buttons examples -->
+        <script src="<?php echo base_url(); ?>plugins/datatables/dataTables.buttons.min.js"></script>
+        <script src="<?php echo base_url(); ?>plugins/datatables/buttons.bootstrap4.min.js"></script>
         
-        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.1/js/responsive.bootstrap.min.js"></script>   
+        
+        <!-- Responsive examples -->
+        <script src="<?php echo base_url(); ?>plugins/datatables/dataTables.responsive.min.js"></script>
+        <script src="<?php echo base_url(); ?>plugins/datatables/responsive.bootstrap4.min.js"></script>
+        
         <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/js/bootstrapValidator.min.js"> </script>
+       
 
 
       
@@ -113,6 +125,21 @@
 });
 
 </script>
+ <script type="text/javascript">
+            $(document).ready(function() {
+                $('#tbldepartment').DataTable();
+
+                //Buttons examples
+                var table = $('#datatable-buttons').DataTable({
+                    lengthChange: false,
+                    buttons: ['copy', 'excel', 'pdf']
+                });
+
+                table.buttons().container()
+                        .appendTo('#datatable-buttons_wrapper .col-md-6:eq(0)');
+            } );
+
+        </script>
 
     </body>
 </html>
