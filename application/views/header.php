@@ -136,7 +136,7 @@
                             </li>
 
                             <li class="">
-                                <a href="<?php echo base_url('administration'); ?>"><i class="md md-color-lens"></i>
+                                <a href="administration.php"><i class="md md-color-lens"></i>
                                 Administration</a>
                              
                             </li>

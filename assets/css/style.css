@@ -5728,21 +5728,3 @@ div.hopscotch-bubble .hopscotch-bubble-arrow-container.down .hopscotch-bubble-ar
     margin-left: 0; } }
 
 /*# sourceMappingURL=style.css.map */
-
-html.loading {
-    /* Replace #333 with the background-color of your choice */
-    /* Replace loading.gif with the loading image of your choice */
-    background: #333 url("../../assets/images/loader.gif") no-repeat 50% 50%;
-
-    /* Ensures that the transition only runs in one direction */
-    -webkit-transition: background-color 0;
-    transition: background-color 0;
-}
-html.loading body {
-    /* Make the contents of the body opaque during loading */
-    opacity: 0.1;
-
-    /* Ensures that the transition only runs in one direction */
-    -webkit-transition: opacity 0;
-    transition: opacity 0;
-}

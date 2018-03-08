@@ -5,7 +5,10 @@
     <div class="col-sm-12">
         <div class="page-title-box">
             <div class="btn-group pull-right">
-                <?php echo $this->breadcrumbs->show(); ?>
+                <ol class="breadcrumb hide-phone p-0 m-0">
+                    <li class="breadcrumb-item"><a href="administration.php">Administration</a></li>
+                    <li class="breadcrumb-item active">Clients List</li>
+                </ol>
             </div>
             <h4 class="page-title">Clients</h4>
         </div>
@@ -26,20 +29,23 @@
     <a class="btn btn-default btn-sm" href="client_contact_registration.php">Add Contact <i class="fa fa-plus"></i></a>
 </div>
 
-<div class="col-md-12"> 
-    <div class="test">
-
-    <table id="tableId" data-toggle="table" data-page-size="10" data-pagination="true" class="table table-striped table-bordered dataTable no-footer dtr-inline table-condensed" style="white-space: nowrap;">
-        <thead>
-            <tr>
-                <!--<th data-priority="1" data-field="state" data-checkbox="true"></th>-->
-                <th data-priority="1" data-switchable="false">S.No</th>
-                <th data-priority="2">Client Name</th>
-                <th data-priority="1">Client Code</th>
-                <th data-priority="1">Created On</th>
-                <th data-priority="1">Status</th>
-                <th data-priority="3">Actions</th>
-            </tr>
+<div class="col-md-12 test">                            
+<div class="table-responsive">
+<table     data-toggle="table"
+           data-page-size="10"
+           data-pagination="true" class="table-bordered table-condensed table-hovered" style="white-space: nowrap;">
+        <thead class="text-white">
+        <tr>
+            <th data-field="state" data-checkbox="true"></th>
+            <th data-field="id" data-switchable="false">S.No</th>
+            <th data-field="name">Name </th>
+             <th data-field="companyname">Company Name </th>
+            <th data-field="branch">Branch</th>
+           
+            <th data-field="mobile">Mobile </th>
+            
+            
+        </tr>
         </thead>
 
 
@@ -58,9 +64,8 @@
         
         </tbody>
     </table>
-
 </div>
-    </div>
+</div>
 <div class="col-md-3 mini" style="display: none">
      <div class="panel ">
       <div class="panel-heading color-dark">  
