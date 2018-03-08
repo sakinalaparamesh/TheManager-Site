@@ -40,7 +40,7 @@ class DepartmentModel extends CI_Model {
         }
         return $res_data;
     }
-    public function getAllClients($limit=10,$start=0,$search='',$order=null,$dir=null)
+    public function getAllDepartments($limit=10,$start=0,$search='',$order=null,$dir=null)
     { 
         try{
                 $data = array();

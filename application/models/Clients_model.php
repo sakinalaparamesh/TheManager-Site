@@ -85,6 +85,27 @@ class Clients_model extends CI_model {
         }
         return $error_code;
     }
+    public function deleteClient($id)
+    { 
+        try{
+                $error_code = 3;
+                  
+                if($id){
+                    $data['isactive'] = 'N';
+                    $data['updatedby'] = $this->session->userdata('UserId');
+                    $data['updatedon'] = date('Y-m-d H:i:s');
+                    $this->db->where('clientid', $id);
+                    $error_code = ($this->db->update('tbl_mng_clientmaster', $data)) ? 1 : 3;                    
+                }
+               
+                
+        }catch (Exception $e){
+            log_message('error', $e->getMessage());
+            //return "ERROR: ".$e->getMessage();
+            $error_code = 3;
+        }
+        return $error_code;
+    }
     public function getAllClientsCount($search='', $searchcols='')
     { 
         try{

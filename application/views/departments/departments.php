@@ -21,7 +21,7 @@
                         <table   id="tbldepartment"  class="table  table-hover table-condensed table-striped">
                             <thead>
                                 <tr>
-                                    
+                                    <th data-priority="5"></th>
                                     <th data-priority="1">S.No</th>
                                     <th data-priority="2">Name </th>
                                     <th data-priority="3">Department code</th>

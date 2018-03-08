@@ -55,7 +55,7 @@
             </a>
         </div>
         <div class="col-md-3">
-             <a href="departments.php"><div class="widget-bg-color-icon card-box">
+            <a href="<?= base_url()?>department"><div class="widget-bg-color-icon card-box">
             <div class="bg-icon bg-dark pull-left">
             <i class="fa fa-list text-white"></i>
             </div>

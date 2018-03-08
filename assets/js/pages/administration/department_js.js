@@ -9,7 +9,7 @@ var departmentjs = (function () {
         _Departmentid = $("#txtDepartmentid");
         _DepartmentName = $("#txtDepartmentName");
         _DepartmentCode = $("#txtDepartmentCode");
-        _DepartmentDescription = $("txtDepartmentDescription");
+        _DepartmentDescription = $("#txtDepartmentDescription");
         _btnSubmit = $("#btnSubmit");
         FormValidator();
         _LoadEvents();

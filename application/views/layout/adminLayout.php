@@ -125,6 +125,21 @@
 
 });
 
+function openSidebar(){ alert('Hello Raj');
+    //var x = document.getElementsByClassName("example");
+   document.getElementById("myListView").classList.remove("col-md-12");
+   document.getElementById("myListView").classList.add("col-md-9");
+    //document.getElementByClass("mini").style.display = "block";
+    document.getElementById("myData").style.display = "block";
+}
+function closeSidebar(){ alert('Hello Raj');
+    //var x = document.getElementsByClassName("example");
+   document.getElementById("myListView").classList.remove("col-md-9");
+   document.getElementById("myListView").classList.add("col-md-12");
+    //document.getElementByClass("mini").style.display = "block";
+    document.getElementById("myData").style.display = "block";
+}
+
 </script>
 <!-- <script type="text/javascript">
             $(document).ready(function() {

@@ -43,11 +43,11 @@ class Department extends BaseController {
         );
         if ($ps_data["departmentid"]== "") {
             $resdata['error_code'] = $this->DepartmentModel->departmentSave($dep_data);
-            echo $resdata['error_code']."dep";exit;
+            
             $resdata['message'] = getErrorMessages("Department", "Save", $resdata['error_code']);
         }else{
             $resdata['error_code'] = $this->DepartmentModel->departmentUpdate($dep_data,$ps_data["departmentid"]);
-            echo $resdata['error_code'];exit;
+            
             $resdata['message'] = getErrorMessages("Department", "Save", $resdata['error_code']);
         }
 
@@ -67,7 +67,7 @@ class Department extends BaseController {
         $search = $this->input->post('search')['value'];
         $search = (!empty($search)) ? $search : '';
 
-        $result = $this->DepartmentModel->getAllClients($limit, $start, $search, $order, $dir);
+        $result = $this->DepartmentModel->getAllDepartments($limit, $start, $search, $order, $dir);
         $totalFiltered = $totalData = $result['totalFiltered'];
         $data = $result['ResultData'];
         if (!empty($search))

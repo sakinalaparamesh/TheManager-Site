@@ -24,7 +24,12 @@ var DepartmentGridJS = (function () {
             },
             "order": [[1, 'asc']],
             "columns": [
+                {mRender: function (data, type, row) {
+                        var link = "";
 
+                        link = '<input type="checkbox" name="dep[]" value="' + row.departmentid + '"/>';
+                        return link;
+                    }, orderable: false},
                 {"data": "departmentid", "orderable": true},
                 {"data": "departmentname", "orderable": true},
                 {"data": "departmentcode", "orderable": true},
@@ -47,7 +52,7 @@ var DepartmentGridJS = (function () {
             ], "fnRowCallback": function (nRow, aData, iDisplayIndex) {
 //console.log("Hello");
                 var index = iDisplayIndex + 1;
-                $('td:eq(0)', nRow).html(index);
+                $('td:eq(1)', nRow).html(index);
                 return nRow;
             }
 
