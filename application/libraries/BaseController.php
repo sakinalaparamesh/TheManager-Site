@@ -9,7 +9,7 @@ class BaseController extends CI_Controller {
     public function __construct() {
         parent::__construct();
 //        $this->obj = & get_instance();
-        is_admin_loggedin();
+        is_user_loggedin();
         $this->layout->setLayout('layout/adminLayout');
     }
 

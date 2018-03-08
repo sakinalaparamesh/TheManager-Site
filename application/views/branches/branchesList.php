@@ -7,7 +7,7 @@
             <div class="btn-group pull-right">
                 <?php echo $this->breadcrumbs->show(); ?>
             </div>
-            <h4 class="page-title">Clients</h4>
+            <h4 class="page-title"><?php echo $title; ?></h4>
         </div>
     </div>
 </div>
@@ -26,9 +26,10 @@
     <a class="btn btn-default btn-sm" href="<?php echo base_url('add-contact'); ?>">Add Contact <i class="fa fa-plus"></i></a>
 </div>
 
-<div class="col-md-12" id="myListView"> 
+<div class="col-md-12"> 
+    <div class="test">
 
-    <table id="tableId" data-toggle="table" data-page-size="10" data-pagination="true" class="table table-striped table-bordered dataTable no-footer dtr-inline table-condensed table-responsive" style="white-space: nowrap; width:100%;">
+    <table id="tableId" data-toggle="table" data-page-size="10" data-pagination="true" class="table table-striped table-bordered dataTable no-footer dtr-inline table-condensed" style="white-space: nowrap;">
         <thead>
             <tr>
                 <!--<th data-priority="1" data-field="state" data-checkbox="true"></th>-->
@@ -37,7 +38,7 @@
                 <th data-priority="1">Client Code</th>
                 <th data-priority="1">Created On</th>
                 <th data-priority="1">Status</th>
-                <th data-priority="3" class="text-center">Actions</th>
+                <th data-priority="3">Actions</th>
             </tr>
         </thead>
 
@@ -46,12 +47,12 @@
         </tbody>
     </table>
 
-
+</div>
     </div>
-<div class="col-md-3 mini" id="myData" style="display: none">
+<div class="col-md-3 mini" style="display: none">
      <div class="panel ">
       <div class="panel-heading color-dark">  
-          <div class="text-right"><span class="fa fa-close closemini" onclick="closeSidebar();"></span></div>
+        <div class="text-right"><span class="fa fa-close closemini"></span></div>
         <p>Employee Details</p>
     </div>
       <div class="panel-body">

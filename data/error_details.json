@@ -34,5 +34,17 @@
       "ActionName": "Save",
       "ErrorCode": "3",
       "Message": "Technical Error occured while saving..Please contact admin"
+   },
+   {
+      "controlname": "Clients",
+      "ActionName": "Delete",
+      "ErrorCode": "1",
+      "Message": "Successfully Deleted Client"
+   },
+   {
+      "controlname": "Clients",
+      "ActionName": "Delete",
+      "ErrorCode": "3",
+      "Message": "Technical Error occured while deleting..Please contact admin"
    }
 ]

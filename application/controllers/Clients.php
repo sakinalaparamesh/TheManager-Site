@@ -88,7 +88,19 @@ class Clients extends CI_Controller {
         $resdata['message'] = getErrorMessages("Clients","Save",$resdata['error_code']);
         $resdata['isError'] = ($resdata['error_code'] > 1) ? "Y" : "N";
         echo json_encode($resdata);
-
     }
+    public function deleteClient($id)
+    {
+        $resdata['error_code'] = $this->clients_model->deleteClient($id);
+        $resdata['message'] = getErrorMessages("Clients","Delete",$resdata['error_code']);
+        
+        if($resdata['error_code'] > 1){
+            $this->session->set_flashdata('flashmsg', '<div class="text-danger">'.$resdata['message'].'</div>');
+        }else{
+            $this->session->set_flashdata('flashmsg', '<div class="text-success">Client '.$resdata['message'].' Successfully</div>');
+        }
+        redirect(base_url().'clients');
+    }
+    
 
 }

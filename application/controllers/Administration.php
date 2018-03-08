@@ -1,16 +1,12 @@
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
+require APPPATH . 'libraries/BaseController.php';
 
-class Administration extends CI_Controller {
+class Administration extends BaseController {
 
     public function __construct() {
         parent::__construct();
-        is_user_loggedin();
-        $this->layout->setLayout('layout/adminLayout');
-        //$this->load->model('clients_model');
-        $session_items = array('IsUserLoggedIn' => TRUE, 'UserId' => 1);
-        $this->session->set_userdata($session_items);
         
     }
     public function index() {
