@@ -40,9 +40,9 @@ class Clients_model extends CI_model {
     public function getClientDetailsById($id)
     { 
         try{
-                $this->db->select("clientid,clientname,clientcode,DATE_FORMAT(createdon,'%d-%m-%Y') as CreatedOn,isactive as Status");
+                $this->db->select("clientid,clientname,clientcode,clientdescription,isactive");
                 $this->db->from("tbl_mng_clientmaster");
-                $this->db->where('id', $id);
+                $this->db->where('clientid', $id);
                 $query = $this->db->get();
                 return $query->result_array();
         } catch (Exception $e){
@@ -53,26 +53,39 @@ class Clients_model extends CI_model {
     public function saveClientDetails($data)
     { 
         try{
+                $error_code = 3;
+                
                 $id = $data['clientid'];
                 unset($data['clientid']);
-                
-                if($id){
-                    $data['updatedby'] = $this->session->userdata('UserId');
-                    $data['updatedon'] = date('Y-m-d H:i:s');
-                    $this->db->where('clientid', $id);
-                    return $this->db->update('tbl_mng_clientmaster', $data);
+                if($id == 0){
+                    $this->db->select("1")->where(array('isactive'=>'Y', 'clientname'=>$data['clientname']));
                 }else{
-                    $data['createdby'] = $this->session->userdata('UserId');
-                    $data['createdon'] = date('Y-m-d H:i:s');
-                    return $this->db->insert('tbl_mng_clientmaster', $data);
+                    $this->db->select("1")->where(array('isactive'=>'Y', 'clientname'=>$data['clientname'], 'clientid !='=>$id));
+                }
+                $query = $this->db->get("tbl_mng_clientmaster");
+                if($query->num_rows() > 0){
+                    $error_code = 2;
+                }else{                   
+                    if($id){
+                        $data['updatedby'] = $this->session->userdata('UserId');
+                        $data['updatedon'] = date('Y-m-d H:i:s');
+                        $this->db->where('clientid', $id);
+                        $error_code = ($this->db->update('tbl_mng_clientmaster', $data)) ? 1 : 3;                    
+                    }else{
+                        $data['createdby'] = $this->session->userdata('UserId');
+                        $data['createdon'] = date('Y-m-d H:i:s');
+                        $error_code = ($this->db->insert('tbl_mng_clientmaster', $data)) ? 1 : 3; 
+                    }
                 }
                 
         }catch (Exception $e){
             log_message('error', $e->getMessage());
-            return "ERROR: ".$e->getMessage();
+            //return "ERROR: ".$e->getMessage();
+            $error_code = 3;
         }
+        return $error_code;
     }
-    public function getAllClientsCount($search='')
+    public function getAllClientsCount($search='', $searchcols='')
     { 
         try{
                 //Filtered Records Count

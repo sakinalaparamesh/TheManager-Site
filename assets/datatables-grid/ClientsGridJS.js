@@ -31,15 +31,15 @@
                             { 
                             mRender: function (data, type, row) {
                                 var status = "";
-                                if(row.Status == 1){ status ="<span class='text-success'>Active</span>"; }
+                                if(row.Status == 'Y'){ status ="<span class='text-success'>Active</span>"; }
                                 else{ status = "<span class='text-warning'>In-active</span>" }
                                 return status; },orderable: false 
                             },
                             { 
                             mRender: function (data, type, row) {
                                 var link = "";
-                                link = link + '<a href="'+_url+'menu/addMenu/'+ row.clientid +'"><span class="Edit" "title="Edit"><i class="fa fa-pencil"></i></span></a> &nbsp; &nbsp;';
-                                link = link + '<a href="'+_url+'menu/deleteMenu/'+ row.clientid +'"><span class="Delete" "title="Delete"><i class="fa fa-trash"></i></span></a>';
+                                link = link + '<a href="'+_url+'clients/addClient/'+ row.clientid +'"><span class="Edit" "title="Edit"><i class="fa fa-pencil"></i></span></a> &nbsp; &nbsp;';
+                                link = link + '<a href="'+_url+'clients/deleteClient/'+ row.clientid +'"><span class="Delete" "title="Delete"><i class="fa fa-trash"></i></span></a>';
                                 return link; },orderable: false 
                             },
                 ],

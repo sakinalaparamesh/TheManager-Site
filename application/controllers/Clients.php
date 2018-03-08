@@ -48,6 +48,7 @@ class Clients extends CI_Controller {
     public function addClient($id = 0)
     {
         $data['title']="Add Client";
+        $details = array();
         //breadcrumbs
         $this->breadcrumbs->push('Administration', 'administration');
         $this->breadcrumbs->push('Clients','Clients');
@@ -70,13 +71,11 @@ class Clients extends CI_Controller {
 //            }
 //            redirect(base_url().'clients');
 //        }//submit
-        
-        //$details = $this->clients_model->getClientDetailsById($id);
-        $details = array();
+        $details = $this->clients_model->getClientDetailsById($id);
         if(count($details)>0){
             $data['details'] = $details;
         }else{
-            $data['details'][] = array('clientid'=>0,'clientname'=>'','clientdescription'=>'','clientcode'=>'','isactive'=>1);
+            $data['details'][] = array('clientid'=>0,'clientname'=>'','clientcode'=>'','clientdescription'=>'','isactive'=>'Y');
         }
         //echo "<pre>"; print_r($data); exit;
         $this->layout->view('clients/addClient', $data);
@@ -87,7 +86,7 @@ class Clients extends CI_Controller {
         //print_r($inputdata); exit;
         $resdata['error_code'] = $this->clients_model->saveClientDetails($_POST);
         $resdata['message'] = getErrorMessages("Clients","Save",$resdata['error_code']);
-        $resdata['isError'] = $resdata['error_code'] > 0 ? "Y" : "N";
+        $resdata['isError'] = ($resdata['error_code'] > 1) ? "Y" : "N";
         echo json_encode($resdata);
 
     }

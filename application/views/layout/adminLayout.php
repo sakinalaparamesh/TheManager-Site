@@ -125,7 +125,7 @@
 });
 
 </script>
- <script type="text/javascript">
+<!-- <script type="text/javascript">
             $(document).ready(function() {
                 $('#tbldepartment').DataTable();
 
@@ -139,7 +139,7 @@
                         .appendTo('#datatable-buttons_wrapper .col-md-6:eq(0)');
             } );
 
-        </script>
+    </script>-->
 
     </body>
 </html>

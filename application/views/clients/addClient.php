@@ -24,19 +24,19 @@
             <div class="form-group row">
                 <label for="clientname" class="col-md-2">Name<span class="text-danger">*</span></label>
                 <div class="col-md-4">
-                    <input type="text" class="form-control input-sm" name="clientname" id="clientname" placeholder="Name">
+                    <input type="text" class="form-control input-sm" name="clientname" id="clientname" value="<?php echo $details[0]['clientname']; ?>" placeholder="Name">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="clientcode" class="col-md-2">Code</label>
                 <div class="col-md-4">
-                    <input type="text" class="form-control input-sm" name="clientcode" id="clientcode" placeholder="Code">
+                    <input type="text" class="form-control input-sm" name="clientcode" id="clientcode" value="<?php echo $details[0]['clientcode']; ?>" placeholder="Code">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="clientdescription" class="col-md-2"> Description</label>
                 <div class="col-md-4">
-                    <textarea class="form-control" name="clientdescription" id="clientdescription" rows="3"></textarea>
+                    <textarea class="form-control" name="clientdescription" id="clientdescription" rows="3"><?php echo $details[0]['clientdescription']; ?></textarea>
                 </div>
             </div>
              <div class="form-group row">
@@ -44,11 +44,11 @@
                 <div class="col-md-4">
                     <div class="radio">
                         <div class="radio  form-check-inline">
-                            <input type="radio" name="isactive" id="rb_isactive1" <?php if($details[0]['isactive'] == 1){ echo 'checked="checked"'; }?> value="1">
+                            <input type="radio" name="isactive" id="rb_isactive1" <?php if($details[0]['isactive'] == 'Y'){ echo 'checked="checked"'; }?> value="Y">
                             <label for="rb_isactive1"> Active </label>
                         </div>
                         <div class="radio form-check-inline">
-                            <input type="radio" name="isactive" id="rb_isactive2" <?php if($details[0]['isactive'] == 0){ echo 'checked="checked"'; }?> value="0" disabled="">
+                            <input type="radio" name="isactive" id="rb_isactive2" <?php if($details[0]['isactive'] == 'N'){ echo 'checked="checked"'; }?> value="N" disabled="">
                             <label for="rb_isactive2"> InActive </label>
                         </div>
                     </div>
@@ -107,11 +107,13 @@ function ValidateMyForm(){
                       success: function(response){ //alert(response); return false; 
 
                           var json = $.parseJSON(response);
-                          //alert(json.isError);
-
-                         if(json.isError){ 
-                              $("html").removeClass( "loading" );
-                              swal({
+                          
+                          $("html").removeClass( "loading" );
+                         if(json.isError == 'N'){ 
+                             //alert(json.isError); 
+                             alert(json.message);
+                              /*swal(
+                                   {
                                     title: "Client Registration!",
                                     text: json.message,
                                     type: "success",
@@ -122,15 +124,19 @@ function ValidateMyForm(){
                                   },
                                   function(){
                                     //window.location.reload();
-                                    window.location.href = "<?php echo base_url('clients'); ?>";
-                                  });
+                                    window.location.href = "<?php //echo base_url('clients'); ?>";
+                                  }
+                                 );*/
+                                 window.location.href = "<?php echo base_url('clients'); ?>";
                          }else{
-                            swal("Client Registration!", json.message, "error");
+                            alert(json.message);
+                            //swal("Client Registration!", json.message, "error");
                          }
                       },
                       error: function(){
-                          alert("failure");
-                      }   
+                          alert('failure');
+                          //swal("Client Registration!", 'Technical Error occured while saving..Please contact admin', "error");
+                      }
                   });
              };
       }
