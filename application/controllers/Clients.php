@@ -101,6 +101,29 @@ class Clients extends CI_Controller {
         }
         redirect(base_url().'clients');
     }
+    public function getClientFullDetailsAjax()
+    {
+        $data['title']="Client Details";
+         $id = $_POST['id'];
+         $data['details'] = $this->clients_model->getClientDetailsById($id);
+         $this->load->view('clients/clientDetails', $data);
+    }
+    public function getClientContactFormAjax()
+    {
+        $data = array();
+         $id = $_POST['id'];
+         //$data['details'] = $this->clients_model->getClientDetailsById($id);
+         $data['details'] = array('');
+         $this->load->view('clients/clientContactRegForm', $data);
+    }  
+    public function getBranchRegFormAajx()
+    {
+        $data = array();
+         $id = $_POST['id'];
+         //$data['details'] = $this->clients_model->getClientDetailsById($id);
+         $data['details'] = array('');
+         $this->load->view('clients/addBranchForm', $data);
+    }  
     
 
 }

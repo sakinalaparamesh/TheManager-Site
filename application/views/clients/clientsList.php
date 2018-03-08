@@ -31,13 +31,16 @@
     <table id="tableId" data-toggle="table" data-page-size="10" data-pagination="true" class="table table-striped table-bordered dataTable no-footer dtr-inline table-condensed table-responsive" style="white-space: nowrap; width:100%;">
         <thead>
             <tr>
-                <!--<th data-priority="1" data-field="state" data-checkbox="true"></th>-->
+                <th data-priority="1" data-field="state" data-checkbox="true"><input type="checkbox" name="rowcheck" id="rowcheck"></th>
                 <th data-priority="1" data-switchable="false">S.No</th>
+                <th data-priority="2"> Name</th>
                 <th data-priority="2">Client Name</th>
-                <th data-priority="1">Client Code</th>
-                <th data-priority="1">Created On</th>
-                <th data-priority="1">Status</th>
-                <th data-priority="3" class="text-center">Actions</th>
+                <th data-priority="1">Branch Name</th>
+                <th data-priority="1">Mobile</th>
+<!--                <th data-priority="1">Created On</th>
+                <th data-priority="1">Status</th>-->
+                <!--<th data-priority="3" class="text-center">Actions</th>-->
+                <th data-priority="1">ID</th>
             </tr>
         </thead>
 
@@ -48,53 +51,27 @@
 
 
     </div>
-<div class="col-md-3 mini" id="myData" style="display: none">
-     <div class="panel ">
-      <div class="panel-heading color-dark">  
-          <div class="text-right"><span class="fa fa-close closemini" onclick="closeSidebar();"></span></div>
-        <p>Employee Details</p>
+<div class="col-md-3 mini" id="DetailsView" style="display: none">&nbsp;</div>
+
+<!--Common Modal -->
+<div class="modal fade content-wrapper modal-right" id="CommonModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                
+
+            </div>
+            
+        </div>
+      
     </div>
-      <div class="panel-body">
-                        <div class="modal-wrapper">
-                            <div class="modal-text">
-                                <form class="form-horizontal" role="form">
-                                <div class="action_icons">
-                                     <button class="btn btn-icon waves-effect color-dark waves-light"> <i class="fa fa-plus" title="Add Branch"></i> </button>
-                                    <button class="btn btn-icon waves-effect color-dark waves-light"> <i class="fa fa-user" title="Add Contact"></i> </button>
-                                     <button class="btn btn-icon waves-effect color-dark waves-light"> <i class="fa fa-pencil" title=" Edit"></i> </button>
-                                     <button class="btn btn-icon waves-effect color-dark waves-light"> <i class="fa fa-dollar" title="Billing Contact"></i> </button>
-                                    <button class="btn btn-icon waves-effect color-dark waves-light"> <i class="fa fa-trash" title="Inactive"></i> </button>
-                                    </div>
-                                    <div class="contact-card m-t-30">
-                                <a class="pull-left" href="#">
-                                    <img class="rounded-circle" src="<?php echo base_url() ?>assets/images/users/avatar-6.jpg" alt="">
-                                </a>
+</div>
 
-                                <div class="member-info">
-
-                                    <h4 class="m-t-0 m-b-5 header-title"><b>Bill Bertz</b></h4>
-                                    <p class="text-muted">Branch manager</p>
-                                    <p class="text-dark"><i class="md md-business m-r-10"></i><small>ABC company Pvt Ltd.</small></p>
-                                     <p class="text-dark"><i class="md md-business m-r-10"></i><small>{Address}</small></p>
-                                     <h4 class="m-t-0 m-b-5 header-title"><b>{Mobile}</b></h4>
-                                     <p class="text-muted">Contact Number</p>
-                                     <p class="text-muted">Email</p>
-                                    <div class="m-t-20">
-                                        <a href="#" class="btn btn-purple waves-effect waves-light btn-sm">Send email</a>
-                                        <a href="#" class="btn btn-success waves-effect waves-light btn-sm m-l-5">Edit</a>
-                                        <a href="#" class="btn btn-pink waves-effect waves-light btn-sm m-l-5">Call</a>
-                                    </div>
-                                </div>
-
-                            </div>
-                                 
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-    </div>
-
-  </div>
 </div>
 </div>
 <!-- end page title end breadcrumb -->
@@ -111,8 +88,62 @@
         var csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
 
         GridJS.Load(url, csrf_token_name, csrf_hash);
-  
+          
     });//ready
+    
+    function openSidebar(id){
+        
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('clients/getClientFullDetailsAjax') ?>", 
+            data: {"id" : id},
+            //data: form_data,
+            success: function(response){ //alert(response);
+                $("#DetailsView").html(response);
+            },
+            error: function(){
+                //alert("failure");
+            }   
+        });//ajax
+        
+        document.getElementById("myListView").classList.remove("col-md-12");
+        document.getElementById("myListView").classList.add("col-md-9");
+        document.getElementById("DetailsView").style.display = "block";
+     }
+     function clientContactForm(id){ //alert('Hello'+id);
+        
+        $('.modal-title').html('');
+        $('.modal-body').html('');
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('clients/getClientContactFormAjax') ?>", 
+            data: {"id" : id},
+            success: function(response){ //alert(response);
+                $('.modal-title').html('Client Contact Registration');
+                $('.modal-body').html(response);
+                //document.getElementByClass("modal-body").html(response);
+                $('#CommonModal').modal({show:true});
+            } 
+        });//ajax
+        
+     }
+     function addBranchForm(id){ //alert('Hello'+id);
+        
+        $('.modal-title').html('');
+        $('.modal-body').html('');
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('clients/getBranchRegFormAajx') ?>", 
+            data: {"id" : id},
+            success: function(response){ //alert(response);
+                $('.modal-title').html('Branch Registration');
+                $('.modal-body').html(response);
+                //document.getElementByClass("modal-body").html(response);
+                $('#CommonModal').modal({show:true});
+            } 
+        });//ajax
+        
+     }
 
 </script>
 <script src="<?php echo base_url().'assets/datatables-grid/ClientsGridJS.js'; ?>"></script>

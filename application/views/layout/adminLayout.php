@@ -108,36 +108,27 @@
             });
         </script>
         <script type="text/javascript">
- $(document).ready(function(){
-    $(".openView").click(function(){
+// $(document).ready(function(){
+//    $(".openView").click(function(){
+//
+//      $(".test").removeClass('col-md-12').addClass('col-md-9');
+//      $('.mini').show();
+//    });
+//
+//    $(".closemini").click(function(){
+//
+//        $(".test").removeClass('col-md-9').addClass('col-md-12');
+//        $('.mini').hide();
+//      });
+//
+//
+//});
 
-      $(".test").removeClass('col-md-12').addClass('col-md-9');
-      $('.mini').show();
-    });
-
-    $(".closemini").click(function(){
-
-        $(".test").removeClass('col-md-9').addClass('col-md-12');
-        $('.mini').hide();
-      });
-
-
-});
-
-function openSidebar(){ alert('Hello Raj');
-    //var x = document.getElementsByClassName("example");
-   document.getElementById("myListView").classList.remove("col-md-12");
-   document.getElementById("myListView").classList.add("col-md-9");
-    //document.getElementByClass("mini").style.display = "block";
-    document.getElementById("myData").style.display = "block";
-}
-function closeSidebar(){ alert('Hello Raj');
-    //var x = document.getElementsByClassName("example");
-   document.getElementById("myListView").classList.remove("col-md-9");
-   document.getElementById("myListView").classList.add("col-md-12");
-    //document.getElementByClass("mini").style.display = "block";
-    document.getElementById("myData").style.display = "block";
-}
+     function closeSidebar(){
+        document.getElementById("myListView").classList.remove("col-md-9");
+        document.getElementById("myListView").classList.add("col-md-12");
+        document.getElementById("DetailsView").style.display = "block";
+     }
 
 </script>
 <!-- <script type="text/javascript">
