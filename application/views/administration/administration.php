@@ -94,7 +94,7 @@
             </a>
         </div>
         <div class="col-md-3">
-            <a href="clients.php"><div class="widget-bg-color-icon card-box">
+            <a href="<?php echo base_url('clients'); ?>"><div class="widget-bg-color-icon card-box">
             <div class="bg-icon bg-dark pull-left">
             <i class="fa fa-users text-white"></i>
             </div>
