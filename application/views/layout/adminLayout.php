@@ -30,7 +30,8 @@
         <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
         
         <script src="<?php echo base_url(); ?>assets/js/modernizr.min.js"></script>
-
+        <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@1.6.0/src/loadingoverlay.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@1.6.0/extras/loadingoverlay_progress/loadingoverlay_progress.min.js"></script>
     </head>
 
     <body>
