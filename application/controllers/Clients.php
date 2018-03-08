@@ -7,8 +7,7 @@ class Clients extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->helper('global_helper');
-        is_admin_loggedin();
-        $this->layout->setLayout('layout/adminLayout');
+        
         //$this->load->model('clients_model');
         
     }
