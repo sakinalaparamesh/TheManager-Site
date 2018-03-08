@@ -1,19 +1,26 @@
-.bootstrap-table .table > thead > tr > th {
-    border-bottom: 2px solid #36404a !important;
-    background: #36404a !important;
-   /* padding: 5px 10px !important;*/
- }
- .bootstrap-table >.fixed-table-container {
-    border: 1px solid #ffffff !important;
-}
-.table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
-    border: 1px solid #f2f2f2 !important;
-}
+
 /*.table-responsive > .bootstrap-table .table > tbody > tr > td{
-	padding: 5px 10px !important;
-}*/
-.table-bordered > thead > tr > th{
-    border: 1px solid #797979 !important;
+	padding: 5px 10px !important}*/
+.table-striped > tbody > tr:nth-of-type(odd){
+	background-color: #f9f9f9!important;
+}
+
+table.dataTable thead th {
+
+    border-bottom: 2px solid #f4f4f4 !important;
+
+}
+.table > thead:first-child > tr:first-child > th {
+    border-top: 0;
+}
+ table.table-bordered.dataTable td {
+    border-left-width: 0;
+}
+ table.table-bordered.dataTable tbody td {
+    border-bottom-width: 0;
+}
+table.table-bordered.dataTable td:last-child, table.table-bordered.dataTable td:last-child {
+    border-right-width: 0;
 }
 .panel-heading p{
 	line-height: 0px;
@@ -41,7 +48,7 @@ form label{
 text-align: left;
 }
 .form-check-inline{
-	display: inline-block!important;
+	display: inline-block;
 }
 .radio{
 	margin-top: 0px!important;
@@ -53,6 +60,9 @@ text-align: left;
 .panel-body{
 	border: 1px solid #f2f2f2;
 	    padding: 10px;
+}
+.form-control{
+	padding: 5px 12px!important;
 }
 @media (min-width: 768px){
 .form-horizontal .control-label {

@@ -14,16 +14,16 @@
 <div class="card-box">
 <div class="row">
 <!-- <label for="" class="col-md-1">Email<span class="text-danger">*</span></label> -->
-<div class="col-md-3">
+<!--<div class="col-md-3">
 <input type="email" required=""  class="form-control input-sm" id="" placeholder="Search">
 </div>
 <div class="col-md-1 m-b-10">
     <a class="btn btn-inverse btn-sm" href="javascript:">Search <i class="fa fa-search"></i></a>
-</div>
-<div class="col-md-8 text-right m-b-10">
-    <a class="btn btn-default btn-sm" href="client_registration.php">Add Client <i class="fa fa-plus"></i></a>
-    <a class="btn btn-default btn-sm" href="branch_registration.php">Add Branch <i class="fa fa-plus"></i></a>
-    <a class="btn btn-default btn-sm" href="client_contact_registration.php">Add Contact <i class="fa fa-plus"></i></a>
+</div>-->
+<div class="col-md-12 text-right m-b-10 pull-right">
+    <a class="btn btn-default btn-sm" href="<?php echo base_url('add-client'); ?>">Add Client <i class="fa fa-plus"></i></a>
+    <a class="btn btn-default btn-sm" href="<?php echo base_url('add-branch'); ?>">Add Branch <i class="fa fa-plus"></i></a>
+    <a class="btn btn-default btn-sm" href="<?php echo base_url('add-contact'); ?>">Add Contact <i class="fa fa-plus"></i></a>
 </div>
 
 <div class="col-md-12"> 
@@ -42,20 +42,8 @@
             </tr>
         </thead>
 
-
         <tbody>
-        <tr class="openView">
-            <td></td>
-            <td>1</td>
-            <td>Divya</td>
-           
-            <td>Provalley </td>
-            <td>Kukatpally </td>
-            <td>9658965412</td>  
-        </tr>
-       
-       
-        
+
         </tbody>
     </table>
 
@@ -80,7 +68,7 @@
                                     </div>
                                     <div class="contact-card m-t-30">
                                 <a class="pull-left" href="#">
-                                    <img class="rounded-circle" src="assets/images/users/avatar-6.jpg" alt="">
+                                    <img class="rounded-circle" src="<?php echo base_url() ?>assets/images/users/avatar-6.jpg" alt="">
                                 </a>
 
                                 <div class="member-info">
@@ -114,3 +102,18 @@
 </div> <!-- end container -->
 </div>
 <!-- end wrapper -->
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+        var url = "<?php echo base_url(); ?>";
+        var csrf_token_name = '<?php echo $this->security->get_csrf_token_name(); ?>';
+        var csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
+
+        GridJS.Load(url, csrf_token_name, csrf_hash);
+  
+    });//ready
+
+</script>
+<script src="<?php echo base_url().'assets/datatables-grid/ClientsGridJS.js'; ?>"></script>
