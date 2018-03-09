@@ -36,12 +36,12 @@
 
 
                 <div class="p-20">
-                <form class="form-horizontal m-t-20" action="index.html">
+                    <form id="loginForm" method="post" class="form-horizontal m-t-20" action="">
 
                         <div class="form-group ">
                             <div class="col-12">
                                 <span><i class="fa fa-user"></i></span>
-                                <input class="form-control" type="text" required="" placeholder="Username"> 
+                                <input class="form-control" type="text" placeholder="Username"> 
 
                             </div>
                         </div>
@@ -49,7 +49,7 @@
                         <div class="form-group">
                             <div class="col-12">
                                 <span><i class="fa fa-lock"></i></span>
-                                <input class="form-control" type="password" required="" placeholder="Password">
+                                <input class="form-control" type="password" placeholder="Password">
                             </div>
                         </div>
 
@@ -67,9 +67,7 @@
 
                         <div class="form-group text-center m-t-40">
                             <div class="col-12 ">
-                                <button class="btn btn-block btn_submit text-uppercase waves-effect waves-light"
-                                        type="submit">Submit
-                                </button>
+                                <button  type="submit" name="loginSubmit" class="btn btn-block btn_submit text-uppercase waves-effect waves-light">Submit</button>
                             </div>
                         </div>
                     </form>

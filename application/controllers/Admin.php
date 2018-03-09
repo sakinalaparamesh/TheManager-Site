@@ -9,8 +9,13 @@ class Admin extends BaseController {
         parent::__construct();
     }
     public function index() {
-        $session_items = array('IsUserLoggedIn' => TRUE, 'UserId' => 1);
-        $this->session->set_userdata($session_items);
+        
+        if(isset($_POST['loginSubmit'])){
+            
+            $session_items = array('IsUserLoggedIn' => TRUE, 'UserId' => 1);
+            $this->session->set_userdata($session_items);
+            redirect('administration');
+        }
         $this->load->view('login');
     }
 
