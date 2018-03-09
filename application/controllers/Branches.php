@@ -20,7 +20,6 @@ class Branches extends BaseController {
         $this->layout->view('branches/branchesList', $data);
     }
 
-
     public function addBranch($id = 0) {
         $data['title'] = "Add Branch";
         $details = array();
