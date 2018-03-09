@@ -40,7 +40,9 @@
 <!--                <th data-priority="1">Created On</th>
                 <th data-priority="1">Status</th>-->
                 <!--<th data-priority="3" class="text-center">Actions</th>-->
-                <th data-priority="1">ID</th>
+                <th data-priority="1">ClientId</th>
+                <th data-priority="1">BranchId</th>
+                <th data-priority="1">ContactId</th>
             </tr>
         </thead>
 
@@ -88,15 +90,18 @@
         var csrf_hash = '<?php echo $this->security->get_csrf_hash(); ?>';
 
         GridJS.Load(url, csrf_token_name, csrf_hash);
+        //SaveBranchDetailsJS.Load(url);
+        //branchjs.Load(url);
           
     });//ready
     
-    function openSidebar(id){
+    function openSidebar(clientId, branchId, contactId){
         
+        //alert(clientId+' '+branchId+ '' + contactId);
         $.ajax({
             type: "POST",
             url: "<?php echo base_url('clients/getClientFullDetailsAjax') ?>", 
-            data: {"id" : id},
+            data: { "clientId" : clientId, "branchId" : branchId, "contactId" : contactId },
             //data: form_data,
             success: function(response){ //alert(response);
                 $("#DetailsView").html(response);
@@ -110,14 +115,32 @@
         document.getElementById("myListView").classList.add("col-md-9");
         document.getElementById("DetailsView").style.display = "block";
      }
-     function clientContactForm(id){ //alert('Hello'+id);
+     function addBranchForm(branchId, clientId){
+        
+        $('.modal-title').html('');
+        $('.modal-body').html('');
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('clients/getBranchRegFormAajx') ?>", 
+            data: {"branchId" : branchId, "clientId" : clientId},
+            success: function(response){ //alert(response);
+                $('.modal-title').html('Branch Registration');
+                $('.modal-body').html(response);
+                //document.getElementByClass("modal-body").html(response);
+                $('#CommonModal').modal({show:true});
+                
+            } 
+        });//ajax
+        
+     }
+     function clientContactForm(branchcontactid, clientbranchid){
         
         $('.modal-title').html('');
         $('.modal-body').html('');
         $.ajax({
             type: "POST",
             url: "<?php echo base_url('clients/getClientContactFormAjax') ?>", 
-            data: {"id" : id},
+            data: {"branchcontactid" : branchcontactid, "clientbranchid" : clientbranchid},
             success: function(response){ //alert(response);
                 $('.modal-title').html('Client Contact Registration');
                 $('.modal-body').html(response);
@@ -127,23 +150,7 @@
         });//ajax
         
      }
-     function addBranchForm(id){ //alert('Hello'+id);
-        
-        $('.modal-title').html('');
-        $('.modal-body').html('');
-        $.ajax({
-            type: "POST",
-            url: "<?php echo base_url('clients/getBranchRegFormAajx') ?>", 
-            data: {"id" : id},
-            success: function(response){ //alert(response);
-                $('.modal-title').html('Branch Registration');
-                $('.modal-body').html(response);
-                //document.getElementByClass("modal-body").html(response);
-                $('#CommonModal').modal({show:true});
-            } 
-        });//ajax
-        
-     }
+     
 
 </script>
 <script src="<?php echo base_url().'assets/datatables-grid/ClientsGridJS.js'; ?>"></script>

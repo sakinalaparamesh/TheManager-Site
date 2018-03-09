@@ -104,26 +104,96 @@ class Clients extends CI_Controller {
     public function getClientFullDetailsAjax()
     {
         $data['title']="Client Details";
-         $id = $_POST['id'];
-         $data['details'] = $this->clients_model->getClientDetailsById($id);
+        $data['clientId'] = $_POST['clientId'];
+        $data['branchId'] = $_POST['branchId'];
+        $data['contactId'] = $_POST['contactId'];
+         
+         $data['details'] = $this->clients_model->getClientFullDetails($data);
+         //echo "<pre>"; print_r($data); exit;
          $this->load->view('clients/clientDetails', $data);
     }
-    public function getClientContactFormAjax()
-    {
-        $data = array();
-         $id = $_POST['id'];
-         //$data['details'] = $this->clients_model->getClientDetailsById($id);
-         $data['details'] = array('');
-         $this->load->view('clients/clientContactRegForm', $data);
-    }  
     public function getBranchRegFormAajx()
     {
-        $data = array();
-         $id = $_POST['id'];
-         //$data['details'] = $this->clients_model->getClientDetailsById($id);
-         $data['details'] = array('');
+         $data = array();
+         $clientId = $_POST['clientId'];
+         $branchId = $_POST['branchId'];
+         if($branchId){
+               $details = $this->clients_model->getBranchDetailsById($id);
+               if(count($details)>0){
+                   $data['details'] = $details;
+               }else{
+                   $data['details'][] = array('branchid'=>0,'clientid'=>'','location'=>'','address'=>'','phonenumber'=>'','faxnumber'=>'','email'=>'','isactive'=>'Y');
+               }
+        }else{
+                 $data['details'][] = array('branchid'=>0,'clientid'=>$clientId,'location'=>'','address'=>'','phonenumber'=>'','faxnumber'=>'','email'=>'','isactive'=>'Y');
+        }
          $this->load->view('clients/addBranchForm', $data);
     }  
-    
+    public function saveBranchAjax() 
+    {
+        
+        $ps_data = $_POST;
+        //echo json_encode($ps_data); exit;
+
+        $save_data = array(
+            "branchid" => $ps_data["branchid"],
+            "clientid" => $ps_data["clientid"],
+            "location" => $ps_data["branchLocation"],
+            "address" => $ps_data["branchAddress"],
+            "phonenumber" => $ps_data["branchPhone"],
+            "faxnumber" => $ps_data["branchFax"],
+            "email" => $ps_data["branchEmail"],
+        );
+        $resdata['error_code'] = $this->clients_model->saveBranchDetails($save_data);
+        $resdata['message'] = getErrorMessages("Clients", "BranchSave", $resdata['error_code']);
+        $resdata['isError'] = $resdata['error_code'] > 1 ? "Y" : "N";
+        echo json_encode($resdata);
+    }
+    //Contact Details
+    public function getClientContactFormAjax()
+    {
+         $data = array();
+         $branchcontactid = $_POST['branchcontactid'];
+         $clientbranchid  = $_POST['clientbranchid'];
+         
+         if($branchcontactid){
+               $details = $this->clients_model->getContactDetailsById($branchcontactid);
+               if(count($details)>0){
+                   $data['details'] = $details;
+               }else{
+                   $data['details'][] = array('branchcontactid'=>0,'clientbranchid'=>'','personname'=>'','designation'=>'','mobilenumber'=>'','email'=>'','comments'=>'','profilepic'=>'','isbillingcontact'=>'','greetings'=>'','isactive'=>'Y');
+               }
+        }else{
+                   $data['details'][] = array('branchcontactid'=>0,'clientbranchid'=>$clientbranchid,'personname'=>'','designation'=>'','mobilenumber'=>'','email'=>'','comments'=>'','profilepic'=>'','isbillingcontact'=>'','greetings'=>'','isactive'=>'Y');
+        }
+         $this->load->view('clients/clientContactRegForm', $data);
+    }  
+    public function saveBranchContactAjax() 
+    {
+        
+        $inputdata = $_POST;
+        //echo json_encode($inputdata); exit;
+        $ProfilePicPath = (isset($inputdata['profilepic'])) ? $inputdata['profilepic'] : $inputdata['ProfilePicPath1'];
+        $greetings = (isset($inputdata['greetings'])) ? $inputdata['greetings'] : $inputdata['greetings1'];
+        $isbillingcontact = (isset($inputdata['isbillingcontact'])) ? $inputdata['isbillingcontact'] : $inputdata['isbillingcontact1'];
+        
+        $save_data = array(
+            "branchcontactid" => $inputdata["branchcontactid"],
+            "clientbranchid" => $inputdata["clientbranchid"],
+            "personname" => $inputdata["personname"],
+            "designation" => $inputdata["designation"],
+            //"phonenumber" => $inputdata["phonenumber"],
+            "mobilenumber" => $inputdata["mobilenumber"],
+            "email" => $inputdata["email"],
+            "comments" => $inputdata["comments"],
+            "profilepic" => $ProfilePicPath,
+            "isbillingcontact" => $isbillingcontact,
+            "greetings" => $greetings
+        );
+        $resdata['error_code'] = $this->clients_model->saveBranchContactDetails($save_data);
+        $resdata['message'] = getErrorMessages("Clients", "BranchContactSave", $resdata['error_code']);
+        $resdata['isError'] = $resdata['error_code'] > 1 ? "Y" : "N";
+        echo json_encode($resdata);
+    }
 
 }

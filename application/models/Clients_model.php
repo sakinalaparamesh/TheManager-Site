@@ -7,11 +7,14 @@ class Clients_model extends CI_model {
     { 
         try{
                 $data = array();
-                $searchcols = "CONCAT(clientname,' ',clientcode,' ',CreatedOn)";
+                $searchcols = "CONCAT(C.clientname,' ',C.clientcode,' ',C.CreatedOn,CD.PersonName)";
                 $data['totalFiltered'] = $this->getAllClientsCount($search, $searchcols);
                 //Filter records Data
-                $this->db->select("clientid,clientname,clientcode,DATE_FORMAT(createdon,'%d-%m-%Y') as CreatedOn,isactive as Status");
-                $this->db->from("tbl_mng_clientmaster");
+                //$this->db->select("C.clientid as clientid,CD.personname as PersonName,C.clientname as ClientName,B.location as BranchName,CD.mobilenumber as Mobile,DATE_FORMAT(C.createdon,'%d-%m-%Y') as CreatedOn,C.isactive as Status");
+                $this->db->select("C.clientid as ClientId,CD.personname as PersonName,C.clientname as ClientName,B.location as BranchName,CD.mobilenumber as Mobile, B.branchid as BranchId, CD.branchcontactid as ContactId");
+                $this->db->from("tbl_mng_clientmaster C");
+                $this->db->join("tbl_mng_clientbranchmaster B","B.clientid = C.clientid","LEFT");
+                $this->db->join("tbl_clientbranchcontactdetails CD","CD.clientbranchid = B.branchid","LEFT");
                 //Search
                 if($search){
                     $this->db->like(array($searchcols => $search));
@@ -45,6 +48,43 @@ class Clients_model extends CI_model {
                 $this->db->where('clientid', $id);
                 $query = $this->db->get();
                 return $query->result_array();
+        } catch (Exception $e){
+            log_message('error', $e->getMessage());
+            return "ERROR: ".$e->getMessage();
+        }
+    }
+    public function getClientFullDetails($data)
+    { 
+        try{
+                $data['clientId'] = $_POST['clientId'];
+                $data['branchId'] = $_POST['branchId'];
+                $data['contactId'] = $_POST['contactId'];
+                
+                if($data['contactId']){
+                    $this->db->select("CD.personname as PersonName,CD.designation as Designation,CD.mobilenumber as Mobile,CD.email as Email,C.clientname as ClientName,B.location as BranchName, B.branchid as BranchId, CD.branchcontactid as ContactId");
+                    $this->db->from("tbl_mng_clientmaster C");
+                    $this->db->join("tbl_mng_clientbranchmaster B","B.clientid = C.clientid","LEFT");
+                    $this->db->join("tbl_clientbranchcontactdetails CD","CD.clientbranchid = B.branchid","LEFT");
+                    $this->db->where(array('CD.branchcontactid'=>$data['contactId']));
+                    $query = $this->db->get();
+                    return $query->result_array();
+                }else if($data['branchId']){
+                    $this->db->select("C.clientname as ClientName,B.location as BranchName");
+                    $this->db->from("tbl_mng_clientmaster C");
+                    $this->db->join("tbl_mng_clientbranchmaster B","B.clientid = C.clientid","LEFT");
+                    $this->db->where(array('B.branchid'=>$data['branchId']));
+                    $query = $this->db->get();
+                    return $query->result_array();
+                }else{
+                    $this->db->select("C.clientname as ClientName");
+                    $this->db->from("tbl_mng_clientmaster C");
+                    $this->db->where(array('C.clientid'=>$data['clientId']));
+                    $query = $this->db->get();
+                    return $query->result_array();
+                }
+                
+               
+                
         } catch (Exception $e){
             log_message('error', $e->getMessage());
             return "ERROR: ".$e->getMessage();
@@ -111,7 +151,9 @@ class Clients_model extends CI_model {
         try{
                 //Filtered Records Count
                 $this->db->select("*");
-                $this->db->from("tbl_mng_clientmaster");
+                $this->db->from("tbl_mng_clientmaster C");
+                $this->db->join("tbl_mng_clientbranchmaster B","B.clientid = C.clientid","LEFT");
+                $this->db->join("tbl_clientbranchcontactdetails CD","CD.clientbranchid = B.branchid","LEFT");
                 if($search){
                     $this->db->like(array($searchcols => $search));
                 }
@@ -123,6 +165,107 @@ class Clients_model extends CI_model {
             echo "ERROR: ".$e->getMessage();
         }
     }
+    //Branches
+    public function getBranchDetailsById($id)
+    { 
+        try{
+                $this->db->select("branchid,clientid,location,address,phonenumber,faxnumber,email,isactive");
+                $this->db->from("tbl_mng_clientbranchmaster");
+                $this->db->where('branchid', $id);
+                $query = $this->db->get();
+                return $query->result_array();
+        } catch (Exception $e){
+            log_message('error', $e->getMessage());
+            return "ERROR: ".$e->getMessage();
+        }
+    }
+    public function saveBranchDetails($data)
+    { 
+        try{
+                $error_code = 3;
+                
+                $id = $data['branchid'];
+                unset($data['branchid']);
+                if($id == 0){
+                    $this->db->select("1")->where(array('isactive'=>'Y', 'location'=>$data['location']));
+                }else{
+                    $this->db->select("1")->where(array('isactive'=>'Y', 'location'=>$data['location'], 'branchid !='=>$id));
+                }
+                $query = $this->db->get("tbl_mng_clientbranchmaster");
+                if($query->num_rows() > 0){
+                    $error_code = 2;
+                }else{                   
+                    if($id){
+                        $data['updatedby'] = $this->session->userdata('UserId');
+                        $data['updatedon'] = date('Y-m-d H:i:s');
+                        $this->db->where('branchid', $id);
+                        $error_code = ($this->db->update('tbl_mng_clientbranchmaster', $data)) ? 1 : 3;                    
+                    }else{
+                        $data['createdby'] = $this->session->userdata('UserId');
+                        $data['createdon'] = date('Y-m-d H:i:s');
+                        $data['isactive'] = 'Y';
+                        $error_code = ($this->db->insert('tbl_mng_clientbranchmaster', $data)) ? 1 : 3; 
+                    }
+                }
+                
+        }catch (Exception $e){
+            log_message('error', $e->getMessage());
+            //return "ERROR: ".$e->getMessage();
+            $error_code = 3;
+        }
+        return $error_code;
+    }
+    //Contact Details
+    public function getContactDetailsById($id)
+    { 
+        try{
+                $this->db->select("branchcontactid,clientbranchid,personname,designation,mobilenumber,email,comments,profilepic,isbillingcontact,greetings,isactive");
+                $this->db->from("tbl_clientbranchcontactdetails");
+                $this->db->where('branchcontactid', $id);
+                $query = $this->db->get();
+                return $query->result_array();
+        } catch (Exception $e){
+            log_message('error', $e->getMessage());
+            return "ERROR: ".$e->getMessage();
+        }
+    }
+    public function saveBranchContactDetails($data)
+    { 
+        try{
+                $error_code = 3;
+                
+                $id = $data['branchcontactid'];
+                unset($data['branchcontactid']);
+                if($id == 0){
+                    $this->db->select("1")->where(array('isactive'=>'Y', 'personname'=>$data['personname']));
+                }else{
+                    $this->db->select("1")->where(array('isactive'=>'Y', 'personname'=>$data['personname'], 'branchcontactid !='=>$id));
+                }
+                $query = $this->db->get("tbl_clientbranchcontactdetails");
+                if($query->num_rows() > 0){
+                    $error_code = 2;
+                }else{                   
+                    if($id){
+                        $data['updatedby'] = $this->session->userdata('UserId');
+                        $data['updatedon'] = date('Y-m-d H:i:s');
+                        $this->db->where('branchcontactid', $id);
+                        $error_code = ($this->db->update('tbl_clientbranchcontactdetails', $data)) ? 1 : 3;                    
+                    }else{
+                        $data['createdby'] = $this->session->userdata('UserId');
+                        $data['createdon'] = date('Y-m-d H:i:s');
+                        $data['isactive'] = 'Y';
+                        $error_code = ($this->db->insert('tbl_clientbranchcontactdetails', $data)) ? 1 : 3; 
+                    }
+                }
+                
+        }catch (Exception $e){
+            log_message('error', $e->getMessage());
+            //return "ERROR: ".$e->getMessage();
+            $error_code = 3;
+        }
+        return $error_code;
+    }
+    
 
 
     

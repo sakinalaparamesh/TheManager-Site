@@ -48,20 +48,38 @@
       "Message": "Technical Error occured while deleting..Please contact admin"
    },
    {
-      "controlname": "Branches",
-      "ActionName": "save",
+      "controlname": "Clients",
+      "ActionName": "BranchSave",
       "ErrorCode": "1",
       "Message": "Successfully saved branch"
    },
    {
-      "controlname": "Branches",
-      "ActionName": "Save",
+      "controlname": "Clients",
+      "ActionName": "BranchSave",
       "ErrorCode": "2",
-      "Message": "Branches Name Duplicated..Please check"
+      "Message": "Branch Name Duplicated..Please check"
    },
    {
-      "controlname": "Branches",
-      "ActionName": "Save",
+      "controlname": "Clients",
+      "ActionName": "BranchSave",
+      "ErrorCode": "3",
+      "Message": "Technical Error occured while saving..Please contact admin"
+   },
+   {
+      "controlname": "Clients",
+      "ActionName": "BranchContactSave",
+      "ErrorCode": "1",
+      "Message": "Successfully saved contact"
+   },
+   {
+      "controlname": "Clients",
+      "ActionName": "BranchContactSave",
+      "ErrorCode": "2",
+      "Message": "Contact Name Duplicated..Please check"
+   },
+   {
+      "controlname": "Clients",
+      "ActionName": "BranchContactSave",
       "ErrorCode": "3",
       "Message": "Technical Error occured while saving..Please contact admin"
    }

@@ -24,25 +24,28 @@
                         },
                         "order": [[ 1, 'asc' ]],
 		"columns": [
-                            { "data": "clientid", "orderable": false },
-                            { "data": "clientname", "orderable": true },
-                            { "data": "clientname", "orderable": true },
-//                            { "data": "clientcode", "orderable": true },
-//                            { "data": "CreatedOn", "orderable": true },
-                            { 
-                            mRender: function (data, type, row) {
-                                var status = "";
-                                if(row.Status == 'Y'){ status ="<span class='text-success'>Active</span>"; }
-                                else{ status = "<span class='text-warning'>In-active</span>" }
-                                return status; },orderable: false 
-                            },
-                            { "data": "clientid", "orderable": false },
+                            { "data": "ClientId", "orderable": false },
+                            { "data": "ClientId", "orderable": false },
+                            { "data": "PersonName", "orderable": true },
+                            { "data": "ClientName", "orderable": true },
+                            { "data": "BranchName", "orderable": true },
+                            { "data": "Mobile", "orderable": true },
+//                            { 
+//                            mRender: function (data, type, row) {
+//                                var status = "";
+//                                if(row.Status == 'Y'){ status ="<span class='text-success'>Active</span>"; }
+//                                else{ status = "<span class='text-warning'>In-active</span>" }
+//                                return status; },orderable: false 
+//                            },
+                            { "data": "ClientId", "orderable": false },
+                            { "data": "BranchId", "orderable": false },
+                            { "data": "ContactId", "orderable": false },
 //                            { 
 //                            mRender: function (data, type, row) {
 //                                var link = "";
-//                                link = link + '<a href="'+_url+'clients/addClient/'+ row.clientid +'" class="btn btn-primary action_btn_padding"><span class="Edit" title="Edit"><i class="fa fa-pencil"></i></span></a> &nbsp; &nbsp;';
-//                                link = link + '<a href="'+_url+'clients/deleteClient/'+ row.clientid +'" class="btn btn-danger action_btn_padding"><span class="Delete" title="Delete"><i class="fa fa-trash"></i></span></a>&nbsp; &nbsp;';
-//                                link = link + '<a href="'+_url+'clients/deleteClient/'+ row.clientid +'" class="btn btn-success action_btn_padding"><span title="List of Branches"><i class="fa fa-list"></i></span></a>';
+//                                link = link + '<a href="'+_url+'clients/addClient/'+ row.ClientId +'" class="btn btn-primary action_btn_padding"><span class="Edit" title="Edit"><i class="fa fa-pencil"></i></span></a> &nbsp; &nbsp;';
+//                                link = link + '<a href="'+_url+'clients/deleteClient/'+ row.ClientId +'" class="btn btn-danger action_btn_padding"><span class="Delete" title="Delete"><i class="fa fa-trash"></i></span></a>&nbsp; &nbsp;';
+//                                link = link + '<a href="'+_url+'clients/deleteClient/'+ row.ClientId +'" class="btn btn-success action_btn_padding"><span title="List of Branches"><i class="fa fa-list"></i></span></a>';
 //                                link = link + '<a class="btn btn-success action_btn_padding" onclick="openSidebar();"><span title="List of Branches"><i class="fa fa-list"></i></span></a>';
 //                                return link; },orderable: false 
 //                            },
@@ -66,12 +69,16 @@
            
             $("#tableId tbody").on("click","tr", function(){ 
                 var _row = $(this);
-                var _Id = _row.find('td:eq(6)').text();
+                var _ClientId  = _row.find('td:eq(6)').text();
+                var _BranchId  = _row.find('td:eq(7)').text();
+                var _ContactId = _row.find('td:eq(8)').text();
                 //alert(_Id);
-                openSidebar(_Id);
+                openSidebar(_ClientId, _BranchId, _ContactId);
            });
                 
 	}
 	
 	return { Load: _Load }
 })();
+
+
