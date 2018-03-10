@@ -250,5 +250,8 @@ class Clients extends CI_Controller {
 
         echo json_encode($json_data);
     }
+    public function getClientTypeDetailsAjax($param) {
+        
+    }
 
 }

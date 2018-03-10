@@ -55,10 +55,13 @@ var ClienttypeGridJS = (function () {
                 $('td:eq(1)', nRow).html(index);
                 return nRow;
             }
-
-
-
         });
+        $("#tblclienttype tbody").on("click","tr", function(){ 
+                var _row = $(this);
+                var _ClienttypeId  = _row.find('td:eq(0)').val();
+                alert(_ClienttypeId);
+//                openSidebar(_ClienttypeId);
+           });
     }
 
     return {Load: _Load}

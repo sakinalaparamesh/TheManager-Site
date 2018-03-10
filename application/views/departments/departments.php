@@ -15,7 +15,10 @@
             </div>
         </div>
         <div class="card-box">
-            <div class="row">            
+            <div class="row">  
+                <div class="col-md-12 text-right m-b-10 pull-right">
+                    <a class="btn btn-default btn-sm" href="<?php echo base_url('add-client'); ?>">Add Department <i class="fa fa-plus"></i></a>
+                </div>
                 <div class="col-md-12 ">                            
                     <div class="box-body  table-responsive">
                         <table   id="tbldepartment" data-toggle="table" data-page-size="10" data-pagination="true"  class="table table-bordered dataTable no-footer dtr-inline table-condensed table-responsive" style="white-space: nowrap; width:100%;"">
@@ -37,7 +40,7 @@
                         </table>
                     </div>
                 </div>
-                
+
             </div>
         </div>
         <!-- end page title end breadcrumb -->
