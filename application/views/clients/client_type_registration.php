@@ -17,24 +17,24 @@
 <div class="card-box">
 <div class="row">
     <div class="col-md-12">
-        <form role="form" >
+        <form role="form" id="client_type">
                                 <div class="form-group row">
-                                    <label for="inputEmail3" class="col-md-2">Name<span class="text-danger">*</span></label>
+                                    <label for="configuration_name" class="col-md-2">Name<span class="text-danger">*</span></label>
                                     <div class="col-md-4">
-                                        <input type="text" required="" parsley-type="name" class="form-control input-sm" id="inputEmail3" placeholder="Name">
+                                        <input type="text" required="" parsley-type="name" class="form-control input-sm" id="configuration_name" name="configuration_name" placeholder="Name">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="hori-pass2" class="col-md-2">Description
                                         <span class="text-danger">*</span></label>
                                     <div class="col-md-4">
-                                        <textarea class="form-control" rows="3"></textarea>
+                                        <textarea class="form-control" rows="3" id="configuration_description" name="configuration_description"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row ">
                                     <label class="col-md-2"></label>
                                     <div class=" col-md-4 ">
-                                        <button type="submit" class="btn btn-default waves-effect waves-light btn-sm" id="success-alert">
+                                        <button type="submit" class="btn btn-default waves-effect waves-light btn-sm" id="btnSubmit">
                                             SUBMIT
                                         </button>
                                         <button type="reset" class="btn btn-inverse waves-effect m-l-5 btn-sm">
@@ -50,3 +50,11 @@
 </div> <!-- end container -->
 </div>
 <!-- end wrapper -->
+ <script src="<?php echo base_url(); ?>assets/js/pages/administration/client_type.js" type="text/javascript"></script>
+ 
+ <script type="text/javascript">
+     $(document).ready(function(){
+         var _baseUrl ='<?php echo base_url(); ?>';
+         client_typejs.Load(_baseUrl);
+     })
+ </script>
