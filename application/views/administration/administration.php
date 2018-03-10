@@ -120,12 +120,12 @@
             </a>
         </div> 
         <div class="col-md-3">
-            <a href="employees.php"><div class="widget-bg-color-icon card-box">
+            <a href=""><div class="widget-bg-color-icon card-box">
             <div class="bg-icon bg-dark pull-left">
             <i class="fa fa-users text-white"></i>
             </div>
             <div class="text-right">
-            <h5 class="text-dark"><span class=""><b>Employees</b></span></h5>
+            <h5 class="text-dark"><span class=""><b>Jobs</b></span></h5>
             <p class="text-muted mb-0 "><b class="badge badge-inverse counter">15</b></p>
             </div>
             <div class="clearfix"></div>
@@ -133,7 +133,7 @@
             </a>
         </div>
         <div class="col-md-3">
-            <a href="employees.php"><div class="widget-bg-color-icon card-box">
+            <a href=""><div class="widget-bg-color-icon card-box">
             <div class="bg-icon bg-dark pull-left">
             <i class="fa fa-users text-white"></i>
             </div>
