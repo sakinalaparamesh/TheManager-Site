@@ -1,19 +1,19 @@
 [
    {
       "controlname": "Department",
-      "ActionName": "Save",
+      "ActionName": "saveDepartment",
       "ErrorCode": "1",
       "Message": "Successfully saved department"
    },
    {
       "controlname": "Department",
-      "ActionName": "Save",
+      "ActionName": "saveDepartment",
       "ErrorCode": "2",
       "Message": "Department Name Duplicated..Please check"
    },
    {
       "controlname": "Department",
-      "ActionName": "Save",
+      "ActionName": "saveDepartment",
       "ErrorCode": "3",
       "Message": "Technical Error occured while saving..Please contact admin"
    },
@@ -80,6 +80,42 @@
    {
       "controlname": "Clients",
       "ActionName": "BranchContactSave",
+      "ErrorCode": "3",
+      "Message": "Technical Error occured while saving..Please contact admin"
+   },
+   {
+      "controlname": "Clients",
+      "ActionName": "saveClientTypes",
+      "ErrorCode": "1",
+      "Message": "Successfully saved contact"
+   },
+   {
+      "controlname": "Clients",
+      "ActionName": "saveClientTypes",
+      "ErrorCode": "2",
+      "Message": "Clienttype Name Duplicated..Please check"
+   },
+   {
+      "controlname": "Clients",
+      "ActionName": "saveClientTypes",
+      "ErrorCode": "3",
+      "Message": "Technical Error occured while saving..Please contact admin"
+   },
+   {
+      "controlname": "Jobs",
+      "ActionName": "saveJob",
+      "ErrorCode": "1",
+      "Message": "Successfully saved contact"
+   },
+   {
+      "controlname": "Jobs",
+      "ActionName": "saveJob",
+      "ErrorCode": "2",
+      "Message": "Jobs Name Duplicated..Please check"
+   },
+   {
+      "controlname": "Jobs",
+      "ActionName": "saveJob",
       "ErrorCode": "3",
       "Message": "Technical Error occured while saving..Please contact admin"
    }

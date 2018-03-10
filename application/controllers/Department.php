@@ -44,11 +44,11 @@ class Department extends BaseController {
         if ($ps_data["departmentid"]== "") {
             $resdata['error_code'] = $this->DepartmentModel->departmentSave($dep_data);
             
-            $resdata['message'] = getErrorMessages("Department", "Save", $resdata['error_code']);
+            $resdata['message'] = getErrorMessages("Department", "saveDepartment", $resdata['error_code']);
         }else{
             $resdata['error_code'] = $this->DepartmentModel->departmentUpdate($dep_data,$ps_data["departmentid"]);
             
-            $resdata['message'] = getErrorMessages("Department", "Save", $resdata['error_code']);
+            $resdata['message'] = getErrorMessages("Department", "saveDepartment", $resdata['error_code']);
         }
 
         $resdata['isError'] = $resdata['error_code'] > 1 ? "Y" : "N";

@@ -21,7 +21,7 @@ class Role extends BaseController {
 
     public function addOrEdit() {
         $data = array();
-
+        $data['department_list'] = $this->Model->fetch('tbl_mng_departmentmaster')->result_array();
         $this->breadcrumbs->push('Administration', 'administration');
         $this->breadcrumbs->push('RoleForm', 'RoleForm');
         $this->layout->view('role/role_form', $data);

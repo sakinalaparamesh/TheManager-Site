@@ -9,12 +9,12 @@ class DepartmentModel extends CI_Model {
         );
         $checkRes = $this->Model->check("tbl_mng_departmentmaster", $dep_check);
         if ($checkRes->num_rows() > 0) {
-            $res_data = 3;
+            $res_data = 2;
         } else {
             if ($this->Model->insert("tbl_mng_departmentmaster", $data)) {
                 $res_data = 1;
             } else {
-                 $res_data= 2;
+                 $res_data= 3;
             }
         }
         return $res_data;
