@@ -36,8 +36,7 @@
 
     <body>
 
-      <?php $this->view('header'); ?>
-        
+      <?php $this->view('header'); ?>        
 
         <?php $flashmessage = $this->session->flashdata('flashmsg');
             if(isset($flashmessage)){ ?>
@@ -128,7 +127,7 @@
      function closeSidebar(){
         document.getElementById("myListView").classList.remove("col-md-9");
         document.getElementById("myListView").classList.add("col-md-12");
-        document.getElementById("DetailsView").style.display = "block";
+        document.getElementById("DetailsView").style.display = "none";
      }
 
 </script>

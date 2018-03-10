@@ -117,12 +117,13 @@
                     if (data['isError'] == "N") {
                         $("#CommonModal").modal('hide');
                         alert(data['message']);
+                        window.location.href = "<?php echo base_url('clients') ?>";
                     }else{
                         alert(data['message']);
                     }
                 },
                 error: function (data) {
-                    alert(data);
+                    alert("Technical Error Occured");
                 }
             })
         }

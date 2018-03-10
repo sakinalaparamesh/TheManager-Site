@@ -7,7 +7,7 @@
             <div class="btn-group pull-right">
                 <?php echo $this->breadcrumbs->show(); ?>
             </div>
-            <h4 class="page-title">Clients</h4>
+            <h4 class="page-title"><?php echo $title; ?></h4>
         </div>
     </div>
 </div>

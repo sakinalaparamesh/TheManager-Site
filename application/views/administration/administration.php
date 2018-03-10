@@ -68,7 +68,7 @@
             </a>
         </div>
         <div class="col-md-3">
-            <a href="product.php"><div class="widget-bg-color-icon card-box">
+            <a href="<?php echo base_url('product'); ?>"><div class="widget-bg-color-icon card-box">
             <div class="bg-icon bg-dark pull-left">
             <i class="fa fa-users text-white"></i>
             </div>
@@ -81,7 +81,7 @@
             </a>
         </div>
         <div class="col-md-3">
-            <a href="agent.php"><div class="widget-bg-color-icon card-box">
+            <a href="<?php echo base_url('agent'); ?>"><div class="widget-bg-color-icon card-box">
             <div class="bg-icon bg-dark pull-left">
             <i class="fa fa-users text-white"></i>
             </div>
