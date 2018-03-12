@@ -94,6 +94,10 @@ text-align: left;
     background: none!important;
     box-shadow: none!important;
 }
+.controllers_role{
+    
+        padding: 0px 30px;
+}
 @media (min-width: 768px){
 .form-horizontal .control-label {
     padding-top: 2px!important;

@@ -26,6 +26,11 @@
         <!-- Responsive datatable examples -->
         <link href="<?php echo base_url(); ?>plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" /><!--select2 CSS-->
+        <link href="<?php echo base_url(); ?>plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css" rel="stylesheet" />
+        <link href="<?php echo base_url(); ?>plugins/multiselect/css/multi-select.css"  rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url(); ?>plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" />
+        <link href="<?php echo base_url(); ?>plugins/bootstrap-touchspin/css/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
+         <link href="<?php echo base_url(); ?>plugins/switchery/css/switchery.min.css" rel="stylesheet" />
 
         <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
         
@@ -78,7 +83,12 @@
         <script src="<?php echo base_url(); ?>plugins/datatables/dataTables.buttons.min.js"></script>
         <script src="<?php echo base_url(); ?>plugins/datatables/buttons.bootstrap4.min.js"></script>
         
-        
+        <script type="text/javascript" src="<?php echo base_url(); ?>plugins/multiselect/js/jquery.multi-select.js"></script>
+        <script type="text/javascript" src="<?php echo base_url(); ?>plugins/jquery-quicksearch/jquery.quicksearch.js"></script>
+        <script src="<?php echo base_url(); ?>plugins/bootstrap-select/js/bootstrap-select.min.js" type="text/javascript"></script>
+        <script type="text/javascript" src="<?php echo base_url(); ?>assets/pages/jquery.form-advanced.init.js"></script>
+         <script src="<?php echo base_url(); ?>plugins/select2/js/select2.min.js" type="text/javascript"></script>
+          
         <!-- Responsive examples -->
         <script src="<?php echo base_url(); ?>plugins/datatables/dataTables.responsive.min.js"></script>
         <script src="<?php echo base_url(); ?>plugins/datatables/responsive.bootstrap4.min.js"></script>
