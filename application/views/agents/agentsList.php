@@ -5,40 +5,36 @@
     <div class="col-sm-12">
         <div class="page-title-box">
             <div class="btn-group pull-right">
-                <ol class="breadcrumb hide-phone p-0 m-0">
-                    <li class="breadcrumb-item"><a href="administration.php">Administration</a></li>
-                    <li class="breadcrumb-item active">Agents</li>
-                </ol>
+                <?php echo $this->breadcrumbs->show(); ?>
             </div>
-            <h4 class="page-title">Agents</h4>
+            <h4 class="page-title"><?php echo $title; ?></h4>
         </div>
     </div>
 </div>
 <div class="card-box">
 <div class="row">
 <!-- <label for="" class="col-md-1">Email<span class="text-danger">*</span></label> -->
-<div class="col-md-3">
+<!--<div class="col-md-3">
 <input type="email" required=""  class="form-control input-sm" id="" placeholder="Search">
 </div>
 <div class="col-md-1 m-b-10">
     <a class="btn btn-inverse btn-sm" href="javascript:">Search <i class="fa fa-search"></i></a>
-</div>
-<div class="col-md-8 text-right m-b-10">
-    <a class="btn btn-default btn-sm" href="agent_registration.php">Add <i class="fa fa-plus-add"></i></a>
+</div>-->
+<div class="col-md-12 text-right m-b-10">
+    <a class="btn btn-default btn-sm" href="<?php echo base_url('Agent/addOrEdit'); ?>">Add <i class="fa fa-plus-add"></i></a>
 </div>
 <div class="col-md-12 test">                            
 <div class="table-responsive">
-<table     data-toggle="table"
-           data-page-size="10"
-           data-pagination="true" class="table-bordered table-condensed table-hovered" style="white-space: nowrap;">
-        <thead class="text-white">
+<table id="tblagent" class="table-bordered table-condensed table-hovered">
+        <thead>
         <tr>
             <th data-field="state" data-checkbox="true"></th>
             <th data-field="id" data-switchable="false">S.No</th>
             <th data-field="name">Name </th>
-            <th data-field="company">Agent Type </th>
+            <th data-field="company">Company </th>
            
             <th data-field="data">Contact number </th>
+             <th data-field="data">Status</th>
             
             
         </tr>
@@ -46,30 +42,13 @@
 
 
         <tbody>
-        <tr class="openView">
-            <td></td>
-            <td>1</td>
-            <td>Divya</td>
-           
-            <td> </td>
-            <td>9658965412</td>  
-        </tr>
-        <tr class="openView">
-            <td></td>
-            <td>2</td>
-            <td>Divya</td>
-           
-            <td> </td>
-            <td>9658965412</td>  
-        </tr>
-       
        
         
         </tbody>
     </table>
 </div>
 </div>
-<div class="col-md-3 mini" style="display: none">
+<!--<div class="col-md-3 mini" style="display: none">
      <div class="panel ">
       <div class="panel-heading color-dark">  
         <div class="text-right"><span class="fa fa-close closemini"></span></div>
@@ -108,10 +87,23 @@
                     </div>
     </div>
 
-  </div>
+  </div>-->
 </div>
 </div>
 <!-- end page title end breadcrumb -->
 </div> <!-- end container -->
 </div>
 <!-- end wrapper -->
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        var url = "<?= base_url() ?>";
+
+       AgentGridJS.Load(url);
+
+
+    });//ready
+
+</script>
+<script src="<?= base_url() ?>assets/datatables-grid/AgentGridJS.js" type="text/javascript"></script>

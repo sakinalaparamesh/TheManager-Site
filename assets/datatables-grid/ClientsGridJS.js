@@ -22,9 +22,9 @@
 			 "type": "POST",
 			 "data":{ _csrf_token_name : _csrf_hash }
                         },
-                        "order": [[ 1, 'asc' ]],
+                        "order": [[ 3, 'asc' ]],
 		"columns": [
-                            { "data": "ClientId", "orderable": false },
+                            { "data": "ClientId", "orderable": false},
                             { "data": "ClientId", "orderable": false },
                             { "data": "PersonName", "orderable": true },
                             { "data": "ClientName", "orderable": true },
@@ -37,9 +37,9 @@
 //                                else{ status = "<span class='text-warning'>In-active</span>" }
 //                                return status; },orderable: false 
 //                            },
-                            { "data": "ClientId", "orderable": false },
-                            { "data": "BranchId", "orderable": false },
-                            { "data": "ContactId", "orderable": false },
+                            { "data": "ClientId", "orderable": false,"visible":false },
+                            { "data": "BranchId", "orderable": false,"visible":false },
+                            { "data": "ContactId", "orderable": false,"visible":false },
 //                            { 
 //                            mRender: function (data, type, row) {
 //                                var link = "";
@@ -69,10 +69,10 @@
            
             $("#tableId tbody").on("click","tr", function(){ 
                 var _row = $(this);
-                var _ClientId  = _row.find('td:eq(6)').text();
-                var _BranchId  = _row.find('td:eq(7)').text();
-                var _ContactId = _row.find('td:eq(8)').text();
-                //alert(_Id);
+                var _ClientId  = dt.row(_row).data()["ClientId"];
+                var _BranchId  = dt.row(_row).data()["BranchId"];
+                var _ContactId = dt.row(_row).data()["ContactId"];    
+                //alert(_ClientId +" "+_BranchId+" "+_ContactId);
                 openSidebar(_ClientId, _BranchId, _ContactId);
            });
                 

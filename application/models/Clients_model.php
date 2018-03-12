@@ -7,7 +7,7 @@ class Clients_model extends CI_model {
     { 
         try{
                 $data = array();
-                $searchcols = "CONCAT(C.clientname,' ',C.clientcode,' ',C.CreatedOn,CD.PersonName)";
+                $searchcols = "CONCAT(PersonName,' ',C.clientname,' ',C.clientcode,' ',C.CreatedOn)";
                 $data['totalFiltered'] = $this->getAllClientsCount($search, $searchcols);
                 //Filter records Data
                 //$this->db->select("C.clientid as clientid,CD.personname as PersonName,C.clientname as ClientName,B.location as BranchName,CD.mobilenumber as Mobile,DATE_FORMAT(C.createdon,'%d-%m-%Y') as CreatedOn,C.isactive as Status");
@@ -21,12 +21,14 @@ class Clients_model extends CI_model {
                 }
                 //OrderBy
                 if($dir == null) $dir = 'DESC';
-                if($order == 1){
-                    $this->db->order_by('clientname', $dir);
-                }else if($order == 2){
-                    $this->db->order_by('clientcode', $dir);
+                if($order == 2){
+                    $this->db->order_by('CD.personname', $dir);
                 }else if($order == 3){
-                    $this->db->order_by('CreatedOn', $dir);
+                    $this->db->order_by('C.clientname', $dir);
+                }else if($order == 4){
+                    $this->db->order_by('B.location', $dir);
+                }else if($order == 5){
+                    $this->db->order_by('CD.mobilenumber', $dir);
                 }
                 $this->db->limit($limit, $start);
                 $query = $this->db->get();
@@ -237,9 +239,9 @@ class Clients_model extends CI_model {
                 $id = $data['branchcontactid'];
                 unset($data['branchcontactid']);
                 if($id == 0){
-                    $this->db->select("1")->where(array('isactive'=>'Y', 'personname'=>$data['personname']));
+                    $this->db->select("1")->where(array('isactive'=>'Y', 'personname'=>$data['personname'], 'clientbranchid'=>$data['clientbranchid']));
                 }else{
-                    $this->db->select("1")->where(array('isactive'=>'Y', 'personname'=>$data['personname'], 'branchcontactid !='=>$id));
+                    $this->db->select("1")->where(array('isactive'=>'Y', 'personname'=>$data['personname'], 'branchcontactid !='=>$id, 'clientbranchid'=>$data['clientbranchid']));
                 }
                 $query = $this->db->get("tbl_clientbranchcontactdetails");
                 if($query->num_rows() > 0){
