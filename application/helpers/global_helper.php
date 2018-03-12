@@ -50,7 +50,7 @@ if (!function_exists('do_upload')) {
         $obj = & get_instance();
         $orignal_path='./manager_gallary/'.$path."/";
         $config['upload_path'] = $orignal_path;
-        $config['allowed_types'] = $formate;
+        $config['allowed_types'] = 'gif|jpg|png';
         $config['encrypt_name']=TRUE;
 
         $obj->load->library('upload', $config);

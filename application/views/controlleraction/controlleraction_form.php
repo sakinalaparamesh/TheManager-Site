@@ -19,7 +19,7 @@
                                     <label for="controller_list" class="col-md-2">Controllers<span class="text-danger">*</span></label>
                             <div class="col-md-4">
                                 <select id="controllerlist" class="form-control input-sm" name="controllerid">
-                                    <option value="none" selected="selected">Select controller</option>
+                                    <option value="" selected="selected">Select controller</option>
                                     <?php foreach($controllerlist as $list){ ?>                                    
                                     <option value="<?=$list['controllerid']?>"><?=$list['controllername']?></option>
  <?php } ?>
