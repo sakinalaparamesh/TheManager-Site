@@ -2,16 +2,20 @@
 
 class Agent_Model extends CI_Model {
 
-    public function agentSave($data) {
+    public function agentSave($data,$user_roles) {
         $res_data = 1;
         $agent_check = array(
-            "agentname" => $data["agentname"]
+            "user_name" => $data["user_name"]
         );
-        $checkRes = $this->Model->check("tbl_mng_agentmaster", $agent_check);
+        $checkRes = $this->Model->check("tdl_mng_usermaster", $agent_check);
         if ($checkRes->num_rows() > 0) {
             $res_data = 3;
         } else {
-            if ($this->Model->insert("tbl_mng_agentmaster", $data)) {
+            
+            if ($this->Model->insert("tdl_mng_usermaster", $data)) {
+                $user_id=$this->db->insert_id();
+                $user_roles["user_id"]=$user_id;
+                $this->Model->insert("tdl_mng_user_roles", $user_roles);
                 $res_data = 1;
             } else {
                  $res_data= 2;

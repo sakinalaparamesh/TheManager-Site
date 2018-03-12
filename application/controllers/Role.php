@@ -36,6 +36,7 @@ class Role extends BaseController {
             "departmentid" => $ps_data["departmentid"],
             "displayname" => $ps_data["displayname"],
             "isactive" => "Y",
+            "createdby"=> $this->session->userdata('UserId'),
             "createdon" => date("Y-m-d H:i:s")
         );
 
@@ -74,6 +75,11 @@ class Role extends BaseController {
         );
 
         echo json_encode($json_data);
+    }
+    public function getRolesbyDepartmentid() {
+        $department_id=$this->input->get('department_id');
+        $roles= $this->Model->check("tbl_mng_rolemaster",array("departmentid"=>$department_id))->result_array();
+        echo json_encode($roles);
     }
 
 }

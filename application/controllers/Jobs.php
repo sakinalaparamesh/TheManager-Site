@@ -36,6 +36,7 @@ class Jobs extends BaseController {
             "jobs_description" => $ps_data["jobs_description"],
             "jobs_eligibilitycriteria" => $ps_data["jobs_eligibilitycriteria"],
             "isactive" => "Y",
+            "createdby" => $this->session->userdata('UserId'),
             "createdon" => date("Y-m-d H:i:s")
         );
 

@@ -6,25 +6,25 @@ var rolejs = (function () {
     var _Url;
     var _Load = function (url) {
         _Url = url;
+/*
+        $.ajax({
+            type: "GET",
+            url: _Url + 'Department/getDepartmentsForDdl',
 
-//        $.ajax({
-//            type: "GET",
-//            url: _Url + 'Department/getDepartmentsForDdl',
-//
-//            dataType: 'json',
-//            success: function (data) {
-////                console.log(data);
-//                var html = '';
-//                for (var i = 0; i < data.length; i++) {
-//                    html += '<option value="' + data[i]['departmentid'] + '">' + data[i]['departmentname'] + '</option>';
-//                }
-//                document.getElementById("department_list").innerHTML = html;
-//            },
-//            error: function (xhr, textStatus, errorThrown) {
-//                alert("Error");
-//                alert(xhr.responseText);
-//            }
-//        })
+            dataType: 'json',
+            success: function (data) {
+//                console.log(data);
+                var html = '';
+                for (var i = 0; i < data.length; i++) {
+                    html += '<option value="' + data[i]['departmentid'] + '">' + data[i]['departmentname'] + '</option>';
+                }
+                document.getElementById("department_list").innerHTML = html;
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert("Error");
+                alert(xhr.responseText);
+            }
+        })*/
         _Departmentid = $("#department_list");
         _RoleName = $("#txtRoleName");
         _RoleDescription = $("#txtRoleDescription");

@@ -44,6 +44,7 @@ class Product extends CI_Controller {
             "productcode" => $ps_data["ProductCode"],
             "productdescription" => $ps_data["ProductDescription"],
             "isactive" => "Y",
+            "createdby" => $this->session->userdata('UserId'),
             "createdon" => date("Y-m-d H:i:s")
         );
         
