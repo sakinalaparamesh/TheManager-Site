@@ -22,7 +22,11 @@
                         <div class="form-group row">
                             <label for="department_list" class="col-md-2">Departments<span class="text-danger">*</span></label>
                             <div class="col-md-4">
-                                <select id="department_list" class="form-control input-sm" name="departmentid"></select>
+                                <select id="department_list" class="form-control input-sm" name="departmentid">
+                                    <?php foreach($department_list as $list){ ?>
+                                    <option value="<?=$list['departmentid']?>"><?=$list['departmentname']?></option>
+ <?php } ?>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row">

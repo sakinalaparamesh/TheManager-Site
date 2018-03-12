@@ -94,6 +94,25 @@
 
 
     });//ready
-
+function getClientTypeDetailsAjax(clientId, branchId, contactId){
+        
+        //alert(clientId+' '+branchId+ '' + contactId);
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('clients/getClientFullDetailsAjax') ?>", 
+            data: { "clientId" : clientId, "branchId" : branchId, "contactId" : contactId },
+            //data: form_data,
+            success: function(response){ //alert(response);
+                $("#DetailsView").html(response);
+            },
+            error: function(){
+                //alert("failure");
+            }   
+        });//ajax
+        
+        document.getElementById("myListView").classList.remove("col-md-12");
+        document.getElementById("myListView").classList.add("col-md-9");
+        document.getElementById("DetailsView").style.display = "block";
+     }
 </script>
 <script src="<?= base_url() ?>assets/js/pages/administration/clienttype_grid.js" type="text/javascript"></script>

@@ -100,5 +100,23 @@
       "ActionName": "saveClientTypes",
       "ErrorCode": "3",
       "Message": "Technical Error occured while saving..Please contact admin"
+   },
+   {
+      "controlname": "Jobs",
+      "ActionName": "saveJob",
+      "ErrorCode": "1",
+      "Message": "Successfully saved contact"
+   },
+   {
+      "controlname": "Jobs",
+      "ActionName": "saveJob",
+      "ErrorCode": "2",
+      "Message": "Jobs Name Duplicated..Please check"
+   },
+   {
+      "controlname": "Jobs",
+      "ActionName": "saveJob",
+      "ErrorCode": "3",
+      "Message": "Technical Error occured while saving..Please contact admin"
    }
 ]
