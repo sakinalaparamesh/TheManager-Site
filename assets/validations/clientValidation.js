@@ -14,6 +14,13 @@
                     }
                 }
             },
+            client_type: {
+                validators: {
+                    notEmpty: {
+                        message: 'The Client Type is required and please select Client Type'
+                    }
+                }
+            },
             is_active: {
                 validators: {
                     notEmpty: {

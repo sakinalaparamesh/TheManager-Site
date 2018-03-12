@@ -12,18 +12,24 @@ class Role extends BaseController {
     }
 
     public function index() {
-        $data = array();
+        
+        $data['title'] = "Roles";
 
         $this->breadcrumbs->push('Administration', 'administration');
-        $this->breadcrumbs->push('RoleForm', 'RoleForm');
+        $this->breadcrumbs->push('Roles', 'role');
+        
         $this->layout->view('role/roles', $data);
     }
 
     public function addOrEdit() {
-        $data = array();
-        $data['department_list'] = $this->Model->fetch('tbl_mng_departmentmaster')->result_array();
+        $data['title'] = "Add Role";
+
         $this->breadcrumbs->push('Administration', 'administration');
-        $this->breadcrumbs->push('RoleForm', 'RoleForm');
+        $this->breadcrumbs->push('Roles', 'role');
+        $this->breadcrumbs->push('Add Role', 'role/addOrEdit');
+        
+        $data['department_list'] = $this->Model->fetch('tbl_mng_departmentmaster')->result_array();
+
         $this->layout->view('role/role_form', $data);
     }
 

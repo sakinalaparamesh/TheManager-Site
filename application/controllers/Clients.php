@@ -55,27 +55,12 @@ class Clients extends CI_Controller {
         $this->breadcrumbs->push('Clients', 'Clients');
         $this->breadcrumbs->push('Add Client', 'Add Client');
 
-        //echo $this->session->userdata('UserId'); exit;
-//        if(isset($_POST['formSubmit']))
-//        {
-//            $inputdata = array();
-//            $inputdata = $_POST;
-//            unset($inputdata['formSubmit']);
-//            //echo "<pre>"; print_r($inputdata); exit;
-//            $error = $this->clients_model->saveClientDetails($inputdata);
-//            if(!$error){
-//                $status = ($inputdata['clientid'] == 0) ? 'Added' : 'Updated';  
-//                $this->session->set_flashdata('flashmsg', '<div class="text-success">Client '.$status.' Successfully</div>');
-//            }else{
-//                $this->session->set_flashdata('flashmsg', '<div class="text-danger">'.$error.'</div>');
-//            }
-//            redirect(base_url().'clients');
-//        }//submit
         $details = $this->clients_model->getClientDetailsById($id);
+        $data['clientTypes'] = $this->clients_model->getAllClientTypes($id);
         if (count($details) > 0) {
             $data['details'] = $details;
         } else {
-            $data['details'][] = array('clientid' => 0, 'clientname' => '', 'clientcode' => '', 'clientdescription' => '', 'isactive' => 'Y');
+            $data['details'][] = array('clientid' => 0, 'client_type' => '', 'clientname' => '', 'clientcode' => '', 'clientdescription' => '', 'is_individual' => 'N', 'isactive' => 'Y');
         }
         //echo "<pre>"; print_r($data); exit;
         $this->layout->view('clients/addClient', $data);
@@ -198,7 +183,13 @@ class Clients extends CI_Controller {
 
 //client type
     public function clientTypeForm() {
-        $data = array();
+        
+        $data['title'] = "Add Client Type";
+        //breadcrumbs
+        $this->breadcrumbs->push('Administration', 'administration');
+        $this->breadcrumbs->push('Client Types', 'clients/clientTypes');
+        $this->breadcrumbs->push('Add Client Type', 'clients/clientTypeForm');
+        
         $this->layout->view('clients/client_type_registration', $data);
     }
 
@@ -220,7 +211,11 @@ class Clients extends CI_Controller {
     }
 
     public function clientTypes() {
-        $data['title'] = "Client Type";
+        
+        $data['title'] = "Client Types";
+        //breadcrumbs
+        $this->breadcrumbs->push('Administration', 'administration');
+        $this->breadcrumbs->push('Client Types', 'clients/clientTypes');
 
         $this->layout->view('clients/client_type', $data);
     }

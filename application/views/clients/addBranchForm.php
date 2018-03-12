@@ -4,22 +4,22 @@
     <input type="hidden" name="clientid" value="<?php echo $details[0]['clientid']; ?>">
     
     <div class="form-group row">
-        <label for="branchLocation" class="col-md-2">Branch Location<span class="text-danger">*</span></label>
-        <div class="col-md-4">
+        <label for="branchLocation" class="col-md-4">Branch Location<span class="text-danger">*</span></label>
+        <div class="col-md-8">
             <input type="text" class="form-control input-sm" id="branchLocation" placeholder="Branch Location" name="branchLocation" value="<?php echo $details[0]['location']; ?>">
             <span class="text-danger" id="branchLocationErr">&nbsp;</span>
         </div>
     </div>
 
     <div class="form-group row">
-        <label for="branchAddress" class="col-md-2"> Address <span class="text-danger" >*</span></label>
-        <div class="col-md-4">
+        <label for="branchAddress" class="col-md-4"> Address <span class="text-danger" >*</span></label>
+        <div class="col-md-8">
             <textarea class="form-control" id="branchAddress" rows="3" name="branchAddress"><?php echo $details[0]['address']; ?></textarea>
         </div>
     </div>
     <div class="form-group row">
-        <label for="branchPhone" class="col-md-2"> Phone No </label>
-        <div class="col-md-4">
+        <label for="branchPhone" class="col-md-4"> Phone No </label>
+        <div class="col-md-8">
             <input type="text"   class="form-control input-sm" id="branchPhone" placeholder="Phone No" name="branchPhone" value="<?php echo $details[0]['phonenumber']; ?>">
         </div>
     </div>
@@ -33,22 +33,22 @@
 
     </div> -->
     <div class="form-group row">
-        <label for="branchFax" class="col-md-2">   Fax No  </label>
-        <div class="col-md-4">
+        <label for="branchFax" class="col-md-4">   Fax No  </label>
+        <div class="col-md-8">
             <input type="text"   class="form-control input-sm" id="branchFax" placeholder="Fax No " name="branchFax" value="<?php echo $details[0]['faxnumber']; ?>">
         </div>
     </div>
     <div class="form-group row">
-        <label for="branchEmail" class="col-md-2">   Email  </label>
-        <div class="col-md-4">
+        <label for="branchEmail" class="col-md-4">   Email  </label>
+        <div class="col-md-8">
             <input type="text"   class="form-control input-sm" id="branchEmail" placeholder="Email" name="branchEmail" value="<?php echo $details[0]['email']; ?>">
         </div>
     </div>
 
 
     <div class="form-group row ">
-        <label class="col-md-2"></label>
-        <div class=" col-md-4">
+        <label class="col-md-4"></label>
+        <div class=" col-md-8">
             <button type="button" class="btn btn-default waves-effect waves-light btn-sm" id="btnSubmit" onclick="ValidateBranch();">
                 SUBMIT
             </button>
