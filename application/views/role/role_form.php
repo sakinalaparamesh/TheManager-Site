@@ -77,6 +77,8 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="controllers_role" data-spy="scroll">
+                            <div class="row">
+                            <div class="col-md-5">
                             <div class="controller">
                                 <div class="text-dark font-13 m-b-15 m-t-20"><b> Controller 1 </b> </div>
                        <div class="checkbox checkbox-inverse form-check-inline">
@@ -91,7 +93,13 @@
                                             <input type="checkbox" id="inlineCheckbox3" value="option1">
                                             <label for="inlineCheckbox3"> List </label>
                                         </div>
+                                <div class="checkbox checkbox-inverse  form-check-inline">
+                                            <input type="checkbox" id="inlineCheckbox13" value="option1">
+                                            <label for="inlineCheckbox13"> Download </label>
+                                        </div>
                        </div> 
+                                </div>
+                            <div class="col-md-6">
                             <div class="controller">
                            <div class="text-dark font-13 m-b-15 m-t-20"> <b> Controller 2 </b></div>
                        <div class="checkbox checkbox-inverse form-check-inline">
@@ -105,96 +113,137 @@
                        <div class="checkbox checkbox-inverse  form-check-inline">
                                             <input type="checkbox" id="inlineCheckbox6" value="option1">
                                             <label for="inlineCheckbox6"> Add </label>
+                                            </div>
+                                             <div class="checkbox checkbox-inverse  form-check-inline">
+                                            <input type="checkbox" id="inlineCheckbox13" value="option1">
+                                            <label for="inlineCheckbox13"> Download </label>
+                                        </div>
+                                        
+                       </div>
+                            </div>
+                                </div>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="controller">
+                           <div class="text-dark font-13 m-b-15 m-t-20"> <b> Controller 3 </b></div>
+                       <div class="checkbox checkbox-inverse form-check-inline">
+                                            <input type="checkbox" id="inlineCheckbox7" value="option1">
+                                            <label for="inlineCheckbox7"> View </label>
+                                        </div>
+                       <div class="checkbox checkbox-inverse  form-check-inline">
+                                            <input type="checkbox" id="inlineCheckbox8" value="option1">
+                                            <label for="inlineCheckbox8"> List </label>
+                                        </div>
+                       <div class="checkbox checkbox-inverse  form-check-inline">
+                                            <input type="checkbox" id="inlineCheckbox9" value="option1">
+                                            <label for="inlineCheckbox9"> Add </label>
+                                        </div>
+                            <div class="checkbox checkbox-inverse  form-check-inline">
+                                            <input type="checkbox" id="inlineCheckbox13" value="option1">
+                                            <label for="inlineCheckbox13"> Download </label>
                                         </div>
                        </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="controller">
+                           <div class="text-dark font-13 m-b-15 m-t-20"> <b> Controller 4 </b></div>
+                       <div class="checkbox checkbox-inverse form-check-inline">
+                                            <input type="checkbox" id="inlineCheckbox7" value="option1">
+                                            <label for="inlineCheckbox7"> View </label>
+                                        </div>
+                       <div class="checkbox checkbox-inverse  form-check-inline">
+                                            <input type="checkbox" id="inlineCheckbox8" value="option1">
+                                            <label for="inlineCheckbox8"> List </label>
+                                        </div>
+                       <div class="checkbox checkbox-inverse  form-check-inline">
+                                            <input type="checkbox" id="inlineCheckbox9" value="option1">
+                                            <label for="inlineCheckbox9"> Add </label>
+                                        </div>
+                       </div>
+                                </div>
+                            </div>
+                             <div class="row">
+                                <div class="col-md-5">
+                                    <div class="controller">
+                           <div class="text-dark font-13 m-b-15 m-t-20"> <b> Controller 3 </b></div>
+                       <div class="checkbox checkbox-inverse form-check-inline">
+                                            <input type="checkbox" id="inlineCheckbox7" value="option1">
+                                            <label for="inlineCheckbox7"> View </label>
+                                        </div>
+                       <div class="checkbox checkbox-inverse  form-check-inline">
+                                            <input type="checkbox" id="inlineCheckbox8" value="option1">
+                                            <label for="inlineCheckbox8"> List </label>
+                                        </div>
+                       <div class="checkbox checkbox-inverse  form-check-inline">
+                                            <input type="checkbox" id="inlineCheckbox9" value="option1">
+                                            <label for="inlineCheckbox9"> Add </label>
+                                        </div>
+                            <div class="checkbox checkbox-inverse  form-check-inline">
+                                            <input type="checkbox" id="inlineCheckbox13" value="option1">
+                                            <label for="inlineCheckbox13"> Download </label>
+                                        </div>
+                       </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="controller">
+                           <div class="text-dark font-13 m-b-15 m-t-20"> <b> Controller 4 </b></div>
+                       <div class="checkbox checkbox-inverse form-check-inline">
+                                            <input type="checkbox" id="inlineCheckbox7" value="option1">
+                                            <label for="inlineCheckbox7"> View </label>
+                                        </div>
+                       <div class="checkbox checkbox-inverse  form-check-inline">
+                                            <input type="checkbox" id="inlineCheckbox8" value="option1">
+                                            <label for="inlineCheckbox8"> List </label>
+                                        </div>
+                       <div class="checkbox checkbox-inverse  form-check-inline">
+                                            <input type="checkbox" id="inlineCheckbox9" value="option1">
+                                            <label for="inlineCheckbox9"> Add </label>
+                                        </div>
+                       </div>
+                                </div>
+                            </div>
+                             <div class="row">
+                                <div class="col-md-5">
+                                    <div class="controller">
+                           <div class="text-dark font-13 m-b-15 m-t-20"> <b> Controller 3 </b></div>
+                       <div class="checkbox checkbox-inverse form-check-inline">
+                                            <input type="checkbox" id="inlineCheckbox7" value="option1">
+                                            <label for="inlineCheckbox7"> View </label>
+                                        </div>
+                       <div class="checkbox checkbox-inverse  form-check-inline">
+                                            <input type="checkbox" id="inlineCheckbox8" value="option1">
+                                            <label for="inlineCheckbox8"> List </label>
+                                        </div>
+                       <div class="checkbox checkbox-inverse  form-check-inline">
+                                            <input type="checkbox" id="inlineCheckbox9" value="option1">
+                                            <label for="inlineCheckbox9"> Add </label>
+                                        </div>
+                            <div class="checkbox checkbox-inverse  form-check-inline">
+                                            <input type="checkbox" id="inlineCheckbox13" value="option1">
+                                            <label for="inlineCheckbox13"> Download </label>
+                                        </div>
+                       </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="controller">
+                           <div class="text-dark font-13 m-b-15 m-t-20"> <b> Controller 4 </b></div>
+                       <div class="checkbox checkbox-inverse form-check-inline">
+                                            <input type="checkbox" id="inlineCheckbox7" value="option1">
+                                            <label for="inlineCheckbox7"> View </label>
+                                        </div>
+                       <div class="checkbox checkbox-inverse  form-check-inline">
+                                            <input type="checkbox" id="inlineCheckbox8" value="option1">
+                                            <label for="inlineCheckbox8"> List </label>
+                                        </div>
+                       <div class="checkbox checkbox-inverse  form-check-inline">
+                                            <input type="checkbox" id="inlineCheckbox9" value="option1">
+                                            <label for="inlineCheckbox9"> Add </label>
+                                        </div>
+                       </div>
+                                </div>
+                            </div>
                             
-                             <div class="controller">
-                           <div class="text-dark font-13 m-b-15 m-t-20"> <b> Controller 3 </b></div>
-                       <div class="checkbox checkbox-inverse form-check-inline">
-                                            <input type="checkbox" id="inlineCheckbox7" value="option1">
-                                            <label for="inlineCheckbox7"> View </label>
-                                        </div>
-                       <div class="checkbox checkbox-inverse  form-check-inline">
-                                            <input type="checkbox" id="inlineCheckbox8" value="option1">
-                                            <label for="inlineCheckbox8"> List </label>
-                                        </div>
-                       <div class="checkbox checkbox-inverse  form-check-inline">
-                                            <input type="checkbox" id="inlineCheckbox9" value="option1">
-                                            <label for="inlineCheckbox9"> Add </label>
-                                        </div>
-                       </div>
-                            <div class="controller">
-                           <div class="text-dark font-13 m-b-15 m-t-20"> <b> Controller 3 </b></div>
-                       <div class="checkbox checkbox-inverse form-check-inline">
-                                            <input type="checkbox" id="inlineCheckbox7" value="option1">
-                                            <label for="inlineCheckbox7"> View </label>
-                                        </div>
-                       <div class="checkbox checkbox-inverse  form-check-inline">
-                                            <input type="checkbox" id="inlineCheckbox8" value="option1">
-                                            <label for="inlineCheckbox8"> List </label>
-                                        </div>
-                       <div class="checkbox checkbox-inverse  form-check-inline">
-                                            <input type="checkbox" id="inlineCheckbox9" value="option1">
-                                            <label for="inlineCheckbox9"> Add </label>
-                                        </div>
-                       </div><div class="controller">
-                           <div class="text-dark font-13 m-b-15 m-t-20"> <b> Controller 3 </b></div>
-                       <div class="checkbox checkbox-inverse form-check-inline">
-                                            <input type="checkbox" id="inlineCheckbox7" value="option1">
-                                            <label for="inlineCheckbox7"> View </label>
-                                        </div>
-                       <div class="checkbox checkbox-inverse  form-check-inline">
-                                            <input type="checkbox" id="inlineCheckbox8" value="option1">
-                                            <label for="inlineCheckbox8"> List </label>
-                                        </div>
-                       <div class="checkbox checkbox-inverse  form-check-inline">
-                                            <input type="checkbox" id="inlineCheckbox9" value="option1">
-                                            <label for="inlineCheckbox9"> Add </label>
-                                        </div>
-                       </div><div class="controller">
-                           <div class="text-dark font-13 m-b-15 m-t-20"> <b> Controller 3 </b></div>
-                       <div class="checkbox checkbox-inverse form-check-inline">
-                                            <input type="checkbox" id="inlineCheckbox7" value="option1">
-                                            <label for="inlineCheckbox7"> View </label>
-                                        </div>
-                       <div class="checkbox checkbox-inverse  form-check-inline">
-                                            <input type="checkbox" id="inlineCheckbox8" value="option1">
-                                            <label for="inlineCheckbox8"> List </label>
-                                        </div>
-                       <div class="checkbox checkbox-inverse  form-check-inline">
-                                            <input type="checkbox" id="inlineCheckbox9" value="option1">
-                                            <label for="inlineCheckbox9"> Add </label>
-                                        </div>
-                       </div><div class="controller">
-                           <div class="text-dark font-13 m-b-15 m-t-20"> <b> Controller 3 </b></div>
-                       <div class="checkbox checkbox-inverse form-check-inline">
-                                            <input type="checkbox" id="inlineCheckbox7" value="option1">
-                                            <label for="inlineCheckbox7"> View </label>
-                                        </div>
-                       <div class="checkbox checkbox-inverse  form-check-inline">
-                                            <input type="checkbox" id="inlineCheckbox8" value="option1">
-                                            <label for="inlineCheckbox8"> List </label>
-                                        </div>
-                       <div class="checkbox checkbox-inverse  form-check-inline">
-                                            <input type="checkbox" id="inlineCheckbox9" value="option1">
-                                            <label for="inlineCheckbox9"> Add </label>
-                                        </div>
-                       </div><div class="controller">
-                           <div class="text-dark font-13 m-b-15 m-t-20"> <b> Controller 3 </b></div>
-                       <div class="checkbox checkbox-inverse form-check-inline">
-                                            <input type="checkbox" id="inlineCheckbox7" value="option1">
-                                            <label for="inlineCheckbox7"> View </label>
-                                        </div>
-                       <div class="checkbox checkbox-inverse  form-check-inline">
-                                            <input type="checkbox" id="inlineCheckbox8" value="option1">
-                                            <label for="inlineCheckbox8"> List </label>
-                                        </div>
-                       <div class="checkbox checkbox-inverse  form-check-inline">
-                                            <input type="checkbox" id="inlineCheckbox9" value="option1">
-                                            <label for="inlineCheckbox9"> Add </label>
-                                        </div>
-                       </div>
-                            
+                           
                             
                             
                             
