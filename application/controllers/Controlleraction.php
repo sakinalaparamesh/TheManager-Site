@@ -15,7 +15,8 @@ class Controlleraction extends CI_Controller {
 
     public function index() {
         $data['title'] = "Controlleractions";
-        $data = array();
+        $this->breadcrumbs->push('Administration', 'administration');       
+        $this->breadcrumbs->push('ControlleractionForm', 'controlleraction/addoredit');
         $this->layout->view('controlleraction/controlleractions', $data);
     }
 
