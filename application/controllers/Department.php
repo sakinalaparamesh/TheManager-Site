@@ -34,20 +34,30 @@ class Department extends BaseController {
     public function saveDepartment() {
         $ps_data = $this->input->post("DepartmentData");
 
-        $dep_data = array(
-            "departmentname" => $ps_data["DepartmentName"],
-            "departmentcode" => $ps_data["DepartmentName"],
-            "departmentdescription" => $ps_data["DepartmentName"],
-            "isactive" => "Y",
-            "createdon" => date("Y-m-d H:i:s")
-        );
-        if ($ps_data["departmentid"]== "") {
+
+        if ($ps_data["departmentid"] == "") {
+            $dep_data = array(
+                "departmentname" => $ps_data["DepartmentName"],
+                "departmentcode" => $ps_data["DepartmentName"],
+                "departmentdescription" => $ps_data["DepartmentName"],
+                "isactive" => "Y",
+                "createdby" => $this->session->userdata('UserId'),
+                "createdon" => date("Y-m-d H:i:s")
+            );
             $resdata['error_code'] = $this->DepartmentModel->departmentSave($dep_data);
-            
+
             $resdata['message'] = getErrorMessages("Department", "saveDepartment", $resdata['error_code']);
-        }else{
-            $resdata['error_code'] = $this->DepartmentModel->departmentUpdate($dep_data,$ps_data["departmentid"]);
-            
+        } else {
+            $dep_data = array(
+                "departmentname" => $ps_data["DepartmentName"],
+                "departmentcode" => $ps_data["DepartmentName"],
+                "departmentdescription" => $ps_data["DepartmentName"],
+                "isactive" => "Y",
+                "updatedby" => $this->session->userdata('UserId'),
+                "createdon" => date("Y-m-d H:i:s")
+            );
+            $resdata['error_code'] = $this->DepartmentModel->departmentUpdate($dep_data, $ps_data["departmentid"]);
+
             $resdata['message'] = getErrorMessages("Department", "saveDepartment", $resdata['error_code']);
         }
 

@@ -1,21 +1,17 @@
 <?php
 
-class Agent_Model extends CI_Model {
+class mngcontrollerModel extends CI_Model {
 
-    public function agentSave($data,$user_roles) {
+    public function mngcontrollerSave($data) {
         $res_data = 1;
-        $agent_check = array(
-            "user_name" => $data["user_name"]
+        $mng_check = array(
+        "controllername" => $data["controllername"]
         );
-        $checkRes = $this->Model->check("tdl_mng_usermaster", $agent_check);
+        $checkRes = $this->Model->check("tbl_mng_controllermaster", $mng_check);
         if ($checkRes->num_rows() > 0) {
             $res_data = 3;
         } else {
-            
-            if ($this->Model->insert("tdl_mng_usermaster", $data)) {
-                $user_id=$this->db->insert_id();
-                $user_roles["user_id"]=$user_id;
-                $this->Model->insert("tdl_mng_user_roles", $user_roles);
+            if ($this->Model->insert("tbl_mng_controllermaster", $data)) {
                 $res_data = 1;
             } else {
                  $res_data= 2;
@@ -23,24 +19,25 @@ class Agent_Model extends CI_Model {
         }
         return $res_data;
     }
-    public function getAllAgents($limit=10,$start=0,$search='',$order=null,$dir=null)
+    public function getAllmngcontrollers($limit=10,$start=0,$search='',$order=null,$dir=null)
     { 
         try{
                 $data = array();
-                $data['totalFiltered'] = $this->getAgentCountBySearch($search);
+                $data['totalFiltered'] = $this->getmngcontrollerCountBySearch($search);
                 //Filter records Data
-                $this->db->select("agentid,agentname,company,ic/passportnumber,exclusieveagent,contactno,email,address,comments,profilepic,isactive");
-                $this->db->from("tbl_mng_agentmaster");
+                $this->db->select("controllerid,controllername,displayname,description,isactive");
+                $this->db->from("tbl_mng_controllermaster");
                 //Search
                 if($search){
-                    $this->db->like(array("CONCAT(agentname,' ',company,' ',contactno)" => $search));
+                    $this->db->like(array("CONCAT(controllername,' ',displayname)" => $search));
                 }
                 //OrderBy
                 if($dir == null) $dir = 'DESC';
                 if($order == 1){
-                    $this->db->order_by('agentname', $dir);
-                }else if($order == 2){
-                    $this->db->order_by('company', $dir);
+                    $this->db->order_by('controllername', $dir);
+                }
+                else if($order == 2){
+                    $this->db->order_by('displayname', $dir);
                 }
                 $this->db->limit($limit, $start);
                 $query = $this->db->get();
@@ -54,14 +51,14 @@ class Agent_Model extends CI_Model {
             echo "ERROR: ".$e->getMessage();
         }
     }
-    public function getAgentCountBySearch($search='')
+    public function getmngcontrollerCountBySearch($search='')
     { 
         try{
                 //Filtered Records Count
                 $this->db->select("*");
-                $this->db->from("tbl_mng_agentmaster");
+                $this->db->from("tbl_mng_controllermaster");
                 if($search){
-                    $this->db->like(array("CONCAT(agentname,' ',company,' ',contactno)" => $search));
+                    $this->db->like(array("CONCAT(controllername,' ',displayname)" => $search));
                 }
                 $query = $this->db->get();
                 return  $query->num_rows(); 

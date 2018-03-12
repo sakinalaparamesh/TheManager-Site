@@ -2,68 +2,58 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Product extends CI_Controller {
+class mngcontroller extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
         //$this->load->helper('global_helper');
         //is_admin_loggedin();
         $this->layout->setLayout('layout/adminLayout');
-        $this->load->model('ProductModel');
+        $this->load->model('mngcontrollerModel');
         
     }
 
     public function index() {
+         $data['title']="mngcontroller";
+        $this->layout->view('mngcontroller/mngcontrollers', $data);
+         $this->breadcrumbs->push('Add C0ntroller','mngcontroller/addoredit');
         
-        $data['title'] = "Products";
-        
-        $this->breadcrumbs->push('Administration', 'administration');
-        $this->breadcrumbs->push('Products', 'product');
-        
-        $this->layout->view('products/products', $data);
     }
 
-    public function addOrEdit() {
-        
-        $data['title'] = "Add Product";
+    public function addoredit() {
+        $data['title']="Add Controller";
 
         $this->breadcrumbs->push('Administration', 'administration');
-        $this->breadcrumbs->push('Products', 'product');
-        $this->breadcrumbs->push('Add Product', 'product/addOrEdit');
-        
-        $this->layout->view('products/product_form', $data);
+        $this->breadcrumbs->push('mngcontroller','mngcontroller/mngcontrollerlist');
+        $this->breadcrumbs->push('ControllerForm', 'ControllerForm');
+        $this->layout->view('mngcontroller/mngcontroller_form', $data);
     }
 
-    public function saveProduct() {
+    public function savemngcontroller() {
+        $ps_data = $this->input->post("mngcontrollerData");
         
-        $ps_data = $this->input->post("ProductData");
-        
-        $pro_data = array(
-            
-            "productname" => $ps_data["ProductName"],
-            "productcode" => $ps_data["ProductCode"],
-            "productdescription" => $ps_data["ProductDescription"],
+        $mng_data = array(            
+            "controllername" => $ps_data["controllername"],
+            "displayname" => $ps_data["displayname"],
+            "description" => $ps_data["description"],
             "isactive" => "Y",
-            "createdby" => $this->session->userdata('UserId'),
             "createdon" => date("Y-m-d H:i:s")
-        );
-        
-       $resdata['error_code']=$this->ProductModel->productSave($pro_data);
-       $resdata['message'] = getErrorMessages("Product","Save",$resdata['error_code']);
+        );      
+       $resdata['error_code']=$this->mngcontrollerModel->mngcontrollerSave($mng_data);
+       $resdata['message'] = getErrorMessages("mngcontroller","Save",$resdata['error_code']);
        $resdata['isError'] = $resdata['error_code']>1?"Y":"N";
        echo json_encode($resdata);
     }
-    public function products() {
-        
+    public function mngcontrollerlist() {
         $data = array();
 
         $this->breadcrumbs->push('Administration', 'administration');
-        $this->breadcrumbs->push('Add Product', 'product/addOrEdit');
-        $this->layout->view('products/products', $data);
+        $this->breadcrumbs->push('MngControllers', 'mngcontrollers');
+        $this->layout->view('mngcontroller/mngcontrollers', $data);
     }
-    public function getAllProducts() {
+    public function getAllmngcontrollers() {
 
-//        $res = $this->Model->fetch("tbl_mng_productmaster");
+//        $res = $this->Model->fetch("tbl_mng_controllermaster");
 //        echo json_encode($res->result());
         
             $limit  = $this->input->post('length');
@@ -73,7 +63,7 @@ class Product extends CI_Controller {
             $search = $this->input->post('search')['value'];
             $search = (!empty($search)) ? $search : '';
 
-            $result = $this->ProductModel->getAllProducts($limit,$start,$search,$order,$dir);
+            $result = $this->mngcontrollerModel->getAllmngcontrollers($limit,$start,$search,$order,$dir);
             $totalFiltered = $totalData = $result['totalFiltered'];
             $data =  $result['ResultData'];
             if(!empty($search)) $totalFiltered = count($data);
