@@ -12,18 +12,30 @@ class Role extends BaseController {
     }
 
     public function index() {
-        $data = array();
+        
+        $data['title'] = "Roles";
 
         $this->breadcrumbs->push('Administration', 'administration');
-        $this->breadcrumbs->push('RoleForm', 'RoleForm');
+        $this->breadcrumbs->push('Roles', 'role');
+        
         $this->layout->view('role/roles', $data);
     }
 
     public function addOrEdit() {
-        $data = array();
-        $data['department_list'] = $this->Model->fetch('tbl_mng_departmentmaster')->result_array();
+
+        
+        $data['title'] = "Add Role";
+
         $this->breadcrumbs->push('Administration', 'administration');
-        $this->breadcrumbs->push('RoleForm', 'RoleForm');
+        $this->breadcrumbs->push('Roles', 'role');
+        $this->breadcrumbs->push('Add Role', 'role/addOrEdit');
+        
+        $data['controller_list'] = $this->Model->check('tbl_mng_controllermaster', array("isactive" => "Y"))->result_array();
+        foreach ($data['controller_list'] as $list) {
+            $data[$list['controllerid']] = $this->Model->check('tbl_mng_controlleractionmaster', array("controllerid" => $list['controllerid'], "isactive" => "Y"))->result_array();
+        }
+        $data['department_list'] = $this->Model->check('tbl_mng_departmentmaster', array("isactive" => "Y"))->result_array();
+
         $this->layout->view('role/role_form', $data);
     }
 
@@ -36,7 +48,7 @@ class Role extends BaseController {
             "departmentid" => $ps_data["departmentid"],
             "displayname" => $ps_data["displayname"],
             "isactive" => "Y",
-            "createdby"=> $this->session->userdata('UserId'),
+            "createdby" => $this->session->userdata('UserId'),
             "createdon" => date("Y-m-d H:i:s")
         );
 
@@ -76,9 +88,10 @@ class Role extends BaseController {
 
         echo json_encode($json_data);
     }
+
     public function getRolesbyDepartmentid() {
-        $department_id=$this->input->get('department_id');
-        $roles= $this->Model->check("tbl_mng_rolemaster",array("departmentid"=>$department_id))->result_array();
+        $department_id = $this->input->get('department_id');
+        $roles = $this->Model->check("tbl_mng_rolemaster", array("departmentid" => $department_id))->result_array();
         echo json_encode($roles);
     }
 

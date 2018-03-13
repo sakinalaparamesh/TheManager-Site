@@ -5,20 +5,17 @@
             <div class="col-sm-12">
                 <div class="page-title-box">
                     <div class="btn-group pull-right">
-                        <ol class="breadcrumb hide-phone p-0 m-0">
-                            <li class="breadcrumb-item"><a href="administration.php">Administration</a></li>
-                            <li class="breadcrumb-item active">Jobs</li>
-                        </ol>
+                        <?php echo $this->breadcrumbs->show(); ?>
                     </div>
-                    <h4 class="page-title">Jobs</h4>
+                    <h4 class="page-title"><?php echo $title; ?></h4>
                 </div>
             </div>
         </div>
         <div class="card-box">
             <div class="row">   
                 <div class="col-md-12 text-right m-b-10 pull-right">
-                    <a class="btn btn-default btn-sm" href="<?php echo base_url('jobs_post'); ?>">Job Post <i class="fa fa-plus"></i></a>
-</div>
+                    <a class="btn btn-default btn-sm" href="<?php echo base_url('jobs/jobsForms'); ?>">Job Post <i class="fa fa-plus"></i></a>
+                </div>
                 <div class="col-md-12 ">                            
                     <div class="box-body  table-responsive">
                         <table   id="tbldepartment" data-toggle="table" data-page-size="10" data-pagination="true"  class="table table-bordered dataTable no-footer dtr-inline table-condensed table-responsive" style="white-space: nowrap; width:100%;"">

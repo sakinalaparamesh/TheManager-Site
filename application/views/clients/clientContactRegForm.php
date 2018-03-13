@@ -7,32 +7,32 @@
         <input type="hidden" name="isbillingcontact1" value="<?php echo $details[0]['isbillingcontact']; ?>">
     
         <div class="form-group row">
-            <label for="personname" class="col-md-2">Name<span class="text-danger">*</span></label>
-            <div class="col-md-4">
+            <label for="personname" class="col-md-4">Name<span class="text-danger">*</span></label>
+            <div class="col-md-8">
                 <input type="text" name="personname" id="personname" placeholder="Name" parsley-type="personname" class="form-control input-sm" value="<?php echo $details[0]['personname']; ?>">
             </div>
         </div>
         <div class="form-group row">
-            <label for="designation" class="col-md-2">Designation<span class="text-danger">*</span></label>
-            <div class="col-md-4">
+            <label for="designation" class="col-md-4">Designation<span class="text-danger">*</span></label>
+            <div class="col-md-8">
                 <input type="text" name="designation" id="designation" parsley-type="designation" placeholder="Designation" class="form-control input-sm" value="<?php echo $details[0]['designation']; ?>">
             </div>
         </div>
         <div class="form-group row">
-            <label for="mobilenumber" class="col-md-2">Mobile</label>
-            <div class="col-md-4">
+            <label for="mobilenumber" class="col-md-4">Mobile</label>
+            <div class="col-md-8">
                 <input type="text" name="mobilenumber" id="mobilenumber" placeholder="Mobile" parsley-type="mobilenumber" class="form-control input-sm" value="<?php echo $details[0]['mobilenumber']; ?>">
             </div>
         </div>
         <div class="form-group row">
-            <label for="email" class="col-md-2"> Email<span class="text-danger">*</span></label>
-            <div class="col-md-4">
+            <label for="email" class="col-md-4"> Email<span class="text-danger">*</span></label>
+            <div class="col-md-8">
                 <input type="text" name="email" id="email" parsley-type="email" class="form-control input-sm"  placeholder="Email" value="<?php echo $details[0]['email']; ?>">
             </div>
         </div>
         <div class="form-group row">
-            <label for="greetings" class="col-md-2"> Greetings<span class="text-danger">*</span></label>
-            <div class="col-md-9">
+            <label for="greetings" class="col-md-4"> Greetings<span class="text-danger">*</span></label>
+            <div class="col-md-8">
                 <div class="radio">
                     <div class="radio  form-check-inline">
                     <input type="radio" name="greetings" id="rd_greetings1" value="Hari Raya" <?php if($details[0]['greetings'] == 'Hari Raya'){ echo 'checked="checked"'; }; ?>>
@@ -52,22 +52,22 @@
         </div>
 
         <div class="form-group row">
-            <label for="inputEmail3" class="col-md-2"> Comments<span class="text-danger">*</span></label>
-            <div class="col-md-4">
+            <label for="inputEmail3" class="col-md-4"> Comments<span class="text-danger">*</span></label>
+            <div class="col-md-8">
                 <textarea name="comments" id="comments" class="form-control" rows="3"><?php echo $details[0]['comments']; ?></textarea>
             </div>
         </div>
         <div class="form-group row">
 
-            <label for="profilepic" class="col-md-2"> Profile Pic </label>
-            <div class="col-md-4">
+            <label for="profilepic" class="col-md-4"> Profile Pic </label>
+            <div class="col-md-8">
                 <input type="file" name="profilepic" id="filestyle-0" class="filestyle col-md-3" data-buttonname="btn-primary"  tabindex="-1" style="position: absolute; clip: rect(0px, 0px, 0px, 0px);">
                  <span class="group-span-filestyle input-group-btn" tabindex="0"><label for="filestyle-0" class="btn btn-primary "> <span class="buttonText">Choose file</span></label></span></div>
 
         </div>
         <div class="form-group row">
-          <label class="col-md-2"></label>
-          <div class=" col-md-4 ">
+          <label class="col-md-4"></label>
+          <div class=" col-md-8 ">
           <div class="checkbox checkbox-inverse">
               <input type="checkbox" name="isbillingcontact" id="chk_isbillingcontact" value="Y">
                     <label for="chk_isbillingcontact">Billing Contact</label>
@@ -78,9 +78,8 @@
 
 
         <div class="form-group row ">
-            <label class="col-md-2"></label>
-            <div class="col-md-4">
-                <button type="submit" class="btn btn-default waves-effect waves-light btn-sm" id="success-alert">
+            <label class="col-md-4"></label>
+            <div class="col-md-8">
                 <button type="button" class="btn btn-default waves-effect waves-light btn-sm" id="success-alert" onclick="ValidateBranchContact();">
                     SUBMIT
                 </button>

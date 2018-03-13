@@ -117,8 +117,8 @@
                         <!-- Navigation Menu-->
                         <ul class="navigation-menu">
 
-                            <li class="has-submenu active">
-                                <a href="dashboard.php"><i class="md md-dashboard"></i>Dashboard</a>
+                            <li class="">
+                                <a href="#"><i class="md md-dashboard"></i>Dashboard</a>
                                 <!-- <ul class="submenu">
                                     <li>
                                         <a href="index.html">Dashboard 01</a>
@@ -135,9 +135,8 @@
                                 </ul> -->
                             </li>
 
-                            <li class="">
-                                <a href="<?php echo base_url('administration'); ?>"><i class="md md-color-lens"></i>
-                                Administration</a>
+                            <li class="active has-submenu">
+                                <a href="<?php echo base_url('administration'); ?>"><i class="md md-color-lens"></i>Administration</a>
                              
                             </li>
 

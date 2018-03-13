@@ -22,8 +22,8 @@
 </div>-->
 <div class="col-md-12 text-right m-b-10 pull-right">
     <a class="btn btn-default btn-sm" href="<?php echo base_url('add-client'); ?>">Add Client <i class="fa fa-plus"></i></a>
-    <a class="btn btn-default btn-sm" href="<?php echo base_url('add-branch'); ?>">Add Branch <i class="fa fa-plus"></i></a>
-    <a class="btn btn-default btn-sm" href="<?php echo base_url('add-contact'); ?>">Add Contact <i class="fa fa-plus"></i></a>
+<!--    <a class="btn btn-default btn-sm" href="<?php //echo base_url('add-branch'); ?>">Add Branch <i class="fa fa-plus"></i></a>
+    <a class="btn btn-default btn-sm" href="<?php //echo base_url('add-contact'); ?>">Add Contact <i class="fa fa-plus"></i></a>-->
 </div>
 
 <div class="col-md-12" id="myListView"> 
@@ -61,8 +61,8 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title"></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
                 
