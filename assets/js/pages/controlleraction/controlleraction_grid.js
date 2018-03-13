@@ -30,9 +30,10 @@ var controlleractionGridJS = (function () {
                             link = '<input type="checkbox" name="con[]" value="'+row.actionid+'"/>';
                                 return link;
                             }, orderable: false },
-                             { "data": "controllername", "orderable": true },
+                             { "data": "controllername", "orderable": true },                             
                             { "data": "controlleractionname", "orderable": true },
                             { "data": "actioncodename", "orderable": true },  
+                             { "data": "actioncodename", "orderable": true }, 
                             { "data": "actiondisplayname", "orderable": true },    
                             { 
                             mRender: function (data, type, row) {

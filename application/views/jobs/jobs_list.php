@@ -14,20 +14,21 @@
         <div class="card-box">
             <div class="row">   
                 <div class="col-md-12 text-right m-b-10 pull-right">
-                    <a class="btn btn-default btn-sm" href="<?php echo base_url('jobs/jobsForms'); ?>">Job Post <i class="fa fa-plus"></i></a>
-                </div>
+                    <a class="btn btn-default btn-sm" href="<?php echo base_url('Jobs/jobsForms'); ?>">Job Post <i class="fa fa-plus"></i></a>
+</div>
                 <div class="col-md-12 ">                            
                     <div class="box-body  table-responsive">
-                        <table   id="tbldepartment" data-toggle="table" data-page-size="10" data-pagination="true"  class="table table-bordered dataTable no-footer dtr-inline table-condensed table-responsive" style="white-space: nowrap; width:100%;"">
+                        <table   id="tbljobs" data-toggle="table" data-page-size="10" data-pagination="true"  class="table table-bordered dataTable no-footer dtr-inline table-condensed table-responsive" style="white-space: nowrap; width:100%;"">
                             <thead>
                                 <tr>
                                     <th data-priority="1" data-field="state" data-checkbox="true"><input type="checkbox" name="rowcheck" id="rowcheck"></th>
                                     <th data-priority="1">S.No</th>
+                                    
                                     <th data-priority="2">Job Position </th>
-                                    <th data-priority="3"> Posting start date</th>
-                                    <th data-priority="4">End date</th>
-                                    <th data-priority="5">Joining Date</th> 
-                                    <th data-priority="6">Country</th>  
+                                    <th data-priority="3">No of Positions</th>
+                                    <th data-priority="4">Joining Date</th>
+                                    <th data-priority="5">Position Start Date</th> 
+<!--                                    <th data-priority="6">Country</th>  -->
                                     <th data-priority="6">Actions</th>
                                     
                                     
@@ -55,11 +56,11 @@
 
         var url = "<?= base_url() ?>";
 
-        DepartmentGridJS.Load(url);
+        jobsGridJS.Load(url);
 
 
     });//ready
 
 </script>
-<script src="<?= base_url() ?>assets/js/pages/administration/dep_grid.js" type="text/javascript"></script>
+<script src="<?= base_url() ?>assets/js/pages/jobs/jobs_grid.js" type="text/javascript"></script>
 

@@ -2,7 +2,9 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Controlleraction extends CI_Controller {
+require APPPATH . 'libraries/BaseController.php';
+
+class Controlleraction extends BaseController {
 
     public function __construct() {
         parent::__construct();
@@ -14,19 +16,24 @@ class Controlleraction extends CI_Controller {
     }
 
     public function index() {
+        
         $data['title'] = "Controlleractions";
+        
         $this->breadcrumbs->push('Administration', 'administration');       
         $this->breadcrumbs->push('ControlleractionForm', 'controlleraction/addoredit');
+        
         $this->layout->view('controlleraction/controlleractions', $data);
     }
 
     public function addoredit() {
-        $data = array();
+             
         $data["title"] = "Add or Edit Controller";
+        
         $data['controllerlist'] = $this->Model->fetch('tbl_mng_controllermaster')->result_array();
         $this->breadcrumbs->push('Administration', 'administration');
         $this->breadcrumbs->push('controlleractionList', 'Controlleraction/controlleractionslist');
-        $this->breadcrumbs->push('controlleractionForm', 'controlleractionForm');        
+        $this->breadcrumbs->push('controlleractionForm', 'controlleractionForm');   
+        
         $this->layout->view('controlleraction/controlleraction_form', $data);
     }
 
