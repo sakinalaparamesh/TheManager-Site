@@ -31,7 +31,7 @@ class Role extends BaseController {
         $this->breadcrumbs->push('Add Role', 'role/addOrEdit');
         
         $data['controller_list'] = $this->Model->check('tbl_mng_controllermaster', array("isactive" => "Y"))->result_array();
-        foreach ($controller_list as $list) {
+        foreach ($data['controller_list'] as $list) {
             $data[$list['controllerid']] = $this->Model->check('tbl_mng_controlleractionmaster', array("controllerid" => $list['controllerid'], "isactive" => "Y"))->result_array();
         }
         $data['department_list'] = $this->Model->check('tbl_mng_departmentmaster', array("isactive" => "Y"))->result_array();
