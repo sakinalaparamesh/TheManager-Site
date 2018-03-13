@@ -6,7 +6,7 @@ var rolejs = (function () {
     var _Url;
     var _Load = function (url) {
         _Url = url;
-
+/*
         $.ajax({
             type: "GET",
             url: _Url + 'Department/getDepartmentsForDdl',
@@ -24,7 +24,7 @@ var rolejs = (function () {
                 alert("Error");
                 alert(xhr.responseText);
             }
-        })
+        })*/
         _Departmentid = $("#department_list");
         _RoleName = $("#txtRoleName");
         _RoleDescription = $("#txtRoleDescription");

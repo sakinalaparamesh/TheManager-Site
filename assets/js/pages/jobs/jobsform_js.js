@@ -38,8 +38,7 @@ var jobsjs = (function () {
         jobJson.jobs_position_enddate = _jobs_position_enddate.val();
         jobJson.jobs_country = _jobs_country.val();
         jobJson.jobs_description = _jobs_description.val();
-        jobJson.jobs_eligibilitycriteria = _jobs_eligibilitycriteria.val();
-        alert(jobJson);
+        jobJson.jobs_eligibilitycriteria = CKEDITOR.instances['jobs_eligibilitycriteria'].getData();
         console.log(jobJson);
         var validator = $('#jobs_form').data('bootstrapValidator');
         validator.validate();
