@@ -12,6 +12,7 @@ class Clients extends CI_Controller {
     }
 
     public function index() {
+        
         $data['title'] = "Clients";
         //breadcrumbs
         $this->breadcrumbs->push('Administration', 'administration');
