@@ -38,11 +38,11 @@ var rolejs = (function () {
     }
 
     var SaveRoleDetails = function () {
-        var RoleJson = {};
-        RoleJson.departmentid = _Departmentid.val();
-        RoleJson.RoleName = _RoleName.val();
-        RoleJson.RoleDescription = _RoleDescription.val();
-        RoleJson.displayname =_displayname.val();
+//        var RoleJson = {};
+//        RoleJson.departmentid = _Departmentid.val();
+//        RoleJson.RoleName = _RoleName.val();
+//        RoleJson.RoleDescription = _RoleDescription.val();
+//        RoleJson.displayname =_displayname.val();
 //        alert(_RoleName.val());
         var validator = $('#frmrole').data('bootstrapValidator');
         validator.validate();
@@ -50,8 +50,8 @@ var rolejs = (function () {
             $.ajax({
                 type: "POST",
                 url: _Url + 'Role/saveRole',
-                data: {RoleData: RoleJson},
-                dataType: 'json',
+                data: $('#frmrole').serialize(),
+//                dataType: 'json',
                 success: function (data) {
                     alert("data saved successfully");
                 },

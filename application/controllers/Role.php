@@ -22,8 +22,8 @@ class Role extends BaseController {
     public function addOrEdit() {
         $data = array();
         $data['controller_list'] = $this->Model->check('tbl_mng_controllermaster', array("isactive" => "Y"))->result_array();
-        foreach ($controller_list as $list) {
-            $data[$list['controllerid']] = $this->Model->check('tbl_mng_controlleractionmaster', array("controllerid" => $list['controllerid'], "isactive" => "Y"))->result_array();
+        foreach ($data['controller_list'] as $list) {
+            $data['actions'][$list['controllerid']] = $this->Model->check('tbl_mng_controlleractionmaster', array("controllerid" => $list['controllerid'], "isactive" => "Y"))->result_array();
         }
         $data['department_list'] = $this->Model->check('tbl_mng_departmentmaster', array("isactive" => "Y"))->result_array();
         $this->breadcrumbs->push('Administration', 'administration');
@@ -32,13 +32,12 @@ class Role extends BaseController {
     }
 
     public function saveRole() {
-        $ps_data = $this->input->post("RoleData");
-
+       
         $role_data = array(
-            "rolename" => $ps_data["RoleName"],
-            "roledescription" => $ps_data["RoleDescription"],
-            "departmentid" => $ps_data["departmentid"],
-            "displayname" => $ps_data["displayname"],
+            "rolename" => $this->input->post("rolename"),
+            "roledescription" => $this->input->post("roledescription"),
+            "departmentid" => $this->input->post("departmentid"),
+            "displayname" => $this->input->post("displayname"),
             "isactive" => "Y",
             "createdby" => $this->session->userdata('UserId'),
             "createdon" => date("Y-m-d H:i:s")
