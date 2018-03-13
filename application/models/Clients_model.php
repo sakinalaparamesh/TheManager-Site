@@ -167,6 +167,21 @@ class Clients_model extends CI_model {
             echo "ERROR: ".$e->getMessage();
         }
     }
+    //Client Types
+    public function getAllClientTypes()
+    { 
+        try{
+                //Filtered Records Count
+                $this->db->select("configuration_id as clientTypeId,configuration_name as clientType");
+                $this->db->where(array('configuration_key'=>'CLIENTTYPE', 'isactive'=>'Y'));
+                $query = $this->db->get("tbl_mng_configuration_master");
+                return  $query->result_array(); 
+                
+        } catch (Exception $e){
+            log_message('error', $e->getMessage());
+            echo "ERROR: ".$e->getMessage();
+        }
+    }
     //Branches
     public function getBranchDetailsById($id)
     { 

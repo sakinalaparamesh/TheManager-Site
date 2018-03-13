@@ -11,17 +11,23 @@ class Department extends BaseController {
     }
 
     public function index() {
-        $data = array();
+        
+        $data['title'] = "Departments";
+
         $this->breadcrumbs->push('Administration', 'administration');
-        $this->breadcrumbs->push('DepartmentForm', 'DepartmentForm');
+        $this->breadcrumbs->push('Departments', 'department');
+        
         $this->layout->view('departments/departments', $data);
     }
 
     public function addOrEdit($id = '') {
-        $data = array();
+        
+        $data['title'] = "Add Department";
 
         $this->breadcrumbs->push('Administration', 'administration');
-        $this->breadcrumbs->push('DepartmentForm', 'DepartmentForm');
+        $this->breadcrumbs->push('Departments', 'department');
+        $this->breadcrumbs->push('Add Department', 'department/addOrEdit');
+        
         if ($id != '') {
             $q_data = array(
                 "departmentid" => $id

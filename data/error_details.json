@@ -118,5 +118,23 @@
       "ActionName": "saveJob",
       "ErrorCode": "3",
       "Message": "Technical Error occured while saving..Please contact admin"
+   },
+   {
+      "controlname": "Agent",
+      "ActionName": "saveAgent",
+      "ErrorCode": "1",
+      "Message": "Successfully saved department"
+   },
+   {
+      "controlname": "Agent",
+      "ActionName": "saveAgent",
+      "ErrorCode": "2",
+      "Message": "Department Name Duplicated..Please check"
+   },
+   {
+      "controlname": "Agent",
+      "ActionName": "saveAgent",
+      "ErrorCode": "3",
+      "Message": "Technical Error occured while saving..Please contact admin"
    }
 ]

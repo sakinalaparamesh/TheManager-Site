@@ -11,18 +11,30 @@ class Jobs extends BaseController {
     }
 
     public function index() {
-        $data = array();
+        
+        $data['title'] = "Jobs";
+
+        $this->breadcrumbs->push('Administration', 'administration');
+        $this->breadcrumbs->push('Jobs', 'jobs');
+        
         $this->layout->view('jobs/jobs_list', $data);
     }
 
     public function jobsForms() {
-        $data['title'] = "Jobs Form";
+        
+        $data['title'] = "Add Job";
+        
+        $this->breadcrumbs->push('Administration', 'administration');
+        $this->breadcrumbs->push('Jobs', 'jobs');
+        $this->breadcrumbs->push('Add Job', 'jobs/jobsForms');
+        
         $data['country_list'] = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "COUNTRIES", "isactive" => "Y"))->result_array();
         $data['skillset_list'] = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "SKILLSET", "isactive" => "Y"))->result_array();
         $this->layout->view('jobs/jobs_post', $data);
     }
 
     public function saveJob() {
+        
         $ps_data = $this->input->post("jobJson");
 
         $dep_data = array(

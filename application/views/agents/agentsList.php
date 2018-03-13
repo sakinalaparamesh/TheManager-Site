@@ -30,13 +30,12 @@
         <tr>
             <th data-field="state" data-checkbox="true"></th>
             <th data-field="id" data-switchable="false">S.No</th>
-            <th data-field="name">Name </th>
-            <th data-field="company">Company </th>
-           
+            <th data-field="name">Agent Name </th>
+            <th data-field="company">User Company </th>
             <th data-field="data">Contact number </th>
-             <th data-field="data">Status</th>
-            
-            
+            <th data-field="data">Email </th>
+            <th data-field="data">Status</th>
+                       
         </tr>
         </thead>
 
@@ -100,10 +99,10 @@
 
         var url = "<?= base_url() ?>";
 
-       AgentGridJS.Load(url);
+        agentGridJS.Load(url);
 
 
     });//ready
 
 </script>
-<script src="<?= base_url() ?>assets/datatables-grid/AgentGridJS.js" type="text/javascript"></script>
+<script src="<?= base_url() ?>assets/js/pages/agent/agent_grid.js" type="text/javascript"></script>

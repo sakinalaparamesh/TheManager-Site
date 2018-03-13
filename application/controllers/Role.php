@@ -12,22 +12,30 @@ class Role extends BaseController {
     }
 
     public function index() {
-        $data = array();
+        
+        $data['title'] = "Roles";
 
         $this->breadcrumbs->push('Administration', 'administration');
-        $this->breadcrumbs->push('RoleForm', 'RoleForm');
+        $this->breadcrumbs->push('Roles', 'role');
+        
         $this->layout->view('role/roles', $data);
     }
 
     public function addOrEdit() {
-        $data = array();
+
+        
+        $data['title'] = "Add Role";
+
+        $this->breadcrumbs->push('Administration', 'administration');
+        $this->breadcrumbs->push('Roles', 'role');
+        $this->breadcrumbs->push('Add Role', 'role/addOrEdit');
+        
         $data['controller_list'] = $this->Model->check('tbl_mng_controllermaster', array("isactive" => "Y"))->result_array();
         foreach ($data['controller_list'] as $list) {
             $data['actions'][$list['controllerid']] = $this->Model->check('tbl_mng_controlleractionmaster', array("controllerid" => $list['controllerid'], "isactive" => "Y"))->result_array();
         }
         $data['department_list'] = $this->Model->check('tbl_mng_departmentmaster', array("isactive" => "Y"))->result_array();
-        $this->breadcrumbs->push('Administration', 'administration');
-        $this->breadcrumbs->push('RoleForm', 'RoleForm');
+
         $this->layout->view('role/role_form', $data);
     }
 

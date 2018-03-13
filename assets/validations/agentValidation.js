@@ -130,20 +130,20 @@ var agentjs = (function () {
                         }
                     }
                 },
-                company: {
-                    validators: {
-                        notEmpty: {
-                            message: 'The company is required and cannot be empty'
-                        }
-                    }
-                },
-                exclusiveagent: {
-                    validators: {
-                        notEmpty: {
-                            message: 'The Exclusiveagent is required and cannot be empty'
-                        }
-                    }
-                },
+//                company: {
+//                    validators: {
+//                        notEmpty: {
+//                            message: 'The company is required and cannot be empty'
+//                        }
+//                    }
+//                },
+//                exclusiveagent: {
+//                    validators: {
+//                        notEmpty: {
+//                            message: 'The Exclusiveagent is required and cannot be empty'
+//                        }
+//                    }
+//                },
                 contactno: {
                     validators: {
                         notEmpty: {

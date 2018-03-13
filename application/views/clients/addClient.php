@@ -7,7 +7,7 @@
             <div class="btn-group pull-right">
                 <?php echo $this->breadcrumbs->show(); ?>
             </div>
-            <h4 class="page-title">Client Registration</h4>
+            <h4 class="page-title"><?php echo $title; ?></h4>
         </div>
     </div>
 </div>
@@ -34,9 +34,31 @@
                 </div>
             </div>
             <div class="form-group row">
+                <label for="client_type" class="col-md-2">Client Type<span class="text-danger">*</span></label>
+                <div class="col-md-4">
+                    <select name="client_type" id="client_type" class="form-control input-sm">
+                        <option value="">Select Client Type</option>
+                        <?php foreach ($clientTypes as $ct){?>
+                            <option value="<?php echo $ct['clientTypeId'] ?>" <?php if($ct['clientTypeId'] == $details[0]['client_type']){ echo 'selected="selected"'; } ?>><?php echo $ct['clientType'] ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
                 <label for="clientdescription" class="col-md-2"> Description</label>
                 <div class="col-md-4">
                     <textarea class="form-control" name="clientdescription" id="clientdescription" rows="3"><?php echo $details[0]['clientdescription']; ?></textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2"></label>
+                <div class="col-md-4">
+                    <div class="checkbox checkbox-inverse">
+                        <input type="checkbox" name="is_individual" id="chk_is_individual" data-parsley-multiple="checkbox2" value="Y" <?php if($details[0]['clientdescription'] == 'Y'){ echo 'checked="checked"';} ?>>
+                        <label for="chk_is_individual">
+                              Individual
+                        </label>
+                    </div>
                 </div>
             </div>
              <div class="form-group row">
@@ -54,17 +76,6 @@
                     </div>
                 </div>
             </div>
-<!--            <div class="form-group row">
-                <label class="col-md-2"></label>
-                <div class="col-md-4">
-                    <div class="checkbox checkbox-inverse">
-                        <input id="checkbox2" type="checkbox" checked="" data-parsley-multiple="checkbox2">
-                        <label for="checkbox2">
-                              Individual
-                        </label>
-                    </div>
-                </div>
-            </div>-->
 
             <div class="form-group row ">
                 <label class="col-md-2"></label>
