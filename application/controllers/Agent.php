@@ -2,13 +2,13 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Agent extends CI_Controller {
+require APPPATH . 'libraries/BaseController.php';
+
+class Agent extends BaseController {
 
     public function __construct() {
         parent::__construct();
-        //$this->load->helper('global_helper');
-        //is_admin_loggedin();
-        $this->layout->setLayout('layout/adminLayout');
+
         $this->load->model('Agent_Model');
     }
 
@@ -25,10 +25,12 @@ class Agent extends CI_Controller {
     public function addOrEdit() {
 
         $data['title'] = "Agent Registration";
-        $data['country_list'] = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "COUNTRIES", "isactive" => "Y"))->result_array();
+        //breadcrumbs
         $this->breadcrumbs->push('Administration', 'administration');
         $this->breadcrumbs->push('Agents', 'agent');
         $this->breadcrumbs->push('Agent Registration', 'agent/addOrEdit');
+        
+        $data['country_list'] = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "COUNTRIES", "isactive" => "Y"))->result_array();
 
         $this->layout->view('agents/agent_registration', $data);
     }
