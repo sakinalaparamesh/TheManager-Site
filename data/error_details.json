@@ -85,6 +85,18 @@
    },
    {
       "controlname": "Clients",
+      "ActionName": "saveClientProductMapping",
+      "ErrorCode": "1",
+      "Message": "Succefully Products assigned to Client"
+   },
+   {
+      "controlname": "Clients",
+      "ActionName": "saveClientProductMapping",
+      "ErrorCode": "3",
+      "Message": "Technical Error occured while saving..Please contact admin"
+   },
+   {
+      "controlname": "Clients",
       "ActionName": "saveClientTypes",
       "ErrorCode": "1",
       "Message": "Successfully saved contact"
