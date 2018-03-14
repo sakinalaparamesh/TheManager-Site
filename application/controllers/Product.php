@@ -36,23 +36,28 @@ class Product extends CI_Controller {
 
     public function saveProduct() {
         
-        $ps_data = $this->input->post("ProductData");
-        
-        $pro_data = array(
-            
-            "productname" => $ps_data["ProductName"],
-            "productcode" => $ps_data["ProductCode"],
-            "productdescription" => $ps_data["ProductDescription"],
-            "isactive" => "Y",
-            "createdby" => $this->session->userdata('UserId'),
+       $pro_data = array(
+            "productname" => $_REQUEST["ProductName"],
+            "productcode" => $_REQUEST["ProductCode"],
+            "productdescription" => $_REQUEST["ProductDescription"], 
+               "isactive" => "Y",
+            "createdby"=> $this->session->userdata('UserId'),
             "createdon" => date("Y-m-d H:i:s")
         );
-        
-       $resdata['error_code']=$this->ProductModel->productSave($pro_data);
+        if($_FILES["productlogo"]["name"]!=""){
+          $file_data=do_upload("productlogo",'Product',$_FILES["productlogo"]['type']);
+
+           $agent_data['product_logo']=$file_data['file_name'];
+        }else{
+            $agent_data['product_logo']="";
+        }
+                
+        $resdata['error_code']=$this->ProductModel->productSave($pro_data);
        $resdata['message'] = getErrorMessages("Product","Save",$resdata['error_code']);
        $resdata['isError'] = $resdata['error_code']>1?"Y":"N";
        echo json_encode($resdata);
     }
+
     public function products() {
         
         $data = array();

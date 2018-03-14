@@ -34,6 +34,13 @@
                                         <textarea class="form-control" id="txtProductDescription" rows="3" name="productdescription"></textarea>
                                     </div>
                                 </div>
+            <div class="form-group row">
+
+                            <label for="productlogo" class="col-md-2"> Logo </label>
+                            <div class="col-md-4">
+                                <input type="file" name="productlogo" id="productlogo"/>
+                            </div>
+            </div>
                                
                                 <div class="form-group row ">
                                     <div class=" col-md-4 col-md-offset-2">
