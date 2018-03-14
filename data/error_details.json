@@ -148,5 +148,23 @@
       "ActionName": "saveAgent",
       "ErrorCode": "3",
       "Message": "Technical Error occured while saving..Please contact admin"
+   },
+   {
+      "controlname": "Product",
+      "ActionName": "saveProduct",
+      "ErrorCode": "1",
+      "Message": "Successfully saved Product"
+   },
+   {
+      "controlname": "Product",
+      "ActionName": "saveProduct",
+      "ErrorCode": "2",
+      "Message": "Product Name Duplicated..Please check"
+   },
+   {
+      "controlname": "Product",
+      "ActionName": "saveProduct",
+      "ErrorCode": "3",
+      "Message": "Technical Error occured while saving..Please contact admin"
    }
 ]

@@ -43,9 +43,9 @@ class Role extends BaseController {
        
         $role_data = array(
             "rolename" => $this->input->post("rolename"),
-            "roledescription" => $this->input->post("roledescription"),
+//            "roledescription" => $this->input->post("roledescription"),
             "departmentid" => $this->input->post("departmentid"),
-            "displayname" => $this->input->post("displayname"),
+//            "displayname" => $this->input->post("displayname"),
             "isactive" => "Y",
             "createdby" => $this->session->userdata('UserId'),
             "createdon" => date("Y-m-d H:i:s")
