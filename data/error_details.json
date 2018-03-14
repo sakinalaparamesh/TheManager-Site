@@ -148,5 +148,23 @@
       "ActionName": "saveAgent",
       "ErrorCode": "3",
       "Message": "Technical Error occured while saving..Please contact admin"
+   },
+   {
+      "controlname": "Administration",
+      "ActionName": "saveMenu",
+      "ErrorCode": "1",
+      "Message": "Menu has been successfully saved"
+   },
+   {
+      "controlname": "Administration",
+      "ActionName": "saveMenu",
+      "ErrorCode": "2",
+      "Message": "Menu Name Duplicated..Please check"
+   },
+   {
+      "controlname": "Administration",
+      "ActionName": "saveMenu",
+      "ErrorCode": "3",
+      "Message": "Technical Error occured while saving..Please contact admin"
    }
 ]
