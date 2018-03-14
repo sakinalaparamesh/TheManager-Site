@@ -54,9 +54,9 @@ class DepartmentModel extends CI_Model {
                 }
                 //OrderBy
                 if($dir == null) $dir = 'DESC';
-                if($order == 1){
+                if($order == 2){
                     $this->db->order_by('departmentname', $dir);
-                }else if($order == 2){
+                }else if($order == 3){
                     $this->db->order_by('departmentcode', $dir);
                 }
                 $this->db->limit($limit, $start);

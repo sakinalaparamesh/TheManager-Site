@@ -136,5 +136,23 @@
       "ActionName": "saveAgent",
       "ErrorCode": "3",
       "Message": "Technical Error occured while saving..Please contact admin"
+   },
+   {
+      "controlname": "Branches",
+      "ActionName": "saveBranchAjax",
+      "ErrorCode": "1",
+      "Message": "Successfully saved department"
+   },
+   {
+      "controlname": "Branches",
+      "ActionName": "saveBranchAjax",
+      "ErrorCode": "2",
+      "Message": "Department Name Duplicated..Please check"
+   },
+   {
+      "controlname": "Branches",
+      "ActionName": "saveBranchAjax",
+      "ErrorCode": "3",
+      "Message": "Technical Error occured while saving..Please contact admin"
    }
 ]
