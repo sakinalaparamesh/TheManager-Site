@@ -7,7 +7,7 @@ class Clients_model extends CI_model {
     { 
         try{
                 $data = array();
-                $searchcols = "CONCAT(PersonName,' ',C.clientname,' ',C.clientcode,' ',C.CreatedOn)";
+                $searchcols = "CONCAT(ifnull(CD.personname, ' '),' ',ifnull(C.clientname, ' '),' ',ifnull(B.location, ' '),' ',ifnull(CD.mobilenumber, ' '))";
                 $data['totalFiltered'] = $this->getAllClientsCount($search, $searchcols);
                 //Filter records Data
                 //$this->db->select("C.clientid as clientid,CD.personname as PersonName,C.clientname as ClientName,B.location as BranchName,CD.mobilenumber as Mobile,DATE_FORMAT(C.createdon,'%d-%m-%Y') as CreatedOn,C.isactive as Status");
@@ -15,6 +15,7 @@ class Clients_model extends CI_model {
                 $this->db->from("tbl_mng_clientmaster C");
                 $this->db->join("tbl_mng_clientbranchmaster B","B.clientid = C.clientid","LEFT");
                 $this->db->join("tbl_clientbranchcontactdetails CD","CD.clientbranchid = B.branchid","LEFT");
+                $this->db->where(array('C.isactive'=>'Y'));
                 //Search
                 if($search){
                     $this->db->like(array($searchcols => $search));
@@ -63,7 +64,7 @@ class Clients_model extends CI_model {
                 $data['contactId'] = $_POST['contactId'];
                 
                 if($data['contactId']){
-                    $this->db->select("CD.personname as PersonName,CD.designation as Designation,CD.mobilenumber as Mobile,CD.email as Email,C.clientname as ClientName,B.location as BranchName, B.branchid as BranchId, CD.branchcontactid as ContactId");
+                    $this->db->select("CD.personname as PersonName,CD.designation as Designation,CD.mobilenumber as Mobile,CD.email as Email,C.clientname as ClientName,B.location as BranchName,B.address as BranchAddress, B.branchid as BranchId, CD.branchcontactid as ContactId");
                     $this->db->from("tbl_mng_clientmaster C");
                     $this->db->join("tbl_mng_clientbranchmaster B","B.clientid = C.clientid","LEFT");
                     $this->db->join("tbl_clientbranchcontactdetails CD","CD.clientbranchid = B.branchid","LEFT");
@@ -71,7 +72,7 @@ class Clients_model extends CI_model {
                     $query = $this->db->get();
                     return $query->result_array();
                 }else if($data['branchId']){
-                    $this->db->select("C.clientname as ClientName,B.location as BranchName");
+                    $this->db->select("C.clientname as ClientName,B.location as BranchName,,B.address as BranchAddress");
                     $this->db->from("tbl_mng_clientmaster C");
                     $this->db->join("tbl_mng_clientbranchmaster B","B.clientid = C.clientid","LEFT");
                     $this->db->where(array('B.branchid'=>$data['branchId']));
@@ -156,6 +157,8 @@ class Clients_model extends CI_model {
                 $this->db->from("tbl_mng_clientmaster C");
                 $this->db->join("tbl_mng_clientbranchmaster B","B.clientid = C.clientid","LEFT");
                 $this->db->join("tbl_clientbranchcontactdetails CD","CD.clientbranchid = B.branchid","LEFT");
+                $this->db->where(array('C.isactive'=>'Y'));
+                
                 if($search){
                     $this->db->like(array($searchcols => $search));
                 }
@@ -186,7 +189,7 @@ class Clients_model extends CI_model {
     public function getBranchDetailsById($id)
     { 
         try{
-                $this->db->select("branchid,clientid,location,address,phonenumber,faxnumber,email,isactive");
+                $this->db->select("branchid,clientid,location,address,phonenumber,faxnumber,email,weburl,isactive");
                 $this->db->from("tbl_mng_clientbranchmaster");
                 $this->db->where('branchid', $id);
                 $query = $this->db->get();
@@ -204,9 +207,9 @@ class Clients_model extends CI_model {
                 $id = $data['branchid'];
                 unset($data['branchid']);
                 if($id == 0){
-                    $this->db->select("1")->where(array('isactive'=>'Y', 'location'=>$data['location']));
+                    $this->db->select("1")->where(array('isactive'=>'Y', 'location'=>$data['location'], 'clientid'=>$data['clientid']));
                 }else{
-                    $this->db->select("1")->where(array('isactive'=>'Y', 'location'=>$data['location'], 'branchid !='=>$id));
+                    $this->db->select("1")->where(array('isactive'=>'Y', 'location'=>$data['location'], 'clientid'=>$data['clientid'], 'branchid !='=>$id));
                 }
                 $query = $this->db->get("tbl_mng_clientbranchmaster");
                 if($query->num_rows() > 0){
@@ -236,7 +239,7 @@ class Clients_model extends CI_model {
     public function getContactDetailsById($id)
     { 
         try{
-                $this->db->select("branchcontactid,clientbranchid,personname,designation,mobilenumber,email,comments,profilepic,isbillingcontact,greetings,isactive");
+                $this->db->select("branchcontactid,clientbranchid,title,personname,designation,mobilenumber,email,comments,profilepic,isbillingcontact,greetings,isactive");
                 $this->db->from("tbl_clientbranchcontactdetails");
                 $this->db->where('branchcontactid', $id);
                 $query = $this->db->get();
@@ -308,6 +311,7 @@ class Clients_model extends CI_model {
                 //Filter records Data
                 $this->db->select("configuration_id,configuration_name,configuration_description,isactive");
                 $this->db->from("tbl_mng_configuration_master");
+                $this->db->where(array('configuration_key'=>'CLIENTTYPE'));
                 //Search
                 if($search){
                     $this->db->like(array("CONCAT(configuration_name,' ',configuration_description)" => $search));
@@ -349,7 +353,51 @@ class Clients_model extends CI_model {
             echo "ERROR: ".$e->getMessage();
         }
     }
-
+    //Client-Products-mapping details 
+    public function getClientProductsMappingDetails($clientId)
+    { 
+        try{
+                $this->db->select("PM.id,P.productid,P.productname,PM.clientid,C.clientname");
+                $this->db->from("tbl_mng_productmaster P");
+                $this->db->join("tbl_client_product_mapping PM", "PM.productid = P.productid AND PM.clientid = ".$clientId, "LEFT");
+                $this->db->join("tbl_mng_clientmaster C", "C.clientid = ".$clientId, "LEFT");
+                $this->db->where('P.isactive', 'Y');
+                $this->db->order_by('P.productname', 'asc');
+                $query = $this->db->get();
+                return $query->result_array();
+        } catch (Exception $e){
+            log_message('error', $e->getMessage());
+            return "ERROR: ".$e->getMessage();
+        }
+    }
+    public function saveClientProductMapping($data)
+    { 
+        try{
+                $error_code = 3;
+                
+                $id = $data['id'];
+                unset($data['id']);
+               
+                    if($id){
+                        $data['updatedby'] = $this->session->userdata('UserId');
+                        $data['updatedon'] = date('Y-m-d H:i:s');
+                        $data['createdby'] = $this->session->userdata('UserId');
+                        $data['createdon'] = date('Y-m-d H:i:s');
+                        $data['isactive'] = 'Y';
+                        $error_code = ($this->db->insert('tbl_client_product_mapping', $data)) ? 1 : 3;                
+                    }else{
+                        $data['createdby'] = $this->session->userdata('UserId');
+                        $data['createdon'] = date('Y-m-d H:i:s');
+                        $data['isactive'] = 'Y';
+                        $error_code = ($this->db->insert('tbl_client_product_mapping', $data)) ? 1 : 3; 
+                    }
+        }catch (Exception $e){
+            log_message('error', $e->getMessage());
+            //return "ERROR: ".$e->getMessage();
+            $error_code = 3;
+        }
+        return $error_code;
+    }
     
 	
 }//class

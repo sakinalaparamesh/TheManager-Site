@@ -150,7 +150,24 @@
         });//ajax
         
      }
-     
+     function clientProductMappingForm(clientId){
+        
+        $('.modal-title').html('');
+        $('.modal-body').html('');
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('clients/getClientProductMappingFormAjax') ?>", 
+            data: { "clientId" : clientId },
+            success: function(response){ //alert(response);
+                $('.modal-title').html('Assign Products');
+                $('.modal-body').html(response);
+                //document.getElementByClass("modal-body").html(response);
+                $('#CommonModal').modal({show:true});
+                
+            } 
+        });//ajax
+        
+     }
 
 </script>
 <script src="<?php echo base_url().'assets/datatables-grid/ClientsGridJS.js'; ?>"></script>

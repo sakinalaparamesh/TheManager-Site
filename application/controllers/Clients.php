@@ -1,14 +1,17 @@
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
+require APPPATH . 'libraries/BaseController.php';
 
-class Clients extends CI_Controller {
+class Clients extends BaseController {
 
     public function __construct() {
         parent::__construct();
-        is_user_loggedin();
-        $this->layout->setLayout('layout/adminLayout');
+        //is_user_loggedin();
+        //$this->layout->setLayout('layout/adminLayout');
         $this->load->model('clients_model');
+        $this->load->model('productModel');
+        
     }
 
     public function index() {
@@ -95,27 +98,26 @@ class Clients extends CI_Controller {
         $data['contactId'] = $_POST['contactId'];
 
         $data['details'] = $this->clients_model->getClientFullDetails($data);
+        $data['productscount'] = $this->productModel->getActiveProducts();
         //echo "<pre>"; print_r($data); exit;
         $this->load->view('clients/clientDetails', $data);
     }
-
     public function getBranchRegFormAajx() {
         $data = array();
         $clientId = $_POST['clientId'];
         $branchId = $_POST['branchId'];
         if ($branchId) {
-            $details = $this->clients_model->getBranchDetailsById($id);
+            $details = $this->clients_model->getBranchDetailsById($branchId);
             if (count($details) > 0) {
                 $data['details'] = $details;
             } else {
                 $data['details'][] = array('branchid' => 0, 'clientid' => '', 'location' => '', 'address' => '', 'phonenumber' => '', 'faxnumber' => '', 'email' => '', 'isactive' => 'Y');
             }
         } else {
-            $data['details'][] = array('branchid' => 0, 'clientid' => $clientId, 'location' => '', 'address' => '', 'phonenumber' => '', 'faxnumber' => '', 'email' => '', 'isactive' => 'Y');
+            $data['details'][] = array('branchid' => 0, 'clientid' => $clientId, 'location' => '', 'address' => '', 'phonenumber' => '', 'faxnumber' => '', 'email' => '', 'weburl' => '', 'isactive' => 'Y');
         }
         $this->load->view('clients/addBranchForm', $data);
     }
-
     public function saveBranchAjax() {
 
         $ps_data = $_POST;
@@ -129,6 +131,7 @@ class Clients extends CI_Controller {
             "phonenumber" => $ps_data["branchPhone"],
             "faxnumber" => $ps_data["branchFax"],
             "email" => $ps_data["branchEmail"],
+            "weburl" => $ps_data["weburl"]
         );
         $resdata['error_code'] = $this->clients_model->saveBranchDetails($save_data);
         $resdata['message'] = getErrorMessages("Clients", "BranchSave", $resdata['error_code']);
@@ -150,7 +153,7 @@ class Clients extends CI_Controller {
                 $data['details'][] = array('branchcontactid' => 0, 'clientbranchid' => '', 'personname' => '', 'designation' => '', 'mobilenumber' => '', 'email' => '', 'comments' => '', 'profilepic' => '', 'isbillingcontact' => '', 'greetings' => '', 'isactive' => 'Y');
             }
         } else {
-            $data['details'][] = array('branchcontactid' => 0, 'clientbranchid' => $clientbranchid, 'personname' => '', 'designation' => '', 'mobilenumber' => '', 'email' => '', 'comments' => '', 'profilepic' => '', 'isbillingcontact' => '', 'greetings' => '', 'isactive' => 'Y');
+            $data['details'][] = array('branchcontactid' => 0, 'clientbranchid' => $clientbranchid, 'title' => '', 'personname' => '', 'designation' => '', 'mobilenumber' => '', 'email' => '', 'comments' => '', 'profilepic' => '', 'isbillingcontact' => '', 'greetings' => '', 'isactive' => 'Y');
         }
         $this->load->view('clients/clientContactRegForm', $data);
     }
@@ -166,6 +169,7 @@ class Clients extends CI_Controller {
         $save_data = array(
             "branchcontactid" => $inputdata["branchcontactid"],
             "clientbranchid" => $inputdata["clientbranchid"],
+            "title" => $inputdata["title"],
             "personname" => $inputdata["personname"],
             "designation" => $inputdata["designation"],
             //"phonenumber" => $inputdata["phonenumber"],
@@ -246,8 +250,51 @@ class Clients extends CI_Controller {
 
         echo json_encode($json_data);
     }
-    public function getClientTypeDetailsAjax($param) {
+    //Client Product Mapping
+    public function getClientProductMappingFormAjax() {
         
+        error_reporting(0);
+        
+        $data = array();
+        $data['clientid'] = $_POST['clientId'];
+        
+        //$data['products'] = $this->productModel->getActiveProducts();
+        //$data['clientDetails'] = $this->clients_model->getClientDetailsById($data['clientid']);        
+        
+        if ($data['clientid']) {
+            $details = $this->clients_model->getClientProductsMappingDetails($data['clientid']);
+            if (count($details) > 0) {
+                $data['details'] = $details;
+            } else {
+                $data['details'][] = array('id' => 0, 'clientname' => '', 'clientid' => '', 'productid' => '', 'isactive' => 'Y');
+            }
+        } else {
+            $data['details'][] = array('id' => 0, 'clientname' => '', 'clientid' => '', 'productid' => '', 'isactive' => 'Y');
+        }
+        
+       //echo "<pre>"; print_r($data); exit;
+        $this->load->view('clients/clientProductMappingForm', $data);
+    }
+    public function saveClientProductMapping() {
+
+        $data = $_POST;
+        //echo json_encode($data); exit;
+        //delete products
+        $this->db->delete('tbl_client_product_mapping', array('clientid' => $data["clientid"]));
+  
+        foreach ($data['products'] as $prod){
+            $save_data = array(
+                //"id" => $data["id"],
+                "id" => 0,
+                "clientid" => $data["clientid"],
+                "productid" => $prod
+            );
+            $resdata['error_code'] = $this->clients_model->saveClientProductMapping($save_data);
+        }
+        //echo json_encode($save_data); exit;
+        $resdata['message'] = getErrorMessages("Clients", "saveClientProductMapping", $resdata['error_code']);
+        $resdata['isError'] = $resdata['error_code'] > 1 ? "Y" : "N";
+        echo json_encode($resdata);
     }
 
 }

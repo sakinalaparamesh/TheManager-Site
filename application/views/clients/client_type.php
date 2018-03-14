@@ -14,13 +14,7 @@
         <div class="card-box">
             <div class="row">
 
-                <div class="col-md-3">
-                    <input type="email" required=""  class="form-control input-sm" id="" placeholder="Search">
-                </div>
-                <div class="col-md-1 m-b-10">
-                    <a class="btn btn-inverse btn-sm" href="javascript:">Search <i class="fa fa-search"></i></a>
-                </div>
-                <div class="col-md-8 text-right m-b-10">
+                <div class="col-md-12 text-right m-b-10">
                     <a class="btn btn-default btn-sm" href="<?= base_url() ?>clients/clientTypeForm">Add <i class="fa fa-plus-add"></i></a>
                 </div>
                 <div class="col-md-12 test">                            
