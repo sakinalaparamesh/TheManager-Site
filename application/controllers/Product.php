@@ -43,7 +43,9 @@ class Product extends CI_Controller {
                "isactive" => "Y",
             "createdby"=> $this->session->userdata('UserId'),
             "createdon" => date("Y-m-d H:i:s")
-        );
+        ); 
+       
+       
         if($_FILES["productlogo"]["name"]!=""){
           $file_data=do_upload("productlogo",'Product',$_FILES["productlogo"]['type']);
 
