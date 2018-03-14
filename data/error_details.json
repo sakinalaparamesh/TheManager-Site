@@ -85,6 +85,18 @@
    },
    {
       "controlname": "Clients",
+      "ActionName": "saveClientProductMapping",
+      "ErrorCode": "1",
+      "Message": "Succefully Products assigned to Client"
+   },
+   {
+      "controlname": "Clients",
+      "ActionName": "saveClientProductMapping",
+      "ErrorCode": "3",
+      "Message": "Technical Error occured while saving..Please contact admin"
+   },
+   {
+      "controlname": "Clients",
       "ActionName": "saveClientTypes",
       "ErrorCode": "1",
       "Message": "Successfully saved contact"
@@ -134,24 +146,6 @@
    {
       "controlname": "Agent",
       "ActionName": "saveAgent",
-      "ErrorCode": "3",
-      "Message": "Technical Error occured while saving..Please contact admin"
-   },
-   {
-      "controlname": "Branches",
-      "ActionName": "saveBranchAjax",
-      "ErrorCode": "1",
-      "Message": "Successfully saved department"
-   },
-   {
-      "controlname": "Branches",
-      "ActionName": "saveBranchAjax",
-      "ErrorCode": "2",
-      "Message": "Department Name Duplicated..Please check"
-   },
-   {
-      "controlname": "Branches",
-      "ActionName": "saveBranchAjax",
       "ErrorCode": "3",
       "Message": "Technical Error occured while saving..Please contact admin"
    }

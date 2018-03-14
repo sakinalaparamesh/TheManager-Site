@@ -67,5 +67,17 @@ class ProductModel extends CI_Model {
             echo "ERROR: ".$e->getMessage();
         }
     }
+    public function getActiveProducts()
+    { 
+        try{
+                $this->db->select("productid,productname");
+                $this->db->where(array('isactive'=>'Y'));
+                $query = $this->db->get("tbl_mng_productmaster");
+                return$query->result_array();
+        } catch (Exception $e){
+            log_message('error', $e->getMessage());
+            echo "ERROR: ".$e->getMessage();
+        }
+    }
 
 }

@@ -73,7 +73,11 @@
             </div>
             <div class="text-right">
             <h5 class="text-dark"><span class=""><b>Clients</b></span></h5>
-            <p class="text-muted mb-0 "><b class="badge badge-inverse counter">15</b></p>
+            <p class="text-muted mb-0 ">
+                C - <b class="badge badge-inverse counter"><?php echo $clients_count['total_clients']; ?></b>&nbsp;&nbsp;&nbsp;&nbsp;
+                B - <b class="badge badge-inverse counter"><?php echo $clients_count['total_branches']; ?></b>&nbsp;&nbsp;&nbsp;&nbsp;
+                P - <b class="badge badge-inverse counter"><?php echo $clients_count['total_persons']; ?></b>&nbsp;&nbsp;&nbsp;&nbsp;
+            </p>
             </div>
             <div class="clearfix"></div>
             </div>

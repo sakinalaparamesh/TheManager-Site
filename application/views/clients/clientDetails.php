@@ -9,8 +9,9 @@
                                 <!--<form class="form-horizontal" role="form">-->
                                 <div class="action_icons">
                                     
-                                     <button class="btn btn-icon waves-effect color-dark waves-light" onclick="addBranchForm(0 ,'<?php echo $clientId; ?>');"> <i class="fa fa-plus" title="Add Branch"></i> </button>
+                                    <button class="btn btn-icon waves-effect color-dark waves-light" onclick="addBranchForm(0 ,'<?php echo $clientId; ?>');"> <i class="fa fa-plus" title="Add Branch"></i> </button>
                                     <?php if($branchId != ''){ ?>
+                                     <button class="btn btn-icon waves-effect color-dark waves-light" onclick="addBranchForm('<?php echo $branchId; ?>' ,'<?php echo $clientId; ?>');"> <i class="fa fa-pencil" title="Edit Branch"></i> </button>
                                      <button class="btn btn-icon waves-effect color-dark waves-light" onclick="clientContactForm(0, '<?php echo $branchId; ?>');"> <i class="fa fa-user" title="Add Contact"></i> </button>
                                      <?php }if($contactId){ ?>
                                      <button class="btn btn-icon waves-effect color-dark waves-light" onclick="clientContactForm('<?php echo $contactId; ?>','<?php echo $branchId; ?>');"> <i class="fa fa-pencil" title=" Edit"></i> </button>
@@ -18,6 +19,8 @@
                                      <button class="btn btn-icon waves-effect color-dark waves-light"> <i class="fa fa-dollar" title="Billing Contact"></i> </button>
                                      <?php }if($contactId){ ?>
                                     <button class="btn btn-icon waves-effect color-dark waves-light"> <i class="fa fa-trash" title="Inactive"></i> </button>
+                                     <?php }if((count($productscount) > 0)){ ?>
+                                        <button class="btn btn-icon waves-effect color-dark waves-light" onclick="clientProductMappingForm('<?php echo $clientId; ?>');"> <i class="fa fa-tasks" title="Assign Products"></i> </button>
                                      <?php } ?>
                                     </div>
                                     <div class="contact-card m-t-30">
@@ -34,6 +37,7 @@
                                     <p class="text-dark"><i class="md md-business m-r-10"></i><small><?php echo $details[0]['ClientName']; ?></small></p>
                                     <?php if($branchId){ ?>
                                         <p class="text-dark"><i class="md md-business m-r-10"></i><small><?php echo $details[0]['BranchName']; ?></small></p>
+                                        <p class="text-dark"><i class="md md-business m-r-10"></i><small><?php echo $details[0]['BranchAddress']; ?></small></p>
                                     <?php } if($contactId){ ?>
                                             <h4 class="m-t-0 m-b-5 header-title"><b><?php echo $details[0]['Mobile']; ?></b></h4>
                                             <p class="text-muted">Contact Number</p>

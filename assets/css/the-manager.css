@@ -98,6 +98,7 @@ text-align: left;
     
         padding: 0px 30px;
 }
+.member-info p{ white-space: inherit !important;}
 @media (min-width: 768px){
 .form-horizontal .control-label {
     padding-top: 2px!important;
