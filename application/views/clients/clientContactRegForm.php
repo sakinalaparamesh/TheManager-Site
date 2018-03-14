@@ -7,6 +7,12 @@
         <input type="hidden" name="isbillingcontact1" value="<?php echo $details[0]['isbillingcontact']; ?>">
     
         <div class="form-group row">
+            <label for="title" class="col-md-4">Title<span class="text-danger">*</span></label>
+            <div class="col-md-8">
+                <input type="text" name="title" id="title" placeholder="Title" parsley-type="title" class="form-control input-sm" value="<?php echo $details[0]['title']; ?>">
+            </div>
+        </div>
+        <div class="form-group row">
             <label for="personname" class="col-md-4">Name<span class="text-danger">*</span></label>
             <div class="col-md-8">
                 <input type="text" name="personname" id="personname" placeholder="Name" parsley-type="personname" class="form-control input-sm" value="<?php echo $details[0]['personname']; ?>">

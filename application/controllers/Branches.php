@@ -51,7 +51,7 @@ class Branches extends BaseController {
             "createdon" => date("Y-m-d H:i:s")
         );
         $resdata['error_code'] = $this->branches_model->brabchSave($save_data);
-        $resdata['message'] = getErrorMessages("Branches", "save", $resdata['error_code']);
+        $resdata['message'] = getErrorMessages("Branches", "saveBranchAjax", $resdata['error_code']);
         $resdata['isError'] = $resdata['error_code'] > 1 ? "Y" : "N";
         echo json_encode($resdata);
     }

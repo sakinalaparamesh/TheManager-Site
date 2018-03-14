@@ -8,6 +8,13 @@ function ValidateForm(){
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
+            title: {
+                validators: {
+                    notEmpty: {
+                        message: 'The Title is required and cannot be empty'
+                    }
+                }
+            },
             personname: {
                 validators: {
                     notEmpty: {

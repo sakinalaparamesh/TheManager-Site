@@ -44,7 +44,12 @@
             <input type="text"   class="form-control input-sm" id="branchEmail" placeholder="Email" name="branchEmail" value="<?php echo $details[0]['email']; ?>">
         </div>
     </div>
-
+    <div class="form-group row">
+        <label for="weburl" class="col-md-4">Web URL</label>
+        <div class="col-md-8">
+            <input type="text" name="weburl" id="weburl" class="form-control input-sm" placeholder="Web URL" value="<?php echo $details[0]['weburl']; ?>">
+        </div>
+    </div>
 
     <div class="form-group row ">
         <label class="col-md-4"></label>
@@ -86,6 +91,7 @@
                     if (data['isError'] == "N") {
                         $("#CommonModal").modal('hide');
                         alert(data['message']);
+                        window.location.href = "<?php echo base_url('clients') ?>";
                     }else{
                         alert(data['message']);
                     }

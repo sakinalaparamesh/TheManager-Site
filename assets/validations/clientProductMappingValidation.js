@@ -1,6 +1,6 @@
 function ValidateForm(){
     
-    $('#branch_form').bootstrapValidator({
+    $('#client_product_mapping_form').bootstrapValidator({
         //container: '#messages',
         feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',
@@ -8,21 +8,13 @@ function ValidateForm(){
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            branchLocation: {
+            'products[]': {
                 validators: {
                     notEmpty: {
-                        message: 'The branch location is required and cannot be empty'
-                    }
-                }
-            },
-            branchAddress: {
-                validators: {
-                    notEmpty: {
-                        message: 'The branch address is required and cannot be empty'
+                        message: 'The Product is required and please select products'
                     }
                 }
             }
-
         }
     });//bootstrapValidator
 }
