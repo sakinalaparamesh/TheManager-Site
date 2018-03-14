@@ -2,7 +2,9 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class mngcontroller extends CI_Controller {
+require APPPATH . 'libraries/BaseController.php';
+
+class mngcontroller extends BaseController {
 
     public function __construct() {
         parent::__construct();
@@ -14,9 +16,13 @@ class mngcontroller extends CI_Controller {
     }
 
     public function index() {
+        
          $data['title']="mngcontroller";
-        $this->layout->view('mngcontroller/mngcontrollers', $data);
+         
+        $this->breadcrumbs->push('Administration', 'administration');
          $this->breadcrumbs->push('Add C0ntroller','mngcontroller/addoredit');
+         
+         $this->layout->view('mngcontroller/mngcontrollers', $data);
         
     }
 

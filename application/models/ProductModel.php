@@ -25,7 +25,7 @@ class ProductModel extends CI_Model {
                 $data = array();
                 $data['totalFiltered'] = $this->getProductCountBySearch($search);
                 //Filter records Data
-                $this->db->select("productid,productname,productcode,isactive");
+                $this->db->select("productid,productname,productcode,product_logo,isactive");
                 $this->db->from("tbl_mng_productmaster");
                 //Search
                 if($search){

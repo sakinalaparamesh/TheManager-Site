@@ -5,9 +5,12 @@
             <div class="col-sm-12">
                 <div class="page-title-box">
                     <div class="btn-group pull-right">
-                        <?php echo $this->breadcrumbs->show(); ?>
+                        <ol class="breadcrumb hide-phone p-0 m-0">
+                            <li class="breadcrumb-item"><a href="">Jobs List</a></li>
+                            <li class="breadcrumb-item active">Add</li>
+                        </ol>
                     </div>
-                    <h4 class="page-title"><?php echo $title; ?></h4>
+                    <h4 class="page-title">Job Post</h4>
                 </div>
             </div>
         </div>
@@ -18,7 +21,7 @@
                         <div class="form-group row">
                             <label for="jobs_position" class="col-md-2">Designation<span class="text-danger">*</span></label>
                             <div class="col-md-4">
-                                <input type="text" required="" name="jobs_position" parsley-type="name" class="form-control input-sm" id="jobs_position" placeholder="Job Position" value="<?= @$info->jobs_position ?>">
+                                <input type="text" required="" name="jobs_position" id="jobs_position"  parsley-type="name" class="form-control input-sm" placeholder="Job Position" value="<?= @$info->jobs_position ?>">
                             </div>
                         </div>
                         <div class="form-group row">

@@ -52,6 +52,7 @@ var jobsjs = (function () {
                 success: function (data) {
 
                     $.LoadingOverlay("hide");
+                    window.location.href = _Url+'Jobs';
 //                                console.log(data);
                     if (data['isError'] == "N") {
                         alert(data['message']);
