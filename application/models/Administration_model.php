@@ -32,10 +32,10 @@ class Administration_model extends CI_model {
 
     public function saveMenu($data) {
         $res_data = 1;
-        $dep_check = array(
+        $menu_check = array(
             "menu_name" => $data["menu_name"]
         );
-        $checkRes = $this->Model->check("tbl_mng_menu", $dep_check);
+        $checkRes = $this->Model->check("tbl_mng_menu", $menu_check);
         if ($checkRes->num_rows() > 0) {
             $res_data = 2;
         } else {

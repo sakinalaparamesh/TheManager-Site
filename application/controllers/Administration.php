@@ -20,6 +20,9 @@ class Administration extends BaseController {
 
         //echo "<pre>"; print_r($data); exit;
 //        $data["main_menu"] = $this->Model->check("tbl_mng_menu", array("isparent" => 1,"isactive"=>"Y"))->result_array();
+//        foreach($data["main_menu"] as $list){
+//            $data["sub_menu"][$list['menu_id']]=$list;
+//        }
         $this->layout->view('administration/administration', $data);
     }
 
