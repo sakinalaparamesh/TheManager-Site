@@ -164,10 +164,8 @@
    {
       "controlname": "Product",
       "ActionName": "saveProduct",
-      "controlname": "Administration",
-      "ActionName": "saveMenu",
-      "ErrorCode": "1",
-      "Message": "Menu has been successfully saved"
+       "ErrorCode": "3",
+      "Message": "Technical Error occured while saving..Please contact admin"
    },
    {
       "controlname": "Administration",
