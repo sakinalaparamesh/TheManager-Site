@@ -49,7 +49,7 @@ class Controlleraction extends BaseController {
             "createdon" => date("Y-m-d H:i:s")
         );      
        $resdata['error_code']=$this->controlleractionModel->controlleractionSave($act_data);
-       $resdata['message'] = getErrorMessages("Controlleraction","savecontrolleraction",$resdata['error_code']);
+       $resdata['message'] = getErrorMessages("Controlleraction","Save",$resdata['error_code']);
        $resdata['isError'] = $resdata['error_code']>1?"Y":"N";
        echo json_encode($resdata);
     }

@@ -9,7 +9,7 @@ class Agent_Model extends CI_Model {
         );
         $checkRes = $this->Model->check("tdl_mng_usermaster", $agent_check);
         if ($checkRes->num_rows() > 0) {
-            $res_data = 2;
+            $res_data = 3;
         } else {
             
             if ($this->Model->insert("tdl_mng_usermaster", $data)) {
@@ -18,7 +18,7 @@ class Agent_Model extends CI_Model {
                 $this->Model->insert("tdl_mng_user_roles", $user_roles);
                 $res_data = 1;
             } else {
-                 $res_data= 3;
+                 $res_data= 2;
             }
         }
         return $res_data;

@@ -29,24 +29,15 @@
         var validator = $('#frmcontrolleraction').data('bootstrapValidator');
         validator.validate();
         if (validator.isValid()) {
-            $.LoadingOverlay("show");
-//            alert("validated form successfully");
+            alert("validated form successfully");
            $.ajax({
                         type: "POST",
                             url: _Url+'Controlleraction/savecontrolleraction',
                         data: { ControlleractionData : controlleractionJson },
                         dataType: 'json',
                         success: function (data) {
-                            // alert("data saved successfully");
-                             $.LoadingOverlay("hide");
-//                                console.log(data);
-                    if (data['isError'] == "N") {
-                        alert(data['message']);
-                         window.location.href = _Url+'controlleraction';
-                    }else{
-                        alert(data['message']);
-                    }
-                         
+                            alert("data saved successfully");
+                          window.location.href = _Url+'controlleraction';
                         },
                         error: function (xhr, textStatus, errorThrown) {
                               alert("Error");

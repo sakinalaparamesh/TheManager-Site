@@ -25,6 +25,7 @@
                                     <th data-priority="1">S.No</th>
                                     <th data-priority="2">Menu Name </th>
                                     <th data-priority="3">Display Name</th>
+                                    <th data-priority="3">Menu Level</th>
                                     <th data-priority="4">Status</th>
                                     <!--<th data-priority="5">Action</th>-->
                                 </tr>

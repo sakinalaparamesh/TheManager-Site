@@ -52,7 +52,7 @@ class Role extends BaseController {
         );
 
         $resdata['error_code'] = $this->RoleModel->roleSave($role_data);
-        $resdata['message'] = getErrorMessages("Role", "Save", $resdata['error_code']);
+        $resdata['message'] = getErrorMessages("Role", "saveRole", $resdata['error_code']);
         $resdata['isError'] = $resdata['error_code'] > 1 ? "Y" : "N";
 
         echo json_encode($resdata);

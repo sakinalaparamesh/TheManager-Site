@@ -164,15 +164,8 @@
    {
       "controlname": "Product",
       "ActionName": "saveProduct",
-       "ErrorCode": "3",
-      "Message": "Technical Error occured while saving..Please contact admin"
-   },
-   {
-      "controlname": "Administration",
-      "ActionName": "saveProduct",
-      "ErrorCode": "1",
-      "Message": "Successfully saved Admini"
-   },
+ 		"ErrorCode": "3",
+      "Message": "Technical Error occured while saving..Please contact admin"  },
    {
       "controlname": "Administration",
       "ActionName": "saveMenu",
@@ -184,60 +177,24 @@
       "ActionName": "saveMenu",
       "ErrorCode": "3",
       "Message": "Technical Error occured while saving..Please contact admin"
-   },
+   }
+   ,
    {
-      "controlname": "mngcontroller",
-      "ActionName": "savemngcontroller",
+      "controlname": "Role",
+      "ActionName": "saveRole",
       "ErrorCode": "1",
-      "Message": "Successfully saved controller"
+      "Message": "Role has been successfully saved"
    },
    {
-      "controlname": "mngcontroller",
-      "ActionName": "savemngcontroller",
+      "controlname": "Role",
+      "ActionName": "saveRole",
       "ErrorCode": "2",
-      "Message": "Controllername Duplicated..Please check"
+      "Message": "Role Name Duplicated..Please check"
    },
    {
-      "controlname": "mngcontroller",
-      "ActionName": "savemngcontroller",
-      "ErrorCode": "3",
-      "Message": "Technical Error occured while saving..Please contact admin"
-   },
-   {
-      "controlname": "Controlleraction",
-      "ActionName": "savecontrolleraction",
-      "ErrorCode": "1",
-      "Message": "Successfully saved controlleraction"
-   },
-   {
-      "controlname": "Controlleraction",
-      "ActionName": "savecontrolleraction",
-      "ErrorCode": "2",
-      "Message": "Controlleraction name Duplicated..Please check"
-   },
-   {
-      "controlname": "Controlleraction",
-      "ActionName": "savecontrolleraction",
-      "ErrorCode": "3",
-      "Message": "Technical Error occured while saving..Please contact admin"
-   },
-   {
-      "controlname": "EmailTemplates",
-      "ActionName": "Save",
-      "ErrorCode": "1",
-      "Message": "Successfully saved email template"
-   },
-   {
-      "controlname": "EmailTemplates",
-      "ActionName": "Save",
-      "ErrorCode": "2",
-      "Message": "Title Duplicated..Please check"
-   },
-   {
-      "controlname": "EmailTemplates",
-      "ActionName": "Save",
+      "controlname": "Role",
+      "ActionName": "saveRole",
       "ErrorCode": "3",
       "Message": "Technical Error occured while saving..Please contact admin"
    }
-   
 ]
