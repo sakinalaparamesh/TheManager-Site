@@ -36,7 +36,7 @@ var menujs = (function () {
         var MenuJson = {};
         MenuJson.isparent = _isparent;
         MenuJson.parent_id = _parent_id.val();
-        MenuJson.controller_id = _controller_id.val();
+        MenuJson.controller_id = _controller_id.val().toString();
         MenuJson.menu_name = _menu_name.val();
         MenuJson.display_name = _display_name.val();
         MenuJson.description = _description.val();
@@ -99,6 +99,13 @@ var menujs = (function () {
                     validators: {
                         notEmpty: {
                             message: 'The menu order is required and cannot be empty'
+                        }
+                    }
+                },
+                controllerid: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The role is required and cannot be empty'
                         }
                     }
                 }

@@ -61,31 +61,32 @@
 
                                 </div>
                                 <div id="child_form" style="display:none;">
-                                    
-                                        <div class="form-group row">
-                                            <label for="menu_id" class="col-md-3">Parent Menu List<span class="text-danger">*</span></label>
-                                            <div class="col-md-6">
-                                                <select id="menu_id" class="form-control input-sm" name="menu_id">
-                                                    <?php foreach ($parentmenu_list as $list) { ?>
-                                                        <option value="<?= $list['menu_id'] ?>"><?= $list['menu_name'] ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </div>
-                                        </div>
 
-                                   
-<!--                                    <div class="form-group" id="MenuURLBox" >
-                                        <label for="menuURL" class="col-sm-4 control-label lable-font">Menu URL (Ex: ControllerName/MethodName)<span class="text-danger">*</span></label>
-                                        <div class="col-sm-8">
+                                    <div class="form-group row">
+                                        <label for="menu_id" class="col-md-3">Parent Menu List<span class="text-danger">*</span></label>
+                                        <div class="col-md-6">
+                                            <select id="menu_id" class="form-control input-sm" name="menu_id">
+                                                <?php foreach ($parentmenu_list as $list) { ?>
+                                                    <option value="<?= $list['menu_id'] ?>"><?= $list['menu_name'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="menuURL" class="col-md-3 control-label lable-font">Menu URL (Ex: ControllerName/MethodName)<span class="text-danger">*</span></label>
+                                        <div class="col-md-6">
                                             <input type="text" name="menuURL" id="menuURL" value="" parsley-trigger="change" placeholder="Menu URL" class="form-control">
                                         </div>
-                                    </div>-->
+                                    </div>
+
+
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="controllerid" class="col-md-3 control-label lable-font">Roles<span class="text-danger">*</span></label>
                                     <div class="col-md-6">
-                                        <select id="controllerid" class="form-control input-sm" name="controllerid">
+                                        <select id="controllerid" name="controllerid" class="select2 select2-multiple select2" multiple="" data-placeholder="Choose ..." tabindex="-1" aria-hidden="true">
+
                                             <?php foreach ($roles_list as $list) { ?>
                                                 <option value="<?= $list['roleid'] ?>"><?= $list['rolename'] ?></option>
                                             <?php } ?>
@@ -93,10 +94,6 @@
                                         <i class=""></i>
                                     </div>
                                 </div>
-
-
-
-
 
                                 <div class="form-group row">
                                     <label for="menuOrder" class="col-md-3 control-label lable-font">Menu Order (After)<span class="text-danger">*</span></label>
