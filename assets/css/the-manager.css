@@ -60,7 +60,7 @@ form label{
 	font-weight: normal;
 }
 .form-horizontal .control-label{
-text-align: left;
+text-align: right;
 }
 .form-check-inline{
 	display: inline-block;
@@ -102,5 +102,13 @@ text-align: left;
 @media (min-width: 768px){
 .form-horizontal .control-label {
     padding-top: 2px!important;
+}
+}
+@media (max-width: 320px){
+   form label {
+    text-align: left;
+} 
+.form-horizontal .control-label{
+    text-align: left;
 }
 }
