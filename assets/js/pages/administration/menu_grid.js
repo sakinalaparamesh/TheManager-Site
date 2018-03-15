@@ -35,6 +35,16 @@ var MenuGridJS = (function () {
                 {"data": "display_name", "orderable": true},
                 {
                     mRender: function (data, type, row) {
+                        var isparent = "";
+                        if (row.isparent == '1') {
+                            isparent = "<span class='text-success'>Parent Menu</span>";
+                        } else {
+                            isparent = "<span class='text-warning'>Child Menu</span>"
+                        }
+                        return isparent;
+                    }, orderable: false},
+                {
+                    mRender: function (data, type, row) {
                         var status = "";
                         if (row.isactive == 'Y') {
                             status = "<span class='text-success'>Active</span>";

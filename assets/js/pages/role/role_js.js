@@ -6,29 +6,29 @@ var rolejs = (function () {
     var _Url;
     var _Load = function (url) {
         _Url = url;
-/*
-        $.ajax({
-            type: "GET",
-            url: _Url + 'Department/getDepartmentsForDdl',
-
-            dataType: 'json',
-            success: function (data) {
-//                console.log(data);
-                var html = '';
-                for (var i = 0; i < data.length; i++) {
-                    html += '<option value="' + data[i]['departmentid'] + '">' + data[i]['departmentname'] + '</option>';
-                }
-                document.getElementById("department_list").innerHTML = html;
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                alert("Error");
-                alert(xhr.responseText);
-            }
-        })*/
+        /*
+         $.ajax({
+         type: "GET",
+         url: _Url + 'Department/getDepartmentsForDdl',
+         
+         dataType: 'json',
+         success: function (data) {
+         //                console.log(data);
+         var html = '';
+         for (var i = 0; i < data.length; i++) {
+         html += '<option value="' + data[i]['departmentid'] + '">' + data[i]['departmentname'] + '</option>';
+         }
+         document.getElementById("department_list").innerHTML = html;
+         },
+         error: function (xhr, textStatus, errorThrown) {
+         alert("Error");
+         alert(xhr.responseText);
+         }
+         })*/
         _Departmentid = $("#department_list");
         _RoleName = $("#txtRoleName");
         _RoleDescription = $("#txtRoleDescription");
-        _displayname=$("#txtDisplayname");
+        _displayname = $("#txtDisplayname");
         _btnSubmit = $("#btnSubmit");
         FormValidator();
         _LoadEvents();
@@ -47,13 +47,20 @@ var rolejs = (function () {
         var validator = $('#frmrole').data('bootstrapValidator');
         validator.validate();
         if (validator.isValid()) {
+            $.LoadingOverlay("show");
             $.ajax({
                 type: "POST",
                 url: _Url + 'Role/saveRole',
                 data: $('#frmrole').serialize(),
 //                dataType: 'json',
                 success: function (data) {
-                    alert("data saved successfully");
+                    $.LoadingOverlay("hide");
+//                                console.log(data);
+                    if (data['isError'] == "N") {
+                        alert(data['message']);
+                    } else {
+                        alert(data['message']);
+                    }
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     alert("Error");
@@ -79,13 +86,13 @@ var rolejs = (function () {
                         }
                     }
                 },
-             displayname: {
-                validators: {
-                    notEmpty: {
-                        message: 'The Displayname is required and cannot be empty'
+                displayname: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The Displayname is required and cannot be empty'
+                        }
                     }
                 }
-            }
 
             }
         });//bootstrapValidator

@@ -15,14 +15,17 @@ class Administration extends BaseController {
         $data['title'] = "Administration";
         //breadcrumbs
         $this->breadcrumbs->push('Administration', 'administration');
-
+ 
         $data['clients_count'] = $this->Administration_model->getClientsCount();
-
-        //echo "<pre>"; print_r($data); exit;
-//        $data["main_menu"] = $this->Model->check("tbl_mng_menu", array("isparent" => 1,"isactive"=>"Y"))->result_array();
-//        foreach($data["main_menu"] as $list){
-//            $data["sub_menu"][$list['menu_id']]=$list;
-//        }
+        $user_id=14;
+//        $this->Administration_model->submainMenuList(4,$user_id);
+//        echo $this->db->last_query();exit;
+        $data["main_menu"] = $this->Administration_model->mainMenuList($user_id)->result_array();
+        
+        foreach($data["main_menu"] as $list){
+            $data["sub_menu"][$list['menu_id']]= $this->Administration_model->submainMenuList($list['menu_id'],$user_id)->result_array();
+        }
+        
         $this->layout->view('administration/administration', $data);
     }
 
@@ -48,7 +51,7 @@ class Administration extends BaseController {
             "menu_name" => $ps_data["menu_name"],
             "display_name" => $ps_data["display_name"],
             "description" => $ps_data["description"],
-//            "menu_url" => $ps_data["menu_url"],
+            "menu_url" => $ps_data["menu_url"],
             "menu_icon" => $ps_data["menu_icon"],
             "menu_order" => $ps_data["menu_order"],
             "menu_color" => $ps_data["menu_color"],

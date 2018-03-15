@@ -164,6 +164,10 @@
    {
       "controlname": "Product",
       "ActionName": "saveProduct",
+      "ErrorCode": "3",
+      "Message": "Technical Error occured while saving..Please contact admin"
+   },
+   {
       "controlname": "Administration",
       "ActionName": "saveMenu",
       "ErrorCode": "1",
@@ -178,6 +182,25 @@
    {
       "controlname": "Administration",
       "ActionName": "saveMenu",
+      "ErrorCode": "3",
+      "Message": "Technical Error occured while saving..Please contact admin"
+   }
+   ,
+   {
+      "controlname": "Role",
+      "ActionName": "saveRole",
+      "ErrorCode": "1",
+      "Message": "Role has been successfully saved"
+   },
+   {
+      "controlname": "Role",
+      "ActionName": "saveRole",
+      "ErrorCode": "2",
+      "Message": "Role Name Duplicated..Please check"
+   },
+   {
+      "controlname": "Role",
+      "ActionName": "saveRole",
       "ErrorCode": "3",
       "Message": "Technical Error occured while saving..Please contact admin"
    }
