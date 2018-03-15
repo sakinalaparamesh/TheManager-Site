@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+<?php $flashmessage = $this->session->flashdata('flashmsg');
+        if(isset($flashmessage)){ ?>
+        <div class="row" style="line-height: 50px;">
+            <div class="col-sm-12 text-center">
+                <?php echo $flashmessage; ?>
+            </div>
+        </div>
+        <?php } ?><!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -36,12 +43,12 @@
 
 
                 <div class="p-20">
-                    <form id="loginForm" method="post" class="form-horizontal m-t-20" action="">
+                    <form id="loginForm" method="post" class="form-horizontal m-t-20" action="Admin/login">
 
                         <div class="form-group ">
                             <div class="col-12">
                                 <span><i class="fa fa-user"></i></span>
-                                <input class="form-control" type="text" placeholder="Username"> 
+                                <input class="form-control" type="text" name="user_email" id="username" placeholder="Username"> 
 
                             </div>
                         </div>
@@ -49,7 +56,7 @@
                         <div class="form-group">
                             <div class="col-12">
                                 <span><i class="fa fa-lock"></i></span>
-                                <input class="form-control" type="password" placeholder="Password">
+                                <input class="form-control" type="password" name="current_password" id="password" placeholder="Password">
                             </div>
                         </div>
 
@@ -67,7 +74,7 @@
 
                         <div class="form-group text-center m-t-40">
                             <div class="col-12 ">
-                                <button  type="submit" name="loginSubmit" class="btn btn-block btn_submit text-uppercase waves-effect waves-light">Submit</button>
+                                <button  type="submit" name="loginSubmit" id="btnsubmit" class="btn btn-block btn_submit text-uppercase waves-effect waves-light">Submit</button>
                             </div>
                         </div>
                     </form>
@@ -99,6 +106,40 @@
 
         <script src="assets/js/jquery.core.js"></script>
         <script src="assets/js/jquery.app.js"></script>
+        <script>
+$(document).ready(function() { 
+    
+    $("#loginForm").focus();
+	
+    $('#loginForm').bootstrapValidator({
+        //container: '#messages',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            username: {
+                validators: {
+                    notEmpty: {
+                        message: 'The Email address is required and cannot be empty'
+                    },
+                    emailAddress: {
+                        message: 'The Email address is not valid'
+                    }
+                }
+            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: 'The Password is required and cannot be empty'
+                    }
+                }
+            }
+        }
+    });//bootstrapValidator
+});//ready
+</script>
 	
 	</body>
 </html>

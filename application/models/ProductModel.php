@@ -12,6 +12,7 @@ class ProductModel extends CI_Model {
             $res_data = 3;
         } else {
             if ($this->Model->insert("tbl_mng_productmaster", $data)) {
+                $productid=$this->db->insert_id();
                 $res_data = 1;
             } else {
                  $res_data= 2;
@@ -70,7 +71,7 @@ class ProductModel extends CI_Model {
     public function getActiveProducts()
     { 
         try{
-                $this->db->select("productid,productname");
+                $this->db->select("productid,productname,product_logo");
                 $this->db->where(array('isactive'=>'Y'));
                 $query = $this->db->get("tbl_mng_productmaster");
                 return$query->result_array();

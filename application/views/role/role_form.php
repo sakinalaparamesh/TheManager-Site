@@ -50,7 +50,7 @@
                                                                 <input id="txtRoleCode" name="rolecode" type="text" placeholder="Role code" required="" class="form-control input-sm">
                                                             </div>
                                                         </div>-->
-                        <div class="row">
+<!--                        <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group row">
                                     <label for="hori-pass2" class="col-md-4">Description
@@ -69,7 +69,7 @@
                                 </div>
                             </div>
 
-                        </div>
+                        </div>-->
                 </div>
             </div>
             <div class="row">

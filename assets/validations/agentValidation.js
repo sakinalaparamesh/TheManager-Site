@@ -97,12 +97,14 @@ var agentjs = (function () {
                 data: formData,
                 success: function (data) {
                     $.LoadingOverlay("hide");
-                    
-//                    console.log(data);
-                    if (data['isError'] == "N") {
-                        alert(data);
-                    }else{
-                        alert(data['message']);
+                    var obj = JSON.parse(data);
+//                                console.log(obj.message);
+                    if (obj.isError == "N") {
+                        alert(obj.message);
+                         window.location.href = _Url+'agent';
+                    } else {
+                        alert(obj.message);
+                       
                     }
 //                    location.reload();
                 },

@@ -52,7 +52,11 @@ class Agent extends BaseController {
         );
         if($_FILES["profilepic"]["name"]!=""){
            $file_data=do_upload("profilepic",'agent',$_FILES["profilepic"]['type']);
-
+if (isset($file_data['error'])) {
+                $resdata['isError'] = "Y";
+                $resdata['message'] = strip_tags($file_data['error']);
+                echo json_encode($resdata);exit;
+            }
            $agent_data['user_profilepic']=$file_data['file_name'];
         }else{
             $agent_data['user_profilepic']="";
