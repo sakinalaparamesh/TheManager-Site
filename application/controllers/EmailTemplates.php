@@ -71,6 +71,8 @@ class EmailTemplates extends BaseController {
 
     public function addTemplateAjax() {
         $inputdata = $_POST;
+        //$inputdata['message'] = mysqli_real_escape_string($inputdata['CK_message']);
+        //$inputdata['message'] = $inputdata['CK_message'];
         //print_r($inputdata); exit;
         $resdata['error_code'] = $this->emailTemplatesModel->saveTemplateDetails($_POST);
         $resdata['message'] = getErrorMessages("EmailTemplates", "Save", $resdata['error_code']);

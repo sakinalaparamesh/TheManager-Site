@@ -109,6 +109,19 @@
             </div>
             </a>
         </div>
+        <div class="col-md-3">
+            <a href="<?php echo base_url('e-templates'); ?>"><div class="widget-bg-color-icon card-box">
+            <div class="bg-icon bg-dark pull-left">
+            <i class="fa fa-users text-white"></i>
+            </div>
+            <div class="text-right">
+            <h5 class="text-dark"><span class=""><b>Email Templates</b></span></h5>
+            <p class="text-muted mb-0 "><b class="badge badge-inverse counter">15</b></p>
+            </div>
+            <div class="clearfix"></div>
+            </div>
+            </a>
+        </div>
     
         <div class="col-md-3">
             <a href="employees.php"><div class="widget-bg-color-icon card-box">

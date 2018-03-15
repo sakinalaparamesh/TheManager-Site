@@ -61,10 +61,13 @@ class EmailTemplatesModel extends CI_model {
                 
                 $id = $data['id'];
                 unset($data['id']);
-                
-                $data['productids']     = implode(',', $data['productids']);
+                if($data['template_type'] == 'product'){
+                    $data['productids'] = implode(',', $data['productids']);
+                }else{
+                    $data['productids'] = '';
+                }
                 $data['template_title'] = trim($data['template_title']);
-                $data['template_id']    = str_replace(' ', '_', strtolower($data['template_title']));
+                $data['template_id']    = str_replace(' ', '_', strtoupper($data['template_title']));
                 
                 if($id == 0){
                     $this->db->select("1")->where(array('isactive'=>'Y', 'template_title'=>$data['template_title']));
