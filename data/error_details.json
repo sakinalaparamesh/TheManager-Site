@@ -164,10 +164,14 @@
    {
       "controlname": "Product",
       "ActionName": "saveProduct",
-      "controlname": "Administration",
+      "ErrorCode": "3",
+      "Message": "Technical Error occured while saving..Please contact admin" 
+    },
+    {
+     "controlname": "Administration",
       "ActionName": "saveMenu",
       "ErrorCode": "1",
-      "Message": "Menu has been successfully saved"
+      "Message": "Successfully saved Admin"
    },
    {
       "controlname": "Administration",
@@ -182,20 +186,56 @@
       "Message": "Technical Error occured while saving..Please contact admin"
    },
    {
-      "controlname": "EmailTemplates",
-      "ActionName": "Save",
+      "controlname": "Role",
+      "ActionName": "saveRole",
       "ErrorCode": "1",
-      "Message": "Successfully saved email template"
+      "Message": "Role has been successfully saved"
    },
    {
-      "controlname": "EmailTemplates",
-      "ActionName": "Save",
+      "controlname": "Role",
+      "ActionName": "saveRole",
       "ErrorCode": "2",
-      "Message": "Title Duplicated..Please check"
+      "Message": "Role Name Duplicated..Please check"
    },
    {
-      "controlname": "EmailTemplates",
-      "ActionName": "Save",
+      "controlname": "Role",
+      "ActionName": "saveRole",
+      "ErrorCode": "3",
+      "Message": "Technical Error occured while saving..Please contact admin"
+   },
+   {
+      "controlname": "mngcontroller",
+      "ActionName": "savemngcontroller",
+      "ErrorCode": "1",
+      "Message": "Successfully saved controller"
+   },
+   {
+      "controlname": "mngcontroller",
+      "ActionName": "savemngcontroller",
+      "ErrorCode": "2",
+      "Message": "Controllername Duplicated..Please check"
+   },
+   {
+      "controlname": "mngcontroller",
+      "ActionName": "savemngcontroller",
+      "ErrorCode": "3",
+      "Message": "Technical Error occured while saving..Please contact admin"
+   },
+   {
+      "controlname": "Controlleraction",
+      "ActionName": "savecontrolleraction",
+      "ErrorCode": "1",
+      "Message": "Successfully saved controlleraction"
+   },
+   {
+      "controlname": "Controlleraction",
+      "ActionName": "savecontrolleraction",
+      "ErrorCode": "2",
+      "Message": "Controlleraction name Duplicated..Please check"
+   },
+   {
+      "controlname": "Controlleraction",
+      "ActionName": "savecontrolleraction",
       "ErrorCode": "3",
       "Message": "Technical Error occured while saving..Please contact admin"
    }

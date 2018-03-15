@@ -8,12 +8,12 @@ var menujs = (function () {
     var _menu_icon;
     var _menu_order;
     var _menu_color;
-    var _isactive;
-    var _isparent;
+//    var _isactive;
+//    var _isparent;
     var _Url;
     var _Load = function (url) {
         _Url = url;
-        _isparent = $("input[name='IsParentMenu']:checked").val();
+//        _isparent = $("input[name='IsParentMenu']:checked");
         _parent_id = $("#menu_id");
         _controller_id = $("#controllerid");
         _menu_name = $("#name");
@@ -23,7 +23,7 @@ var menujs = (function () {
         _menu_icon = $("#MenuIcon");
         _menu_order = $("#menuOrder");
         _menu_color = $("#menuColor");
-        _isactive=$("input[name='is_active']:checked").val();
+//        _isactive=$("input[name='is_active']:checked");
         _btnSubmit = $("#btnSubmit");
         FormValidator();
         _LoadEvents();
@@ -34,7 +34,7 @@ var menujs = (function () {
 
     var SaveMenuDetails = function () {
         var MenuJson = {};
-        MenuJson.isparent = _isparent;
+        MenuJson.isparent = $("input[name='IsParentMenu']:checked").val();
         MenuJson.parent_id = _parent_id.val();
         MenuJson.controller_id = _controller_id.val().toString();
         MenuJson.menu_name = _menu_name.val();
@@ -44,8 +44,8 @@ var menujs = (function () {
         MenuJson.menu_icon = _menu_icon.val();
         MenuJson.menu_order = _menu_order.val();
         MenuJson.menu_color = _menu_color.val();
-        MenuJson.isactive = _isactive;
-//        alert(_DepartmentName.val());
+        MenuJson.isactive = $("input[name='is_active']:checked").val();
+//        alert($("input[name='IsParentMenu']:checked").val());
         var validator = $('#MenuForm').data('bootstrapValidator');
         validator.validate();
         if (validator.isValid()) {

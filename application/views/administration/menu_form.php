@@ -51,10 +51,10 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="IsParentMenu" class="col-md-3 control-label lable-font">Is Parent Menu ? <span class="text-danger">*</span></label> 
-                                    <div class="col-md-6  ">
-                                        <input type="radio" name="IsParentMenu" id="IsParentMenu" value="1"  > &nbsp; YES &nbsp;&nbsp;
-                                        <input type="radio" name="IsParentMenu" id="IsChildMenu" value="0"  checked> &nbsp; NO
+                                    <label for="" class="col-md-3 control-label lable-font">Is Parent Menu ? <span class="text-danger">*</span></label> 
+                                    <div class="col-md-6">
+                                        <input type="radio" name="IsParentMenu" value="1"  > &nbsp; YES &nbsp;&nbsp;
+                                        <input type="radio" name="IsParentMenu" value="0" checked> &nbsp; NO
                                     </div>
                                 </div>
                                 <div id="parent_form" style="display:none;">
@@ -66,6 +66,7 @@
                                         <label for="menu_id" class="col-md-3">Parent Menu List<span class="text-danger">*</span></label>
                                         <div class="col-md-6">
                                             <select id="menu_id" class="form-control input-sm" name="menu_id">
+                                                <option value="">Select parent menu</option>
                                                 <?php foreach ($parentmenu_list as $list) { ?>
                                                     <option value="<?= $list['menu_id'] ?>"><?= $list['menu_name'] ?></option>
                                                 <?php } ?>
@@ -149,9 +150,13 @@
         $("input[name='IsParentMenu']").click(function () {
             var ParentMenuStatus = $("input[name='IsParentMenu']:checked").val();
             if (ParentMenuStatus == 1) {
-                $('#parent_form').show();
+                $('#IsParentMenu').show();
+//                $('#parent_form').attr('checked',true);
+//                $('#IsChildMenu').attr('checked',false);
                 $('#child_form').hide();
             } else {
+//                $('#IsParentMenu').attr('checked',false);
+//                $('#IsChildMenu').attr('checked',true);
                 $('#parent_form').hide();
                 $('#child_form').show();
             }

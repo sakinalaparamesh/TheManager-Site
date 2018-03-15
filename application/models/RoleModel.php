@@ -14,13 +14,13 @@ class RoleModel extends CI_Model {
             if ($this->Model->insert("tbl_mng_rolemaster", $data)) {
                 $role_id = $this->db->insert_id();
                 $controller_ids = $this->input->post("controller_ids");
-                foreach ($controller_ids as $id) {
-                    $role_ids = $this->input->post($id);
-                    foreach ($role_ids as $role) {
+                foreach ($controller_ids as $controller_id) {
+                    $action_ids = $this->input->post($controller_id);
+                    foreach ($action_ids as $action) {
                         $privilages_data = array(
                             "role_id" => $role_id,
-                            "controller_id" => $id,
-                            "action_id" => $role,
+                            "controller_id" => $controller_id,
+                            "action_id" => $action,
                             "isgranted"=>"Y",
                             "isactive"=>"Y",
                             "createdby"=>$this->session->userdata('UserId'),
