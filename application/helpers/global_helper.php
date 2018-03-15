@@ -20,11 +20,24 @@
 if (!function_exists('is_user_loggedin')) {
 
     function is_user_loggedin() {
-        try {
-            return true;
-        } catch (Exception $e) {
+//        try {
+//            return true;
+//        } catch (Exception $e) {
+//            log_message('error', $e->getMessage());
+//            redirect(base_url());
+//        }
+        
+        try{
+            $CI =& get_instance();
+            if ($CI->session->userdata('IsUserLoggedIn')){
+                return TRUE;
+            }else{
+                $CI->session->set_flashdata('flashmsg', 'Your session is expired, please login again...!');
+                redirect("Admin");
+            }
+        } catch (Exception $e){
             log_message('error', $e->getMessage());
-            redirect(base_url());
+            redirect(base_url().$CI->config->item('base_url'));
         }
     }
 

@@ -46,7 +46,7 @@ class mngcontroller extends BaseController {
             "createdon" => date("Y-m-d H:i:s")
         );      
        $resdata['error_code']=$this->mngcontrollerModel->mngcontrollerSave($mng_data);
-       $resdata['message'] = getErrorMessages("mngcontroller","Save",$resdata['error_code']);
+       $resdata['message'] = getErrorMessages("mngcontroller","savemngcontroller",$resdata['error_code']);
        $resdata['isError'] = $resdata['error_code']>1?"Y":"N";
        echo json_encode($resdata);
     }

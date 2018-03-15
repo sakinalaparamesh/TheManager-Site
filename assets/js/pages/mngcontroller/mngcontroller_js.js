@@ -31,8 +31,15 @@ var mngcontrollerjs= (function(){
                         data: { mngcontrollerData : mngcontrollerJson },
                         dataType: 'json',
                        success: function (data) {
-                            alert("data saved successfully");
-                           window.location.href = _Url+'mngcontroller';
+                             $.LoadingOverlay("hide");
+//                                console.log(data);
+                    if (data['isError'] == "N") {
+                        alert(data['message']);
+                         window.location.href = _Url+'mngcontroller';
+                    }else{
+                        alert(data['message']);
+                    }
+                          
                         },
                         error: function (xhr, textStatus, errorThrown) {
                               alert("Error");

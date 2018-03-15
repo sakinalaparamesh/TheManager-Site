@@ -53,8 +53,16 @@ var rolejs = (function () {
                 data: $('#frmrole').serialize(),
 //                dataType: 'json',
                 success: function (data) {
-                    alert("data saved successfully");
-                },
+                    $.LoadingOverlay("hide");
+//                                console.log(data);
+                    if (data['isError'] == "N") {
+                        alert(data['message']);
+                         window.location.href = _Url+'Role';
+                    }else{
+                        alert(data['message']);
+                    }
+                         
+                     },
                 error: function (xhr, textStatus, errorThrown) {
                     alert("Error");
                     alert(xhr.responseText);

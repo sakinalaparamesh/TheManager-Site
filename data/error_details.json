@@ -171,6 +171,12 @@
    },
    {
       "controlname": "Administration",
+      "ActionName": "saveProduct",
+      "ErrorCode": "1",
+      "Message": "Successfully saved Admini"
+   },
+   {
+      "controlname": "Administration",
       "ActionName": "saveMenu",
       "ErrorCode": "2",
       "Message": "Menu Name Duplicated..Please check"
@@ -180,5 +186,42 @@
       "ActionName": "saveMenu",
       "ErrorCode": "3",
       "Message": "Technical Error occured while saving..Please contact admin"
+   },
+   {
+      "controlname": "mngcontroller",
+      "ActionName": "savemngcontroller",
+      "ErrorCode": "1",
+      "Message": "Successfully saved controller"
+   },
+   {
+      "controlname": "mngcontroller",
+      "ActionName": "savemngcontroller",
+      "ErrorCode": "2",
+      "Message": "Controllername Duplicated..Please check"
+   },
+   {
+      "controlname": "mngcontroller",
+      "ActionName": "savemngcontroller",
+      "ErrorCode": "3",
+      "Message": "Technical Error occured while saving..Please contact admin"
+   },
+   {
+      "controlname": "Controlleraction",
+      "ActionName": "savecontrolleraction",
+      "ErrorCode": "1",
+      "Message": "Successfully saved controlleraction"
+   },
+   {
+      "controlname": "Controlleraction",
+      "ActionName": "savecontrolleraction",
+      "ErrorCode": "2",
+      "Message": "Controlleraction name Duplicated..Please check"
+   },
+   {
+      "controlname": "Controlleraction",
+      "ActionName": "savecontrolleraction",
+      "ErrorCode": "3",
+      "Message": "Technical Error occured while saving..Please contact admin"
    }
+   
 ]

@@ -1,11 +1,4 @@
-<?php $flashmessage = $this->session->flashdata('flashmsg');
-        if(isset($flashmessage)){ ?>
-        <div class="row" style="line-height: 50px;">
-            <div class="col-sm-12 text-center">
-                <?php echo $flashmessage; ?>
-            </div>
-        </div>
-        <?php } ?><!DOCTYPE html>
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -31,7 +24,14 @@
         <div class="clearfix"></div>
         <div class="wrapper-page">    
         </div>
-        
+        <?php $flashmessage = $this->session->flashdata('flashmsg');
+        if(isset($flashmessage)){ ?>
+        <div class="row" style="line-height: 50px;">
+            <div class="col-sm-12 text-center">
+                <?php echo $flashmessage; ?>
+            </div>
+        </div>
+        <?php } ?>
         <div class="container-fluid">
             <div class="row">
                 <div class="container">
@@ -48,7 +48,7 @@
                         <div class="form-group ">
                             <div class="col-12">
                                 <span><i class="fa fa-user"></i></span>
-                                <input class="form-control" type="text" name="user_email" id="username" placeholder="Username"> 
+                                <input class="form-control" type="text" name="user_email" id="username" placeholder="Username" required="required" > 
 
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                         <div class="form-group">
                             <div class="col-12">
                                 <span><i class="fa fa-lock"></i></span>
-                                <input class="form-control" type="password" name="current_password" id="password" placeholder="Password">
+                                <input class="form-control" type="password" name="current_password" id="password" placeholder="Password" required="required" >
                             </div>
                         </div>
 
