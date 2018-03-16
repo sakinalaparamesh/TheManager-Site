@@ -25,9 +25,10 @@
                             <tr>
                                 <th data-priority="1"></th>
                                 <th data-priority="2">S.No</th>
-                                <th data-priority="3">Department</th>
+                                
                                 <th data-priority="3">Role Name </th>
                                 <th data-priority="3">Role Description </th>
+                                <th data-priority="3">Department</th>
                                 <th data-priority="4">roleid</th>
                                 <th data-priority="5">Status</th>
 

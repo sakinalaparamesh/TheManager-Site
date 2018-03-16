@@ -31,22 +31,6 @@ class Admin extends CI_Controller {
         }
     }
 
-    public function uriseg() {
-//        $controller = $CI->uri->segment(1);
-//        $check_point = 0;
-//        $privileges = $CI->session->userdata("UserRolePrevillages");
-//        foreach ($privileges as $list) {
-//            if (strpos($list['controllername'], $controller) !== false) {
-//                $check_point++;
-//            }
-//        }
-//        if ($check_point > 0) {
-//            return TRUE;
-//        } else {
-//            echo "You don't have access to this page..!";
-//        }
-    }
-
     public function logout() {
         $array_items = array('IsUserLoggedIn' => '');
         $this->session->unset_userdata($array_items);

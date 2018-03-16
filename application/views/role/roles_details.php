@@ -22,16 +22,22 @@
                 </div>
                 <div class="contact-card m-t-30">
 
-<!--                    <a class="pull-left" href="#">
-                        <img class="rounded-circle" src="<?php echo base_url() ?>assets/images/users/avatar-6.jpg" alt="">
-                    </a>-->
+                    <!--                    <a class="pull-left" href="#">
+                                            <img class="rounded-circle" src="<?php echo base_url() ?>assets/images/users/avatar-6.jpg" alt="">
+                                        </a>-->
 
                     <div class="member-info">
 
                         <p class="text-dark"><i class="md md-business m-r-10"></i><small><?php echo $role_info['rolename']; ?></small></p>
                         <p class="text-dark"><i class="md md-business m-r-10"></i><small><?php echo $role_info['roledescription']; ?></small></p>
                         <p class="text-dark"><i class="md md-business m-r-10"></i><small><?php echo $role_info['displayname']; ?></small></p>
-
+                                <?php foreach ($controllers as $ctrl_info) { ?>
+                                    <?= $ctrl_info['controllername'] ?><br>
+                        <?php foreach ($actions_info[$ctrl_info['controllerid']] as $action_info) { ?>
+                        <p class="text-dark"><i class="md md-business m-r-10"></i><small>
+                            <?php echo $action_info['controlleractionname']; ?></small></p>
+                        
+                        <?php }} ?>
                     </div>
 
                 </div>

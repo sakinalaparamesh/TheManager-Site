@@ -32,10 +32,11 @@ var RoleGridJS = (function () {
                                 return link;
                             }, orderable: false },
                         { "data": "roleid", "orderable": true },
-                        { "data": "departmentname", "orderable": true },
+                        
                         { "data": "rolename", "orderable": true },
                         { "data": "roledescription", "orderable": true }, 
-                        { "data": "roleid", "orderable": true },
+                        { "data": "departmentname", "orderable": true },
+                        { "data": "roleid", "orderable": true,"visible":false },
                             { 
                             mRender: function (data, type, row) {
                                 var status = "";
