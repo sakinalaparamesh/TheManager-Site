@@ -21,12 +21,12 @@ class RoleModel extends CI_Model {
                             "role_id" => $role_id,
                             "controller_id" => $controller_id,
                             "action_id" => $action,
-                            "isgranted"=>"Y",
-                            "isactive"=>"Y",
-                            "createdby"=>$this->session->userdata('UserId'),
-                            "createdon"=>date("Y-m-d H:i:s")
+                            "isgranted" => "Y",
+                            "isactive" => "Y",
+                            "createdby" => $this->session->userdata('UserId'),
+                            "createdon" => date("Y-m-d H:i:s")
                         );
-                        $this->Model->insert("tbl_mng_role_privilages",$privilages_data);
+                        $this->Model->insert("tbl_mng_role_privilages", $privilages_data);
                     }
                 }
                 $res_data = 1;
@@ -84,6 +84,19 @@ class RoleModel extends CI_Model {
             log_message('error', $e->getMessage());
             echo "ERROR: " . $e->getMessage();
         }
+    }
+
+    public function getRoleFullDetails($roleid) {
+        $data['role_info'] = $this->Model->check("tbl_mng_rolemaster", array("roleid" => $roleid))->row_array();
+        $controllers_query = "select * from tbl_mng_controllermaster where controllerid in (select GROUP_CONCAT(controller_id SEPARATOR ',') AS controller_id from tbl_mng_role_privilages where role_id='" . $roleid . "' "
+                . "group by tbl_mng_role_privilages.controller_id)";
+        $data['controllers'] = $this->db->query($controllers_query)->result_array();
+        foreach ($data['controllers'] as $ctrl_list) {
+            $actions_query = $this->Model->check("tbl_mng_controlleractionmaster", array("controllerid" => $ctrl_list['controllerid']));
+
+            $data['actions_info'][$ctrl_list['controllerid']] = $actions_query->result_array();
+        }
+        return $data;
     }
 
 }

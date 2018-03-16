@@ -19,15 +19,9 @@ class Admin extends CI_Controller {
 
     public function login() {
         $user_info = $this->login_model->CheckUser();
-        $user_info['IsUserLoggedIn']=TRUE;
+        $user_info['IsUserLoggedIn'] = TRUE;
 //        print_r($user_info);exit;
-//                $sess_array = array(
-//                                      'userid' => $result->userid,
-//                                      'user_name' => $result->user_name,
-//                                      'user_mobilenumber' => $result->user_mobilenumber,
-//                                     
-//                                    );
-//                $session_items = array('IsUserLoggedIn' => TRUE, 'UserId' => $user_info->userid,'UserId' => $user_info->user_name);
+
         if (!isset($IsValid)) {
             $this->session->set_userdata($user_info);
             redirect('administration');
@@ -35,14 +29,29 @@ class Admin extends CI_Controller {
             $this->session->set_flashdata('flashmsg', 'please recheck your credentials.');
             redirect('Admin');
         }
-        
+    }
+
+    public function uriseg() {
+//        $controller = $CI->uri->segment(1);
+//        $check_point = 0;
+//        $privileges = $CI->session->userdata("UserRolePrevillages");
+//        foreach ($privileges as $list) {
+//            if (strpos($list['controllername'], $controller) !== false) {
+//                $check_point++;
+//            }
+//        }
+//        if ($check_point > 0) {
+//            return TRUE;
+//        } else {
+//            echo "You don't have access to this page..!";
+//        }
     }
 
     public function logout() {
         $array_items = array('IsUserLoggedIn' => '');
         $this->session->unset_userdata($array_items);
         $this->session->sess_destroy();
-        
+
         redirect(base_url());
     }
 

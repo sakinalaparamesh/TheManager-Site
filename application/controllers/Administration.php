@@ -16,8 +16,9 @@ class Administration extends BaseController {
         //breadcrumbs
         $this->breadcrumbs->push('Administration', 'administration');
  
-        $data['clients_count'] = $this->Administration_model->getClientsCount();
-        $user_id=14;
+//        $data['clients_count'] = $this->Administration_model->getClientsCount();
+        $UserInfo=$this->session->userdata("UserInfo");
+        $user_id=$UserInfo['userid'];
 //        $this->Administration_model->submainMenuList(4,$user_id);
 //        echo $this->db->last_query();exit;
         $data["main_menu"] = $this->Administration_model->mainMenuList($user_id)->result_array();

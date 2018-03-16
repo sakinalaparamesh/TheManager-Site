@@ -20,24 +20,33 @@
 if (!function_exists('is_user_loggedin')) {
 
     function is_user_loggedin() {
-//        try {
-//            return true;
-//        } catch (Exception $e) {
-//            log_message('error', $e->getMessage());
-//            redirect(base_url());
-//        }
-        
-        try{
-            $CI =& get_instance();
-            if ($CI->session->userdata('IsUserLoggedIn')){
-                return TRUE;
-            }else{
+
+        try {
+            $CI = & get_instance();
+            if ($CI->session->userdata('IsUserLoggedIn')) {
+                
+                $controller = $CI->uri->segment(1);
+                $check_point = 0;
+                $privileges = $CI->session->userdata("UserRolePrevillages");
+                foreach ($privileges as $list) {
+                    if (strpos($list['controllername'],$controller) !== false) {
+                        $check_point++;
+                    }
+                }
+                if ($check_point > 0) {
+                    return TRUE;
+                } else {
+
+                    echo "You don't have access to this page..!"; exit;
+                }
+//                return TRUE;
+            } else {
                 $CI->session->set_flashdata('flashmsg', 'Your session is expired, please login again...!');
                 redirect("Admin");
             }
-        } catch (Exception $e){
+        } catch (Exception $e) {
             log_message('error', $e->getMessage());
-            redirect(base_url().$CI->config->item('base_url'));
+            redirect(base_url() . $CI->config->item('base_url'));
         }
     }
 
@@ -57,14 +66,14 @@ if (!function_exists('getErrorMessages')) {
 
 }
 if (!function_exists('do_upload')) {
-    
 
-    function do_upload($file,$path,$formate) {
+
+    function do_upload($file, $path, $formate) {
         $obj = & get_instance();
-        $orignal_path='./manager_gallary/'.$path."/";
+        $orignal_path = './manager_gallary/' . $path . "/";
         $config['upload_path'] = $orignal_path;
         $config['allowed_types'] = 'gif|jpg|png|jpeg';
-        $config['encrypt_name']=TRUE;
+        $config['encrypt_name'] = TRUE;
 
         $obj->load->library('upload', $config);
 
@@ -74,6 +83,26 @@ if (!function_exists('do_upload')) {
         } else {
             $data = array('upload_data' => $obj->upload->data());
             return $data['upload_data'];
+        }
+    }
+
+}
+if (!function_exists('checkPrivileges')) {
+
+
+    function checkPrivileges($controller, $action) {
+        $obj = & get_instance();
+        $check_point = 0;
+        $privileges = $obj->session->userdata("UserRolePrevillages");
+        foreach ($privileges as $list) {
+            if ((strcasecmp($list['controllername'], $controller) == 0) && (strcasecmp($list['actioncodename'], $action) == 0)) {
+                $check_point++;
+            }
+        }
+        if ($check_point > 0) {
+            return TRUE;
+        } else {
+            return FALSE;
         }
     }
 
