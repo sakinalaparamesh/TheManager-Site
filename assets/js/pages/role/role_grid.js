@@ -12,7 +12,7 @@ var RoleGridJS = (function () {
 		LoadRoles();
     }
 	var LoadRoles = function () {
-		 _tblrole.DataTable({
+		 var dt =_tblrole.DataTable({
                         responsive: true,
 			"processing": true,
 			"serverSide": true,
@@ -32,9 +32,11 @@ var RoleGridJS = (function () {
                                 return link;
                             }, orderable: false },
                         { "data": "roleid", "orderable": true },
-                        { "data": "departmentname", "orderable": true },
+                        
                         { "data": "rolename", "orderable": true },
-                        { "data": "roledescription", "orderable": true },                          
+                        { "data": "roledescription", "orderable": true }, 
+                        { "data": "departmentname", "orderable": true },
+                        { "data": "roleid", "orderable": true,"visible":false },
                             { 
                             mRender: function (data, type, row) {
                                 var status = "";
@@ -48,10 +50,13 @@ var RoleGridJS = (function () {
                     $('td:eq(1)',nRow).html(index);
                     return nRow;
                 }
-               
-	    
-
 		});
+                $("#tblrole tbody").on("click","tr", function(){ 
+                var _row = $(this);
+                var _roleid  = dt.row(_row).data()["roleid"];   
+//                alert(_roleid);
+                openSidebar(_roleid);
+           });
                 
 	}
 	

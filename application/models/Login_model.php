@@ -27,16 +27,18 @@ class Login_model extends CI_model {
                 $this->db->where(array("urm.isactive" => "Y"));
                 $userrolequery = $this->db->get();
                 $data['UserRoleInfo'] = $userrolequery->result_array();
+                
+//                $data['UserRoleInfo'] = $this->db->last_query();
                 $q1 = "SELECT GROUP_CONCAT(role_id SEPARATOR ',') AS role_ids 
-FROM tdl_mng_user_roles where user_id='" . $res->row()->userid . "'";
-                $role_ids= $this->db->query($q1)->row()->role_ids;
+FROM tdl_mng_user_roles where user_id='" . $res->row()->userid . "' AND isactive='Y'";
+                $role_ids = $this->db->query($q1)->row()->role_ids;
                 $this->db->select("rp.role_id,rm.rolename,rp.controller_id,cm.controllername,cam.actioncodename");
                 $this->db->from("tbl_mng_role_privilages rp");
                 $this->db->Join("tbl_mng_rolemaster rm", "rm.roleid = rp.role_id", "inner");
                 $this->db->Join("tbl_mng_controllermaster cm", "cm.controllerid = rp.controller_id", "inner");
                 $this->db->Join("tbl_mng_controlleractionmaster cam", "cam.actionid = rp.action_id", "inner");
-                $this->db->where_in("rm.roleid", $role_ids);
-                $this->db->where(array("rp.isactive" => "Y","isgranted"=>"Y"));
+                $this->db->where_in("rm.roleid", $role_ids, false);
+                $this->db->where(array("rp.isactive" => "Y", "isgranted" => "Y"));
                 $userrole_privilages = $this->db->get();
                 $data['UserRolePrevillages'] = $userrole_privilages->result_array();
 //                $data['UserRolePrevillages'] = $this->db->last_query();

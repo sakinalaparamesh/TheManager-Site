@@ -19,15 +19,9 @@ class Admin extends CI_Controller {
 
     public function login() {
         $user_info = $this->login_model->CheckUser();
-        $user_info['IsUserLoggedIn']=TRUE;
+        $user_info['IsUserLoggedIn'] = TRUE;
 //        print_r($user_info);exit;
-//                $sess_array = array(
-//                                      'userid' => $result->userid,
-//                                      'user_name' => $result->user_name,
-//                                      'user_mobilenumber' => $result->user_mobilenumber,
-//                                     
-//                                    );
-//                $session_items = array('IsUserLoggedIn' => TRUE, 'UserId' => $user_info->userid,'UserId' => $user_info->user_name);
+
         if (!isset($IsValid)) {
             $this->session->set_userdata($user_info);
             redirect('administration');
@@ -35,14 +29,13 @@ class Admin extends CI_Controller {
             $this->session->set_flashdata('flashmsg', 'please recheck your credentials.');
             redirect('Admin');
         }
-        
     }
 
     public function logout() {
         $array_items = array('IsUserLoggedIn' => '');
         $this->session->unset_userdata($array_items);
         $this->session->sess_destroy();
-        
+
         redirect(base_url());
     }
 

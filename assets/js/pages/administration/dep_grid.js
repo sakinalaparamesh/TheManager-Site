@@ -12,7 +12,7 @@ var DepartmentGridJS = (function () {
         LoadDepartments();
     }
     var LoadDepartments = function () {
-        _tbldepartment.DataTable({
+        var dt =_tbldepartment.DataTable({
             responsive: true,
             "processing": true,
             "serverSide": true,
@@ -32,7 +32,7 @@ var DepartmentGridJS = (function () {
                     }, orderable: false},
                 {"data": "departmentid", "orderable": true},
                 {"data": "departmentname", "orderable": true},
-                {"data": "departmentcode", "orderable": true},
+                {"data": "departmentcode", "orderable": true},                
                 {
                     mRender: function (data, type, row) {
                         var status = "";
@@ -49,7 +49,8 @@ var DepartmentGridJS = (function () {
 //                        result += '<a href="' + _url + 'Department/delete_department/' + row.departmentid + '">Delete</a>';
 //                        return result;
 //                    }, orderable: false},
-            ], "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+            ],
+            "fnRowCallback": function (nRow, aData, iDisplayIndex) {
 //console.log("Hello");
                 var index = iDisplayIndex + 1;
                 $('td:eq(1)', nRow).html(index);
@@ -59,7 +60,12 @@ var DepartmentGridJS = (function () {
 
 
         });
+        $("#tbldepartment tbody").on("click","tr", function(){ 
+                var _row = $(this);
+                var _departmentid  = dt.row(_row).data()["departmentid"];
+//                alert(_departmentid);
+                openSidebar(_departmentid);
+           });
     }
-
     return {Load: _Load}
 })();

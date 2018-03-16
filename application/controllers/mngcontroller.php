@@ -85,5 +85,13 @@ class mngcontroller extends BaseController {
 
             echo json_encode($json_data); 
     }
+    public function getmngcontrollerFullDetailsAjax() {
+        $data['title'] = "Controller Details";
+        $controllerid = $this->input->post('controllerid');        
+
+        $data['details'] = $this->Model->check("tbl_mng_controllermaster",array("controllerid"=>$controllerid))->row();
+
+        $this->load->view('mngcontroller/mngcontroller_details', $data);
+    }
 
 }

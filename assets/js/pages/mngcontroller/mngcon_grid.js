@@ -12,7 +12,7 @@ var mngcontrollerGridJS = (function () {
 		Loadmngcontrollers();
     }
 	var Loadmngcontrollers = function () {
-		 _tblmngcontroller.DataTable({
+		 var dt =_tblmngcontroller.DataTable({
                         responsive: true,
 			"processing": true,
 			"serverSide": true,
@@ -48,9 +48,13 @@ var mngcontrollerGridJS = (function () {
                     return nRow;
                 }
                
-	    
-
-		});
+	    });
+            $("#tblmngcontroller tbody").on("click","tr", function(){ 
+                var _row = $(this);
+                var _controllerid  = dt.row(_row).data()["controllerid"];
+//                alert(_controllerid);
+                openSidebar(_controllerid);
+           });
                 
 	}
 	

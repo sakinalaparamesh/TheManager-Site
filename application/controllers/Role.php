@@ -93,5 +93,13 @@ class Role extends BaseController {
         $roles = $this->Model->check("tbl_mng_rolemaster", array("departmentid" => $department_id))->result_array();
         echo json_encode($roles);
     }
+    public function getRoleFullDetailsAjax() {
+        
+        $roleid= $this->input->post("roleid");
+        $data= $this->RoleModel->getRoleFullDetails($roleid);
+        $data['title']="Role Details";
+//        print_r($data);
+        $this->load->view('role/roles_details', $data);
+    }
 
 }

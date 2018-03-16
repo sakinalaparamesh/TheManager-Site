@@ -11,7 +11,7 @@ var controlleractionGridJS = (function () {
 		Loadcontrolleractions();
     }
 	var Loadcontrolleractions = function () {
-		 _tblcontrolleraction.DataTable({
+		var dt =_tblcontrolleraction.DataTable({
                         responsive: true,
 			"processing": true,
 			"serverSide": true,
@@ -52,6 +52,12 @@ var controlleractionGridJS = (function () {
 	    
 
 		});
+                 $("#tblcontrolleraction tbody").on("click","tr", function(){ 
+                var _row = $(this);
+                var _actionid  = dt.row(_row).data()["actionid"];
+//                alert(_departmentid);
+                openSidebar(_actionid);
+           });
                 
 	}
 	
