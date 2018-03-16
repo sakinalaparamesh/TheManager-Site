@@ -120,7 +120,7 @@ $(document).ready(function(){
    
     ValidateForm();
     
-    //CKEDITOR.replace('message');
+    CKEDITOR.replace('message');
    
     $("input[name='template_type']").click(function(){
         var template_type = $("input[name='template_type']:checked").val();
@@ -147,10 +147,18 @@ function ValidateMyForm(){
                   //var CK_message = CKEDITOR.instances['message'].getData();
                   //var CK_message = CKEDITOR.instances.Editor.document.getBody().getHtml();
                   //alert(CK_message); return false;
+                  var id = $("#id");
+                  var template_id = $("#template_id");
+                  var template_title = $("#template_title");
+                  var subject = $("#subject");
+                  var message = CKEDITOR.instances['message'].getData();
+                  var productids = $("#productids");
+
                   $.ajax({
                       type: "POST",
                       url: "<?php echo base_url('emailTemplates/addTemplateAjax'); ?>", 
-                      data: $('#MyForm').serialize(),
+                      //data: $('#MyForm').serialize(),
+                      data: { id : id, template_id : template_id, template_title : template_title, subject : subject, message : message, template_type : template_type, productids : productids },
                       //data: $('#MyForm').serialize() + "&CK_message=" + CK_message,
                       //data: form_data,
                       success: function(response){ //alert(response); return false; 

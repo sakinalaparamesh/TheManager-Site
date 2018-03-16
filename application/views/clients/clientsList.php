@@ -28,7 +28,7 @@
 
 <div class="col-md-12" id="myListView"> 
 
-    <table id="tableId" data-toggle="table" data-page-size="10" data-pagination="true" class="table table-bordered dataTable no-footer dtr-inline table-condensed table-responsive" style="white-space: nowrap; width:100%;">
+    <table id="tableId" data-toggle="table" data-page-size="10" data-pagination="true" class="table table-bordered dataTable no-footer dtr-inline table-condensed table-responsive" style="width:100%;">
         <thead>
             <tr>
                 <th data-priority="1" data-field="state" data-checkbox="true"><input type="checkbox" name="rowcheck" id="rowcheck"></th>
