@@ -23,27 +23,41 @@
                                         <button class="btn btn-icon waves-effect color-dark waves-light" onclick="clientProductMappingForm('<?php echo $clientId; ?>');"> <i class="fa fa-tasks" title="Assign Products"></i> </button>
                                      <?php } ?>
                                     </div>
-                                    <div class="contact-card m-t-30">
+                                
+                                <div class="contact-card m-t-30">
+                                        <div class="row">
+                                        <div class="col-md-2">
                                 <?php if($contactId){ ?>
-                                <a class="pull-left" href="#">
-                                    <img class="rounded-circle" src="<?php echo base_url() ?>assets/images/users/avatar-6.jpg" alt="">
+                                            <a class="" href="#">
+                                    <img class="rounded-circle thumb-md" src="<?php echo base_url() ?>assets/images/users/avatar-2.jpg" alt="">
                                 </a><?php } ?>
-
-                                <div class="member-info">
-                                    <?php if($contactId){ ?>
+                                            </div>
+                                        <div class="col-md-10 m-t-5">
+                                             <?php if($contactId){ ?>
                                     <h4 class="m-t-0 m-b-5 header-title"><b><?php echo $details[0]['PersonName']; ?></b></h4>
                                         <p class="text-muted"><?php echo $details[0]['Designation']; ?></p>
-                                    <?php } ?>
+                                         <?php } ?>
+                                        </div>
+                                            </div>
+
+                                <div class="member-info">
+                                   
                                     <p class="text-dark"><i class="md md-business m-r-10"></i><small><?php echo $details[0]['ClientName']; ?></small></p>
                                     <?php if($branchId){ ?>
                                         <p class="text-dark"><i class="md md-business m-r-10"></i><small><?php echo $details[0]['BranchName']; ?></small></p>
                                         <p class="text-dark"><i class="md md-business m-r-10"></i><small><?php echo $details[0]['BranchAddress']; ?></small></p>
                                     <?php } if($contactId){ ?>
-                                            <h4 class="m-t-0 m-b-5 header-title"><b><?php echo $details[0]['Mobile']; ?></b></h4>
-                                            <p class="text-muted">Contact Number</p>
-                                            <h4 class="m-t-0 m-b-5 header-title"><b><?php echo $details[0]['Email']; ?></b></h4>
-                                            <p class="text-muted">Email</p>
+                                        <div class="row">
+                                         <p class="col-md-4 text-muted">Contact Number</p>
+                                            <h4 class="col-md-8 m-t-2 m-b-5 f-16"><b><?php echo $details[0]['Mobile']; ?></b></h4>
+                                            </div>
+                                        <div class="row">
+                                            <p class="col-md-2 text-muted">Email</p>
+                                           
+                                            <h4 class="col-md-8 m-t-2 m-b-5 f-16"><b><?php echo $details[0]['Email']; ?></b></h4>
+                                            
                                     <?php } ?>
+                                            </div>
                                    <!-- <div class="m-t-20">
                                         <a href="#" class="btn btn-purple waves-effect waves-light btn-sm">Send email</a>
                                         <a href="#" class="btn btn-success waves-effect waves-light btn-sm m-l-5">Edit</a>
@@ -52,6 +66,7 @@
                                 </div>
 
                             </div>
+                                
                                  
                                 <!--</form>-->
                             </div>
