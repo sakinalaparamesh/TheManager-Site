@@ -23,9 +23,15 @@
             <input type="hidden" name="id" value="<?php echo $details[0]['id']; ?>">  
             
             <div class="form-group row">
+                <label for="template_id" class="col-md-2">Template ID<span class="text-danger">*</span></label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control input-sm" name="template_id" id="template_id" value="<?php echo $details[0]['template_id']; ?>" placeholder="Template ID" readonly="">
+                </div>
+            </div>            
+            <div class="form-group row">
                 <label for="template_title" class="col-md-2">Title<span class="text-danger">*</span></label>
                 <div class="col-md-4">
-                    <input type="text" class="form-control input-sm" name="template_title" id="template_title" value="<?php echo $details[0]['template_title']; ?>" placeholder="Title">
+                    <input type="text" class="form-control input-sm" name="template_title" id="template_title" value="<?php echo $details[0]['template_title']; ?>" placeholder="Title" <?php if($details[0]['id']){ echo 'readonly=""'; } ?>>
                 </div>
             </div>
             <div class="form-group row">
@@ -114,6 +120,8 @@ $(document).ready(function(){
    
     ValidateForm();
     
+    //CKEDITOR.replace('message');
+   
     $("input[name='template_type']").click(function(){
         var template_type = $("input[name='template_type']:checked").val();
         if(template_type == 'product'){
@@ -121,6 +129,11 @@ $(document).ready(function(){
         }else{
             $('#products_list_box').css({'display':'none'});
         }
+    });
+    $("input[name='template_title']").keyup(function(){
+        
+        var template_title = $(this).val().trim().replace(/ /g,"_").toUpperCase();
+        $("#template_id").val(template_title);
     });
 
 });//ready
@@ -131,10 +144,14 @@ function ValidateMyForm(){
              if(validator.isValid()){
 
                   $("html").addClass( "loading" );
+                  //var CK_message = CKEDITOR.instances['message'].getData();
+                  //var CK_message = CKEDITOR.instances.Editor.document.getBody().getHtml();
+                  //alert(CK_message); return false;
                   $.ajax({
                       type: "POST",
                       url: "<?php echo base_url('emailTemplates/addTemplateAjax'); ?>", 
                       data: $('#MyForm').serialize(),
+                      //data: $('#MyForm').serialize() + "&CK_message=" + CK_message,
                       //data: form_data,
                       success: function(response){ //alert(response); return false; 
 
