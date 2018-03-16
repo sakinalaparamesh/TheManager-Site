@@ -28,7 +28,7 @@ class Login_model extends CI_model {
                 $userrolequery = $this->db->get();
                 $data['UserRoleInfo'] = $userrolequery->result_array();
                 $q1 = "SELECT GROUP_CONCAT(role_id SEPARATOR ',') AS role_ids 
-FROM tdl_mng_user_roles where user_id='" . $res->row()->userid . "'";
+                FROM tdl_mng_user_roles where user_id='" . $res->row()->userid . "'";
                 $role_ids= $this->db->query($q1)->row()->role_ids;
                 $this->db->select("rp.role_id,rm.rolename,rp.controller_id,cm.controllername,cam.actioncodename");
                 $this->db->from("tbl_mng_role_privilages rp");

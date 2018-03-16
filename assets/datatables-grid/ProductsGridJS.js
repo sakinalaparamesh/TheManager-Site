@@ -12,7 +12,7 @@ var ProductGridJS = (function () {
 		LoadProducts();
     }
 	var LoadProducts = function () {
-		 _tblproduct.DataTable({
+              var dt =_tblproduct.DataTable({
                         responsive: true,
 			"processing": true,
 			"serverSide": true,
@@ -41,18 +41,21 @@ var ProductGridJS = (function () {
                                 else{ status = "<span class='text-warning'>In-active</span>" }
                                 return status; },orderable: false },
                             
-                ],"fnRowCallback" : function(nRow, aData, iDisplayIndex){
+                ],
+                "fnRowCallback" : function(nRow, aData, iDisplayIndex){
                     //console.log("Hello");
                     var index = iDisplayIndex +1;
                     $('td:eq(1)',nRow).html(index);
                     return nRow;
                 }
                
-	    
-
-		});
-                
-	}
-	
+	    });
+             $("#tblproduct tbody").on("click","tr", function(){ 
+                var _row = $(this);
+                var _productid  = dt.row(_row).data()["productid"];
+//                alert(_productid);
+                openSidebar(_productid);
+           });
+          }
 	return { Load: _Load }
 })();
