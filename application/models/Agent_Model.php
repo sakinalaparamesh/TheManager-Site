@@ -5,7 +5,7 @@ class Agent_Model extends CI_Model {
     public function agentSave($data,$user_roles) {
         $res_data = 1;
         $agent_check = array(
-            "user_name" => $data["user_name"]
+            "user_email" => $data["user_email"]
         );
         $checkRes = $this->Model->check("tdl_mng_usermaster", $agent_check);
         if ($checkRes->num_rows() > 0) {

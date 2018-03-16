@@ -135,13 +135,13 @@
       "controlname": "Agent",
       "ActionName": "saveAgent",
       "ErrorCode": "1",
-      "Message": "Successfully saved department"
+      "Message": "Successfully saved Agent"
    },
    {
       "controlname": "Agent",
       "ActionName": "saveAgent",
       "ErrorCode": "2",
-      "Message": "Department Name Duplicated..Please check"
+      "Message": "Agent Email Duplicated..Please check"
    },
    {
       "controlname": "Agent",
