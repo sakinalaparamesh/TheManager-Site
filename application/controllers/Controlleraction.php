@@ -89,5 +89,13 @@ class Controlleraction extends BaseController {
 
             echo json_encode($json_data); 
     }
+    public function getControlleractionFullDetailsAjax() {
+        $data['title'] = "Controlleraction Details";
+        $actionid = $this->input->post('actionid');        
+
+        $data['details'] = $this->Model->check("tbl_mng_controlleractionmaster",array("actionid"=>$actionid))->row();
+
+        $this->load->view('controlleraction/controlleraction_details', $data);
+    }
 
 }
