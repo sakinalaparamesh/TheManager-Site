@@ -59,9 +59,9 @@ class Clients_model extends CI_model {
     public function getClientFullDetails($data)
     { 
         try{
-                $data['clientId'] = $_POST['clientId'];
-                $data['branchId'] = $_POST['branchId'];
-                $data['contactId'] = $_POST['contactId'];
+//                $data['clientId'] = $_POST['clientId'];
+//                $data['branchId'] = $_POST['branchId'];
+//                $data['contactId'] = $_POST['contactId'];
                 
                 if($data['contactId']){
                     $this->db->select("CD.personname as PersonName,CD.designation as Designation,CD.mobilenumber as Mobile,CD.email as Email,C.clientname as ClientName,B.location as BranchName,B.address as BranchAddress, B.branchid as BranchId, CD.branchcontactid as ContactId");
@@ -72,7 +72,7 @@ class Clients_model extends CI_model {
                     $query = $this->db->get();
                     return $query->result_array();
                 }else if($data['branchId']){
-                    $this->db->select("C.clientname as ClientName,B.location as BranchName,,B.address as BranchAddress");
+                    $this->db->select("C.clientname as ClientName,B.location as BranchName,B.address as BranchAddress,B.email as Email");
                     $this->db->from("tbl_mng_clientmaster C");
                     $this->db->join("tbl_mng_clientbranchmaster B","B.clientid = C.clientid","LEFT");
                     $this->db->where(array('B.branchid'=>$data['branchId']));
@@ -110,12 +110,12 @@ class Clients_model extends CI_model {
                     $error_code = 2;
                 }else{                   
                     if($id){
-                        $data['updatedby'] = $this->session->userdata('UserId');
+                        $data['updatedby'] = $this->session->userdata()['UserInfo']['userid'];
                         $data['updatedon'] = date('Y-m-d H:i:s');
                         $this->db->where('clientid', $id);
                         $error_code = ($this->db->update('tbl_mng_clientmaster', $data)) ? 1 : 3;                    
                     }else{
-                        $data['createdby'] = $this->session->userdata('UserId');
+                        $data['createdby'] = $this->session->userdata()['UserInfo']['userid'];
                         $data['createdon'] = date('Y-m-d H:i:s');
                         $error_code = ($this->db->insert('tbl_mng_clientmaster', $data)) ? 1 : 3; 
                     }
@@ -135,7 +135,7 @@ class Clients_model extends CI_model {
                   
                 if($id){
                     $data['isactive'] = 'N';
-                    $data['updatedby'] = $this->session->userdata('UserId');
+                    $data['updatedby'] = $this->session->userdata()['UserInfo']['userid'];
                     $data['updatedon'] = date('Y-m-d H:i:s');
                     $this->db->where('clientid', $id);
                     $error_code = ($this->db->update('tbl_mng_clientmaster', $data)) ? 1 : 3;                    
@@ -216,12 +216,12 @@ class Clients_model extends CI_model {
                     $error_code = 2;
                 }else{                   
                     if($id){
-                        $data['updatedby'] = $this->session->userdata('UserId');
+                        $data['updatedby'] = $this->session->userdata()['UserInfo']['userid'];
                         $data['updatedon'] = date('Y-m-d H:i:s');
                         $this->db->where('branchid', $id);
                         $error_code = ($this->db->update('tbl_mng_clientbranchmaster', $data)) ? 1 : 3;                    
                     }else{
-                        $data['createdby'] = $this->session->userdata('UserId');
+                        $data['createdby'] = $this->session->userdata()['UserInfo']['userid'];
                         $data['createdon'] = date('Y-m-d H:i:s');
                         $data['isactive'] = 'Y';
                         $error_code = ($this->db->insert('tbl_mng_clientbranchmaster', $data)) ? 1 : 3; 
@@ -266,12 +266,12 @@ class Clients_model extends CI_model {
                     $error_code = 2;
                 }else{                   
                     if($id){
-                        $data['updatedby'] = $this->session->userdata('UserId');
+                        $data['updatedby'] = $this->session->userdata()['UserInfo']['userid'];
                         $data['updatedon'] = date('Y-m-d H:i:s');
                         $this->db->where('branchcontactid', $id);
                         $error_code = ($this->db->update('tbl_clientbranchcontactdetails', $data)) ? 1 : 3;                    
                     }else{
-                        $data['createdby'] = $this->session->userdata('UserId');
+                        $data['createdby'] = $this->session->userdata()['UserInfo']['userid'];
                         $data['createdon'] = date('Y-m-d H:i:s');
                         $data['isactive'] = 'Y';
                         $error_code = ($this->db->insert('tbl_clientbranchcontactdetails', $data)) ? 1 : 3; 
@@ -379,18 +379,33 @@ class Clients_model extends CI_model {
                 unset($data['id']);
                
                     if($id){
-                        $data['updatedby'] = $this->session->userdata('UserId');
+                        $data['updatedby'] = $this->session->userdata()['UserInfo']['userid'];
                         $data['updatedon'] = date('Y-m-d H:i:s');
-                        $data['createdby'] = $this->session->userdata('UserId');
+                        $data['createdby'] = $this->session->userdata()['UserInfo']['userid'];
                         $data['createdon'] = date('Y-m-d H:i:s');
                         $data['isactive'] = 'Y';
                         $error_code = ($this->db->insert('tbl_client_product_mapping', $data)) ? 1 : 3;                
                     }else{
-                        $data['createdby'] = $this->session->userdata('UserId');
+                        $data['createdby'] = $this->session->userdata()['UserInfo']['userid'];
                         $data['createdon'] = date('Y-m-d H:i:s');
                         $data['isactive'] = 'Y';
                         $error_code = ($this->db->insert('tbl_client_product_mapping', $data)) ? 1 : 3; 
                     }
+        }catch (Exception $e){
+            log_message('error', $e->getMessage());
+            //return "ERROR: ".$e->getMessage();
+            $error_code = 3;
+        }
+        return $error_code;
+    }
+    public function saveEmailSentDetails($data)
+    { 
+        try{
+                $error_code = 3;
+ 
+                $error_code = ($this->db->insert('tbl_email_reports', $data)) ? 1 : 3; 
+  
+                
         }catch (Exception $e){
             log_message('error', $e->getMessage());
             //return "ERROR: ".$e->getMessage();

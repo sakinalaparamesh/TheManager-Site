@@ -135,13 +135,13 @@
       "controlname": "Agent",
       "ActionName": "saveAgent",
       "ErrorCode": "1",
-      "Message": "Successfully saved department"
+      "Message": "Successfully saved Agent"
    },
    {
       "controlname": "Agent",
       "ActionName": "saveAgent",
       "ErrorCode": "2",
-      "Message": "Department Name Duplicated..Please check"
+      "Message": "Agent Email Duplicated..Please check"
    },
    {
       "controlname": "Agent",
@@ -236,6 +236,36 @@
    {
       "controlname": "Controlleraction",
       "ActionName": "savecontrolleraction",
+      "ErrorCode": "3",
+      "Message": "Technical Error occured while saving..Please contact admin"
+   },
+   {
+      "controlname": "EmailTemplates",
+      "ActionName": "Save",
+      "ErrorCode": "1",
+      "Message": "Successfully saved email template"
+   },
+   {
+      "controlname": "EmailTemplates",
+      "ActionName": "Save",
+      "ErrorCode": "2",
+      "Message": "Title Duplicated..Please check"
+   },
+   {
+      "controlname": "EmailTemplates",
+      "ActionName": "Save",
+      "ErrorCode": "3",
+      "Message": "Technical Error occured while saving..Please contact admin"
+   },
+   {
+      "controlname": "Clients",
+      "ActionName": "SendEmail",
+      "ErrorCode": "1",
+      "Message": "Successfully sent emails"
+   },
+   {
+      "controlname": "Clients",
+      "ActionName": "SendEmail",
       "ErrorCode": "3",
       "Message": "Technical Error occured while saving..Please contact admin"
    }
