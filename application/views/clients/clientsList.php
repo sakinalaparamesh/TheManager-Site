@@ -21,6 +21,7 @@
     <a class="btn btn-inverse btn-sm" href="javascript:">Search <i class="fa fa-search"></i></a>
 </div>-->
 <div class="col-md-12 text-right m-b-10 pull-right">
+    <a class="btn btn-default btn-sm" href="#" onclick="emailForm(1,2);">Send Email <i class="fa fa-plus"></i></a>
     <a class="btn btn-default btn-sm" href="<?php echo base_url('add-client'); ?>">Add Client <i class="fa fa-plus"></i></a>
 <!--    <a class="btn btn-default btn-sm" href="<?php //echo base_url('add-branch'); ?>">Add Branch <i class="fa fa-plus"></i></a>
     <a class="btn btn-default btn-sm" href="<?php //echo base_url('add-contact'); ?>">Add Contact <i class="fa fa-plus"></i></a>-->
@@ -31,7 +32,7 @@
     <table id="tableId" data-toggle="table" data-page-size="10" data-pagination="true" class="table table-bordered dataTable no-footer dtr-inline table-condensed table-responsive" style="width:100%;">
         <thead>
             <tr>
-                <th data-priority="1" data-field="state" data-checkbox="true"><input type="checkbox" name="rowcheck" id="rowcheck"></th>
+                <th data-priority="1"><input type="checkbox" name="select_all" id="select_all" /></th>
                 <th data-priority="1" data-switchable="false">S.No</th>
                 <th data-priority="2"> Name</th>
                 <th data-priority="2">Client Name</th>
@@ -92,6 +93,14 @@
         GridJS.Load(url, csrf_token_name, csrf_hash);
         //SaveBranchDetailsJS.Load(url);
         //branchjs.Load(url);
+        
+        // Select all
+        $("#select_all").click( function() {
+            //$('input[type="checkbox"]').attr('checked', true);
+            //$(this).attr('checked', true);
+            //$('input[name="select_all"]').attr('checked', true);
+            $('input:checkbox').prop('checked', this.checked);    
+        });
           
     });//ready
     
@@ -160,6 +169,25 @@
             data: { "clientId" : clientId },
             success: function(response){ //alert(response);
                 $('.modal-title').html('Assign Products');
+                $('.modal-body').html(response);
+                //document.getElementByClass("modal-body").html(response);
+                $('#CommonModal').modal({show:true});
+                
+            } 
+        });//ajax
+        
+     }
+     function emailForm(branchId, clientId){
+        
+        $('.modal-title').html('');
+        $('.modal-body').html('');
+        
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('clients/emailFormAjax') ?>", 
+            data: {"branchId" : branchId, "clientId" : clientId},
+            success: function(response){ //alert(response);
+                $('.modal-title').html('Send Email');
                 $('.modal-body').html(response);
                 //document.getElementByClass("modal-body").html(response);
                 $('#CommonModal').modal({show:true});

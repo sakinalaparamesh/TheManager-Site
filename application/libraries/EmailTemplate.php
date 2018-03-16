@@ -35,8 +35,8 @@ class EmailTemplate {
 //        echo "<pre>"; print_r($this->from_email);
 //        echo "<pre>"; print_r($this->from_name);
         
-        $final_output = "Subject: <br>".$this->subject."<br><br>Message: <br>".$this->message;;
-        echo $final_output; exit;
+        //$final_output = "Subject: <br>".$this->subject."<br><br>Message: <br>".$this->message;;
+        //echo $final_output; exit;
         
         $this->setEmailConfiguration();
         //send email from server
@@ -81,10 +81,20 @@ class EmailTemplate {
     }   
     function setEmailConfiguration(){
         
-        $config['protocol'] = 'sendmail';
-        $config['mailpath'] = '/usr/sbin/sendmail';
-        $config['charset'] = 'iso-8859-1';
-        $config['wordwrap'] = TRUE;
+//        $config['protocol'] = 'sendmail';
+//        $config['mailpath'] = '/usr/sbin/sendmail';
+//        $config['charset'] = 'iso-8859-1';
+//        $config['wordwrap'] = TRUE;
+        
+        $config = Array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_port' => 465,
+            'smtp_user' => 'xxx',
+            'smtp_pass' => 'xxx',
+            'mailtype'  => 'html', 
+            'charset'   => 'iso-8859-1'
+        );
 
         $this->CI->email->initialize($config);
     }

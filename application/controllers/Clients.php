@@ -11,7 +11,7 @@ class Clients extends BaseController {
         //$this->layout->setLayout('layout/adminLayout');
         $this->load->model('clients_model');
         $this->load->model('productModel');
-        
+        $this->load->model('emailTemplatesModel');        
     }
 
     public function index() {
@@ -138,7 +138,6 @@ class Clients extends BaseController {
         $resdata['isError'] = $resdata['error_code'] > 1 ? "Y" : "N";
         echo json_encode($resdata);
     }
-
     //Contact Details
     public function getClientContactFormAjax() {
         $data = array();
@@ -214,7 +213,6 @@ class Clients extends BaseController {
         $resdata['isError'] = $resdata['error_code'] > 1 ? "Y" : "N";
         echo json_encode($resdata);
     }
-
     public function clientTypes() {
         
         $data['title'] = "Client Types";
@@ -224,7 +222,6 @@ class Clients extends BaseController {
 
         $this->layout->view('clients/client_type', $data);
     }
-
     public function getAllClientTypes() {
         $limit = $this->input->post('length');
         $start = $this->input->post('start');
@@ -293,6 +290,63 @@ class Clients extends BaseController {
         }
         //echo json_encode($save_data); exit;
         $resdata['message'] = getErrorMessages("Clients", "saveClientProductMapping", $resdata['error_code']);
+        $resdata['isError'] = $resdata['error_code'] > 1 ? "Y" : "N";
+        echo json_encode($resdata);
+    }
+    //Send Email
+    public function emailFormAjax() {
+        $data = array();
+        $clientId = $_POST['clientId'];
+        $branchId = $_POST['branchId'];
+        
+        $data['templates_list'] = $this->emailTemplatesModel->getActiveEmailTemplates();
+        
+        //echo "<pre>"; print_r($data);
+
+        $this->load->view('clients/emailForm', $data);
+    }
+    public function sendEmailAjax() {
+
+        $data = $_POST;
+        //echo json_encode($data); exit;
+        
+        //print_r($data['allids']);  
+        
+        $template_id = $data['template_id'];
+    
+        foreach($data['allids'] as $ids){
+            //$to_email = $this->clients_model->getEmailId($ids);
+            $allids['clientId'] = $ids['clientid'];
+            $allids['branchId'] = $ids['branchid'];
+            $allids['contactId'] = $ids['contactid'];
+            $result  = $this->clients_model->getClientFullDetails($allids);
+            
+            if(isset($result[0]['Email']) && $result[0]['Email'] != ''){
+                $to_emails = array($result[0]['Email']);
+                $name = (isset($result[0]['PersonName'])) ? $result[0]['PersonName'] : 'Sir/Madam';
+                //Send Email
+                $recipients = array('to' => $to_emails);
+                $replace_items = array('name'=>$name);
+                $this->load->library('emailtemplate');               
+                $sent_status = $this->emailtemplate->sendEmail($template_id, $recipients, $replace_items);
+                
+                $save_data = array(
+                    "template_id" => $template_id,
+                    "clientid" => $ids["clientid"],
+                    "branchid" => $ids["branchid"],
+                    "contactid" => $ids["contactid"],
+                    "to_email" => $result[0]['Email'],
+                    //"from_email" => $from_email,
+                    "sent_on" => date('Y-m-d H:i:s'),
+                    "sent_by" => $this->session->userdata()['UserInfo']['userid'],
+                    "sent_status" => $sent_status,
+                );
+                $resdata['error_code'] = $this->clients_model->saveEmailSentDetails($save_data);
+            }
+        }//foreach
+        //print_r($final_output);
+        
+        $resdata['message'] = getErrorMessages("Clients", "SendEmail", $resdata['error_code']);
         $resdata['isError'] = $resdata['error_code'] > 1 ? "Y" : "N";
         echo json_encode($resdata);
     }
