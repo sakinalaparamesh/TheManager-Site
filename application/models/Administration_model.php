@@ -96,14 +96,14 @@ class Administration_model extends CI_model {
     }
 
     public function mainMenuList($user_id) {
-//        $query="SELECT * FROM tbl_mng_menu WHERE isparent = 1 AND isactive = 'Y' AND FIND_IN_SET('".$role_id."',role_id) ";
+
        $query="SELECT m.* FROM tbl_mng_menu AS m , tdl_mng_user_roles as r "
                . "WHERE m.isparent = 1 AND m.isactive = 'Y' AND FIND_IN_SET(r.role_id , m.role_id) AND r.user_id='".$user_id."' GROUP BY m.menu_name"; 
         $result = $this->db->query($query);
         return $result;
     }
     public function submainMenuList($menu_id,$user_id) {
-//        $query="SELECT * FROM tbl_mng_menu WHERE isparent = 0 AND isactive = 'Y' AND parent_id='".$menu_id."' AND FIND_IN_SET('".$role_id."',role_id) ";
+
         $query="SELECT m.* FROM tbl_mng_menu AS m , tdl_mng_user_roles as r "
                . "WHERE m.isparent = 0 AND m.isactive = 'Y' AND FIND_IN_SET(r.role_id , m.role_id) AND"
                 . " parent_id='".$menu_id."' AND r.user_id='".$user_id."' GROUP BY m.menu_name"; 
