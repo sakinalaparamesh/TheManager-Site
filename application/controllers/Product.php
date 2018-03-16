@@ -100,5 +100,13 @@ class Product extends CI_Controller {
 
         echo json_encode($json_data);
     }
+    public function getProductFullDetailsAjax() {
+        $data['title'] = "Product Details";
+        $productid = $this->input->post('productid');        
+
+        $data['details'] = $this->Model->check("tbl_mng_productmaster",array("productid"=>$productid))->row();
+
+        $this->load->view('products/product_details', $data);
+    }
 
 }

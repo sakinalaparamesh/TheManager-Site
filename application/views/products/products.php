@@ -16,9 +16,9 @@
                 <div class="col-md-12 text-right m-b-10">
                     <a class="btn btn-default btn-sm" href="<?php echo base_url('product/addOrEdit'); ?>">Add <i class="fa fa-plus-add"></i></a>
                 </div>
-                <div class="col-md-12 ">                            
+                <div class="col-md-12" id="myListView">                            
                     <div class="box-body  table-responsive">
-                        <table   id="tblproduct"  class="table  table-hover table-condensed table-striped">
+                        <table   id="tblproduct"  data-toggle="table" data-page-size="10" data-pagination="true"  class="table table-bordered dataTable no-footer dtr-inline table-condensed table-responsive" style="white-space: nowrap; width:100%;">
                             <thead>
                                 <tr>
                                     <th data-priority="1"></th>
@@ -37,7 +37,7 @@
                         </table>
                     </div>
                 </div>
-                
+                <div class="col-md-3 mini" id="DetailsView">&nbsp;</div>
             </div>
         </div>
         <!-- end page title end breadcrumb -->
@@ -54,6 +54,26 @@
 
 
     });//ready
+    function openSidebar(productid) {
+
+//        alert(productid);
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('Product/getProductFullDetailsAjax') ?>",
+            data: {"productid": productid},
+            //data: form_data,
+            success: function (response) { //alert(response);
+                $("#DetailsView").html(response);
+            },
+            error: function () {
+//                alert("failure");
+            }
+        });//ajax
+
+        document.getElementById("myListView").classList.remove("col-md-12");
+        document.getElementById("myListView").classList.add("col-md-9");
+        document.getElementById("DetailsView").style.display = "block";
+    }
 
 </script>
 <script src="<?= base_url() ?>assets/datatables-grid/ProductsGridJS.js" type="text/javascript"></script>

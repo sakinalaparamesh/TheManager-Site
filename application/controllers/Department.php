@@ -105,6 +105,14 @@ class Department extends BaseController {
         $list = $this->Model->fetch('tbl_mng_departmentmaster')->result_array();
         echo json_encode($list);
     }
+    public function getDepartmentFullDetailsAjax() {
+        $data['title'] = "Department Details";
+        $departmentid = $this->input->post('departmentid');        
+
+        $data['details'] = $this->Model->check("tbl_mng_departmentmaster",array("departmentid"=>$departmentid))->row();
+
+        $this->load->view('departments/department_details', $data);
+    }
 
     public function delete_department($id = '') {
         try {
