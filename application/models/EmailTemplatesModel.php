@@ -79,12 +79,12 @@ class EmailTemplatesModel extends CI_model {
                     $error_code = 2;
                 }else{                   
                     if($id){
-                        $data['updatedby'] = $this->session->userdata('UserId');
+                        $data['updatedby'] = $this->session->userdata()['UserInfo']['userid'];
                         $data['updatedon'] = date('Y-m-d H:i:s');
                         $this->db->where('id', $id);
                         $error_code = ($this->db->update('tbl_email_templates', $data)) ? 1 : 3;                    
                     }else{
-                        $data['createdby'] = $this->session->userdata('UserId');
+                        $data['createdby'] = $this->session->userdata()['UserInfo']['userid'];
                         $data['createdon'] = date('Y-m-d H:i:s');
                         $error_code = ($this->db->insert('tbl_email_templates', $data)) ? 1 : 3; 
                     }
@@ -116,7 +116,19 @@ class EmailTemplatesModel extends CI_model {
             echo "ERROR: ".$e->getMessage();
         }
     }
-    
+    public function getActiveEmailTemplates()
+    { 
+        try{
+                $this->db->select("T.id,T.template_id,T.template_title");
+                $this->db->from("tbl_email_templates T");
+                $this->db->where('isactive', 'Y');
+                $query = $this->db->get();
+                return $query->result_array();
+        } catch (Exception $e){
+            log_message('error', $e->getMessage());
+            return "ERROR: ".$e->getMessage();
+        }
+    }
     
 	
 }//class

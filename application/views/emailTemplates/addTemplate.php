@@ -147,28 +147,34 @@ function ValidateMyForm(){
                   //var CK_message = CKEDITOR.instances['message'].getData();
                   //var CK_message = CKEDITOR.instances.Editor.document.getBody().getHtml();
                   //alert(CK_message); return false;
-                  var id = $("#id");
-                  var template_id = $("#template_id");
-                  var template_title = $("#template_title");
-                  var subject = $("#subject");
+                  var productids = new Array();
+                  var id = $("input[name='id']").val();
+                  var template_id = $("input[name='template_id']").val();
+                  var template_title = $("input[name='template_title']").val();
+                  var subject = $("input[name='subject']").val();
                   var message = CKEDITOR.instances['message'].getData();
-                  var productids = $("#productids");
-
+                  var template_type = $("input[name='template_type']").val();
+                  $('input[name^="productids"]').each(function() {
+                        if($(this).is(":checked")){
+                            productids.push($(this).val());
+                        }
+                   });
+                 
                   $.ajax({
                       type: "POST",
                       url: "<?php echo base_url('emailTemplates/addTemplateAjax'); ?>", 
                       //data: $('#MyForm').serialize(),
                       data: { id : id, template_id : template_id, template_title : template_title, subject : subject, message : message, template_type : template_type, productids : productids },
                       //data: $('#MyForm').serialize() + "&CK_message=" + CK_message,
-                      //data: form_data,
-                      success: function(response){ //alert(response); return false; 
+                      dataType: 'json',
+                      success: function(data){ //alert(response); return false; 
 
-                          var json = $.parseJSON(response);
+                          //var json = $.parseJSON(response);
                           
                           $("html").removeClass( "loading" );
-                         if(json.isError == 'N'){ 
+                         if(data['isError'] == 'N'){ 
                              //alert(json.isError); 
-                             alert(json.message);
+                             alert(data['message']);
                               /*swal(
                                    {
                                     title: "Email Template!",
@@ -186,11 +192,11 @@ function ValidateMyForm(){
                                  );*/
                                  window.location.href = "<?php echo base_url('e-templates'); ?>";
                          }else{
-                            alert(json.message);
+                            alert(data['message']);
                             //swal("Email Template!", json.message, "error");
                          }
                       },
-                      error: function(){
+                      error: function (data) {
                           alert('Technical Error occured while saving..Please contact admin');
                           //swal("Email Template!", 'Technical Error occured while saving..Please contact admin', "error");
                       }
