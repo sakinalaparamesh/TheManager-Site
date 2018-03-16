@@ -25,21 +25,21 @@ if (!function_exists('is_user_loggedin')) {
             $CI = & get_instance();
             if ($CI->session->userdata('IsUserLoggedIn')) {
                 
-                $controller = $CI->uri->segment(1);
-                $check_point = 0;
-                $privileges = $CI->session->userdata("UserRolePrevillages");
-                foreach ($privileges as $list) {
-                    if (strpos($list['controllername'],$controller) !== false) {
-                        $check_point++;
-                    }
-                }
-                if ($check_point > 0) {
-                    return TRUE;
-                } else {
-
-                    echo "You don't have access to this page..!"; exit;
-                }
-//                return TRUE;
+//                $controller = $CI->uri->segment(1);
+//                $check_point = 0;
+//                $privileges = $CI->session->userdata("UserRolePrevillages");
+//                foreach ($privileges as $list) {
+//                    if (strpos($list['controllername'],$controller) !== false) {
+//                        $check_point++;
+//                    }
+//                }
+//                if ($check_point > 0) {
+//                    return TRUE;
+//                } else {
+//
+//                    echo "You don't have access to this page..!"; exit;
+//                }
+                return TRUE;
             } else {
                 $CI->session->set_flashdata('flashmsg', 'Your session is expired, please login again...!');
                 redirect("Admin");

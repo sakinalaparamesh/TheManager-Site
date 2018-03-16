@@ -239,4 +239,23 @@
       "ErrorCode": "3",
       "Message": "Technical Error occured while saving..Please contact admin"
    }
+   ,
+   {
+      "controlname": "User",
+      "ActionName": "saveUser",
+      "ErrorCode": "1",
+      "Message": "Successfully saved User"
+   },
+   {
+      "controlname": "User",
+      "ActionName": "saveUser",
+      "ErrorCode": "2",
+      "Message": "User Email Duplicated..Please check"
+   },
+   {
+      "controlname": "User",
+      "ActionName": "saveUser",
+      "ErrorCode": "3",
+      "Message": "Technical Error occured while saving..Please contact admin"
+   }
 ]

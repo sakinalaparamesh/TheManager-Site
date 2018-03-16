@@ -57,15 +57,16 @@
 
     });//ready
     function openSidebar(actionid) {
-
+        $.LoadingOverlay("show");
 //        alert(departmentid);
         $.ajax({
             type: "POST",
             url: "<?php echo base_url('Controlleraction/getControlleractionFullDetailsAjax') ?>",
             data: {"actionid": actionid},
             //data: form_data,
-            success: function (response) { //alert(response);
+            success: function (response) { //alert(response);                
                 $("#DetailsView").html(response);
+                $.LoadingOverlay("hide");
             },
             error: function () {
 //                alert("failure");
