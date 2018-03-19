@@ -30,7 +30,7 @@
                             <div class="col-md-4">
                                 <select id="jobs_skillset" class="select2 select2-multiple select2" multiple="" data-placeholder="Choose ..." tabindex="-1" aria-hidden="true">
                                     <?php foreach ($skillset_list as $list) { ?>
-                                        <option value="<?= $list['configuration_id'] ?>" <?=(strpos($list['configuration_id'],@$info->jobs_skillset)!== false)?"selected":""?>><?= $list['configuration_name'] ?></option>
+                                        <option value="<?= $list['configuration_id'] ?>" <?=(strpos(@$info->jobs_skillset,$list['configuration_id'])!== false)?"selected":""?>><?= $list['configuration_name'] ?></option>
                                     <?php } ?>
                                 </select>
 
