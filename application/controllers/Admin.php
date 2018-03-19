@@ -24,7 +24,7 @@ class Admin extends CI_Controller {
         
 //        print_r($user_info);exit;
 
-        if (!isset($IsValid)) {
+        if ($user_info['IsValid']==1) {
             $this->session->set_userdata($user_info);
             redirect('administration');
         } else {

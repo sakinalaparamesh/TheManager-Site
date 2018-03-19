@@ -5,12 +5,9 @@
             <div class="col-sm-12">
                 <div class="page-title-box">
                     <div class="btn-group pull-right">
-                        <ol class="breadcrumb hide-phone p-0 m-0">
-                            <li class="breadcrumb-item"><a href="employees.php">Roles List</a></li>
-                            <li class="breadcrumb-item active">Add</li>
-                        </ol>
+                        <?php echo $this->breadcrumbs->show(); ?>
                     </div>
-                    <h4 class="page-title">Add Roles</h4>
+                    <h4 class="page-title"><?php echo $title; ?></h4>
                 </div>
             </div>
         </div>
@@ -50,26 +47,26 @@
                                                                 <input id="txtRoleCode" name="rolecode" type="text" placeholder="Role code" required="" class="form-control input-sm">
                                                             </div>
                                                         </div>-->
-<!--                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group row">
-                                    <label for="hori-pass2" class="col-md-4">Description
-                                        <span class="text-danger">*</span></label>
-                                    <div class="col-md-8">
-                                        <textarea class="form-control" id="txtRoleDescription" rows="5" name="roledescription"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="form-group row">
-                                    <label for="txtDisplayname" class="col-md-2">Display Name<span class="text-danger">*</span></label>
-                                    <div class="col-md-4">
-                                        <input type="text" required="" name="displayname" parsley-type="name" class="form-control input-sm" id="txtDisplayname" placeholder="">
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>-->
+                        <!--                        <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group row">
+                                                            <label for="hori-pass2" class="col-md-4">Description
+                                                                <span class="text-danger">*</span></label>
+                                                            <div class="col-md-8">
+                                                                <textarea class="form-control" id="txtRoleDescription" rows="5" name="roledescription"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <div class="form-group row">
+                                                            <label for="txtDisplayname" class="col-md-2">Display Name<span class="text-danger">*</span></label>
+                                                            <div class="col-md-4">
+                                                                <input type="text" required="" name="displayname" parsley-type="name" class="form-control input-sm" id="txtDisplayname" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                        
+                                                </div>-->
                 </div>
             </div>
             <div class="row">
@@ -82,10 +79,10 @@
                                     <div class="controller">
 
                                         <div class="text-dark font-13 m-b-15 m-t-20"><b> <?= $list['controllername'] ?> </b> </div>
-                                        <input type="hidden" name="controller_ids[]" value="<?=$list['controllerid']?>"/>
+                                        <input type="hidden" name="controller_ids[]" value="<?= $list['controllerid'] ?>"/>
                                         <?php foreach ($actions[$list['controllerid']] as $info) { ?> 
                                             <div class="checkbox checkbox-inverse form-check-inline">
-                                                <input type="checkbox" id="inlineCheckbox_<?= $info['actionid'] ?>" value="<?= $info['actionid'] ?>" name="<?=$list['controllerid']?>[]">
+                                                <input type="checkbox" id="inlineCheckbox_<?= $info['actionid'] ?>" value="<?= $info['actionid'] ?>" name="<?= $list['controllerid'] ?>[]">
                                                 <label for="inlineCheckbox_<?= $info['actionid'] ?>"> <?= $info['controlleractionname'] ?> </label>
                                             </div>
                                         <?php } ?>

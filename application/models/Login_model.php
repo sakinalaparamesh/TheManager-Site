@@ -3,15 +3,16 @@
 class Login_model extends CI_model {
 
     public function CheckUser() {
-        $IsValid = 0;
+        
         $data = array();
+        $data['IsValid'] = 0;
         try {
             $useremail = $this->input->post("user_email");
             $password = md5($this->input->post("current_password"));
             $res = $this->Model->check("tdl_mng_usermaster", array("user_email" => $useremail, "current_password" => $password, "isactive" => "Y")
             );
             if ($res->num_rows() > 0) {
-                $IsValid = 1;
+                $data['IsValid'] = 1;
                 $this->db->select("userid,user_name,user_mobilenumber,user_profilepic,isemployee,isactive");
                 $this->db->from("tdl_mng_usermaster um");
                 $this->db->where(array("isactive" => "Y", "user_email" => $useremail));
@@ -41,13 +42,14 @@ FROM tdl_mng_user_roles where user_id='" . $res->row()->userid . "' AND isactive
                 $this->db->where(array("rp.isactive" => "Y", "isgranted" => "Y"));
                 $userrole_privilages = $this->db->get();
                 $data['UserRolePrevillages'] = $userrole_privilages->result_array();
+                $data['IsValid']=1;
 //                $data['UserRolePrevillages'] = $this->db->last_query();
             } else {
-                $IsValid = 0;
+                $data['IsValid'] = 0;
             }
         } catch (Exception $e) {
             log_message('error', $e->getMessage());
-            $IsValid = 0;
+            $data['IsValid'] = 0;
         }
         return $data;
     }
