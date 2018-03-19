@@ -268,6 +268,24 @@
       "ActionName": "SendEmail",
       "ErrorCode": "3",
       "Message": "Technical Error occured while saving..Please contact admin"
+   },
+   {
+      "controlname": "Department",
+      "ActionName": "delete_department",
+      "ErrorCode": "1",
+      "Message": "Department deleted successfully."
+   },
+   {
+      "controlname": "Department",
+      "ActionName": "delete_department",
+      "ErrorCode": "2",
+      "Message": "Department has some roles,Unable to delete Department."
+   },
+   {
+      "controlname": "Department",
+      "ActionName": "delete_department",
+      "ErrorCode": "3",
+      "Message": "Technical Error occured while saving..Please contact admin"
    }
    ,
    {
@@ -285,6 +303,24 @@
    {
       "controlname": "User",
       "ActionName": "saveUser",
+      "ErrorCode": "3",
+      "Message": "Technical Error occured while saving..Please contact admin"
+   },
+   {
+      "controlname": "Jobs",
+      "ActionName": "delete_job",
+      "ErrorCode": "1",
+      "Message": "Job deleted successfullry."
+   },
+   {
+      "controlname": "Jobs",
+      "ActionName": "delete_job",
+      "ErrorCode": "2",
+      "Message": "Unable to delete job."
+   },
+   {
+      "controlname": "Jobs",
+      "ActionName": "delete_job",
       "ErrorCode": "3",
       "Message": "Technical Error occured while saving..Please contact admin"
    }

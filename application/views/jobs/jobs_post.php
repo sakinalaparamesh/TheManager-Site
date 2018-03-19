@@ -5,12 +5,9 @@
             <div class="col-sm-12">
                 <div class="page-title-box">
                     <div class="btn-group pull-right">
-                        <ol class="breadcrumb hide-phone p-0 m-0">
-                            <li class="breadcrumb-item"><a href="">Jobs List</a></li>
-                            <li class="breadcrumb-item active">Add</li>
-                        </ol>
+                        <?php echo $this->breadcrumbs->show(); ?>
                     </div>
-                    <h4 class="page-title">Job Post</h4>
+                    <h4 class="page-title"><?php echo $title; ?></h4>
                 </div>
             </div>
         </div>
@@ -18,6 +15,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <form role="form" id="jobs_form">
+                        <input type="hidden" id="jobs_id"  value="<?=(isset($info->jobs_id))?$info->jobs_id:""?>">
                         <div class="form-group row">
                             <label for="jobs_position" class="col-md-2">Designation<span class="text-danger">*</span></label>
                             <div class="col-md-4">
@@ -32,7 +30,7 @@
                             <div class="col-md-4">
                                 <select id="jobs_skillset" class="select2 select2-multiple select2" multiple="" data-placeholder="Choose ..." tabindex="-1" aria-hidden="true">
                                     <?php foreach ($skillset_list as $list) { ?>
-                                        <option value="<?= $list['configuration_id'] ?>" ><?= $list['configuration_name'] ?></option>
+                                        <option value="<?= $list['configuration_id'] ?>" <?=(strpos($list['configuration_id'],@$info->jobs_skillset)!== false)?"selected":""?>><?= $list['configuration_name'] ?></option>
                                     <?php } ?>
                                 </select>
 
@@ -42,7 +40,7 @@
                             <label for="jobs_description" class="col-md-2">Job Description
                                 <span class="text-danger">*</span></label>
                             <div class="col-md-4">
-                                <textarea class="form-control" id="jobs_description" rows="3" name="jobs_description"></textarea>
+                                <textarea class="form-control" id="jobs_description" rows="3" name="jobs_description"><?= @$info->jobs_description ?></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -78,7 +76,7 @@
                             <div class="col-md-4">
                                 <select class="form-control" name="jobs_country" id="jobs_country">
                                     <?php foreach ($country_list as $list) { ?>
-                                        <option value="<?= $list['configuration_id'] ?>"><?= $list['configuration_name'] ?></option>
+                                        <option value="<?= $list['configuration_id'] ?>" <?=(@$info->jobs_country==$list['configuration_id'])?"selected":""?>><?= $list['configuration_name'] ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
@@ -88,7 +86,7 @@
                             <label for="jobs_eligibilitycriteria" class="col-md-2">Job Eligibility Criteria
                                 <span class="text-danger">*</span></label>
                             <div class="col-md-4">
-                                <textarea class="form-control" id="jobs_eligibilitycriteria" rows="3" name="jobs_eligibilitycriteria"></textarea>
+                                <textarea class="form-control" id="jobs_eligibilitycriteria" rows="3" name="jobs_eligibilitycriteria"><?= @$info->jobs_eligibilitycriteria ?></textarea>
                             </div>
                         </div>
                         <div class="form-group row ">

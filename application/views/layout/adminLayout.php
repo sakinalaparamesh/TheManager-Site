@@ -75,7 +75,7 @@
 
         <!--for sweet alert-->
         <script src="<?php echo base_url(); ?>plugins/bootstrap-sweetalert/sweet-alert.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/pages/jquery.sweet-alert.init.js"></script>
+        <!--<script src="<?php echo base_url(); ?>assets/pages/jquery.sweet-alert.init.js"></script>-->
          <!-- Required datatable js -->
         <script src="<?php echo base_url(); ?>plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="<?php echo base_url(); ?>plugins/datatables/dataTables.bootstrap4.min.js"></script>

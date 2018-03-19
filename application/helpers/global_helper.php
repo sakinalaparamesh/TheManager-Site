@@ -29,7 +29,7 @@ if (!function_exists('is_user_loggedin')) {
 //                $check_point = 0;
 //                $privileges = $CI->session->userdata("UserRolePrevillages");
 //                foreach ($privileges as $list) {
-//                    if (strpos($list['controllername'],$controller) !== false) {
+//                    if (strpos(strtolower($list['controllername']),strtolower($controller)) !== false) {
 //                        $check_point++;
 //                    }
 //                }

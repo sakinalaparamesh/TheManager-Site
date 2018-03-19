@@ -57,7 +57,7 @@ class Administration extends BaseController {
             "menu_order" => $ps_data["menu_order"],
             "menu_color" => $ps_data["menu_color"],
             "isactive" => "Y",
-            "createdby" => $this->session->userdata('UserId'),
+            "createdby" => $this->session->userdata("UserInfo")['userid'],
             "createdon" => date("Y-m-d H:i:s")
         );
         $resdata['error_code'] = $this->Administration_model->saveMenu($menu_data);

@@ -108,7 +108,22 @@ var menujs = (function () {
                             message: 'The role is required and cannot be empty'
                         }
                     }
+                },
+                menu_id: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The parent menu is required and cannot be empty'
+                        }
+                    }
+                },
+                menuURL: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The menu url is required and cannot be empty'
+                        }
+                    }
                 }
+                
 
             }
         });//bootstrapValidator

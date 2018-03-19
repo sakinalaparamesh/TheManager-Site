@@ -9,22 +9,29 @@
                 <!--<form class="form-horizontal" role="form">-->
                 <div class="action_icons">
 
-                    <a class="btn btn-icon waves-effect color-dark waves-light" href="<?= base_url() ?>Department/addOrEdit/<?= $details->departmentid ?>"> <i class="fa fa-pencil" title="Edit Branch"></i> </a>
+                    <!--<button class="btn btn-icon waves-effect color-dark waves-light"> <i class="fa fa-plus" title="Add role"></i> </button>-->
 
+                    <a class="btn btn-icon waves-effect color-dark waves-light" href="<?= base_url() ?>Jobs/jobsForms/<?= $job_details['jobs_id'] ?>"> <i class="fa fa-pencil" title="Edit Role"></i> </a>
 
-                    <a class="btn btn-icon waves-effect color-dark waves-light dep_sa-delete" id="<?= $details->departmentid ?>"> <i class="fa fa-trash" title="Inactive"></i> </a>                                                                          
+                    <!--<button class="btn btn-icon waves-effect color-dark waves-light"> <i class="fa fa-dollar" title="Billing Contact"></i> </button>-->
+
+                    <button class="btn btn-icon waves-effect color-dark waves-light sa-delete" id="<?= $job_details['jobs_id'] ?>"> <i class="fa fa-trash" title="Inactive"></i> </button>
+
+                    <!--<button class="btn btn-icon waves-effect color-dark waves-light" onclick="clientProductMappingForm('');"> <i class="fa fa-tasks" title="Assign Products"></i> </button>-->
 
                 </div>
                 <div class="contact-card m-t-30">
 
-                    <!--                                <a class="pull-left" href="#">
-                                                        <img class="rounded-circle" src="<?php echo base_url() ?>assets/images/users/avatar-6.jpg" alt="">
-                                                    </a>-->
+                    <!--                    <a class="pull-left" href="#">
+                                            <img class="rounded-circle" src="<?php echo base_url() ?>assets/images/users/avatar-6.jpg" alt="">
+                                        </a>-->
 
                     <div class="member-info">
 
-                        <p class="text-dark"><i class="md md-business m-r-10"></i><small><?php echo $details->departmentname; ?></small></p>
-
+                        <p class="text-dark"><i class="md md-business m-r-10"></i><small><?php echo $job_details['jobs_position']; ?></small></p>
+                        <p class="text-dark"><i class="md md-business m-r-10"></i><small><?php echo $job_details['jobs_numberofposition']; ?></small></p>
+                        <p class="text-dark"><i class="md md-business m-r-10"></i><small><?php echo $job_details['skillset']; ?></small></p>
+                               
                     </div>
 
                 </div>
@@ -48,8 +55,8 @@ _Url='<?= base_url()?>';
         SweetAlert.prototype.init = function () {
             
             
-            $('.dep_sa-delete').click(function () {
-                var dep_id=$(this).attr("id");
+            $('.sa-delete').click(function () {
+                var id=$(this).attr("id");
                 swal({
                     title: "Are you sure?",
                     text: "You will not be able to recover this record!",
@@ -65,8 +72,8 @@ _Url='<?= base_url()?>';
                         $.LoadingOverlay("show");
                         $.ajax({
                             type: "POST",
-                            url: _Url + 'Department/delete_department',
-                            data: {dep_id: dep_id},
+                            url: _Url + 'Jobs/delete_job',
+                            data: {id: id},
                             dataType: 'json',
                             success: function (data) {
 
@@ -86,7 +93,7 @@ _Url='<?= base_url()?>';
                         })
 
                     } else {
-                        swal("Cancelled", "Your imaginary file is safe :)", "error");
+                        swal("Cancelled", "Your record is safe :)", "error");
                     }
                 });
             });
@@ -102,4 +109,3 @@ _Url='<?= base_url()?>';
                 $.SweetAlert.init()
             }(window.jQuery);
 </script>
-

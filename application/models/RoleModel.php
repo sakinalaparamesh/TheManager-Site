@@ -23,7 +23,7 @@ class RoleModel extends CI_Model {
                             "action_id" => $action,
                             "isgranted" => "Y",
                             "isactive" => "Y",
-                            "createdby" => $this->session->userdata('UserId'),
+                            "createdby" => $this->session->userdata("UserInfo")['userid'],
                             "createdon" => date("Y-m-d H:i:s")
                         );
                         $this->Model->insert("tbl_mng_role_privilages", $privilages_data);
