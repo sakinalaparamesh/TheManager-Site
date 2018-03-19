@@ -39,6 +39,7 @@
 
                             <label for="productlogo" class="col-md-2"> Logo </label>
                             <div class="col-md-4">
+                                <img src="<?php echo base_url().'manager_gallary/product/'.@$product_info->product_logo; ?>" alt="Logo Image" style="width:50px;heigh:50px">
                                 <input type="file" name="productlogo" id="productlogo"/>
                             </div>
             </div>
