@@ -23,7 +23,9 @@ class Jobs extends BaseController {
 
     public function jobsForms() {
         $data['title'] = "Jobs Form";
-        
+        $this->breadcrumbs->push('Administration', 'administration');
+        $this->breadcrumbs->push('Jobs', 'Jobs');
+        $this->breadcrumbs->push('Add Job', 'jobsForms');
         $data['country_list'] = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "COUNTRIES", "isactive" => "Y"))->result_array();
         $data['skillset_list'] = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "SKILLSET", "isactive" => "Y"))->result_array();
         
@@ -44,7 +46,7 @@ class Jobs extends BaseController {
             "jobs_description" => $ps_data["jobs_description"],
             "jobs_eligibilitycriteria" => $ps_data["jobs_eligibilitycriteria"],
             "isactive" => "Y",
-            "createdby" => $this->session->userdata('UserId'),
+            "createdby" => $this->session->userdata("UserInfo")['userid'],
             "createdon" => date("Y-m-d H:i:s")
         );
 
@@ -90,6 +92,13 @@ class Jobs extends BaseController {
         );
 
         echo json_encode($json_data);
+    }
+    public function getJobFullDetailsAjax() {
+        $id= $this->input->post("jobid");
+        $data['job_details']= $this->Model->check("tbl_mng_jobs",array("jobs_id"=>$id))->row_array();
+        $data['title']="Job Details";
+//        print_r($data);
+        $this->load->view('jobs/job_details', $data);
     }
 
 }

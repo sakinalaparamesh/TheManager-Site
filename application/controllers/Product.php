@@ -40,7 +40,7 @@ class Product extends CI_Controller {
             "productcode" => $_REQUEST["ProductCode"],
             "productdescription" => $_REQUEST["ProductDescription"],
             "isactive" => "Y",
-            "createdby" => $this->session->userdata('UserId'),
+            "createdby" => $this->session->userdata("UserInfo")['userid'],
             "createdon" => date("Y-m-d H:i:s")
         );
 

@@ -47,7 +47,7 @@ class Branches extends BaseController {
             "phonenumber" => $ps_data["phonenumber"],
             "email" => $ps_data["email"],
             "isactive" => "Y",
-            "createdby" => $this->session->userdata('UserId'),
+            "createdby" => $this->session->userdata("UserInfo")['userid'],
             "createdon" => date("Y-m-d H:i:s")
         );
         $resdata['error_code'] = $this->branches_model->brabchSave($save_data);

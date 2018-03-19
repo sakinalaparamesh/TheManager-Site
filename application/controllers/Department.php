@@ -11,23 +11,23 @@ class Department extends BaseController {
     }
 
     public function index() {
-        
+
         $data['title'] = "Departments";
 
         $this->breadcrumbs->push('Administration', 'administration');
         $this->breadcrumbs->push('Departments', 'department');
-        
+
         $this->layout->view('departments/departments', $data);
     }
 
     public function addOrEdit($id = '') {
-        
+
         $data['title'] = "Add Department";
 
         $this->breadcrumbs->push('Administration', 'administration');
         $this->breadcrumbs->push('Departments', 'department');
         $this->breadcrumbs->push('Add Department', 'department/addOrEdit');
-        
+
         if ($id != '') {
             $q_data = array(
                 "departmentid" => $id
@@ -47,7 +47,7 @@ class Department extends BaseController {
                 "departmentcode" => $ps_data["DepartmentName"],
                 "departmentdescription" => $ps_data["DepartmentName"],
                 "isactive" => "Y",
-                "createdby" => $this->session->userdata('UserId'),
+                "createdby" => $this->session->userdata("UserInfo")['userid'],
                 "createdon" => date("Y-m-d H:i:s")
             );
             $resdata['error_code'] = $this->DepartmentModel->departmentSave($dep_data);
@@ -59,7 +59,7 @@ class Department extends BaseController {
                 "departmentcode" => $ps_data["DepartmentName"],
                 "departmentdescription" => $ps_data["DepartmentName"],
                 "isactive" => "Y",
-                "updatedby" => $this->session->userdata('UserId'),
+                "updatedby" => $this->session->userdata("UserInfo")['userid'],
                 "createdon" => date("Y-m-d H:i:s")
             );
             $resdata['error_code'] = $this->DepartmentModel->departmentUpdate($dep_data, $ps_data["departmentid"]);
@@ -105,22 +105,24 @@ class Department extends BaseController {
         $list = $this->Model->fetch('tbl_mng_departmentmaster')->result_array();
         echo json_encode($list);
     }
+
     public function getDepartmentFullDetailsAjax() {
         $data['title'] = "Department Details";
-        $departmentid = $this->input->post('departmentid');        
+        $departmentid = $this->input->post('departmentid');
 
-        $data['details'] = $this->Model->check("tbl_mng_departmentmaster",array("departmentid"=>$departmentid))->row();
+        $data['details'] = $this->Model->check("tbl_mng_departmentmaster", array("departmentid" => $departmentid))->row();
 
         $this->load->view('departments/department_details', $data);
     }
 
-    public function delete_department($id = '') {
-        try {
-            $this->DepartmentModel->delete_department($id);
-        } catch (Exception $e) {
-            $this->session->set_flashdata('flashmsg', 'Unable to delete the department..!');
-        }
-        redirect("Department");
+    public function delete_department() {
+        $id = $this->input->post("dep_id");
+        $resdata['error_code'] = $this->DepartmentModel->delete_department($id);
+        $resdata['message'] = getErrorMessages("Department", "delete_department", $resdata['error_code']);
+
+        $resdata['isError'] = $resdata['error_code'] > 1 ? "Y" : "N";
+        echo json_encode($resdata);
+//        redirect("Department");
     }
 
 }
