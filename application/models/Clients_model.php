@@ -357,7 +357,7 @@ class Clients_model extends CI_model {
     public function getClientProductsMappingDetails($clientId)
     { 
         try{
-                $this->db->select("PM.id,P.productid,P.productname,PM.clientid,C.clientname");
+                $this->db->select("PM.id,P.productid,P.productname,PM.clientid,C.clientname,P.product_logo as ProductLogo");
                 $this->db->from("tbl_mng_productmaster P");
                 $this->db->join("tbl_client_product_mapping PM", "PM.productid = P.productid AND PM.clientid = ".$clientId, "LEFT");
                 $this->db->join("tbl_mng_clientmaster C", "C.clientid = ".$clientId, "LEFT");

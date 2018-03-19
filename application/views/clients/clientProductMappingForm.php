@@ -26,7 +26,7 @@
             <?php if(count($details) > 0){
                 foreach($details as $dt){ ?>
             <input type="checkbox" name="products[]" id="products_<?php echo $dt['productid'];  ?>" value="<?php echo $dt['productid']; ?>" <?php if($dt['clientid']){ echo 'checked="checked"'; } ?> class="form-control input-sm">
-            <img class="rounded-circle" src="<?php echo base_url() ?>assets/images/users/avatar-6.jpg" alt="" width="50">
+            <img class="rounded-circle" src="<?php echo base_url(); ?>manager_gallary/product/<?php echo $dt['ProductLogo']; ?>" alt="" width="50">
             <?php echo $dt['productname']; ?>
             <?php } } ?>
         </div>
