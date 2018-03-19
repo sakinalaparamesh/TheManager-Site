@@ -20,6 +20,8 @@ class Admin extends CI_Controller {
     public function login() {
         $user_info = $this->login_model->CheckUser();
         $user_info['IsUserLoggedIn'] = TRUE;
+        
+        
 //        print_r($user_info);exit;
 
         if (!isset($IsValid)) {

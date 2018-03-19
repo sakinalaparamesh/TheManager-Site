@@ -13,9 +13,11 @@
         </div>
         <div class="card-box">
             <div class="row">   
+                <?php if(checkPrivileges("mngcontroller","addoredit")){ ?>
                 <div class="col-md-12 text-right m-b-10">
                 <a class="btn btn-default btn-sm" href="<?php echo base_url('mngcontroller/addOrEdit'); ?>">Add controller<i class="fa fa-plus-add"></i></a>
                  </div>
+                 <?php } ?>
                 <div class="col-md-12" id="myListView">                            
                     <div class="box-body  table-responsive">
                         <table id="tblmngcontroller" data-toggle="table" data-page-size="10" data-pagination="true"  class="table table-bordered dataTable no-footer dtr-inline table-condensed table-responsive" style="width:100%;">
@@ -55,6 +57,7 @@
 
     });//ready
     function openSidebar(controllerid) {
+        $.LoadingOverlay("show");
 
 //        alert(controllerid);
         $.ajax({
@@ -64,6 +67,7 @@
             //data: form_data,
             success: function (response) { //alert(response);
                 $("#DetailsView").html(response);
+                 $.LoadingOverlay("hide");
             },
             error: function () {
 //                alert("failure");

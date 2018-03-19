@@ -29,14 +29,14 @@ if (!function_exists('is_user_loggedin')) {
 //                $check_point = 0;
 //                $privileges = $CI->session->userdata("UserRolePrevillages");
 //                foreach ($privileges as $list) {
-//                    if (strpos(strtolower($list['controllername']),strtolower($controller)) !== false) {
+//                    if (strpos($list['controllername'],$controller) !== false) {
 //                        $check_point++;
 //                    }
 //                }
 //                if ($check_point > 0) {
 //                    return TRUE;
 //                } else {
-//                   
+//
 //                    echo "You don't have access to this page..!"; exit;
 //                }
                 return TRUE;

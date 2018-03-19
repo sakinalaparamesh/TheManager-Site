@@ -13,11 +13,11 @@
         </div>
         <div class="card-box">
             <div class="row">  
-                <?php if(checkPrivileges("Department","addOrEdit")){ ?>
+                 <?php if(checkPrivileges("Department","addOrEdit")){ ?>
                 <div class="col-md-12 text-right m-b-10 pull-right">
                     <a class="btn btn-default btn-sm" href="<?php echo base_url('department/addOrEdit'); ?>">Add Department <i class="fa fa-plus"></i></a>
                 </div>
-                <?php } ?>
+                 <?php } ?>
                 <div class="col-md-12" id="myListView">                            
                     <div class="box-body  table-responsive">
                         <table id="tbldepartment" data-toggle="table" data-page-size="10" data-pagination="true"  class="table table-bordered dataTable no-footer dtr-inline table-condensed table-responsive" style="white-space: nowrap; width:100%;">
@@ -57,15 +57,16 @@
 
     });//ready
     function openSidebar(departmentid) {
-
+        $.LoadingOverlay("show");
 //        alert(departmentid);
         $.ajax({
             type: "POST",
             url: "<?php echo base_url('Department/getDepartmentFullDetailsAjax') ?>",
             data: {"departmentid": departmentid},
             //data: form_data,
-            success: function (response) { //alert(response);
+            success: function (response) { //alert(response);               
                 $("#DetailsView").html(response);
+                 $.LoadingOverlay("hide");
             },
             error: function () {
 //                alert("failure");

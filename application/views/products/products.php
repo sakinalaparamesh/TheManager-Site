@@ -55,6 +55,7 @@
 
     });//ready
     function openSidebar(productid) {
+         $.LoadingOverlay("show");
 
 //        alert(productid);
         $.ajax({
@@ -64,6 +65,7 @@
             //data: form_data,
             success: function (response) { //alert(response);
                 $("#DetailsView").html(response);
+                 $.LoadingOverlay("hide");
             },
             error: function () {
 //                alert("failure");
