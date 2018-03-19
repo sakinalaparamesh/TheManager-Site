@@ -19,6 +19,27 @@ class mngcontrollerModel extends CI_Model {
         }
         return $res_data;
     }
+    public function mngcontrollerUpdate($data, $id = '') {
+        $res_data = 1;
+        $dep_check = array(
+            "controllerid!=" => $id,
+            "controllername" => $data["controllername"]
+        );
+        $checkRes = $this->Model->check("tbl_mng_controllermaster", $dep_check);
+        if ($checkRes->num_rows() > 0) {
+            $res_data = 3;
+        } else {
+            $q_data = array(
+                "controllerid" => $id
+            );
+            if ($this->Model->update("tbl_mng_controllermaster", $q_data, $data)) {
+                $res_data = 1;
+            } else {
+                $res_data = 2;
+            }
+        }
+        return $res_data;
+    }
     public function getAllmngcontrollers($limit=10,$start=0,$search='',$order=null,$dir=null)
     { 
         try{

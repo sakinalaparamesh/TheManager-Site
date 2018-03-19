@@ -26,30 +26,67 @@ class mngcontroller extends BaseController {
         
     }
 
-    public function addoredit() {
+    public function addoredit($id = '') {
         $data['title']="Add Controller";
 
         $this->breadcrumbs->push('Administration', 'administration');
         $this->breadcrumbs->push('mngcontroller','mngcontroller/mngcontrollerlist');
         $this->breadcrumbs->push('ControllerForm', 'ControllerForm');
+        if ($id != '') {
+            $q_data = array(
+                "controllerid" => $id
+            );
+            $data['mngcontroller_info'] = $this->Model->check("tbl_mng_controllermaster", $q_data)->row();
+        }
         $this->layout->view('mngcontroller/mngcontroller_form', $data);
     }
 
     public function savemngcontroller() {
         $ps_data = $this->input->post("mngcontrollerData");
         
-        $mng_data = array(            
-            "controllername" => $ps_data["controllername"],
-            "displayname" => $ps_data["displayname"],
-            "description" => $ps_data["description"],
-            "isactive" => "Y",
-            "createdon" => date("Y-m-d H:i:s")
-        );      
-       $resdata['error_code']=$this->mngcontrollerModel->mngcontrollerSave($mng_data);
-       $resdata['message'] = getErrorMessages("mngcontroller","Save",$resdata['error_code']);
-       $resdata['isError'] = $resdata['error_code']>1?"Y":"N";
-       echo json_encode($resdata);
+//        print_r($ps_data); exit;
+        if ($ps_data["controllerid"] == "") {
+            $dep_data = array(
+                "controllername" => $ps_data["ControllerName"],
+                "displayname" => $ps_data["displayname"],
+                "description" => $ps_data["description"],
+                "isactive" => "Y",
+                "createdby" => $this->session->userdata("UserInfo")['userid'],
+                "createdon" => date("Y-m-d H:i:s")
+            );
+            $resdata['error_code'] = $this->mngcontrollerModel->mngcontrollerSave($dep_data);
+
+            $resdata['message'] = getErrorMessages("Department", "saveDepartment", $resdata['error_code']);
+        } else {
+            $dep_data = array(
+                "controllername" => $ps_data["controllername"],
+                "displayname" => $ps_data["displayname"],
+                "description" => $ps_data["description"],
+                "isactive" => "Y",
+                "updatedby" => $this->session->userdata("UserInfo")['userid'],
+                "createdon" => date("Y-m-d H:i:s")
+            );
+            $resdata['error_code'] = $this->mngcontrollerModel->mngcontrollerUpdate($dep_data, $ps_data["controllerid"]);
+
+            $resdata['message'] = getErrorMessages("mngcontroller", "savemngcontroller", $resdata['error_code']);
+        }
+
+        $resdata['isError'] = $resdata['error_code'] > 1 ? "Y" : "N";
+        echo json_encode($resdata);
     }
+        
+//        $mng_data = array(            
+//            "controllername" => $ps_data["controllername"],
+//            "displayname" => $ps_data["displayname"],
+//            "description" => $ps_data["description"],
+//            "isactive" => "Y",
+//            "createdon" => date("Y-m-d H:i:s")
+//        );      
+//       $resdata['error_code']=$this->mngcontrollerModel->mngcontrollerSave($mng_data);
+//       $resdata['message'] = getErrorMessages("mngcontroller","Save",$resdata['error_code']);
+//       $resdata['isError'] = $resdata['error_code']>1?"Y":"N";
+//       echo json_encode($resdata);
+//    }
     public function mngcontrollerlist() {
         $data = array();
 

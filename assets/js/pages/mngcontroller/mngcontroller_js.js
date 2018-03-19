@@ -1,10 +1,12 @@
 var mngcontrollerjs = (function () {
+    var _controllerid;
     var _controllername;
     var _displayname;
     var _description;
     var _Url;
     var _Load = function (url) {
         _Url = url;
+        _controllerid=$("#mngcontrollerid");
         _controllername = $("#txtmngControllerName");
         _displayname = $("#txtmngcontrollerdisplayname");
         _description = $("#txtmngcontrollerDescription");
@@ -18,6 +20,7 @@ var mngcontrollerjs = (function () {
 
     var SavemngcontrollerDetails = function () {
         var mngcontrollerJson = {};
+        mngcontrollerJson.controllerid = _controllerid.val();
         mngcontrollerJson.controllername = _controllername.val();
         mngcontrollerJson.displayname = _displayname.val();
         mngcontrollerJson.description = _description.val();

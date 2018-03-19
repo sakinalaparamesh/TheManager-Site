@@ -9,7 +9,7 @@
                                 <!--<form class="form-horizontal" role="form">-->
                                 <div class="action_icons">
                                     
-                                    <button class="btn btn-icon waves-effect color-dark waves-light" onclick="addBranchForm('');"> <i class="fa fa-pencil" title="Edit Branch"></i> </button>
+                                    <a class="btn btn-icon waves-effect color-dark waves-light" href="<?= base_url() ?>Product/addOrEdit/<?= $details->productid ?>"> <i class="fa fa-pencil" title="Edit Branch"></i> </a>
                                                                         
                                      
                                     <button class="btn btn-icon waves-effect color-dark waves-light"> <i class="fa fa-trash" title="Inactive"></i> </button>                                                                          

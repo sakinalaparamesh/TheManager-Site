@@ -1,4 +1,5 @@
 var productjs = (function () {
+    var _productid;
     var _ProductName;
     var _ProductCode;
     var _ProductDescription;
@@ -6,6 +7,7 @@ var productjs = (function () {
     var _Url;
     var _Load = function (url) {
         _Url = url;
+        _productid=$("#productid");
         _ProductName = $("#txtProductName");
         _ProductCode = $("#txtProductCode");
         _ProductDescription = $("#txtProductDescription");
@@ -31,6 +33,7 @@ var productjs = (function () {
 //        ProductJson.ProductLogo=_ProductLogo.val();
 //        
         //alert(_ProductName.val());
+        formData.append('ProductId', _productid.val());
         formData.append('ProductName', _ProductName.val());
         formData.append('ProductCode', _ProductCode.val());
         formData.append('ProductDescription', _ProductDescription.val());
