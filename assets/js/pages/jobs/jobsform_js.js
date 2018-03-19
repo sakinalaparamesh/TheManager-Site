@@ -1,4 +1,5 @@
 var jobsjs = (function () {
+    var _jobs_id;
     var _jobs_skillset;
     var _jobs_numberofposition;
     var _jobs_position;
@@ -11,6 +12,7 @@ var jobsjs = (function () {
     var _Url;
     var _Load = function (url) {
         _Url = url;
+        _jobs_id=$("#jobs_id");
         _jobs_numberofposition=$("#jobs_numberofposition");
         _jobs_skillset = $("#jobs_skillset");
         _jobs_position = $("#jobs_position");
@@ -30,6 +32,7 @@ var jobsjs = (function () {
 
     var SaveJobDetails = function () {
         var jobJson = {};
+        jobJson.jobs_id = _jobs_id.val();
         jobJson.jobs_numberofposition = _jobs_numberofposition.val();
         jobJson.jobs_skillset = _jobs_skillset.val().toString();
         jobJson.jobs_position = _jobs_position.val();

@@ -305,5 +305,23 @@
       "ActionName": "saveUser",
       "ErrorCode": "3",
       "Message": "Technical Error occured while saving..Please contact admin"
+   },
+   {
+      "controlname": "Jobs",
+      "ActionName": "delete_job",
+      "ErrorCode": "1",
+      "Message": "Job deleted successfullry."
+   },
+   {
+      "controlname": "Jobs",
+      "ActionName": "delete_job",
+      "ErrorCode": "2",
+      "Message": "Unable to delete job."
+   },
+   {
+      "controlname": "Jobs",
+      "ActionName": "delete_job",
+      "ErrorCode": "3",
+      "Message": "Technical Error occured while saving..Please contact admin"
    }
 ]

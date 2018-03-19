@@ -13,9 +13,11 @@
         </div>
         <div class="card-box">
             <div class="row">   
+                <?php // if(checkPrivileges("Jobs","jobsForms")){ ?>
                 <div class="col-md-12 text-right m-b-10 pull-right">
                     <a class="btn btn-default btn-sm" href="<?php echo base_url('Jobs/jobsForms'); ?>">Job Post <i class="fa fa-plus"></i></a>
                 </div>
+                <?php // } ?>
                 <div class="col-md-12" id="myListView">                            
                     <div class="box-body  table-responsive">
                         <table   id="tbljobs" data-toggle="table" data-page-size="10" data-pagination="true"  class="table table-bordered dataTable no-footer dtr-inline table-condensed table-responsive" style="white-space: nowrap; width:100%;">
