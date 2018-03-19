@@ -15,29 +15,31 @@
 <div class="row">
     <div class="col-md-12">
         <form role="form" id="frmproduct">
+            <input type="hidden" id="productid"  value="<?=(isset($product_info->productid))?@$product_info->productid:""?>">
                                 <div class="form-group row">
                                     <label for="txtProductName" class="col-md-2">Name<span class="text-danger">*</span></label>
                                     <div class="col-md-4">
-                                        <input type="text" required="" name="productname" parsley-type="name" class="form-control input-sm" id="txtProductName" placeholder="Product Name">
+                                        <input type="text" required="" name="productname" parsley-type="name" class="form-control input-sm" id="txtProductName" placeholder="Product Name" value="<?=@$product_info->productname?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                
                                     <label for="Product_code" class="col-md-2">Product code<span class="text-danger">*</span></label>
                                     <div class="col-md-4">
-                                        <input id="txtProductCode" name="productcode" type="text" placeholder="Product code" required="" class="form-control input-sm">
+                                        <input id="txtProductCode" name="productcode" type="text" placeholder="Product code" required="" class="form-control input-sm" value="<?=@$product_info->productcode?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="hori-pass2" class="col-md-2">Description</label>
                                     <div class="col-md-4">
-                                        <textarea class="form-control" id="txtProductDescription" rows="3" name="productdescription"></textarea>
+                                        <textarea class="form-control" id="txtProductDescription" rows="3" name="productdescription"><?=@$product_info->productdescription?></textarea>
                                     </div>
                                 </div>
             <div class="form-group row">
 
                             <label for="productlogo" class="col-md-2"> Logo </label>
                             <div class="col-md-4">
+                                <img src="<?php echo base_url().'manager_gallary/product/'.@$product_info->product_logo; ?>" alt="Logo Image" style="width:50px;heigh:50px">
                                 <input type="file" name="productlogo" id="productlogo"/>
                             </div>
             </div>

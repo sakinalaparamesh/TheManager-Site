@@ -15,24 +15,25 @@
 <div class="row">
     <div class="col-md-12">
         <form role="form" id="frmmngcontroller">
+             <input type="hidden" id="productid"  value="<?=(isset($mngcontroller_info->controllerid))?$mngcontroller_info->controllerid:""?>">
                                 <div class="form-group row">
                                     <label for="mngcontrollername" class="col-md-2">Controller Name<span class="text-danger">*</span></label>
                                     <div class="col-md-4">
-                                        <input type="text" name="mngcontrollername" id="txtmngControllerName" parsley-type="mngcontrollername" class="form-control input-sm"  placeholder="Controller Name">
+                                        <input type="text" name="mngcontrollername" id="txtmngControllerName" parsley-type="mngcontrollername" class="form-control input-sm"  placeholder="Controller Name" value="<?=$mngcontroller_info->controllername?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                
                                     <label for="mngcontrollerdisplayname" class="col-md-2">Display Name<span class="text-danger">*</span></label>
                                     <div class="col-md-4">
-                                        <input  type="text" name="mngcontrollerdisplayname" id="txtmngcontrollerdisplayname"placeholder="Display Name" class="form-control input-sm">
+                                        <input  type="text" name="mngcontrollerdisplayname" id="txtmngcontrollerdisplayname"placeholder="Display Name" class="form-control input-sm" value="<?=$mngcontroller_info->displayname?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="mngcontrollerDescription" class="col-md-2">Description
                                         <span class="text-danger">*</span></label>
                                     <div class="col-md-4">
-                                        <textarea class="form-control" name="mngcontrollerDescription" id="txtmngcontrollerDescription" rows="3"></textarea>
+                                        <textarea class="form-control" name="mngcontrollerDescription" id="txtmngcontrollerDescription" rows="3"><?=$mngcontroller_info->description?></textarea>
                                     </div>
                                 </div>
                                

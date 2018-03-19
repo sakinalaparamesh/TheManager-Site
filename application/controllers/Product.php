@@ -22,29 +22,39 @@ class Product extends CI_Controller {
         $this->layout->view('products/products', $data);
     }
 
-    public function addOrEdit() {
+    public function addOrEdit($id = '') {
 
         $data['title'] = "Add Product";
 
         $this->breadcrumbs->push('Administration', 'administration');
         $this->breadcrumbs->push('Products', 'product');
         $this->breadcrumbs->push('Add Product', 'product/addOrEdit');
+        if ($id != '') {
+            $q_data = array(
+                "productid" => $id
+            );
+            $data['product_info'] = $this->Model->check("tbl_mng_productmaster", $q_data)->row();
+        }
 
         $this->layout->view('products/product_form', $data);
     }
 
     public function saveProduct() {
 
-        $pro_data = array(
-            "productname" => $_REQUEST["ProductName"],
-            "productcode" => $_REQUEST["ProductCode"],
-            "productdescription" => $_REQUEST["ProductDescription"],
-            "isactive" => "Y",
-            "createdby" => $this->session->userdata("UserInfo")['userid'],
-            "createdon" => date("Y-m-d H:i:s")
-        );
-
-        if ($_FILES["productlogo"]["name"] != "") {
+//        $ps_data = $this->input->post("productData");
+        
+//        print_r($ps_data); exit;
+        $productid=$this->input->post("ProductId");
+        if ($productid == "") {
+            $data = array(
+                "productname" => $this->input->post("ProductName"),
+                "productcode" => $this->input->post("ProductCode"),
+                "productdescription" => $this->input->post("ProductDescription"),
+                "isactive" => "Y",
+                "createdby" => $this->session->userdata("UserInfo")['userid'],
+                "createdon" => date("Y-m-d H:i:s")
+            );
+            if (@$_FILES["productlogo"]["name"] != ""&&isset($_FILES["productlogo"]["name"])) {
             $file_data = do_upload("productlogo", 'product', $_FILES["productlogo"]['type']);
             if (isset($file_data['error'])) {
                 $resdata['isError'] = "Y";
@@ -55,9 +65,34 @@ class Product extends CI_Controller {
         } else {
             $pro_data['product_logo'] = "";
         }
+            $resdata['error_code'] = $this->ProductModel->productSave($data);
 
-        $resdata['error_code'] = $this->ProductModel->productSave($pro_data);
-        $resdata['message'] = getErrorMessages("Product", "saveProduct", $resdata['error_code']);
+            $resdata['message'] = getErrorMessages("Product", "saveProduct", $resdata['error_code']);
+        } else {
+            $data = array(
+               "productname" => $this->input->post("ProductName"),
+                "productcode" => $this->input->post("ProductCode"),
+                "productdescription" => $this->input->post("ProductDescription"),
+                "isactive" => "Y",
+                "updatedby" => $this->session->userdata("UserInfo")['userid'],
+                "updatedon" => date("Y-m-d H:i:s")
+            );
+            if (@$_FILES["productlogo"]["name"] != ""&&isset($_FILES["productlogo"]["name"])) {
+            $file_data = do_upload("productlogo", 'product', $_FILES["productlogo"]['type']);
+            if (isset($file_data['error'])) {
+                $resdata['isError'] = "Y";
+                $resdata['message'] =strip_tags($file_data['error']);
+                echo json_encode($resdata);exit;
+            }
+            $pro_data['product_logo'] = $file_data['file_name'];
+        } else {
+            $pro_data['product_logo'] = "";
+        }
+            $resdata['error_code'] = $this->ProductModel->productUpdate($data, $productid);
+
+            $resdata['message'] = getErrorMessages("Product", "productSave", $resdata['error_code']);
+        }
+        
         $resdata['isError'] = $resdata['error_code'] > 1 ? "Y" : "N";
         echo json_encode($resdata);
     }
@@ -97,8 +132,7 @@ class Product extends CI_Controller {
             "limit" => $limit,
             "start" => $start,
         );
-
-        echo json_encode($json_data);
+                echo json_encode($json_data);
     }
     public function getProductFullDetailsAjax() {
         $data['title'] = "Product Details";
