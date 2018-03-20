@@ -12,7 +12,7 @@
                                     <a class="btn btn-icon waves-effect color-dark waves-light" href="<?= base_url() ?>mngcontroller/addoredit/<?= $details->controllerid ?>"> <i class="fa fa-pencil" title="Edit Branch"></i> </a>
                                                                         
                                      
-                                    <button class="btn btn-icon waves-effect color-dark waves-light"> <i class="fa fa-trash" title="Inactive"></i> </button>                                                                          
+                                   <a class="btn btn-icon waves-effect color-dark waves-light dep_sa-delete" id="<?= $details->controllerid ?>"> <i class="fa fa-trash" title="Inactive"></i> </a>                                                                          
                                  
                                     </div>
                                     <div class="contact-card m-t-30">

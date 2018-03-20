@@ -89,5 +89,25 @@ class mngcontrollerModel extends CI_Model {
             echo "ERROR: ".$e->getMessage();
         }
     }
+    public function delete_mngcontroller($id) {
+        $res_data = 1;
+        $roles = $this->Model->check("tbl_mng_controllermaster", array("controllerid" => $id));
+        if ($roles->num_rows() == 0) {
+            try{
+            $q_data = array(
+                "controllerid" => $id
+            );
+            $this->Model->delete("tbl_mng_controllermaster", $q_data);
+            $res_data = 1;
+            }catch(Exception $e){
+                $res_data = 3;
+            }
+            
+        }else{
+            $res_data = 2;
+            
+        }
+        return $res_data;
+    }
 
 }

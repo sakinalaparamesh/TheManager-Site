@@ -130,5 +130,14 @@ class mngcontroller extends BaseController {
 
         $this->load->view('mngcontroller/mngcontroller_details', $data);
     }
+    public function delete_mngcontroller() {
+        $id = $this->input->post("mng_id");
+        $resdata['error_code'] = $this->mngcontrollerModel->delete_mngcontroller($id);
+        $resdata['message'] = getErrorMessages("mngcontroller", "delete_mngcontroller", $resdata['error_code']);
+
+        $resdata['isError'] = $resdata['error_code'] > 1 ? "Y" : "N";
+        echo json_encode($resdata);
+//        redirect("Department");
+    }
 
 }
