@@ -312,6 +312,7 @@ class Clients extends BaseController {
         
         //print_r($data['allids']);  
         
+        
         $template_id = $data['template_id'];
     
         foreach($data['allids'] as $ids){
