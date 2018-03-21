@@ -71,7 +71,6 @@
                 dataType: 'json',
                 success: function (data) {
                     $.LoadingOverlay("hide");
-                    
                     //console.log(data);
                     if (data['isError'] == "N") {
                         $("#CommonModal").modal('hide');
