@@ -9,11 +9,10 @@ class EmailTemplates extends BaseController {
         parent::__construct();
         $this->load->model('emailTemplatesModel');
         $this->load->model('productModel');
-        
     }
 
     public function index() {
-        
+
         $data['title'] = "Email Templates";
         //breadcrumbs
         $this->breadcrumbs->push('Administration', 'administration');
@@ -50,7 +49,7 @@ class EmailTemplates extends BaseController {
     }
 
     public function addTemplate($id = 0) {
-        
+
         $data['title'] = "Add Template";
         $details = array();
         //breadcrumbs
@@ -62,10 +61,22 @@ class EmailTemplates extends BaseController {
         $data['products'] = $this->productModel->getActiveProducts($id);
         if (count($details) > 0) {
             $data['details'] = $details;
+            $fpath = APPPATH . 'views/templates/' . $details[0]['message'] . '.php';
+//            $file = fopen($fpath, "r");
+//            $content=fread($file, filesize($fpath));
+//            fclose($file);
+            $details[0]['message']=file_get_contents($fpath,true);
+//            print_r((string)$details[0]['message']);exit;
+            
         } else {
-            $data['details'][] = array('id' => 0, 'template_id' => '', 'template_title' => '', 'subject' => '', 'message' => '', 'template_type' => '', 'productids' => '', 'isactive' => 'Y');
+            $data['template_id'] = uniqid();
+            $this->Model->insert("tbl_email_templates", array("template_id" => $data['template_id'], "createdby" => $this->session->userdata()['UserInfo']['userid'], "createdon" => date('Y-m-d H:i:s')));
+            $data['id'] = $this->db->insert_id();
+            
+            
+            $data['details'][] = array('id' => 0, 'template_id' => $data['id'], 'template_title' => '', 'subject' => '', 'message' => '', 'template_type' => '', 'productids' => '', 'isactive' => 'Y');
         }
-        //echo "<pre>"; print_r($data); exit;
+
         $this->layout->view('emailTemplates/addTemplate', $data);
     }
 
@@ -75,6 +86,15 @@ class EmailTemplates extends BaseController {
         //$inputdata['message'] = $inputdata['CK_message'];
         //print_r($inputdata); exit;
         $resdata['error_code'] = $this->emailTemplatesModel->saveTemplateDetails($_POST);
+        $resdata['message'] = getErrorMessages("EmailTemplates", "Save", $resdata['error_code']);
+        $resdata['isError'] = ($resdata['error_code'] > 1) ? "Y" : "N";
+        echo json_encode($resdata);
+    }
+
+//new method
+    public function createTemplate() {
+
+        $resdata['error_code'] = $this->emailTemplatesModel->saveTemplate($_POST);
         $resdata['message'] = getErrorMessages("EmailTemplates", "Save", $resdata['error_code']);
         $resdata['isError'] = ($resdata['error_code'] > 1) ? "Y" : "N";
         echo json_encode($resdata);
@@ -92,6 +112,41 @@ class EmailTemplates extends BaseController {
         redirect(base_url() . 'e-templates');
     }
 
-    
+    public function uploadImages() {
+        $total = count($_FILES);
+
+        $id = $this->input->post('id');
+        $uploads = array();
+
+        for ($i = 0; $i < $total; $i++) {
+            $unique_id = uniqid();
+            $tmpFilePath = $_FILES['file']['tmp_name'][$i];
+
+            if ($tmpFilePath != "") {
+                $array = explode('.', $_FILES['file']['name'][$i]);
+                $extension = end($array);
+                $file_name = $unique_id . '.' . $extension;
+                $newFilePath = "./template_images/" . $file_name;
+                if (move_uploaded_file($tmpFilePath, $newFilePath)) {
+                    $this->Model->insert("tbl_mng_template_images", array("email_template_id" => $id, "template_images_name" => $file_name, "created_on" => date('Y-m-d H:i:s'), "created_by" => $this->session->userdata()['UserInfo']['userid']));
+                    array_push($uploads, $file_name);
+                }
+            }
+        }
+
+        echo json_encode($uploads);
+    }
+
+    public function deleteImage() {
+        $image = $this->input->post('img');
+        $file = "./template_images/" . $image;
+
+        if (unlink($file)) {
+            $this->Model->delete("tbl_mng_template_images", array('template_images_name' => $image));
+            echo true;
+        } else {
+            echo false;
+        }
+    }
 
 }

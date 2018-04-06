@@ -17,6 +17,14 @@
                     <form role="form" id="jobs_form">
                         <input type="hidden" id="jobs_id"  value="<?=(isset($info->jobs_id))?$info->jobs_id:""?>">
                         <div class="form-group row">
+                            <label for="jobs_title" class="col-md-2">Job Title
+                                <span class="text-danger"></span></label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="jobs_title" name="jobs_title" value="<?= @$info->jobs_title ?>">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
                             <label for="jobs_position" class="col-md-2">Designation<span class="text-danger">*</span></label>
                             <div class="col-md-4">
                                 <input type="text" required="" name="jobs_position" id="jobs_position"  parsley-type="name" class="form-control input-sm" placeholder="Job Position" value="<?= @$info->jobs_position ?>">
@@ -44,30 +52,52 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="jobs_experience_min" class="col-md-2">Minimum years
+                                <span class="text-danger"></span></label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="jobs_experience_min" name="jobs_experience_min" value="<?= @$info->jobs_experience ?>">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="jobs_experience_max" class="col-md-2">Maximum years
+                                <span class="text-danger"></span></label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="jobs_experience_max" name="jobs_experience_max" value="<?= @$info->jobs_experience ?>">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="jobs_contact_email" class="col-md-2">Contact person email
+                                <span class="text-danger"></span></label>
+                            <div class="col-md-4">
+                                <input type="email" class="form-control" id="jobs_contact_email" name="jobs_contact_email" value="<?= @$info->jobs_contact_email ?>">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
                             <label for="jobs_numberofposition" class="col-md-2">Number of Positions<span class="text-danger">*</span></label>
                             <div class="col-md-4">
-                                <input type="text" required="" name="jobs_numberofposition" parsley-type="name" class="form-control input-sm" id="jobs_numberofposition" placeholder="Job Position" value="<?= @$info->jobs_numberofposition ?>">
+                                <input type="number" required="" name="jobs_numberofposition" parsley-type="name" class="form-control input-sm" id="jobs_numberofposition" placeholder="Job Position" value="<?= @$info->jobs_numberofposition ?>">
                             </div>
                         </div>
                         <div class="form-group row">
 
-                            <label for="jobs_position_startdate" class="col-md-2">Start date <span class="text-danger">*</span></label>
+                            <label for="jobs_position_startdate" class="col-md-2">Start date <span class="text-danger"></span></label>
                             <div class="col-md-4">
-                                <input id="jobs_position_startdate" name="jobs_position_startdate" type="text" placeholder="Posting start date" required="" class="form-control input-sm" value="<?= @$info->jobs_position_startdate ?>">
+                                <input id="jobs_position_startdate" name="jobs_position_startdate" type="text" placeholder="Posting start date" class="form-control input-sm" value="<?= @$info->jobs_position_startdate ?>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="jobs_position_enddate" class="col-md-2">End date
-                                <span class="text-danger">*</span></label>
+                                <span class="text-danger"></span></label>
                             <div class="col-md-4">
-                                <input id="jobs_position_enddate" name="jobs_position_enddate" type="text" placeholder="End date" required="" class="form-control input-sm" value="<?= @$info->jobs_position_enddate ?>">
+                                <input id="jobs_position_enddate" name="jobs_position_enddate" type="text" placeholder="End date" class="form-control input-sm" value="<?= @$info->jobs_position_enddate ?>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="jobs_joiningdate" class="col-md-2">Joining Date
-                                <span class="text-danger">*</span></label>
+                                <span class="text-danger"></span></label>
                             <div class="col-md-4">
-                                <input id="jobs_joiningdate" name="jobs_joiningdate" type="text" placeholder="Joining Date" required="" class="form-control input-sm" value="<?= @$info->jobs_joiningdate ?>">
+                                <input id="jobs_joiningdate" name="jobs_joiningdate" type="text" placeholder="Joining Date" class="form-control input-sm" value="<?= @$info->jobs_joiningdate ?>">
                             </div>
                         </div>
                         <div class="form-group row">

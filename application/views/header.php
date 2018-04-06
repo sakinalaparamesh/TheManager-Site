@@ -118,7 +118,7 @@
                         <ul class="navigation-menu">
 
                             <li class="">
-                                <a href="#"><i class="md md-dashboard"></i>Dashboard</a>
+                                <!--<a href="#"><i class="md md-dashboard"></i>Dashboard</a>-->
                                 <!-- <ul class="submenu">
                                     <li>
                                         <a href="index.html">Dashboard 01</a>
@@ -140,7 +140,7 @@
                              
                             </li>
 
-                            <li class="">
+<!--                            <li class="">
                                 <a href="#"><i class="md md-layers"></i>Marketing Agents</a>
                              
                             </li>
@@ -161,7 +161,7 @@
 
                             <li class="">
                                 <a href="#"><i class="md md-account-circle"></i>Support</a>                               
-                            </li>
+                            </li>-->
 
                             
                         </ul>

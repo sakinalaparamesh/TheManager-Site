@@ -1,89 +1,191 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
+<!-- Page-Title -->
+<div class="wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="btn-group pull-right">
 
-	<style type="text/css">
+                    </div>
+                    <h4 class="page-title"></h4>
+                </div>
+            </div>
+        </div>
+        <div class="card-box">
+            <div class="row">
+                <div class="col-md-12 text-center progress-loader">&nbsp;</div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
 
-	::selection { background-color: #E13300; color: white; }
-	::-moz-selection { background-color: #E13300; color: white; }
+                    <form id="MyForm" method="post" enctype="multipart/form-data" action="<?= base_url() ?>Welcome/saveText" class="form-horizontal" novalidate="" role="form">
 
-	body {
-		background-color: #fff;
-		margin: 40px;
-		font: 13px/20px normal Helvetica, Arial, sans-serif;
-		color: #4F5155;
-	}
 
-	a {
-		color: #003399;
-		background-color: transparent;
-		font-weight: normal;
-	}
+                        <div class="form-group row">
+                            <label for="message" class="col-md-2"> Message<span class="text-danger">*</span></label>
+                            <div class="col-md-4">
+                                <textarea class="form-control" name="message" id="message" rows="40" cols="80"></textarea>
+                            </div>
+                        </div>
 
-	h1 {
-		color: #444;
-		background-color: transparent;
-		border-bottom: 1px solid #D0D0D0;
-		font-size: 19px;
-		font-weight: normal;
-		margin: 0 0 14px 0;
-		padding: 14px 15px 10px 15px;
-	}
 
-	code {
-		font-family: Consolas, Monaco, Courier New, Courier, monospace;
-		font-size: 12px;
-		background-color: #f9f9f9;
-		border: 1px solid #D0D0D0;
-		color: #002166;
-		display: block;
-		margin: 14px 0 14px 0;
-		padding: 12px 10px 12px 10px;
-	}
 
-	#body {
-		margin: 0 15px 0 15px;
-	}
+                        <div class="form-group row ">
+                            <label class="col-md-2"></label>
+                            <div class=" col-md-4">
+                                <button type="submit" name="formSubmit" id="formSubmit" class="btn btn-default waves-effect waves-light btn-sm" onclick="ValidateMyForm();">
+                                    save
+                                </button>
+                                <button type="button" onclick="previewTemplate()" class="btn btn-inverse waves-effect m-l-5 btn-sm">
+                                    view
+                                </button>
+                                <button type="button" onclick="sendMail()" class="btn btn-inverse waves-effect m-l-5 btn-sm">
+                                    send email
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <form enctype="multipart/form-data">
 
-	p.footer {
-		text-align: right;
-		font-size: 11px;
-		border-top: 1px solid #D0D0D0;
-		line-height: 32px;
-		padding: 0 10px 0 10px;
-		margin: 20px 0 0 0;
-	}
+                        <div class='block'>
+                            <input name="file[]" type="file" />
+                            <!--<input name="file_name[]" type="text" placeholder="Image Name"  class="file_name"/>-->
+                            <a onclick="delete_block(this)">del</a>
+                        </div>
+                        <button class="add_more">Add More Files</button>
+                        <input type="button" value="Upload File" id="upload"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- end page title end breadcrumb -->
+        <div id="images_append"></div>
+        <!--Common Modal -->
+        <div class="modal fade content-wrapper modal-right" id="CommonModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"></h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
 
-	#container {
-		margin: 10px;
-		border: 1px solid #D0D0D0;
-		box-shadow: 0 0 8px #D0D0D0;
-	}
-	</style>
-</head>
-<body>
 
-<div id="container">
-	<h1>Welcome to CodeIgniter!</h1>
+                    </div>
 
-	<div id="body">
-		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
+                </div>
 
-		<p>If you would like to edit this page you'll find it located at:</p>
-		<code>application/views/welcome_message.php</code>
-
-		<p>The corresponding controller for this page is found at:</p>
-		<code>application/controllers/Welcome.php</code>
-
-		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
-	</div>
-
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
+            </div>
+        </div>
+    </div> <!-- end container -->
 </div>
+<!-- end wrapper -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
+<script>
+var path = document.location.pathname;
+var directory = path.substring(path.indexOf('/'), path.lastIndexOf('/'));
+console.log(window.location.hostname+directory);
 
-</body>
-</html>
+                                _Url = '<?= base_url() ?>';
+                                function delete_block(res) {
+
+                                    $(res).parent('.block').remove();
+                                }
+                                function delete_dis(res) {
+                                    var img = $(res).parent('.dis_img').attr('id');
+                                    alert(img);
+                                    $.ajax({
+                                        type: "POST",
+                                        url: _Url + 'Welcome/deleteImage',
+                                        data: {img: img},
+                                        success: function (data) {
+                                            $(res).parent('.dis_img').remove();
+                                        },
+                                        error: function (data) {
+                                        }
+                                    })
+
+                                }
+                                $(document).ready(function () {
+
+                                    $('.add_more').click(function (e) {
+                                        e.preventDefault();
+                                        $(this).before("<div class='block'><input name='file[]' type='file'/><a onclick='delete_block(this)'>del</a></div>");
+                                    });
+                                    $('body').on('click', '#upload', function (e) {
+                                        e.preventDefault();
+//                                        var taskArray = new Array();
+//                                        $(".file_name").each(function () {
+//                                            var val = $(this).val();
+//                                            taskArray.push(val);
+//                                        });
+                                        var formData = new FormData($(this).parents('form')[0]);
+//                                        formData.append('file_names', taskArray);
+                                        $.ajax({
+                                            url: _Url + 'Welcome/uploadImages',
+                                            type: 'POST',
+                                            data: formData,
+                                            cache: false,
+                                            contentType: false,
+                                            processData: false,
+                                            success: function (data) {
+                                                var obj = JSON.parse(data);
+//                                                console.log(obj);
+                                                var src_html = '';
+
+                                                for (var i = 0; i < obj.length; i++) {
+
+                                                    src_html += '<div class="dis_img" id="' + obj[i] + '"><img src="./template_images/' + obj[i] + '" alt="something" /><a onclick="delete_dis(this)">X</a></div>';
+                                                }
+                                                $('#images_append').append(src_html);
+                                                $(".block").each(function () {
+                                                    $(this).remove();
+                                                });
+
+                                            }
+                                        });
+                                        return false;
+                                    })
+                                });
+                                function previewTemplate() {
+
+                                    var msg = $("#message").val();
+                                    $('.modal-title').html('Proview Template');
+                                    $('.modal-body').html(msg);
+                                    $('#CommonModal').modal({show: true});
+//                                        $.ajax({
+//                                            type: "POST",
+//                                            url: _Url + 'Welcome/preview',
+//                                            data: {message: msg},
+//                                            success: function (data) {
+//                                                $('.modal-title').html('Proview Template');
+//                                                $('.modal-body').html(data);
+//                                                $('#CommonModal').modal({show: true});
+//                                            },
+//                                            error: function (data) {
+//                                            }
+//                                        })
+                                }
+                                function sendMail() {
+
+                                    var msg = $("#message").val();
+                                    $.ajax({
+                                        type: "POST",
+                                        url: _Url + 'Welcome/sendEmail',
+                                        data: {message: msg},
+                                        success: function (data) {
+//                                                alert(data);
+                                            if (data == '1') {
+                                                alert("email sent successfully.");
+                                            } else {
+                                                alert("Could not send email.");
+                                            }
+                                        },
+                                        error: function (data) {
+                                        }
+                                    })
+                                }
+</script>
+

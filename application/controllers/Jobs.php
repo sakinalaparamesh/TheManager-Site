@@ -42,6 +42,9 @@ class Jobs extends BaseController {
         if ($ps_data["jobs_id"] == "") {
             $jobs_data = array(
                 "jobs_skillset" => $ps_data["jobs_skillset"],
+                "jobs_title" => $ps_data["jobs_title"],
+                "jobs_experience" => $ps_data["jobs_experience"],
+                "jobs_contact_email" => $ps_data["jobs_contact_email"],
                 "jobs_position" => $ps_data["jobs_position"],
                 "jobs_numberofposition" => $ps_data["jobs_numberofposition"],
                 "jobs_joiningdate" => date("Y-m-d", strtotime($ps_data["jobs_joiningdate"])),
@@ -60,6 +63,9 @@ class Jobs extends BaseController {
         } else {
             $jobs_data = array(
                 "jobs_skillset" => $ps_data["jobs_skillset"],
+                "jobs_title" => $ps_data["jobs_title"],
+                "jobs_experience" => $ps_data["jobs_experience"],
+                "jobs_contact_email" => $ps_data["jobs_contact_email"],
                 "jobs_position" => $ps_data["jobs_position"],
                 "jobs_numberofposition" => $ps_data["jobs_numberofposition"],
                 "jobs_joiningdate" => date("Y-m-d", strtotime($ps_data["jobs_joiningdate"])),
@@ -72,7 +78,7 @@ class Jobs extends BaseController {
                 "createdby" => $this->session->userdata("UserInfo")['userid'],
                 "createdon" => date("Y-m-d H:i:s")
             );
-            $resdata['error_code'] = $this->Jobs_model->updateJob($jobs_data,$ps_data["jobs_id"]);
+            $resdata['error_code'] = $this->Jobs_model->updateJob($jobs_data, $ps_data["jobs_id"]);
 
             $resdata['message'] = getErrorMessages("Jobs", "saveJob", $resdata['error_code']);
         }
@@ -127,6 +133,7 @@ class Jobs extends BaseController {
 //        print_r($data);
         $this->load->view('jobs/job_details', $data);
     }
+
     public function delete_job() {
         $id = $this->input->post("id");
         $resdata['error_code'] = $this->Jobs_model->delete_job($id);

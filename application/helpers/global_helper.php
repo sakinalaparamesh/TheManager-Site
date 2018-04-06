@@ -24,7 +24,7 @@ if (!function_exists('is_user_loggedin')) {
         try {
             $CI = & get_instance();
             if ($CI->session->userdata('IsUserLoggedIn')) {
-                
+
 //                $controller = $CI->uri->segment(1);
 //                $check_point = 0;
 //                $privileges = $CI->session->userdata("UserRolePrevillages");
@@ -103,6 +103,26 @@ if (!function_exists('checkPrivileges')) {
             return TRUE;
         } else {
             return FALSE;
+        }
+    }
+
+}
+if (!function_exists('sendEmail')) {
+
+
+    function sendEmail($to, $subject, $message, $headers='') {
+        // Always set content-type when sending HTML email
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+// More headers
+        $headers .= 'From: <noreply@provalley.net>' . "\r\n";
+        //$headers .= 'Cc: myboss@example.com' . "\r\n";
+
+        if(mail($to, $subject, $message, $headers)){
+            return true;
+        }else{
+            return false;
         }
     }
 

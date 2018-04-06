@@ -29,7 +29,7 @@ class User extends BaseController {
         $this->breadcrumbs->push('Administration', 'administration');
         $this->breadcrumbs->push('User', 'user');
         $this->breadcrumbs->push('User Registration', 'user/addOrEdit');
-        
+
         $data['country_list'] = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "COUNTRIES", "isactive" => "Y"))->result_array();
 
         $this->layout->view('user/user_registration', $data);
@@ -44,32 +44,33 @@ class User extends BaseController {
             "user_mobilenumber" => $_REQUEST["Contactno"],
             "user_email" => $_REQUEST["Email"],
             "user_address" => $_REQUEST["Address"],
-            "user_countryid"=>$_REQUEST["user_countryid"],
+            "user_countryid" => $_REQUEST["user_countryid"],
             "user_comments" => $_REQUEST["comments"],
             "isactive" => "Y",
-            "createdby"=> $this->session->userdata('UserId'),
+            "createdby" => $this->session->userdata('UserId'),
             "createdon" => date("Y-m-d H:i:s")
         );
-        if($_FILES["profilepic"]["name"]!=""){
-           $file_data=do_upload("profilepic",'user',$_FILES["profilepic"]['type']);
-if (isset($file_data['error'])) {
+        if ($_FILES["profilepic"]["name"] != "") {
+            $file_data = do_upload("profilepic", 'user', $_FILES["profilepic"]['type']);
+            if (isset($file_data['error'])) {
                 $resdata['isError'] = "Y";
                 $resdata['message'] = strip_tags($file_data['error']);
-                echo json_encode($resdata);exit;
+                echo json_encode($resdata);
+                exit;
             }
-           $user_data['user_profilepic']=$file_data['file_name'];
-        }else{
-            $user_data['user_profilepic']="";
+            $user_data['user_profilepic'] = $file_data['file_name'];
+        } else {
+            $user_data['user_profilepic'] = "";
         }
-        
-        $user_roles=array(
-            "department_id"=>1,
-            "role_id"=>1,
-            "isactive"=>"Y",
-            "createdby"=> $this->session->userdata('UserId'),
+
+        $user_roles = array(
+            "department_id" => 1,
+            "role_id" => 1,
+            "isactive" => "Y",
+            "createdby" => $this->session->userdata('UserId'),
             "createdon" => date("Y-m-d H:i:s")
         );
-        $resdata['error_code'] = $this->User_model->userSave($user_data,$user_roles);
+        $resdata['error_code'] = $this->User_model->userSave($user_data, $user_roles);
         $resdata['message'] = getErrorMessages("User", "saveUser", $resdata['error_code']);
         $resdata['isError'] = $resdata['error_code'] > 1 ? "Y" : "N";
         echo json_encode($resdata);

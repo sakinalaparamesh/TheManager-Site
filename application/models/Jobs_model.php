@@ -88,7 +88,12 @@ class Jobs_model extends CI_Model {
 
     public function getJobFullDetails($id) {
         $details_q = "select tbl_mng_jobs.*,(select GROUP_CONCAT(configuration_name SEPARATOR ',') from tbl_mng_configuration_master "
-                . "where configuration_id in(tbl_mng_jobs.jobs_skillset)) as skillset from tbl_mng_jobs where jobs_id='" . $id . "'";
+                . "where find_in_set(tbl_mng_configuration_master.configuration_id,tbl_mng_jobs.jobs_skillset)) as skillset from tbl_mng_jobs where jobs_id='" . $id . "'";
+        return $this->db->query($details_q);
+    }
+    public function getActiveJobs() {
+        $details_q = "select tbl_mng_jobs.*,(select GROUP_CONCAT(configuration_name SEPARATOR ',') from tbl_mng_configuration_master "
+                . "where find_in_set(tbl_mng_configuration_master.configuration_id,tbl_mng_jobs.jobs_skillset)) as skillset from tbl_mng_jobs where isactive='Y'";
         return $this->db->query($details_q);
     }
     public function delete_job($id) {
