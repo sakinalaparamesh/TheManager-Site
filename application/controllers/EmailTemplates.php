@@ -62,12 +62,11 @@ class EmailTemplates extends BaseController {
         if (count($details) > 0) {
             $data['details'] = $details;
             $fpath = APPPATH . 'views/templates/' . $details[0]['message'] . '.php';
-//            $file = fopen($fpath, "r");
-//            $content=fread($file, filesize($fpath));
-//            fclose($file);
-            $details[0]['message']=file_get_contents($fpath,true);
-//            print_r((string)$details[0]['message']);exit;
-            
+            $file = fopen($fpath, "r");
+            $content=fread($file, filesize($fpath));
+            fclose($file);
+            $data['details'][0]['message']=$content;
+
         } else {
             $data['template_id'] = uniqid();
             $this->Model->insert("tbl_email_templates", array("template_id" => $data['template_id'], "createdby" => $this->session->userdata()['UserInfo']['userid'], "createdon" => date('Y-m-d H:i:s')));
