@@ -73,7 +73,7 @@ class EmailTemplates extends BaseController {
             $data['id'] = $this->db->insert_id();
             
             
-            $data['details'][] = array('id' => 0, 'template_id' => $data['id'], 'template_title' => '', 'subject' => '', 'message' => '', 'template_type' => '', 'productids' => '', 'isactive' => 'Y');
+            $data['details'][] = array('id' => $data['id'], 'template_id' => $data['template_id'], 'template_title' => '', 'subject' => '', 'message' => '', 'template_type' => '', 'productids' => '', 'isactive' => 'Y');
         }
 
         $this->layout->view('emailTemplates/addTemplate', $data);

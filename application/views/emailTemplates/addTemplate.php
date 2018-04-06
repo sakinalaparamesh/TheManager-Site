@@ -186,13 +186,14 @@
     }
     function delete_dis(res) {
         var img = $(res).parent('.dis_img').attr('id');
-        alert(img);
+//        alert(img);
         $.ajax({
             type: "POST",
             url: _Url + 'EmailTemplates/deleteImage',
             data: {img: img},
             success: function (data) {
                 $(res).parent('.dis_img').remove();
+                alert("Deleted successfully");
             },
             error: function (data) {
             }
