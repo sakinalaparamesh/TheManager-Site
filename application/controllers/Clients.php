@@ -23,7 +23,6 @@ class Clients extends BaseController {
 
         $this->layout->view('clients/clientsList', $data);
     }
-
     public function getAllClients() {
 
         $limit = $this->input->post('length');
@@ -312,6 +311,7 @@ class Clients extends BaseController {
         
         //print_r($data['allids']);  
         
+        
         $template_id = $data['template_id'];
     
         foreach($data['allids'] as $ids){
@@ -329,6 +329,7 @@ class Clients extends BaseController {
                 $replace_items = array('name'=>$name);
                 $this->load->library('emailtemplate');               
                 $sent_status = $this->emailtemplate->sendEmail($template_id, $recipients, $replace_items);
+                //echo json_encode($sent_status); exit;
                 
                 $save_data = array(
                     "template_id" => $template_id,

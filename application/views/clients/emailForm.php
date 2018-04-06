@@ -62,7 +62,7 @@
         //alert(validator.isValid()); return false;
         var _Url = "<?php echo base_url(); ?>";
         if (validator.isValid()) {
-            //$.LoadingOverlay("show");
+            $.LoadingOverlay("show");
             $.ajax({
                 type: "POST",
                 url: _Url + 'clients/sendEmailAjax',
@@ -71,7 +71,6 @@
                 dataType: 'json',
                 success: function (data) {
                     $.LoadingOverlay("hide");
-                    
                     //console.log(data);
                     if (data['isError'] == "N") {
                         $("#CommonModal").modal('hide');

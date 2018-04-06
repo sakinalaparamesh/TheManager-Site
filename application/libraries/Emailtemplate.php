@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class EmailTemplate {
+class Emailtemplate {
 
     var $template_id;
     var $subject;
@@ -16,6 +16,7 @@ class EmailTemplate {
     
     function __construct() {
         $this->from_email = 'info@provalley.net';
+        //$this->from_email = 'prvnarenderreddyvanga@gmail.com';
         $this->from_name  = 'Provalley Solutions';
         $this->CI =& get_instance();
     }
@@ -43,6 +44,9 @@ class EmailTemplate {
         $this->setEmailParams();
         
         return $this->CI->email->send();
+        //$send_details = $this->CI->email->send(); 
+        //return print_r($send_details);exit;
+        //return $this->CI->email->print_debugger(); exit;
         
     }
     function setRecipients($recipients){
@@ -71,32 +75,33 @@ class EmailTemplate {
         $result = $query->row();
                 
         $this->subject = $result->subject;
-        $this->message = $result->message;;       
+        $this->message = $result->message;      
         
         //replace itmes
         foreach($replace_items as $key=>$val){
             $this->subject = str_ireplace("##".$key."##", $val, $this->subject);
             $this->message = str_ireplace("##".$key."##", $val, $this->message);
         }
+        $message = '';
+        $message .= '<!DOCTYPE html><html><head><title>Test Email</title></head><body>';
+        $message .= $this->message;        
+        $message .= '</body></html>';
+        $this->message = $message;
     }   
     function setEmailConfiguration(){
         
-//        $config['protocol'] = 'sendmail';
-//        $config['mailpath'] = '/usr/sbin/sendmail';
-//        $config['charset'] = 'iso-8859-1';
-//        $config['wordwrap'] = TRUE;
-        
         $config = Array(
             'protocol' => 'smtp',
-            'smtp_host' => 'ssl://smtp.googlemail.com',
-            'smtp_port' => 465,
-            'smtp_user' => 'xxx',
-            'smtp_pass' => 'xxx',
+            'smtp_host' => 'ssl://smtp.gmail.com',
+            'smtp_port' => 587,
+            'smtp_user' => 'prvnarenderreddyvanga@gmail.com',
+            'smtp_pass' => 'Provalley123',
             'mailtype'  => 'html', 
-            'charset'   => 'iso-8859-1'
+            'charset'   => 'utf-8',//iso-8859-1
+            //'newline'   => "\r\n"
         );
-
-        $this->CI->email->initialize($config);
+        $this->CI->email->set_mailtype("html");
+        //$this->CI->email->initialize($config);
     }
     function setEmailParams(){
         
