@@ -42,9 +42,8 @@ class Product extends CI_Controller {
     public function saveProduct() {
 
 //        $ps_data = $this->input->post("productData");
-        
 //        print_r($ps_data); exit;
-        $productid=$this->input->post("ProductId");
+        $productid = $this->input->post("ProductId");
         if ($productid == "") {
             $data = array(
                 "productname" => $this->input->post("ProductName"),
@@ -54,45 +53,47 @@ class Product extends CI_Controller {
                 "createdby" => $this->session->userdata("UserInfo")['userid'],
                 "createdon" => date("Y-m-d H:i:s")
             );
-            if (@$_FILES["productlogo"]["name"] != ""&&isset($_FILES["productlogo"]["name"])) {
-            $file_data = do_upload("productlogo", 'product', $_FILES["productlogo"]['type']);
-            if (isset($file_data['error'])) {
-                $resdata['isError'] = "Y";
-                $resdata['message'] =strip_tags($file_data['error']);
-                echo json_encode($resdata);exit;
+            if (@$_FILES["productlogo"]["name"] != "" && isset($_FILES["productlogo"]["name"])) {
+                $file_data = do_upload("productlogo", 'product', $_FILES["productlogo"]['type']);
+                if (isset($file_data['error'])) {
+                    $resdata['isError'] = "Y";
+                    $resdata['message'] = strip_tags($file_data['error']);
+                    echo json_encode($resdata);
+                    exit;
+                }
+                $pro_data['product_logo'] = $file_data['file_name'];
+            } else {
+                $pro_data['product_logo'] = "";
             }
-            $pro_data['product_logo'] = $file_data['file_name'];
-        } else {
-            $pro_data['product_logo'] = "";
-        }
             $resdata['error_code'] = $this->ProductModel->productSave($data);
 
             $resdata['message'] = getErrorMessages("Product", "saveProduct", $resdata['error_code']);
         } else {
             $data = array(
-               "productname" => $this->input->post("ProductName"),
+                "productname" => $this->input->post("ProductName"),
                 "productcode" => $this->input->post("ProductCode"),
                 "productdescription" => $this->input->post("ProductDescription"),
                 "isactive" => "Y",
                 "updatedby" => $this->session->userdata("UserInfo")['userid'],
                 "updatedon" => date("Y-m-d H:i:s")
             );
-            if (@$_FILES["productlogo"]["name"] != ""&&isset($_FILES["productlogo"]["name"])) {
-            $file_data = do_upload("productlogo", 'product', $_FILES["productlogo"]['type']);
-            if (isset($file_data['error'])) {
-                $resdata['isError'] = "Y";
-                $resdata['message'] =strip_tags($file_data['error']);
-                echo json_encode($resdata);exit;
+            if (@$_FILES["productlogo"]["name"] != "" && isset($_FILES["productlogo"]["name"])) {
+                $file_data = do_upload("productlogo", 'product', $_FILES["productlogo"]['type']);
+                if (isset($file_data['error'])) {
+                    $resdata['isError'] = "Y";
+                    $resdata['message'] = strip_tags($file_data['error']);
+                    echo json_encode($resdata);
+                    exit;
+                }
+                $pro_data['product_logo'] = $file_data['file_name'];
+            } else {
+                $pro_data['product_logo'] = "";
             }
-            $pro_data['product_logo'] = $file_data['file_name'];
-        } else {
-            $pro_data['product_logo'] = "";
-        }
             $resdata['error_code'] = $this->ProductModel->productUpdate($data, $productid);
 
             $resdata['message'] = getErrorMessages("Product", "productSave", $resdata['error_code']);
         }
-        
+
         $resdata['isError'] = $resdata['error_code'] > 1 ? "Y" : "N";
         echo json_encode($resdata);
     }
@@ -132,13 +133,14 @@ class Product extends CI_Controller {
             "limit" => $limit,
             "start" => $start,
         );
-                echo json_encode($json_data);
+        echo json_encode($json_data);
     }
+
     public function getProductFullDetailsAjax() {
         $data['title'] = "Product Details";
-        $productid = $this->input->post('productid');        
+        $productid = $this->input->post('productid');
 
-        $data['details'] = $this->Model->check("tbl_mng_productmaster",array("productid"=>$productid))->row();
+        $data['details'] = $this->Model->check("tbl_mng_productmaster", array("productid" => $productid))->row();
 
         $this->load->view('products/product_details', $data);
     }

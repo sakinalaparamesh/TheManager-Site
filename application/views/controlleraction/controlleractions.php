@@ -1,4 +1,3 @@
-<!-- Page-Title -->
 <div class="wrapper">
     <div class="container-fluid">
         <div class="row">            
@@ -14,8 +13,8 @@
         <div class="card-box">
             <div class="row">
                 <div class="col-md-12 text-right m-b-10">
-    <a class="btn btn-default btn-sm" href="<?php echo base_url('controlleraction/addOrEdit'); ?>">Add <i class="fa fa-plus-add"></i></a>
-</div>
+                    <a class="btn btn-default btn-sm" href="<?php echo base_url('controlleraction/addOrEdit'); ?>"><i class="fa fa-plus"></i>Add </a>
+                </div>
                 <div class="col-md-12" id="myListView">                            
                     <div class="box-body  table-responsive">
                         <table id="tblcontrolleraction" data-toggle="table" data-page-size="10" data-pagination="true"  class="table table-bordered dataTable no-footer dtr-inline table-condensed table-responsive" style="width:100%;">
@@ -43,9 +42,8 @@
             </div>
         </div>
         <!-- end page title end breadcrumb -->
-    </div> <!-- end container -->
+    </div>
 </div>
-<!-- end wrapper -->
 <script type="text/javascript">
 
     $(document).ready(function () {

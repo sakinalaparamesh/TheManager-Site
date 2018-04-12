@@ -127,3 +127,19 @@ if (!function_exists('sendEmail')) {
     }
 
 }
+
+
+if (!function_exists('dataCompare')) {
+
+
+    function dataCompare($set, $value) {
+        $array = explode(",", $set);
+
+        if (in_array($value, $array)) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
+}

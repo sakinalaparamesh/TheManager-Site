@@ -1,9 +1,10 @@
 var rolejs = (function () {
-    var _Departmentid;
+
     var _RoleName;
-    var _RoleDescription;
+    var id;
     var _displayname;
     var _Url;
+    var _btnSubmit;
     var _Load = function (url) {
         _Url = url;
         /*
@@ -25,9 +26,9 @@ var rolejs = (function () {
          alert(xhr.responseText);
          }
          })*/
-        _Departmentid = $("#department_list");
+
         _RoleName = $("#txtRoleName");
-        _RoleDescription = $("#txtRoleDescription");
+        id = $("#roleid");
         _displayname = $("#txtDisplayname");
         _btnSubmit = $("#btnSubmit");
         FormValidator();
@@ -38,12 +39,45 @@ var rolejs = (function () {
     }
 
     var SaveRoleDetails = function () {
-//        var RoleJson = {};
-//        RoleJson.departmentid = _Departmentid.val();
-//        RoleJson.RoleName = _RoleName.val();
-//        RoleJson.RoleDescription = _RoleDescription.val();
-//        RoleJson.displayname =_displayname.val();
-//        alert(_RoleName.val());
+
+
+        var tileids = "";
+
+        var ParentTileIds = [];
+
+
+        $('.chk_tiles').each(function (index) {
+            if ($(this).is(':checked')) {
+
+                tileids += $(this).val() + ",";
+                var _ParentTileId = $(this).attr("data-chk_tilespar");
+                if (jQuery.inArray(_ParentTileId, ParentTileIds) == -1) {
+                    tileids += _ParentTileId + ",";
+                    ParentTileIds.push(_ParentTileId);
+                }
+
+            }
+        });
+        var RoleJson = {};
+        RoleJson.chk_module = [];
+        RoleJson.chk_tiles = tileids;
+
+        RoleJson.rolename = _RoleName.val();
+        RoleJson.id = id.val();
+
+
+        $('.chk_module').each(function (index) {
+            if ($(this).is(':checked')) {
+                var _ControllerAction = {};
+                _ControllerAction.ModuleId = $(this).val();
+                _ControllerAction.ControllerId = $(this).attr("data-ControllerId");
+                RoleJson.chk_module.push(_ControllerAction);
+            }
+        });
+
+
+
+//        alert(moduleIds);
         var validator = $('#frmrole').data('bootstrapValidator');
         validator.validate();
         if (validator.isValid()) {
@@ -51,20 +85,40 @@ var rolejs = (function () {
             $.ajax({
                 type: "POST",
                 url: _Url + 'Role/saveRole',
-                data: $('#frmrole').serialize(),
-//                dataType: 'json',
+                data: {RoleJson: RoleJson},
+                dataType: 'json',
                 success: function (data) {
                     $.LoadingOverlay("hide");
 //                                console.log(data);
+//                    var obj = JSON.parse(data);
+//                                console.log(data.message);
+//                                alert(data['message']);
                     if (data['isError'] == "N") {
-                        alert(data['message']);
+
+                        swal({
+                            title: "Success",
+                            text: data['message'],
+                            type: "success"
+                        },
+                                function () {
+                                    window.location.href = _Url + 'Role';
+                                });
                     } else {
-                        alert(data['message']);
+                        swal({
+                            title: "Error",
+                            text: data['message'],
+                            type: "error"
+                        });
+
+
                     }
                 },
                 error: function (xhr, textStatus, errorThrown) {
-                    alert("Error");
-                    alert(xhr.responseText);
+                    swal({
+                        title: "Error",
+                        text: "Technical Error Occured",
+                        type: "error"
+                    });
                 }
             })
         }

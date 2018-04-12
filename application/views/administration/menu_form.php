@@ -83,7 +83,7 @@
 
                                 </div>
 
-                                <div class="form-group row">
+<!--                                <div class="form-group row">
                                     <label for="controllerid" class="col-md-3 control-label lable-font">Roles<span class="text-danger">*</span></label>
                                     <div class="col-md-6">
                                         <select id="controllerid" name="controllerid" class="select2 select2-multiple select2" multiple="" data-placeholder="Choose ..." tabindex="-1" aria-hidden="true">
@@ -94,7 +94,7 @@
                                         </select>
                                         <i class=""></i>
                                     </div>
-                                </div>
+                                </div>-->
 
                                 <div class="form-group row">
                                     <label for="menuOrder" class="col-md-3 control-label lable-font">Menu Order (After)<span class="text-danger">*</span></label>

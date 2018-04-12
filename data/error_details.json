@@ -204,19 +204,19 @@
       "Message": "Technical Error occured while saving..Please contact admin"
    },
    {
-      "controlname": "mngcontroller",
+      "controlname": "MngController",
       "ActionName": "savemngcontroller",
       "ErrorCode": "1",
       "Message": "Successfully saved controller"
    },
    {
-      "controlname": "mngcontroller",
+      "controlname": "MngController",
       "ActionName": "savemngcontroller",
       "ErrorCode": "2",
       "Message": "Controllername Duplicated..Please check"
    },
    {
-      "controlname": "mngcontroller",
+      "controlname": "MngController",
       "ActionName": "savemngcontroller",
       "ErrorCode": "3",
       "Message": "Technical Error occured while saving..Please contact admin"
@@ -342,5 +342,41 @@
       "ActionName": "productSave",
       "ErrorCode": "3",
       "Message": "Technical Error occured while saving..Please contact admin"
-   }
+   },
+    {
+        "controlname": "Controlleraction",
+        "ActionName": "delete_controlleraction",
+        "ErrorCode": "1",
+        "Message": "Controlleraction deleted successfully"
+    },
+    {
+        "controlname": "Controlleraction",
+        "ActionName": "delete_controlleraction",
+        "ErrorCode": "2",
+        "Message": "Unable to delete record due to some dependency."
+    },
+    {
+        "controlname": "Controlleraction",
+        "ActionName": "delete_controlleraction",
+        "ErrorCode": "3",
+        "Message": "Technical Error occured while saving..Please contact admin"
+    },
+    {
+        "controlname": "MngController",
+        "ActionName": "delete_mngcontroller",
+        "ErrorCode": "1",
+        "Message": "Controller deleted successfully"
+    },
+    {
+        "controlname": "MngController",
+        "ActionName": "delete_mngcontroller",
+        "ErrorCode": "2",
+        "Message": "Unable to delete record due to some dependency."
+    },
+    {
+        "controlname": "MngController",
+        "ActionName": "delete_mngcontroller",
+        "ErrorCode": "3",
+        "Message": "Technical Error occured while saving..Please contact admin"
+    }
 ]

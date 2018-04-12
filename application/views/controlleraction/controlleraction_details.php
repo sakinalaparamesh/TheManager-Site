@@ -9,10 +9,11 @@
                                 <!--<form class="form-horizontal" role="form">-->
                                 <div class="action_icons">
                                     
-                                    <button class="btn btn-icon waves-effect color-dark waves-light" onclick="addBranchForm('');"> <i class="fa fa-pencil" title="Edit Branch"></i> </button>
+                                    <a class="btn btn-icon waves-effect color-dark waves-light" href="<?= base_url() ?>controlleraction/addoredit/<?= $details->actionid ?>"> <i class="fa fa-pencil" title="Edit Actions"></i> </a>
                                                                         
                                      
-                                    <button class="btn btn-icon waves-effect color-dark waves-light"> <i class="fa fa-trash" title="Inactive"></i> </button>                                                                          
+                                    <!--<a class="btn btn-icon waves-effect color-dark waves-light"> <i class="fa fa-trash" title="Inactive"></i> </a>-->    
+                                    <a class="btn btn-icon waves-effect color-dark waves-light mng_sa-delete" actionid="<?= $details->actionid?>"> <i class="fa fa-trash" title="Inactive"></i> </a> 
                                  
                                     </div>
                                     <div class="contact-card m-t-30">
@@ -35,3 +36,73 @@
                         </div>
                     </div>
     </div>
+<script>
+
+_Url='<?= base_url()?>';
+
+    !function ($) {
+        "use strict";
+
+        var SweetAlert = function () {
+        };
+
+        
+        SweetAlert.prototype.init = function () {
+            
+            
+            $('.mng_sa-delete').click(function () {
+                var id=$(this).attr("actionid");
+                  swal({
+                    title: "Are you sure?",
+                    text: "You will not be able to recover this record!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "No, cancel plx!",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                }, 
+                    function (isConfirm) {
+//                       alert(id);
+                    if (isConfirm) {
+                        $.LoadingOverlay("show");
+                        $.ajax({
+                            type: "POST",
+                            url: _Url + 'Controlleraction/delete_controlleraction',
+                            data: {id: id},
+                            dataType: 'json',
+                            success: function (data) {
+
+                                $.LoadingOverlay("hide");
+
+                                if (data['isError'] == "N") {
+                                    alert(data['message']);
+                                    swal("Deleted!",data['message'], "success");
+                                    location.reload();
+                                } else {
+                                    swal("Deleted!",data['message'], "error");
+                                }
+                            },
+                            error: function (data) {
+
+                            }
+                        })
+
+                    } else {
+                        swal("Cancelled", "Your imaginary file is safe :)", "error");
+                    }
+                });
+            });
+
+
+
+        },
+                $.SweetAlert = new SweetAlert, $.SweetAlert.Constructor = SweetAlert
+    }(window.jQuery),
+
+            function ($) {
+                "use strict";
+                $.SweetAlert.init()
+            }(window.jQuery);
+</script>

@@ -13,9 +13,9 @@
         </div>
         <div class="card-box">
             <div class="row">  
-                <?php if(checkPrivileges("Role","addOrEdit")){ ?>
+                <?php if(checkPrivileges("Role","RoleAdd")){ ?>
                 <div class="col-md-12 text-right m-b-10 pull-right">
-                    <a class="btn btn-default btn-sm" href="<?php echo base_url('role/addOrEdit'); ?>">Add Role <i class="fa fa-plus"></i></a>
+                    <a class="btn btn-default btn-sm" href="<?php echo base_url('role/addOrEdit'); ?>"> <i class="fa fa-plus"></i> Add Role</a>
                 </div>
                 <?php } ?>
                 <div class="col-md-12" id="myListView">                            
@@ -27,8 +27,7 @@
                                 <th data-priority="2">S.No</th>
                                 
                                 <th data-priority="3">Role Name </th>
-                                <th data-priority="3">Role Description </th>
-                                <th data-priority="3">Department</th>
+                                <!--<th data-priority="3">Role Description </th>-->
                                 <th data-priority="4">roleid</th>
                                 <th data-priority="5">Status</th>
 
@@ -46,7 +45,7 @@
             </div>
         </div>
         <!-- end page title end breadcrumb -->
-    </div> <!-- end container -->
+    </div>
 </div>
 <!-- end wrapper -->
 <script type="text/javascript">

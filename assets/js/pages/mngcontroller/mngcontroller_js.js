@@ -6,7 +6,7 @@ var mngcontrollerjs = (function () {
     var _Url;
     var _Load = function (url) {
         _Url = url;
-        _controllerid=$("#mngcontrollerid");
+        _controllerid=$("#controllerid");
         _controllername = $("#txtmngControllerName");
         _displayname = $("#txtmngcontrollerdisplayname");
         _description = $("#txtmngcontrollerDescription");
@@ -37,17 +37,31 @@ var mngcontrollerjs = (function () {
                 success: function (data) {
                     $.LoadingOverlay("hide");
 //                                console.log(data);
-                    if (data['isError'] == "N") {
-                        alert(data['message']);
-                        window.location.href = _Url + 'mngcontroller';
-                    } else {
-                        alert(data['message']);
+                    if (data['isError'] == "N") {                      
+                     swal({
+                            title: "Success",
+                            text: data['message'],
+                            type: "success"
+                        },
+                        function () {
+                            window.location.href = _Url + 'mngcontroller';
+                        });                    } else {
+                       
+                        swal({
+                            title: "Error",
+                            text: data['message'],
+                            type: "error"
+                        });
+
                     }
                     
                 },
                 error: function (xhr, textStatus, errorThrown) {
-                    alert("Error");
-                    alert(xhr.responseText);
+                     swal({
+                            title: "Error",
+                            text: "Technical Error Occured",
+                            type: "error"
+                        });
 
                 }
             })

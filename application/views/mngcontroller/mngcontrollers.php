@@ -1,4 +1,3 @@
-<!-- Page-Title -->
 <div class="wrapper">
     <div class="container-fluid">
         <div class="row">
@@ -15,9 +14,9 @@
             <div class="row">   
                 <?php // if(checkPrivileges("mngcontroller","addoredit")){ ?>
                 <div class="col-md-12 text-right m-b-10">
-                <a class="btn btn-default btn-sm" href="<?php echo base_url('mngcontroller/addOrEdit'); ?>">Add controller<i class="fa fa-plus-add"></i></a>
-                 </div>
-                 <?php // } ?>
+                    <a class="btn btn-default btn-sm" href="<?php echo base_url('mngController/addOrEdit'); ?>"> <i class="fa fa-plus"></i> Add controller</a>
+                </div>
+                <?php // } ?>
                 <div class="col-md-12" id="myListView">                            
                     <div class="box-body  table-responsive">
                         <table id="tblmngcontroller" data-toggle="table" data-page-size="10" data-pagination="true"  class="table table-bordered dataTable no-footer dtr-inline table-condensed table-responsive" style="width:100%;">
@@ -43,9 +42,8 @@
             </div>
         </div>
         <!-- end page title end breadcrumb -->
-    </div> <!-- end container -->
+    </div>
 </div>
-<!-- end wrapper -->
 <script type="text/javascript">
 
     $(document).ready(function () {
@@ -62,12 +60,12 @@
 //        alert(controllerid);
         $.ajax({
             type: "POST",
-            url: "<?php echo base_url('mngcontroller/getmngcontrollerFullDetailsAjax') ?>",
+            url: "<?php echo base_url('mngController/getmngcontrollerFullDetailsAjax') ?>",
             data: {"controllerid": controllerid},
             //data: form_data,
             success: function (response) { //alert(response);
                 $("#DetailsView").html(response);
-                 $.LoadingOverlay("hide");
+                $.LoadingOverlay("hide");
             },
             error: function () {
 //                alert("failure");

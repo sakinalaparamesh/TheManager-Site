@@ -1,5 +1,6 @@
 var controlleractionjs = (function () {
 
+    var _actionid;
     var _Controllerid;
     var _Controlleractionname;
     var _Actioncodename;
@@ -7,6 +8,7 @@ var controlleractionjs = (function () {
     var _Url;
     var _Load = function (url) {
         _Url = url;
+        _actionid = $("#actionid")
         _Controllerid = $("#controllerlist");
         _Controlleractionname = $("#txtcontrolleractionname");
         _Actioncodename = $("#txtactioncodename");
@@ -17,15 +19,17 @@ var controlleractionjs = (function () {
     }
     var _LoadEvents = function () {
         _btnSubmit.on('click', SavecontrolleractionDetails);
+        //alert("Hello");
     }
 
     var SavecontrolleractionDetails = function () {
         var controlleractionJson = {};
+        controlleractionJson.actionid = _actionid.val();
         controlleractionJson.controllerid = _Controllerid.val();
         controlleractionJson.controlleractionname = _Controlleractionname.val();
         controlleractionJson.actioncodename = _Actioncodename.val();
         controlleractionJson.actiondisplayname = _Actiondisplayname.val();
-//        alert(_Controlleractionname.val());
+       // alert(_Controlleractionname.val());
         var validator = $('#frmcontrolleraction').data('bootstrapValidator');
         validator.validate();
         if (validator.isValid()) {
@@ -39,16 +43,31 @@ var controlleractionjs = (function () {
                     $.LoadingOverlay("hide");
 //                                console.log(data);
                     if (data['isError'] == "N") {
-                        alert(data['message']);
-                    window.location.href = _Url + 'controlleraction';
+                        
+                        swal({
+                            title: "Success",
+                            text: data['message'],
+                            type: "success"
+                        },
+                                function () {
+                                    window.location.href = _Url + 'controlleraction';
+                                });
+
                     } else {
-                        alert(data['message']);
+                        swal({
+                            title: "Error",
+                            text: data['message'],
+                            type: "error"
+                        });
+
                     }
                 },
                 error: function (xhr, textStatus, errorThrown) {
-                    alert("Error");
-                    alert(xhr.responseText);
-
+                    swal({
+                            title: "Error",
+                            text: "Technical error occured",
+                            type: "error"
+                        });
                 }
             });
         }

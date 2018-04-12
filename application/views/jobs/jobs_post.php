@@ -31,7 +31,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="jobs_skillset" class="col-md-2">Skill set<span class="text-danger">*</span></label>
+                            <label for="jobs_skillset" class="col-md-2">Skill set<span class="text-danger"></span></label>
                             <!--                            <div class="col-md-4">
                                                             <input type="text" required="" name="jobs_position" parsley-type="name" class="form-control input-sm" id="jobs_position" placeholder="Job Position" value="<?= @$info->jobs_position ?>">
                                                         </div>-->
@@ -69,7 +69,7 @@
                             <label for="jobs_contact_email" class="col-md-2">Contact person email
                                 <span class="text-danger"></span></label>
                             <div class="col-md-4">
-                                <input type="email" class="form-control" id="jobs_contact_email" name="jobs_contact_email" value="<?= @$info->jobs_contact_email ?>">
+                                <input type="text" class="form-control" id="jobs_contact_email" name="jobs_contact_email" value="<?= @$info->jobs_contact_email ?>">
                             </div>
                         </div>
                         

@@ -49,9 +49,7 @@ var controlleractionGridJS = (function () {
                     return nRow;
                 }
                
-	    
-
-		});
+	    });
                  $("#tblcontrolleraction tbody").on("click","tr", function(){ 
                 var _row = $(this);
                 var _actionid  = dt.row(_row).data()["actionid"];

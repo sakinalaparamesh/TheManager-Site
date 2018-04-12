@@ -22,8 +22,8 @@ class Login_model extends CI_model {
                 /* Need to fetch user roles */
                 $this->db->select("urm.role_id,rm.rolename,urm.department_id,dm.departmentname");
                 $this->db->from("tdl_mng_user_roles urm");
-                $this->db->Join("tbl_mng_rolemaster rm", "rm.roleid = urm.role_id", "inner");
-                $this->db->Join("tbl_mng_departmentmaster dm", "dm.departmentid = urm.department_id", "inner");
+                $this->db->Join("tbl_mng_rolemaster rm", "rm.roleid = urm.role_id", "left");
+                $this->db->Join("tbl_mng_departmentmaster dm", "dm.departmentid = urm.department_id", "left");
                 $this->db->where("urm.user_id", $res->row()->userid);
                 $this->db->where(array("urm.isactive" => "Y"));
                 $userrolequery = $this->db->get();
@@ -35,9 +35,9 @@ FROM tdl_mng_user_roles where user_id='" . $res->row()->userid . "' AND isactive
                 $role_ids = $this->db->query($q1)->row()->role_ids;
                 $this->db->select("rp.role_id,rm.rolename,rp.controller_id,cm.controllername,cam.actioncodename");
                 $this->db->from("tbl_mng_role_privilages rp");
-                $this->db->Join("tbl_mng_rolemaster rm", "rm.roleid = rp.role_id", "inner");
-                $this->db->Join("tbl_mng_controllermaster cm", "cm.controllerid = rp.controller_id", "inner");
-                $this->db->Join("tbl_mng_controlleractionmaster cam", "cam.actionid = rp.action_id", "inner");
+                $this->db->Join("tbl_mng_rolemaster rm", "rm.roleid = rp.role_id", "left");
+                $this->db->Join("tbl_mng_controllermaster cm", "cm.controllerid = rp.controller_id", "left");
+                $this->db->Join("tbl_mng_controlleractionmaster cam", "cam.actionid = rp.action_id", "left");
                 $this->db->where_in("rm.roleid", $role_ids, false);
                 $this->db->where(array("rp.isactive" => "Y", "isgranted" => "Y"));
                 $userrole_privilages = $this->db->get();

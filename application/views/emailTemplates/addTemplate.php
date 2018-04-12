@@ -109,24 +109,7 @@
                             </div>
 
                         </div>
-                        <!--             <div class="form-group row">
-                                        <label for="isactive" class="col-md-2"> Status<span class="text-danger">*</span></label>
-                                        <div class="col-md-4">
-                                            <div class="radio">
-                                                <div class="radio  form-check-inline">
-                                                    <input type="radio" name="isactive" id="rb_isactive1" <?php //if($details[0]['isactive'] == 'Y'){ echo 'checked="checked"'; }          ?> value="Y">
-                                                    <label for="rb_isactive1"> Active </label>
-                                                </div>
-                                                <div class="radio form-check-inline">
-                                                    <input type="radio" name="isactive" id="rb_isactive2" <?php //if($details[0]['isactive'] == 'N'){ echo 'checked="checked"'; }          ?> value="N" disabled="">
-                                                    <label for="rb_isactive2"> InActive </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>-->
-
-
-
+                       
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label for="message" class="col-md-2"> Message<span class="text-danger">*</span></label>
@@ -186,12 +169,14 @@
     }
     function delete_dis(res) {
         var img = $(res).parent('.dis_img').attr('id');
+        $.LoadingOverlay("show");
 //        alert(img);
         $.ajax({
             type: "POST",
             url: _Url + 'EmailTemplates/deleteImage',
             data: {img: img},
             success: function (data) {
+                $.LoadingOverlay("hide");
                 $(res).parent('.dis_img').remove();
                 alert("Deleted successfully");
             },
@@ -222,6 +207,7 @@
 
             var formData = new FormData($(this).parents('form')[0]);
             formData.append('id', $("input[name='id']").val());
+            $.LoadingOverlay("show");
             $.ajax({
                 url: _Url + 'EmailTemplates/uploadImages',
                 type: 'POST',
@@ -230,6 +216,7 @@
                 contentType: false,
                 processData: false,
                 success: function (data) {
+                    $.LoadingOverlay("hide");
                     var obj = JSON.parse(data);
 
                     var src_html = '';

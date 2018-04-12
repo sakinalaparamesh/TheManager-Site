@@ -17,7 +17,7 @@ var mngcontrollerGridJS = (function () {
 			"processing": true,
 			"serverSide": true,
 			"ajax":{
-			 "url": _url + "mngcontroller/getAllmngcontrollers",
+			 "url": _url + "mngController/getAllmngcontrollers",
 			 "dataType": "json",
 			 "type": "POST",
 			 "data":{ _csrf_token_name : _csrf_hash }
