@@ -33,7 +33,7 @@ var GridJS = (function () {
                             { 
                             mRender: function (data, type, row) {
                                 var link = "";
-                                link = link + '<a href="'+_url+'add-email-template/'+ row.id +'" class="btn btn-primary action_btn_padding"><span class="Edit" title="Edit"><i class="fa fa-pencil"></i></span></a> &nbsp; &nbsp;';
+                                link = link + '<a href="'+_url+'emailTemplates/addTemplate/'+ row.id +'" class="btn btn-primary action_btn_padding"><span class="Edit" title="Edit"><i class="fa fa-pencil"></i></span></a> &nbsp; &nbsp;';
                                 return link; },orderable: false 
                             },
                 ],

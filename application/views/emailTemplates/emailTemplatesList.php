@@ -21,7 +21,7 @@
     <a class="btn btn-inverse btn-sm" href="javascript:">Search <i class="fa fa-search"></i></a>
 </div>-->
 <div class="col-md-12 text-right m-b-10 pull-right">
-    <a class="btn btn-default btn-sm" href="<?php echo base_url('add-email-template'); ?>">Add <i class="fa fa-plus"></i></a>
+    <a class="btn btn-default btn-sm" href="<?php echo base_url('emailTemplates/addTemplate'); ?>">Add <i class="fa fa-plus"></i></a>
 <!--    <a class="btn btn-default btn-sm" href="<?php //echo base_url('add-branch'); ?>">Add Branch <i class="fa fa-plus"></i></a>
     <a class="btn btn-default btn-sm" href="<?php //echo base_url('add-contact'); ?>">Add Contact <i class="fa fa-plus"></i></a>-->
 </div>
