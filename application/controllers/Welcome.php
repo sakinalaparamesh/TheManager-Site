@@ -59,6 +59,7 @@ class Welcome extends CI_Controller {
 
 //        $file_names = explode(",", $this->input->post('file_names'));
         $total = count($_FILES['file']);
+        
 //        if (count(array_unique($file_names)) < count($file_names)) {
 //            echo "array duplicated";
 //        } else {

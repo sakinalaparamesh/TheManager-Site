@@ -3,15 +3,17 @@ var productjs = (function () {
     var _ProductName;
     var _ProductCode;
     var _ProductDescription;
-    var _productlogo;
+    var _product_url;
+    var _product_id;
     var _Url;
     var _Load = function (url) {
         _Url = url;
-        _productid=$("#productid");
+        _productid = $("#productid");
         _ProductName = $("#txtProductName");
         _ProductCode = $("#txtProductCode");
         _ProductDescription = $("#txtProductDescription");
-        _productlogo = $("#productlogo")
+        _product_url = $("#product_url");
+        _product_id = $("#product_id");
         _btnSubmit = $("#btnSubmit");
         FormValidator();
         _LoadEvents();
@@ -23,22 +25,26 @@ var productjs = (function () {
     var SaveProductDetails = function () {
         var logoImg = $('input[name="productlogo"]').get(0).files[0];
 
-        var formData = new FormData();
-        formData.append('productlogo', logoImg);
+        var files_count = 0;
+        $(".block").each(function () {
+            files_count++;
+        });
 
-//        var ProductJson = {};
-//        ProductJson.ProductName = _ProductName.val();
-//        ProductJson.ProductCode = _ProductCode.val();
-//        ProductJson.ProductDescription = _ProductDescription.val();
-//        ProductJson.ProductLogo=_ProductLogo.val();
-//        
-        //alert(_ProductName.val());
+var exfiles_count = "";
+        $(".dis_img").each(function () {
+            exfiles_count+=$(this).attr("id")+",";
+        });
+
+        var formData = new FormData($("#upload").parents('form')[0]);
+        formData.append('productlogo', logoImg);
+        formData.append('files_count', files_count);
+        formData.append('exfiles_count', exfiles_count);
         formData.append('ProductId', _productid.val());
         formData.append('ProductName', _ProductName.val());
         formData.append('ProductCode', _ProductCode.val());
         formData.append('ProductDescription', _ProductDescription.val());
-//        formData.append('productlogo',_productlogo.val());
-
+        formData.append('product_url', _product_url.val());
+        formData.append('product_id', _product_id.val());
 
         var validator = $('#frmproduct').data('bootstrapValidator');
         validator.validate();
@@ -53,14 +59,32 @@ var productjs = (function () {
 //                        dataType: 'json',
                 success: function (data) {
                     $.LoadingOverlay("hide");
+
+
+//                    var formData = new FormData($('#upload').parents('form')[0]);
+//                    
+//                    $.LoadingOverlay("show");
+//                    $.ajax({
+//                        url: _Url + 'EmailTemplates/uploadImageste',
+//                        type: 'POST',
+//                        data: formData,
+//                        cache: false,
+//                        contentType: false,
+//                        processData: false,
+//                        success: function (data) {
+//
+//                        }
+//                    });
+
+
                     var obj = JSON.parse(data);
 //                                console.log(obj.message);
                     if (obj.isError == "N") {
                         alert(obj.message);
-                         window.location.href = _Url+'product';
+                        window.location.href = _Url + 'product';
                     } else {
                         alert(obj.message);
-                       
+
                     }
 //                            window.location.href = _Url+'product';
                 },

@@ -56,6 +56,9 @@ a:focus {
   right: 0;
   left: 240px;
   font-size: 13px; }
+#topnav .navigation-menu{
+    text-align: left!important;
+}
 
 #wrapper {
   height: 100%;
@@ -199,6 +202,7 @@ a:focus {
 
 .w-xs {
   min-width: 80px; }
+
 
 .w-sm {
   min-width: 95px; }

@@ -63,16 +63,16 @@ class EmailTemplates extends BaseController {
             $data['details'] = $details;
             $fpath = APPPATH . 'views/templates/' . $details[0]['message'] . '.php';
             $file = fopen($fpath, "r");
-            $content=fread($file, filesize($fpath));
+            $content = fread($file, filesize($fpath));
             fclose($file);
-            $data['details'][0]['message']=$content;
-
+            $data['details'][0]['message'] = $content;
+            $data['gallery'] = $this->Model->check("tbl_mng_template_images", array("email_template_id" =>$id))->result_array();
         } else {
             $data['template_id'] = uniqid();
             $this->Model->insert("tbl_email_templates", array("template_id" => $data['template_id'], "createdby" => $this->session->userdata()['UserInfo']['userid'], "createdon" => date('Y-m-d H:i:s')));
             $data['id'] = $this->db->insert_id();
-            
-            
+
+
             $data['details'][] = array('id' => $data['id'], 'template_id' => $data['template_id'], 'template_title' => '', 'subject' => '', 'message' => '', 'template_type' => '', 'productids' => '', 'isactive' => 'Y');
         }
 
@@ -112,8 +112,8 @@ class EmailTemplates extends BaseController {
     }
 
     public function uploadImages() {
-        $total = count($_FILES);
-
+        $total = $this->input->post('files_count');
+//echo $total;exit;
         $id = $this->input->post('id');
         $uploads = array();
 
@@ -134,6 +134,12 @@ class EmailTemplates extends BaseController {
         }
 
         echo json_encode($uploads);
+    }
+
+    public function uploadImageste() {
+        $total = count($_FILES);
+        echo $total;
+        exit;
     }
 
     public function deleteImage() {

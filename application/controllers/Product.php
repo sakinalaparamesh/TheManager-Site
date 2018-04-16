@@ -34,6 +34,7 @@ class Product extends CI_Controller {
                 "productid" => $id
             );
             $data['product_info'] = $this->Model->check("tbl_mng_productmaster", $q_data)->row();
+//            print_r($data['product_info']);exit;
         }
 
         $this->layout->view('products/product_form', $data);
@@ -41,18 +42,19 @@ class Product extends CI_Controller {
 
     public function saveProduct() {
 
-//        $ps_data = $this->input->post("productData");
-//        print_r($ps_data); exit;
         $productid = $this->input->post("ProductId");
         if ($productid == "") {
             $data = array(
                 "productname" => $this->input->post("ProductName"),
                 "productcode" => $this->input->post("ProductCode"),
+                "product_url" => $this->input->post("product_url"),
+                "product_id" => $this->input->post("product_id"),
                 "productdescription" => $this->input->post("ProductDescription"),
                 "isactive" => "Y",
                 "createdby" => $this->session->userdata("UserInfo")['userid'],
                 "createdon" => date("Y-m-d H:i:s")
             );
+            
             if (@$_FILES["productlogo"]["name"] != "" && isset($_FILES["productlogo"]["name"])) {
                 $file_data = do_upload("productlogo", 'product', $_FILES["productlogo"]['type']);
                 if (isset($file_data['error'])) {
@@ -61,10 +63,27 @@ class Product extends CI_Controller {
                     echo json_encode($resdata);
                     exit;
                 }
-                $pro_data['product_logo'] = $file_data['file_name'];
-            } else {
-                $pro_data['product_logo'] = "";
+                $data['product_logo'] = $file_data['file_name'];
             }
+            $total = $this->input->post('files_count');
+            $uploads = array();
+
+            for ($i = 0; $i < $total; $i++) {
+                $unique_id = uniqid();
+                $tmpFilePath = $_FILES['file']['tmp_name'][$i];
+
+                if ($tmpFilePath != "") {
+                    $array = explode('.', $_FILES['file']['name'][$i]);
+                    $extension = end($array);
+                    $file_name = $unique_id . '.' . $extension;
+                    $newFilePath = "./manager_gallary/product/" . $file_name;
+                    if (move_uploaded_file($tmpFilePath, $newFilePath)) {
+
+                        array_push($uploads, $file_name);
+                    }
+                }
+            }
+            $data['product_gallery'] = implode(",", $uploads);
             $resdata['error_code'] = $this->ProductModel->productSave($data);
 
             $resdata['message'] = getErrorMessages("Product", "saveProduct", $resdata['error_code']);
@@ -72,11 +91,14 @@ class Product extends CI_Controller {
             $data = array(
                 "productname" => $this->input->post("ProductName"),
                 "productcode" => $this->input->post("ProductCode"),
+                "product_url" => $this->input->post("product_url"),
+                "product_id" => $this->input->post("product_id"),
                 "productdescription" => $this->input->post("ProductDescription"),
                 "isactive" => "Y",
                 "updatedby" => $this->session->userdata("UserInfo")['userid'],
                 "updatedon" => date("Y-m-d H:i:s")
             );
+            
             if (@$_FILES["productlogo"]["name"] != "" && isset($_FILES["productlogo"]["name"])) {
                 $file_data = do_upload("productlogo", 'product', $_FILES["productlogo"]['type']);
                 if (isset($file_data['error'])) {
@@ -85,10 +107,29 @@ class Product extends CI_Controller {
                     echo json_encode($resdata);
                     exit;
                 }
-                $pro_data['product_logo'] = $file_data['file_name'];
-            } else {
-                $pro_data['product_logo'] = "";
+                $data['product_logo'] = $file_data['file_name'];
             }
+            $total = $this->input->post('files_count');
+            $exfiles_count=$this->input->post('exfiles_count');
+            $uploads = array();
+
+            for ($i = 0; $i < $total; $i++) {
+                $unique_id = uniqid();
+                $tmpFilePath = $_FILES['file']['tmp_name'][$i];
+
+                if ($tmpFilePath != "") {
+                    $array = explode('.', $_FILES['file']['name'][$i]);
+                    $extension = end($array);
+                    $file_name = $unique_id . '.' . $extension;
+                    $newFilePath = "./manager_gallary/product/" . $file_name;
+                    if (move_uploaded_file($tmpFilePath, $newFilePath)) {
+
+                        array_push($uploads, $file_name);
+                    }
+                }
+            }
+            $data['product_gallery'] =$exfiles_count;
+            $data['product_gallery'] .= implode(",", $uploads);
             $resdata['error_code'] = $this->ProductModel->productUpdate($data, $productid);
 
             $resdata['message'] = getErrorMessages("Product", "productSave", $resdata['error_code']);

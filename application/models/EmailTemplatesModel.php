@@ -143,7 +143,7 @@ class EmailTemplatesModel extends CI_model {
 
                     fclose($myfile);
                     $data["message"] = $unique_id;
-                    
+
                     $data['createdby'] = $this->session->userdata()['UserInfo']['userid'];
                     $data['createdon'] = date('Y-m-d H:i:s');
                     $error_code = ($this->db->insert('tbl_email_templates', $data)) ? 1 : 3;

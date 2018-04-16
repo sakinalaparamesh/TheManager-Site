@@ -25,39 +25,35 @@
             <div class="row">
                 <div class="col-md-12 text-center progress-loader">&nbsp;</div>
             </div>
-            <div class="row">
-                <div class="col-md-6">
 
-                    <form id="MyForm" method="post" enctype="multipart/form-data" action="" class="form-horizontal" novalidate="" role="form">
 
-                        <input type="hidden" name="id" value="<?php echo @$id; ?>">  
 
-                        <div class="form-group row">
-                            <label for="template_id" class="col-md-2">Template ID<span class="text-danger">*</span></label>
-                            <div class="col-md-6">
+            <form id="MyForm" method="post" enctype="multipart/form-data" action="" class="form-horizontal" novalidate="" role="form">
+                <div class="row">
+                    <input type="hidden" name="id" value="<?php echo @$details[0]['id']; ?>">
+                    <div class="col-md-6">                        
+                        <div class="form-group">
+                            <label for="template_id" class="control-label">Template ID<span class="text-danger">*</span></label>
+                            <div class="col-md-12">
                                 <input type="text" class="form-control input-sm" name="template_id" id="template_id" value="<?php echo @$details[0]['template_id']; ?>" placeholder="Template ID" readonly="">
                             </div>
                         </div>            
-                        <div class="form-group row">
-                            <label for="template_title" class="col-md-2">Title<span class="text-danger">*</span></label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control input-sm" name="template_title" id="template_title" value="<?php echo $details[0]['template_title']; ?>" placeholder="Title" <?php
-                                if ($details[0]['id']) {
-                                    echo 'readonly=""';
-                                }
-                                ?>>
+                        <div class="form-group ">
+                            <label for="template_title" class="control-label">Title<span class="text-danger">*</span></label>
+                            <div class="col-md-12">
+                                <input type="text" class="form-control input-sm" name="template_title" id="template_title" value="<?php echo $details[0]['template_title']; ?>" placeholder="Title" >
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="subject" class="col-md-2">Subject<span class="text-danger">*</span></label>
-                            <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="subject" class="control-label">Subject<span class="text-danger">*</span></label>
+                            <div class="col-md-12">
                                 <input type="text" class="form-control input-sm" name="subject" id="subject" value="<?php echo $details[0]['subject']; ?>" placeholder="Subject">
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="template_type" class="col-md-2"> Template Type<span class="text-danger">*</span></label>
-                            <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="template_type" class="control-label"> Template Type<span class="text-danger">*</span></label>
+                            <div class="col-md-12">
                                 <div class="radio">
                                     <div class="radio  form-check-inline">
                                         <input type="radio" name="template_type" id="rb_template_type1" <?php
@@ -86,9 +82,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group row" id="products_list_box"  <?php if ($details[0]['productids'] == '') echo 'style="display: none;"'; ?>>
+                        <div class="form-group " id="products_list_box"  <?php if ($details[0]['productids'] == '') echo 'style="display: none;"'; ?>>
 
-                            <label for="products" class="col-md-2">Products<span class="text-danger">*</span></label>
+                            <label for="products" class="control-label">Products<span class="text-danger">*</span></label>
 
                             <div class="col-md-12">
                                 <div class="checkbox">
@@ -108,41 +104,66 @@
                                 </div>
                             </div>
 
-                        </div>
-                       
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label for="message" class="col-md-2"> Message<span class="text-danger">*</span></label>
-                                <div class="col-md-9">
-                                    <textarea class="form-control" name="message" id="message" rows="10" required><?php echo $details[0]['message']; ?></textarea>
-                                </div>
+                        </div> 
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+                            <label for="message" class="control-label"> Message<span class="text-danger">*</span></label>
+                            <div class="col-md-12">
+                                <textarea class="form-control" name="message" id="message" required><?php echo $details[0]['message']; ?></textarea>
                             </div>
                         </div>
-                    </form>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group row">
-                    <label class="col-md-3">
-                        Upload Images</label>
-                    <div class="col-md-6">
-                        <input type="checkbox" id="upload_gall"/>
 
-                        <div style="display:none" id="image_blocks">
-                            <form enctype="multipart/form-data">
-                                <div class='block'>
-                                    <input name="file[]" type="file"/>
-                                    <!--<input name="file_name[]" type="text" placeholder="Image Name"  class="file_name"/>-->
-                                    <a class="delete-clr float-right" onclick="delete_block(this)">X</a>
-                                </div>
-                                <button class="add_more btn btn-primary">Add More Files</button>
-                                <input type="button" class="uplod-file" value="Upload File" id="upload"/>
-                            </form>
-                        </div>
                     </div>
-
-                    <div id="images_append"></div>
                 </div> 
+            </form>
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="col-md-3">
+                            Upload Images</label>
+                        <div class="col-md-6">
+
+
+
+                            <div class="checkbox checkbox-inverse form-check-inline">
+                                <input type="checkbox" id="upload_gall" <?= (count($gallery) > 0) ? "checked" : "" ?>/>
+                                <label for="upload_gall">  </label>
+                            </div>
+
+                            <div <?= (count($gallery) > 0) ? "" : "style='display:none'" ?> id="image_blocks">
+                                <form enctype="multipart/form-data">
+                                    <div class='block' style="margin-top:10px !important;">
+                                        <!--<input name="file[]" type="file" />-->
+                                        <div style="position:relative;">
+                                            <a class='btn btn-primary' href='javascript:;'>
+                                                Choose File...
+                                                <input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file[]" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
+                                            </a>
+                                            &nbsp;
+                                            <span class='label label-info' id="upload-file-info"></span>
+                                        </div>
+                                        <a class="delete-clr float-right"  style="position:relative;" onclick="delete_block(this)"><i class="fa fa-remove"></i></a>
+                                    </div>
+                                    <button class="add_more btn btn-primary">Add More Files</button>
+                                    <input type="button" class="uplod-file" value="Upload File" id="upload"/>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div id="images_append">
+                            <?php foreach ($gallery as $list) { ?>
+                                <div class="dis_img" id="<?= $list['template_images_name'] ?>">
+                                    <img src="<?= base_url() ?>template_images/<?= $list['template_images_name'] ?>" alt="something" style="width:60px;"/>
+                                    <a class="close-img" onclick="delete_dis(this)">X</a><br/><?= $list['template_images_name'] ?>
+                                </div>
+                            <?php } ?>
+                        </div>
+                    </div> 
+                </div>
             </div>
             <div class="form-group row ">
                 <label class="col-md-2"></label>
@@ -153,6 +174,9 @@
                     <button type="reset" class="btn btn-inverse waves-effect m-l-5 btn-sm">
                         CANCEL
                     </button>
+                    <button type="button" onclick="previewTemplate()" class="btn btn-inverse waves-effect m-l-5 btn-sm">
+                        view
+                    </button>
                 </div>
             </div>
         </div>
@@ -160,6 +184,44 @@
     </div> <!-- end container -->
 </div>
 <!-- end wrapper -->
+<!--Common Modal -->
+<!--<div class="modal fade content-wrapper modal-right"  role="dialog">
+    <div class="modal-dialog">
+         Modal content
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+
+
+            </div>
+
+        </div>
+
+    </div>
+</div>-->
+
+
+<!-- Modal -->
+<div class="modal fade" id="CommonModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title"></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     _Url = '<?= base_url() ?>';
@@ -186,6 +248,25 @@
 
     }
 
+    function previewTemplate() {
+
+        var msg = $("#message").val();
+        $('.modal-title').html('Preview Template');
+        $('.modal-body').html(msg);
+        $('#CommonModal').modal({show: true});
+//                                        $.ajax({
+//                                            type: "POST",
+//                                            url: _Url + 'Welcome/preview',
+//                                            data: {message: msg},
+//                                            success: function (data) {
+//                                                $('.modal-title').html('Preview Template');
+//                                                $('.modal-body').html(data);
+//                                                $('#CommonModal').modal({show: true});
+//                                            },
+//                                            error: function (data) {
+//                                            }
+//                                        })
+    }
     $(document).ready(function () {
         $('#upload_gall').click(function () {
             if ($(this).is(':checked')) {
@@ -199,14 +280,31 @@
 //        CKEDITOR.replace('message');
 
         $('.add_more').click(function (e) {
-            e.preventDefault();
-            $(this).before("<div class='block'><input name='file[]' type='file'/><a class='delete-clr float-right' onclick='delete_block(this)'>X</a></div>");
+            e.preventDefault(); 
+            var par="progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+            var field = '<div class="block" style="margin-top:10px !important;">' +
+                    '<div style="position:relative;">' +
+                    '<a class="btn btn-primary" href="javascript:;">Choose File...' +
+                    '<input type="file" style="position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity='+0+');-ms-filter:'+par+';opacity:0;background-color:transparent;color:transparent;" name="file[]" size="40"  onchange="$("#upload-file-info").html($(this).val());">' +
+                    '</a>&nbsp;' +
+                    '<span class="label label-info" id="upload-file-info"></span>' +
+                    '</div>' +
+                    '<a class="delete-clr float-right"  style="position:relative;" onclick="delete_block(this)"><i class="fa fa-remove"></i></a>' +
+                    '</div>';
+//            $(this).before("<div class='block'><input name='file[]' type='file'/><a class='delete-clr float-right' onclick='delete_block(this)'>X</a></div>");
+            $(this).before(field);
+
         });
         $('#upload').on('click', function (e) {
             e.preventDefault();
+            var files_count = 0;
+            $(".block").each(function () {
+                files_count++;
+            });
 
             var formData = new FormData($(this).parents('form')[0]);
             formData.append('id', $("input[name='id']").val());
+            formData.append('files_count', files_count);
             $.LoadingOverlay("show");
             $.ajax({
                 url: _Url + 'EmailTemplates/uploadImages',
@@ -298,7 +396,7 @@
                          },
                          function(){
                          //window.location.reload();
-                         window.location.href = "<?php //echo base_url('e-templates');           ?>";
+                         window.location.href = "<?php //echo base_url('e-templates');                 ?>";
                          }
                          );*/
                         window.location.href = "<?php echo base_url('e-templates'); ?>";

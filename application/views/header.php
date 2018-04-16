@@ -135,8 +135,8 @@
                                 </ul> -->
                             </li>
 
-                            <li class="active has-submenu">
-                                <a href="<?php echo base_url('administration'); ?>"><i class="md md-color-lens"></i>Administration</a>
+                            <li class="has-submenu active">
+                                <a href="<?php echo base_url('administration'); ?>"><i class="md md-dashboard"></i>Administration</a>
                              
                             </li>
 

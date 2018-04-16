@@ -307,13 +307,10 @@ class Clients extends BaseController {
     public function sendEmailAjax() {
 
         $data = $_POST;
-        //echo json_encode($data); exit;
-        
-        //print_r($data['allids']);  
-        
-        
+       
         $template_id = $data['template_id'];
-    
+//    echo $template_id;
+//        print_r($data['allids']);exit;
         foreach($data['allids'] as $ids){
             //$to_email = $this->clients_model->getEmailId($ids);
             $allids['clientId'] = $ids['clientid'];
@@ -322,14 +319,17 @@ class Clients extends BaseController {
             $result  = $this->clients_model->getClientFullDetails($allids);
             
             if(isset($result[0]['Email']) && $result[0]['Email'] != ''){
-                $to_emails = array($result[0]['Email']);
-                $name = (isset($result[0]['PersonName'])) ? $result[0]['PersonName'] : 'Sir/Madam';
-                //Send Email
-                $recipients = array('to' => $to_emails);
-                $replace_items = array('name'=>$name);
-                $this->load->library('emailtemplate');               
-                $sent_status = $this->emailtemplate->sendEmail($template_id, $recipients, $replace_items);
-                //echo json_encode($sent_status); exit;
+                $to_emails = $result[0]['Email'];
+//                print_r($to_emails);
+                $t_data['name'] = (isset($result[0]['PersonName'])) ? $result[0]['PersonName'] : 'Sir/Madam';
+                
+                $template_data= $this->Model->check("tbl_email_templates",array("template_id"=>$template_id))->row();
+                $t_data['template_images']=$this->Model->check("tbl_mng_template_images",array("email_template_id"=>$template_data->id))->result();
+                $view_path="templates/".$template_data->message.".php";
+                $message= $this->load->view($view_path,$t_data,TRUE);
+                
+                $sent_status= sendEmail($to_emails, $template_data->subject, $message);
+                
                 
                 $save_data = array(
                     "template_id" => $template_id,
