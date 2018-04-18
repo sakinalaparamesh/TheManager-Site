@@ -17,7 +17,7 @@
 
                     <button class="btn btn-icon waves-effect color-dark waves-light sa-delete" id="<?= $job_details['jobs_id'] ?>"> <i class="fa fa-trash" title="Inactive"></i> </button>
 
-                    <!--<button class="btn btn-icon waves-effect color-dark waves-light" onclick="clientProductMappingForm('');"> <i class="fa fa-tasks" title="Assign Products"></i> </button>-->
+                    <button class="btn btn-icon waves-effect color-dark waves-light" onclick="jobDisable('<?= $job_details['jobs_id'] ?>');"> <i class="fa fa-tasks" title="Assign Products"></i> </button>
 
                 </div>
                 <div class="contact-card m-t-30">

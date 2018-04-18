@@ -378,5 +378,17 @@
         "ActionName": "delete_mngcontroller",
         "ErrorCode": "3",
         "Message": "Technical Error occured while saving..Please contact admin"
+    },
+    {
+        "controlname": "Jobs",
+        "ActionName": "jobDisableAction",
+        "ErrorCode": "1",
+        "Message": "Successfully disabled the job."
+    },
+    {
+        "controlname": "Jobs",
+        "ActionName": "jobDisableAction",
+        "ErrorCode": "3",
+        "Message": "Technical Error occured while saving..Please contact admin"
     }
 ]

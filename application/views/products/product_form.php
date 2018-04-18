@@ -59,12 +59,20 @@
                                             <div class='block' style="margin-top:10px !important;">
                                         <!--<input name="file[]" type="file" />-->
                                                 <div style="position:relative;">
-                                                    <a class='btn btn-primary' href='javascript:;'>
+                                                    <a class='btn btn-primary uploadfl' href='javascript:;'>
                                                         Choose File...
-                                                        <input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file[]" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
+                                                        <input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file[]" size="40"  onchange='$(this).parent(".uploadfl").next(".upload-file-info").html($(this).val());'>
                                                     </a>
                                                     &nbsp;
-                                                    <span class='label label-info' id="upload-file-info"></span>
+                                                    <span class='label label-info upload-file-info'></span>
+
+
+                                                    <!--                                                    <a class='btn btn-primary' href='javascript:;'>
+                                                                                                            Choose File...
+                                                                                                            <input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file[]" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
+                                                                                                        </a>
+                                                                                                        &nbsp;
+                                                                                                        <span class='label label-info' id="upload-file-info"></span>-->
                                                 </div>
                                                 <a class="delete-clr float-right"  style="position:relative;" onclick="delete_block(this)"><i class="fa fa-remove"></i></a>
                                             </div>
@@ -105,15 +113,23 @@
                                     <img src="<?php echo base_url() . 'manager_gallary/product/' . @$product_info->product_logo; ?>" alt="Logo Image" style="width:50px;heigh:50px">
                                 <?php } ?>
                                 <div style="position:relative;">
-                                    <a class='btn btn-primary' href='javascript:;'>
+                                    <a class='btn btn-primary uploadfl' href='javascript:;'>
                                         Choose File...
-                                        <input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="productlogo" id="productlogo" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
+                                        <input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="productlogo" id="productlogo" size="40"  onchange='$(this).parent(".uploadfl").next(".upload-file-info").html($(this).val());'>
                                     </a>
                                     &nbsp;
-                                    <span class='label label-info' id="upload-file-info"></span>
+                                    <span class='label label-info upload-file-info'></span>
+
+
+                                    <!--                                    <a class='btn btn-primary' href='javascript:;'>
+                                                                            Choose File...
+                                                                            <input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="productlogo" id="productlogo" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
+                                                                        </a>
+                                                                        &nbsp;
+                                                                        <span class='label label-info' id="upload-file-info"></span>-->
                                 </div>
 
-                                    
+
 <!--                                <input type="file" name="productlogo" id="productlogo"/>-->
                             </div>
                         </div>
@@ -139,10 +155,10 @@
 <script src="<?php echo base_url(); ?>assets/validations/productValidation.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-                                                            function delete_dis(res) {
-                                                                var img = $(res).parent('.dis_img').attr('id');
+                                    function delete_dis(res) {
+                                        var img = $(res).parent('.dis_img').attr('id');
 //        $.LoadingOverlay("show");
-                                                                $(res).parent('.dis_img').remove();
+                                        $(res).parent('.dis_img').remove();
 //        alert(img);
 //        $.ajax({
 //            type: "POST",
@@ -157,45 +173,46 @@
 //            }
 //        })
 
-                                                            }
-                                                            function delete_block(res) {
+                                    }
+                                    function delete_block(res) {
 
-                                                                $(res).parent('.block').remove();
-                                                            }
-                                                            var _baseUrl = '<?php echo base_url(); ?>';
-                                                            $(document).ready(function () {
+                                        $(res).parent('.block').remove();
+                                    }
+                                    var _baseUrl = '<?php echo base_url(); ?>';
+                                    $(document).ready(function () {
 
-                                                                productjs.Load(_baseUrl);
+                                        productjs.Load(_baseUrl);
 
-                                                                $('.add_more').click(function (e) {
-                                                                    e.preventDefault();
-                                                                    var par = "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-                                                                    var field = '<div class="block" style="margin-top:10px !important;">' +
-                                                                            '<div style="position:relative;">' +
-                                                                            '<a class="btn btn-primary" href="javascript:;">Choose File...' +
-                                                                            '<input type="file" style="position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=' + 0 + ');-ms-filter:' + par + ';opacity:0;background-color:transparent;color:transparent;" name="file[]" size="40"  onchange="$("#upload-file-info").html($(this).val());">' +
-                                                                            '</a>&nbsp;' +
-                                                                            '<span class="label label-info" id="upload-file-info"></span>' +
-                                                                            '</div>' +
-                                                                            '<a class="delete-clr float-right"  style="position:relative;" onclick="delete_block(this)"><i class="fa fa-remove"></i></a>' +
-                                                                            '</div>';
+                                        $('.add_more').click(function (e) {
+                                            e.preventDefault();
+                                            var par = "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+                                            var action = "$(this).parent('.uploadfl').next('.upload-file-info').html($(this).val());";
+                                            var field = '<div class="block" style="margin-top:10px !important;">' +
+                                                    '<div style="position:relative;">' +
+                                                    '<a class="btn btn-primary uploadfl" href="javascript:;">Choose File...' +
+                                                    '<input type="file" style="position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=' + 0 + ');-ms-filter:' + par + ';opacity:0;background-color:transparent;color:transparent;" name="file[]" size="40"  onchange="' + action + '">' +
+                                                    '</a>&nbsp;' +
+                                                    '<span class="label label-info upload-file-info"></span>' +
+                                                    '</div>' +
+                                                    '<a class="delete-clr float-right"  style="position:relative;" onclick="delete_block(this)"><i class="fa fa-remove"></i></a>' +
+                                                    '</div>';
 
-                                                                    $(this).before(field);
+                                            $(this).before(field);
 
-                                                                });
-                                                                /* $('.add_more').click(function (e) {
-                                                                 e.preventDefault();
-                                                                 var field = "<div class='block' style='margin-top:10px !important;'>" +
-                                                                 "<div style='position:relative;'>" +
-                                                                 "<a class='btn btn-primary' href='javascript:;'>Choose File..." +
-                                                                 "<input type='file' style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)';opacity:0;background-color:transparent;color:transparent;' name='file[]' size='40'  onchange='$('#upload-file-info').html($(this).val());'>" +
-                                                                 "</a>&nbsp;" +
-                                                                 "<span class='label label-info' id='upload-file-info'></span>" +
-                                                                 "</div>" +
-                                                                 "<a class='delete-clr float-right'  style='position:relative;' onclick='delete_block(this)'><i class='fa fa-remove'></i></a>" +
-                                                                 "</div>";
-                                                                 $(this).before(field);
-                                                                 //                                                    $(this).before("<div class='block'><input name='file[]' type='file'/><a class='delete-clr float-right' onclick='delete_block(this)'>X</a></div>");
-                                                                 });*/
-                                                            })
+                                        });
+                                        /* $('.add_more').click(function (e) {
+                                         e.preventDefault();
+                                         var field = "<div class='block' style='margin-top:10px !important;'>" +
+                                         "<div style='position:relative;'>" +
+                                         "<a class='btn btn-primary' href='javascript:;'>Choose File..." +
+                                         "<input type='file' style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)';opacity:0;background-color:transparent;color:transparent;' name='file[]' size='40'  onchange='$('#upload-file-info').html($(this).val());'>" +
+                                         "</a>&nbsp;" +
+                                         "<span class='label label-info' id='upload-file-info'></span>" +
+                                         "</div>" +
+                                         "<a class='delete-clr float-right'  style='position:relative;' onclick='delete_block(this)'><i class='fa fa-remove'></i></a>" +
+                                         "</div>";
+                                         $(this).before(field);
+                                         //                                                    $(this).before("<div class='block'><input name='file[]' type='file'/><a class='delete-clr float-right' onclick='delete_block(this)'>X</a></div>");
+                                         });*/
+                                    })
 </script>

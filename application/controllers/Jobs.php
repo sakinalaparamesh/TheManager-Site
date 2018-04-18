@@ -144,4 +144,25 @@ class Jobs extends BaseController {
 //        redirect("Department");
     }
 
+    public function jobDisable() {
+        $data['jobid'] = $this->input->post('jobid');
+        
+        $this->load->view('jobs/job_disable_form', $data);
+    }
+
+    public function jobDisableAction() {
+        
+        if ($this->Model->update("tbl_mng_jobs", array("jobs_id" => $this->input->post('jobid')), array("jobs_disable_comment" => $this->input->post('jobs_disable_comment'), "isactive" => 'N'))) {
+            
+            $resdata['error_code'] = 1;
+        } else {
+            $resdata['error_code'] = 3;
+        }
+        
+        $resdata['message'] = getErrorMessages("Jobs", "jobDisableAction", $resdata['error_code']);
+
+        $resdata['isError'] = $resdata['error_code'] > 1 ? "Y" : "N";
+        echo json_encode($resdata);
+    }
+
 }

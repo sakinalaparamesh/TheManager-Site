@@ -14,6 +14,7 @@
         <link href="<?php echo base_url(); ?>assets/css/the-manager.css" rel="stylesheet" type="text/css" />
 <!--        <link href="<?php echo base_url(); ?>plugins/bootstrap-table/css/bootstrap-table.min.css" rel="stylesheet" type="text/css" />-->
         <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url(); ?>plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css"/>
          <!--<link href="<?php //echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet" type="text/css" />-->
         <link href="<?php echo base_url(); ?>assets/css/icons.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet" type="text/css" />
@@ -92,6 +93,7 @@
         <!-- Responsive examples -->
         <script src="<?php echo base_url(); ?>plugins/datatables/dataTables.responsive.min.js"></script>
         <script src="<?php echo base_url(); ?>plugins/datatables/responsive.bootstrap4.min.js"></script>
+        <script src="<?php echo base_url(); ?>plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
         
         <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/js/bootstrapValidator.min.js"> </script>
        

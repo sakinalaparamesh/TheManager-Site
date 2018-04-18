@@ -138,13 +138,21 @@
                                 <form enctype="multipart/form-data">
                                     <div class='block' style="margin-top:10px !important;">
                                         <!--<input name="file[]" type="file" />-->
+                                        
                                         <div style="position:relative;">
-                                            <a class='btn btn-primary' href='javascript:;'>
+                                            <a class='btn btn-primary uploadfl' href='javascript:;'>
+                                                        Choose File...
+                                                        <input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file[]" size="40"  onchange='$(this).parent(".uploadfl").next(".upload-file-info").html($(this).val());'>
+                                                    </a>
+                                                    &nbsp;
+                                                    <span class='label label-info upload-file-info'></span>
+                                                    
+<!--                                            <a class='btn btn-primary' href='javascript:;'>
                                                 Choose File...
                                                 <input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file[]" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
                                             </a>
                                             &nbsp;
-                                            <span class='label label-info' id="upload-file-info"></span>
+                                            <span class='label label-info' id="upload-file-info"></span>-->
                                         </div>
                                         <a class="delete-clr float-right"  style="position:relative;" onclick="delete_block(this)"><i class="fa fa-remove"></i></a>
                                     </div>
@@ -282,12 +290,13 @@
         $('.add_more').click(function (e) {
             e.preventDefault(); 
             var par="progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+            var action = "$(this).parent('.uploadfl').next('.upload-file-info').html($(this).val());";
             var field = '<div class="block" style="margin-top:10px !important;">' +
                     '<div style="position:relative;">' +
-                    '<a class="btn btn-primary" href="javascript:;">Choose File...' +
-                    '<input type="file" style="position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity='+0+');-ms-filter:'+par+';opacity:0;background-color:transparent;color:transparent;" name="file[]" size="40"  onchange="$("#upload-file-info").html($(this).val());">' +
+                    '<a class="btn btn-primary uploadfl" href="javascript:;">Choose File...' +
+                    '<input type="file" style="position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity='+0+');-ms-filter:'+par+';opacity:0;background-color:transparent;color:transparent;" name="file[]" size="40"  onchange="' + action + '">' +
                     '</a>&nbsp;' +
-                    '<span class="label label-info" id="upload-file-info"></span>' +
+                    '<span class="label label-info upload-file-info"></span>' +
                     '</div>' +
                     '<a class="delete-clr float-right"  style="position:relative;" onclick="delete_block(this)"><i class="fa fa-remove"></i></a>' +
                     '</div>';

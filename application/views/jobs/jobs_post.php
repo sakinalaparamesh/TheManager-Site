@@ -55,21 +55,21 @@
                             <label for="jobs_experience_min" class="col-md-2">Minimum years
                                 <span class="text-danger"></span></label>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" id="jobs_experience_min" name="jobs_experience_min" value="<?= @$info->jobs_experience ?>">
+                                <input type="number" class="form-control" id="jobs_experience_min" name="jobs_experience_min" value="<?= @explode("-", $info->jobs_experience)[0] ?>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="jobs_experience_max" class="col-md-2">Maximum years
                                 <span class="text-danger"></span></label>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" id="jobs_experience_max" name="jobs_experience_max" value="<?= @$info->jobs_experience ?>">
+                                <input type="number" class="form-control" id="jobs_experience_max" name="jobs_experience_max" value="<?= @@explode("-", $info->jobs_experience)[1] ?>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="jobs_contact_email" class="col-md-2">Contact person email
                                 <span class="text-danger"></span></label>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" id="jobs_contact_email" name="jobs_contact_email" value="<?= @$info->jobs_contact_email ?>">
+                                <input type="email" class="form-control" id="jobs_contact_email" name="jobs_contact_email" value="<?= @$info->jobs_contact_email ?>">
                             </div>
                         </div>
                         
@@ -83,21 +83,21 @@
 
                             <label for="jobs_position_startdate" class="col-md-2">Start date <span class="text-danger"></span></label>
                             <div class="col-md-4">
-                                <input id="jobs_position_startdate" name="jobs_position_startdate" type="text" placeholder="Posting start date" class="form-control input-sm" value="<?= @$info->jobs_position_startdate ?>">
+                                <input id="jobs_position_startdate" name="jobs_position_startdate" type="text" placeholder="Posting start date" class="form-control input-sm datepicker_common" value="<?= date("Y-m-d", strtotime(@$info->jobs_position_startdate)) ?>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="jobs_position_enddate" class="col-md-2">End date
                                 <span class="text-danger"></span></label>
                             <div class="col-md-4">
-                                <input id="jobs_position_enddate" name="jobs_position_enddate" type="text" placeholder="End date" class="form-control input-sm" value="<?= @$info->jobs_position_enddate ?>">
+                                <input id="jobs_position_enddate" name="jobs_position_enddate" type="text" placeholder="End date" class="form-control input-sm datepicker_common" value="<?= date("Y-m-d", strtotime(@$info->jobs_position_enddate)) ?>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="jobs_joiningdate" class="col-md-2">Joining Date
                                 <span class="text-danger"></span></label>
                             <div class="col-md-4">
-                                <input id="jobs_joiningdate" name="jobs_joiningdate" type="text" placeholder="Joining Date" class="form-control input-sm" value="<?= @$info->jobs_joiningdate ?>">
+                                <input id="jobs_joiningdate" name="jobs_joiningdate" type="text" placeholder="Joining Date" class="form-control input-sm datepicker_common" value="<?= date("Y-m-d", strtotime(@$info->jobs_joiningdate)) ?>">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -144,6 +144,14 @@
     $(document).ready(function () {
         $('.js-example-basic-single').select2({
             placeholder: 'Select an option'
+        });
+        var todaysDate = new Date();
+        $('.datepicker_common').datepicker({
+            autoclose: true,
+            format: 'mm/dd/yyyy',
+//            endDate: todaysDate,
+            todayBtn: "linked",
+            todayHighlight: true
         });
         CKEDITOR.replace('jobs_eligibilitycriteria');
         var _baseUrl = '<?php echo base_url(); ?>';
