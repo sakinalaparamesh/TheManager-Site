@@ -25,4 +25,11 @@ class Model extends CI_Model{
         $this->db->where($check);
         return $this->db->delete($table); 
     }
+    public function last_inserted_rec($table,$col) {
+        $last = $this->db->order_by($col,"desc")
+		->limit(1)
+		->get($table)
+		->row(); 
+        return $last;
+    }
 }

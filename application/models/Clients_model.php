@@ -414,5 +414,12 @@ class Clients_model extends CI_model {
         return $error_code;
     }
     
+
+    public function getClients($pid) {
+        $sql="select tbl_mng_clientmaster.clientid,tbl_mng_clientmaster.clientname from tbl_mng_clientmaster join tbl_client_product_mapping on"
+                . " tbl_mng_clientmaster.clientid=tbl_client_product_mapping.clientid where tbl_client_product_mapping.productid='".$pid."'";
+        return $this->db->query($sql);
+    }
+    
 	
 }//class

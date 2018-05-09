@@ -48,7 +48,7 @@ class Administration extends BaseController {
         $menu_data = array(
             "isparent" => $ps_data["isparent"],
             "parent_id" => $ps_data["parent_id"],
-            "role_id" => $ps_data["controller_id"],
+//            "role_id" => $ps_data["controller_id"],
             "menu_name" => $ps_data["menu_name"],
             "display_name" => $ps_data["display_name"],
             "description" => $ps_data["description"],
@@ -89,6 +89,41 @@ class Administration extends BaseController {
         $search = (!empty($search)) ? $search : '';
 
         $result = $this->Administration_model->getAllMenus($limit, $start, $search, $order, $dir);
+        $totalFiltered = $totalData = $result['totalFiltered'];
+        $data = $result['ResultData'];
+        if (!empty($search))
+            $totalFiltered = count($data);
+
+        $json_data = array(
+            "draw" => intval($this->input->post('draw')),
+            "recordsTotal" => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data" => $data,
+            "limit" => $limit,
+            "start" => $start,
+        );
+
+        echo json_encode($json_data);
+    }
+    
+    public function enquiries() {
+        $data['title'] = "Enquiries";
+        //breadcrumbs
+        $this->breadcrumbs->push('Administration', 'Administration');
+        $this->breadcrumbs->push('Enquiries', 'Enquiries');
+        $this->layout->view('administration/enquiries', $data);
+    }
+    
+    public function getAllEnquiries() {
+
+        $limit = $this->input->post('length');
+        $start = $this->input->post('start');
+        $order = $this->input->post('order')[0]['column'];
+        $dir = $this->input->post('order')[0]['dir'];
+        $search = $this->input->post('search')['value'];
+        $search = (!empty($search)) ? $search : '';
+
+        $result = $this->Administration_model->getAllEnquiries($limit, $start, $search, $order, $dir);
         $totalFiltered = $totalData = $result['totalFiltered'];
         $data = $result['ResultData'];
         if (!empty($search))

@@ -11,11 +11,11 @@ class Clients extends BaseController {
         //$this->layout->setLayout('layout/adminLayout');
         $this->load->model('clients_model');
         $this->load->model('productModel');
-        $this->load->model('emailTemplatesModel');        
+        $this->load->model('emailTemplatesModel');
     }
 
     public function index() {
-        
+
         $data['title'] = "Clients";
         //breadcrumbs
         $this->breadcrumbs->push('Administration', 'administration');
@@ -23,6 +23,7 @@ class Clients extends BaseController {
 
         $this->layout->view('clients/clientsList', $data);
     }
+
     public function getAllClients() {
 
         $limit = $this->input->post('length');
@@ -101,6 +102,7 @@ class Clients extends BaseController {
         //echo "<pre>"; print_r($data); exit;
         $this->load->view('clients/clientDetails', $data);
     }
+
     public function getBranchRegFormAajx() {
         $data = array();
         $clientId = $_POST['clientId'];
@@ -117,6 +119,7 @@ class Clients extends BaseController {
         }
         $this->load->view('clients/addBranchForm', $data);
     }
+
     public function saveBranchAjax() {
 
         $ps_data = $_POST;
@@ -137,6 +140,7 @@ class Clients extends BaseController {
         $resdata['isError'] = $resdata['error_code'] > 1 ? "Y" : "N";
         echo json_encode($resdata);
     }
+
     //Contact Details
     public function getClientContactFormAjax() {
         $data = array();
@@ -186,13 +190,13 @@ class Clients extends BaseController {
 
 //client type
     public function clientTypeForm() {
-        
+
         $data['title'] = "Add Client Type";
         //breadcrumbs
         $this->breadcrumbs->push('Administration', 'administration');
         $this->breadcrumbs->push('Client Types', 'clients/clientTypes');
         $this->breadcrumbs->push('Add Client Type', 'clients/clientTypeForm');
-        
+
         $this->layout->view('clients/client_type_registration', $data);
     }
 
@@ -212,8 +216,9 @@ class Clients extends BaseController {
         $resdata['isError'] = $resdata['error_code'] > 1 ? "Y" : "N";
         echo json_encode($resdata);
     }
+
     public function clientTypes() {
-        
+
         $data['title'] = "Client Types";
         //breadcrumbs
         $this->breadcrumbs->push('Administration', 'administration');
@@ -221,6 +226,7 @@ class Clients extends BaseController {
 
         $this->layout->view('clients/client_type', $data);
     }
+
     public function getAllClientTypes() {
         $limit = $this->input->post('length');
         $start = $this->input->post('start');
@@ -246,17 +252,18 @@ class Clients extends BaseController {
 
         echo json_encode($json_data);
     }
+
     //Client Product Mapping
     public function getClientProductMappingFormAjax() {
-        
+
         error_reporting(0);
-        
+
         $data = array();
         $data['clientid'] = $_POST['clientId'];
-        
+
         //$data['products'] = $this->productModel->getActiveProducts();
         //$data['clientDetails'] = $this->clients_model->getClientDetailsById($data['clientid']);        
-        
+
         if ($data['clientid']) {
             $details = $this->clients_model->getClientProductsMappingDetails($data['clientid']);
             if (count($details) > 0) {
@@ -267,18 +274,19 @@ class Clients extends BaseController {
         } else {
             $data['details'][] = array('id' => 0, 'clientname' => '', 'clientid' => '', 'productid' => '', 'isactive' => 'Y');
         }
-        
-       //echo "<pre>"; print_r($data); exit;
+
+        //echo "<pre>"; print_r($data); exit;
         $this->load->view('clients/clientProductMappingForm', $data);
     }
+
     public function saveClientProductMapping() {
 
         $data = $_POST;
         //echo json_encode($data); exit;
         //delete products
         $this->db->delete('tbl_client_product_mapping', array('clientid' => $data["clientid"]));
-  
-        foreach ($data['products'] as $prod){
+
+        foreach ($data['products'] as $prod) {
             $save_data = array(
                 //"id" => $data["id"],
                 "id" => 0,
@@ -292,45 +300,47 @@ class Clients extends BaseController {
         $resdata['isError'] = $resdata['error_code'] > 1 ? "Y" : "N";
         echo json_encode($resdata);
     }
+
     //Send Email
     public function emailFormAjax() {
         $data = array();
         $clientId = $_POST['clientId'];
         $branchId = $_POST['branchId'];
-        
+
         $data['templates_list'] = $this->emailTemplatesModel->getActiveEmailTemplates();
-        
+
         //echo "<pre>"; print_r($data);
 
         $this->load->view('clients/emailForm', $data);
     }
+
     public function sendEmailAjax() {
 
         $data = $_POST;
-       
+
         $template_id = $data['template_id'];
 //    echo $template_id;
 //        print_r($data['allids']);exit;
-        foreach($data['allids'] as $ids){
+        foreach ($data['allids'] as $ids) {
             //$to_email = $this->clients_model->getEmailId($ids);
             $allids['clientId'] = $ids['clientid'];
             $allids['branchId'] = $ids['branchid'];
             $allids['contactId'] = $ids['contactid'];
-            $result  = $this->clients_model->getClientFullDetails($allids);
-            
-            if(isset($result[0]['Email']) && $result[0]['Email'] != ''){
+            $result = $this->clients_model->getClientFullDetails($allids);
+
+            if (isset($result[0]['Email']) && $result[0]['Email'] != '') {
                 $to_emails = $result[0]['Email'];
 //                print_r($to_emails);
                 $t_data['name'] = (isset($result[0]['PersonName'])) ? $result[0]['PersonName'] : 'Sir/Madam';
-                
-                $template_data= $this->Model->check("tbl_email_templates",array("template_id"=>$template_id))->row();
-                $t_data['template_images']=$this->Model->check("tbl_mng_template_images",array("email_template_id"=>$template_data->id))->result();
-                $view_path="templates/".$template_data->message.".php";
-                $message= $this->load->view($view_path,$t_data,TRUE);
-                
-                $sent_status= sendEmail($to_emails, $template_data->subject, $message);
-                
-                
+
+                $template_data = $this->Model->check("tbl_email_templates", array("template_id" => $template_id))->row();
+                $t_data['template_images'] = $this->Model->check("tbl_mng_template_images", array("email_template_id" => $template_data->id))->result();
+                $view_path = "templates/" . $template_data->message . ".php";
+                $message = $this->load->view($view_path, $t_data, TRUE);
+
+                $sent_status = sendEmail($to_emails, $template_data->subject, $message);
+
+
                 $save_data = array(
                     "template_id" => $template_id,
                     "clientid" => $ids["clientid"],
@@ -346,10 +356,15 @@ class Clients extends BaseController {
             }
         }//foreach
         //print_r($final_output);
-        
+
         $resdata['message'] = getErrorMessages("Clients", "SendEmail", $resdata['error_code']);
         $resdata['isError'] = $resdata['error_code'] > 1 ? "Y" : "N";
         echo json_encode($resdata);
+    }
+
+    public function getClients() {
+        $result = $this->clients_model->getClients($this->input->get('pid'))->result();
+        echo json_encode($result);
     }
 
 }

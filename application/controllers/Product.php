@@ -185,5 +185,5 @@ class Product extends CI_Controller {
 
         $this->load->view('products/product_details', $data);
     }
-
+    
 }

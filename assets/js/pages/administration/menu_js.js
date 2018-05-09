@@ -36,7 +36,7 @@ var menujs = (function () {
         var MenuJson = {};
         MenuJson.isparent = $("input[name='IsParentMenu']:checked").val();
         MenuJson.parent_id = _parent_id.val();
-        MenuJson.controller_id = _controller_id.val().toString();
+        MenuJson.controller_id = _controller_id.val();
         MenuJson.menu_name = _menu_name.val();
         MenuJson.display_name = _display_name.val();
         MenuJson.description = _description.val();

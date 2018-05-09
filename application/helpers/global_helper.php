@@ -110,7 +110,7 @@ if (!function_exists('checkPrivileges')) {
 if (!function_exists('sendEmail')) {
 
 
-    function sendEmail($to, $subject, $message, $headers='') {
+    function sendEmail($to, $subject, $message, $headers = '') {
         // Always set content-type when sending HTML email
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
@@ -119,9 +119,9 @@ if (!function_exists('sendEmail')) {
         $headers .= 'From: <noreply@provalley.net>' . "\r\n";
         //$headers .= 'Cc: myboss@example.com' . "\r\n";
 
-        if(mail($to, $subject, $message, $headers)){
+        if (mail($to, $subject, $message, $headers)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -140,6 +140,17 @@ if (!function_exists('dataCompare')) {
         } else {
             return FALSE;
         }
+    }
+
+}
+
+if (!function_exists('genSubCode')) {
+
+    function genSubCode($str) {
+        $numbers = preg_replace('/[^0-9]/', '', $str);
+        $letters = preg_replace('/[^a-zA-Z]/', '', $str);
+        $new_code = strtoupper($letters) . sprintf('%05d', (intval($numbers) + 1));
+        return $new_code;
     }
 
 }

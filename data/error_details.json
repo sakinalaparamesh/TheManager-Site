@@ -390,5 +390,11 @@
         "ActionName": "jobDisableAction",
         "ErrorCode": "3",
         "Message": "Technical Error occured while saving..Please contact admin"
+    },
+    {
+        "controlname": "ProductSubscriptions",
+        "ActionName": "saveSubscription",
+        "ErrorCode": "1",
+        "Message": "Successfully saved the subscription."
     }
 ]

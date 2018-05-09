@@ -130,6 +130,55 @@ class Administration_model extends CI_model {
         $result = $this->db->query($query);
         return $result;
     }
+    
+    public function getAllEnquiries($limit = 10, $start = 0, $search = '', $order = null, $dir = null) {
+        try {
+            $data = array();
+            $data['totalFiltered'] = $this->getEnquiriesCountBySearch($search);
+            //Filter records Data
+            $this->db->select("eq.enquiries_id,eq.enquiries_name,eq.enquiries_company,eq.enquiries_email,eq.enquiries_phone,eq.enquiries_message,pd.productname");
+            $this->db->from("tbl_mng_enquiries as eq");
+            $this->db->join("tbl_mng_productmaster as pd","pd.productid=eq.enquiries_product_id");
+            //Search
+            if ($search) {
+                $this->db->like(array("CONCAT(ifnull(pd.productname,''),' ',ifnull(eq.enquiries_name,''))" => $search));
+            }
+            //OrderBy
+            if ($dir == null)
+                $dir = 'DESC';
+            if ($order == 2) {
+                $this->db->order_by('pd.productname', $dir);
+            } else if ($order == 3) {
+                $this->db->order_by('eq.enquiries_name', $dir);
+            }
+            $this->db->limit($limit, $start);
+            $query = $this->db->get();
+            //echo $this->db->last_query(); exit;
+            $data['ResultData'] = $query->result_array();
+            //echo "<pre>"; print_r($data); exit;
+            return $data;
+        } catch (Exception $e) {
+            log_message('error', $e->getMessage());
+            echo "ERROR: " . $e->getMessage();
+        }
+    }
+
+    public function getEnquiriesCountBySearch($search = '') {
+        try {
+            //Filtered Records Count
+            $this->db->select("eq.enquiries_id,eq.enquiries_name,eq.enquiries_company,eq.enquiries_email,eq.enquiries_phone,eq.enquiries_message,pd.productname");
+            $this->db->from("tbl_mng_enquiries as eq");
+            $this->db->join("tbl_mng_productmaster as pd","pd.productid=eq.enquiries_product_id");
+            if ($search) {
+                $this->db->like(array("CONCAT(ifnull(pd.productname,''),' ',ifnull(eq.enquiries_name,''))" => $search));
+            }
+            $query = $this->db->get();
+            return $query->num_rows();
+        } catch (Exception $e) {
+            log_message('error', $e->getMessage());
+            echo "ERROR: " . $e->getMessage();
+        }
+    }
 
 }
 
