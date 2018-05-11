@@ -54,11 +54,11 @@ var subscriptionGridJS = (function () {
             }
 
         });
-        $("#tblproduct tbody").on("click", "tr", function () {
+        $("#tblsub tbody").on("click", "tr", function () {
             var _row = $(this);
-            var _productid = dt.row(_row).data()["productid"];
-//                alert(_productid);
-            openSidebar(_productid);
+            var _id = dt.row(_row).data()["subscriptions_id"];
+//                alert(_id);
+            openSidebar(_id);
         });
     }
     return {Load: _Load}

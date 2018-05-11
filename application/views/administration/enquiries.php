@@ -26,6 +26,7 @@
                                     <th data-priority="3">Company</th>
                                     <th data-priority="3">Email</th>
                                     <th data-priority="3">Phone</th>
+                                    <th data-priority="4">Date/Time</th>
                                     <th data-priority="4">Message</th>
                                 </tr>
                             </thead>

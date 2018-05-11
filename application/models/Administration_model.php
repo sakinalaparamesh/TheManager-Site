@@ -136,9 +136,9 @@ class Administration_model extends CI_model {
             $data = array();
             $data['totalFiltered'] = $this->getEnquiriesCountBySearch($search);
             //Filter records Data
-            $this->db->select("eq.enquiries_id,eq.enquiries_name,eq.enquiries_company,eq.enquiries_email,eq.enquiries_phone,eq.enquiries_message,pd.productname");
+            $this->db->select("eq.enquiries_id,eq.enquiries_name,eq.enquiries_company,eq.enquiries_email,eq.enquiries_phone,eq.enquiries_message,pd.productname,eq.created_on");
             $this->db->from("tbl_mng_enquiries as eq");
-            $this->db->join("tbl_mng_productmaster as pd","pd.productid=eq.enquiries_product_id");
+            $this->db->join("tbl_mng_productmaster as pd","pd.productid=eq.enquiries_product_id","left");
             //Search
             if ($search) {
                 $this->db->like(array("CONCAT(ifnull(pd.productname,''),' ',ifnull(eq.enquiries_name,''))" => $search));
@@ -166,9 +166,9 @@ class Administration_model extends CI_model {
     public function getEnquiriesCountBySearch($search = '') {
         try {
             //Filtered Records Count
-            $this->db->select("eq.enquiries_id,eq.enquiries_name,eq.enquiries_company,eq.enquiries_email,eq.enquiries_phone,eq.enquiries_message,pd.productname");
+            $this->db->select("eq.enquiries_id,eq.enquiries_name,eq.enquiries_company,eq.enquiries_email,eq.enquiries_phone,eq.enquiries_message,pd.productname,eq.created_on");
             $this->db->from("tbl_mng_enquiries as eq");
-            $this->db->join("tbl_mng_productmaster as pd","pd.productid=eq.enquiries_product_id");
+            $this->db->join("tbl_mng_productmaster as pd","pd.productid=eq.enquiries_product_id","left");
             if ($search) {
                 $this->db->like(array("CONCAT(ifnull(pd.productname,''),' ',ifnull(eq.enquiries_name,''))" => $search));
             }

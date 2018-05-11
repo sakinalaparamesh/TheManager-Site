@@ -36,6 +36,7 @@ var GridJS = (function () {
                 {"data": "enquiries_company", "orderable": true},
                 {"data": "enquiries_email", "orderable": true},
                 {"data": "enquiries_phone", "orderable": true},
+                {"data": "created_on", "orderable": true},
                 {"data": "enquiries_message", "orderable": true},
             ], "fnRowCallback": function (nRow, aData, iDisplayIndex) {
 

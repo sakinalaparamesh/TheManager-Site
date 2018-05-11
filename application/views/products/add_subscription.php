@@ -30,28 +30,28 @@
                         <div class="form-group row">
                             <label for="subscriptions_company_name" class="col-md-2">Company Name<span class="text-danger">*</span></label>
                             <div class="col-md-4">
-                                <input type="text" required="" name="subscriptions_company_name" parsley-type="name" class="form-control input-sm" id="subscriptions_company_name" placeholder="Product Name" value="<?= @$product_info->subscriptions_company_name ?>">
+                                <input type="text" required="" name="subscriptions_company_name" parsley-type="name" class="form-control input-sm" id="subscriptions_company_name" placeholder="Company Name" value="<?= @$product_info->subscriptions_company_name ?>">
                             </div>
                         </div>
                         <div class="form-group row">
 
                             <label for="subscriptions_reg_number" class="col-md-2">Company Registration Number<span class="text-danger">*</span></label>
                             <div class="col-md-4">
-                                <input id="subscriptions_reg_number" name="subscriptions_reg_number" type="text" placeholder="Product code" required="" class="form-control input-sm" value="<?= @$product_info->subscriptions_reg_number ?>">
+                                <input id="subscriptions_reg_number" name="subscriptions_reg_number" type="text" placeholder="Company Registration Number" required="" class="form-control input-sm" value="<?= @$product_info->subscriptions_reg_number ?>">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="subscriptions_cmp_email" class="col-md-2">Company Email<span class="text-danger">*</span></label>
                             <div class="col-md-4">
-                                <input id="subscriptions_cmp_email" required="" name="subscriptions_cmp_email" type="text" placeholder="Product URL"  class="form-control input-sm" value="<?= @$product_info->subscriptions_cmp_email ?>">
+                                <input id="subscriptions_cmp_email" required="" name="subscriptions_cmp_email" type="text" placeholder="Company Email"  class="form-control input-sm" value="<?= @$product_info->subscriptions_cmp_email ?>">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="subscriptions_cmp_phone" class="col-md-2">Company Phone Number<span class="text-danger">*</span></label>
                             <div class="col-md-4">
-                                <input id="subscriptions_cmp_phone" required="" name="subscriptions_cmp_phone" type="text" placeholder="Product URL"  class="form-control input-sm" value="<?= @$product_info->subscriptions_cmp_phone ?>">
+                                <input id="subscriptions_cmp_phone" required="" name="subscriptions_cmp_phone" type="text" placeholder="Company Phone Number"  class="form-control input-sm" value="<?= @$product_info->subscriptions_cmp_phone ?>">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -66,7 +66,7 @@
                         <div class="form-group row">
                             <label for="subscriptions_cmp_login" class="col-md-2">Company Login</label>
                             <div class="col-md-4">
-                                <input id="subscriptions_cmp_login" name="subscriptions_cmp_login" type="text" placeholder="Product ID"  class="form-control input-sm" value="<?= @$product_info->product_id ?>">
+                                <input id="subscriptions_cmp_login" name="subscriptions_cmp_login" type="text" placeholder="Company Login"  class="form-control input-sm" value="<?= @$product_info->product_id ?>">
                             </div>
                         </div>
                         <div class="form-group row">

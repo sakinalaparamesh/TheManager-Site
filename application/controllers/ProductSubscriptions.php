@@ -73,5 +73,23 @@ class ProductSubscriptions extends BaseController {
         $this->breadcrumbs->push('Administration', 'administration');
         $this->layout->view('products/bill_config_form', $data);
     }
+    public function detailsView() {
+       $data['title'] = "Detail View";
+        //breadcrumbs
+        $this->breadcrumbs->push('Administration', 'administration');
+        $subsrc_id= $this->input->post('subsrc_id');
+        $data['sub_info']= $this->Model->check("tbl_mng_subscriptions",array("subscriptions_id"=>$subsrc_id))->row();
+        $this->load->view('products/subscription_details', $data); 
+    }
+    public function activeSubscription() {
+        $this->load->view('products/subscription_active'); 
+    }
+    
+    public function billing() {
+        $data['title'] = "Detail View";
+        //breadcrumbs
+        $this->breadcrumbs->push('Administration', 'administration');
+        $this->load->view('products/subscription_billing',$data); 
+    }
 
 }
