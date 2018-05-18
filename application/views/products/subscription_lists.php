@@ -112,6 +112,24 @@
         });//ajax
 
     }
+    function deactiveSubscription(subsrc_id) {
+        $.LoadingOverlay("show");
+        $('.modal-title').html('');
+        $('.modal-body').html('');
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('ProductSubscriptions/deactiveSubscription') ?>",
+            data: {"subsrc_id": subsrc_id},
+            success: function (response) { //alert(response);
+                $('.modal-title').html('Deactive Subscription');
+                $('.modal-body').html(response);
+                //document.getElementByClass("modal-body").html(response);
+                $('#CommonModal').modal({show: true});
+                $.LoadingOverlay("hide");
+            }
+        });//ajax
+
+    }
     function billing(subsrc_id) {
         $.LoadingOverlay("show");
         $('.modal-title').html('');

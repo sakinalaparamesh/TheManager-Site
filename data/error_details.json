@@ -396,5 +396,17 @@
         "ActionName": "saveSubscription",
         "ErrorCode": "1",
         "Message": "Successfully saved the subscription."
+    },
+    {
+        "controlname": "ProductSubscriptions",
+        "ActionName": "activateSubscription",
+        "ErrorCode": "1",
+        "Message": "Successfully activated the subscription."
+    },
+    {
+        "controlname": "ProductSubscriptions",
+        "ActionName": "deactivateSubscription",
+        "ErrorCode": "1",
+        "Message": "Successfully deactivated the subscription."
     }
 ]
