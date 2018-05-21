@@ -413,6 +413,18 @@
         "controlname": "ProductSubscriptions",
         "ActionName": "saveBillConfigDetails",
         "ErrorCode": "1",
-        "Message": "Successfully saved the billing."
+        "Message": "Successfully saved the billing details."
+    },
+    {
+        "controlname": "ProductSubscriptions",
+        "ActionName": "addSubscription",
+        "ErrorCode": "0",
+        "Message": "Subscription code generation issues occured.Please try again."
+    },
+    {
+        "controlname": "ProductSubscriptions",
+        "ActionName": "saveBillConfigDetails",
+        "ErrorCode": "2",
+        "Message": "Successfully updated the billing details."
     }
 ]

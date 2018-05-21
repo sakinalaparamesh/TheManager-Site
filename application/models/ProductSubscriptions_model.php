@@ -54,28 +54,48 @@ class ProductSubscriptions_model extends CI_Model {
     public function getSubscriptionDetails($sub_id) {
         $this->db->select("bl.*,ad.*,pd.productname,sb.subscriptions_id,sb.subscriptions_code,sb.subscriptions_company_name,sb.isactive");
         $this->db->from("tbl_mng_subscriptions as sb");
-        $this->db->join("tbl_mng_productmaster as pd", "pd.productid=sb.subscriptions_prd_id","left");
-        $this->db->join("tbl_mng_subscription_ad as ad", "ad.scrb_id=sb.subscriptions_id && ad.isactive='Y'","left");
-        $this->db->join("tbl_mng_subscription_billing as bl", "bl.bill_subscriptions_id=sb.subscriptions_id","left");
+        $this->db->join("tbl_mng_productmaster as pd", "pd.productid=sb.subscriptions_prd_id", "left");
+        $this->db->join("tbl_mng_subscription_ad as ad", "ad.scrb_id=sb.subscriptions_id && ad.isactive='Y'", "left");
+        $this->db->join("tbl_mng_subscription_billing as bl", "bl.bill_subscriptions_id=sb.subscriptions_id", "left");
         $this->db->where("sb.subscriptions_id", $sub_id);
         $query = $this->db->get();
         return $query;
     }
+
     public function saveSubscription($data) {
-        $this->Model->update("tbl_mng_subscriptions",array("subscriptions_id"=>$data["subscriptions_id"]),$data);
+        $this->Model->update("tbl_mng_subscriptions", array("subscriptions_id" => $data["subscriptions_id"]), $data);
         return 1;
     }
+
     public function activateSubscription($data) {
-        $this->Model->insert("tbl_mng_subscription_ad",$data);
+        $this->Model->insert("tbl_mng_subscription_ad", $data);
         return 1;
     }
+
     public function deactivateSubscription($data) {
-        $this->Model->update("tbl_mng_subscription_ad",array("scrb_id"=>$data['scrb_id'],"isactive"=>"Y"),$data);
+        $this->Model->update("tbl_mng_subscription_ad", array("scrb_id" => $data['scrb_id'], "isactive" => "Y"), $data);
         return 1;
     }
 
     public function saveBillConfigDetails($data) {
-        $this->Model->insert("tbl_mng_subscription_billing",$data);
+        $this->Model->insert("tbl_mng_subscription_billing", $data);
         return 1;
     }
+
+    public function addSubscription() {
+        $code = $this->Model->last_inserted_rec("tbl_mng_subscriptions", "subscriptions_id")->subscriptions_code;
+        $sub_code = ($code != "") ? genSubCode($code) : "AAAAA00001";
+        $sub_check = $this->Model->check("tbl_mng_subscriptions", array("subscriptions_code" => $sub_code))->num_rows();
+        if ($sub_check == 0) {
+            $this->Model->insert("tbl_mng_subscriptions", array("subscriptions_code" => $sub_code, "createdon" => date("Y-m-d H:is"), "createdby" => $this->session->userdata("UserInfo")['userid']));
+            return $this->db->insert_id();
+        }else{
+            return 0;
+        }
+    }
+    public function updateBillConfigDetails($info,$id) {
+        $this->Model->update("tbl_mng_subscription_billing",array("sub_billing_id"=>$id), $info);
+        return 2;
+    }
+
 }

@@ -49,12 +49,16 @@ class ProductSubscriptions extends BaseController {
         //breadcrumbs
         $this->breadcrumbs->push('Administration', 'Administration');
         $this->breadcrumbs->push('Add Subscription', 'Add Subscription');
-        $code = $this->Model->last_inserted_rec("tbl_mng_subscriptions", "subscriptions_id")->subscriptions_code;
-        $sub_code = ($code != "") ? genSubCode($code) : "AAAAA00001";
-        $this->Model->insert("tbl_mng_subscriptions", array("subscriptions_code" => $sub_code, "createdon" => date("Y-m-d H:is"), "createdby" => $this->session->userdata("UserInfo")['userid']));
-        $data['sub_id'] = $this->db->insert_id();
-        $data['Products'] = $this->Model->check("tbl_mng_productmaster", array("isactive" => 'Y'));
-        $this->layout->view('products/add_subscription', $data);
+
+        $data['sub_id'] = $this->ProductSubscriptions_model->addSubscription();
+        if ($data['sub_id'] != 0) {
+            $data['Products'] = $this->Model->check("tbl_mng_productmaster", array("isactive" => 'Y'));
+            $this->layout->view('products/add_subscription', $data);
+        } else {
+
+            $this->session->set_flashdata("message", getErrorMessages("ProductSubscriptions", "addSubscription", 0));
+            redirect("ProductSubscriptions");
+        }
     }
 
     public function saveSubscription() {
@@ -127,22 +131,24 @@ class ProductSubscriptions extends BaseController {
     public function billing() {
         $data['title'] = "Detail View";
         $data['subsrc_id'] = $this->input->post('subsrc_id');
-        $data['details']=$this->ProductSubscriptions_model->getSubscriptionDetails($data['subsrc_id'])->row();
-        
+        $data['details'] = $this->ProductSubscriptions_model->getSubscriptionDetails($data['subsrc_id'])->row();
+
         $this->load->view('products/subscription_billing', $data);
     }
 
     public function saveBillConfigDetails() {
-        $s_from= explode(",", $this->input->post("slab_from"));
-        $s_to= explode(",", $this->input->post("slab_to"));
-        $s_rate= explode(",", $this->input->post("slab_rate"));
-        $json_array=array();
-        foreach($s_from as $k=>$vals){
-            array_push($json_array, array("s_from"=>$s_from[$k],"s_to"=>$s_to[$k],"s_rate"=>$s_rate[$k]));
+        $billing_configid = $this->input->post("billing_configid");
+
+        $s_from = explode(",", $this->input->post("slab_from"));
+        $s_to = explode(",", $this->input->post("slab_to"));
+        $s_rate = explode(",", $this->input->post("slab_rate"));
+        $json_array = array();
+        foreach ($s_from as $k => $vals) {
+            array_push($json_array, array("s_from" => $s_from[$k], "s_to" => $s_to[$k], "s_rate" => $s_rate[$k]));
         }
-        
+
         $info = array(
-            "subscriptions_id" => $this->input->post("subscriptions_id"),
+            "bill_subscriptions_id" => $this->input->post("subscriptions_id"),
 //            "measuring_unit" => $this->input->post("measuring_unit"),
             "sub_billing_recurrign_duration" => $this->input->post("recurring_duration"),
             "sub_billing_type" => $this->input->post("billing_type"),
@@ -151,12 +157,20 @@ class ProductSubscriptions extends BaseController {
             "sub_billing_effective_from" => date("Y-m-d", strtotime($this->input->post("effective_from"))),
             "sub_billing_currency" => $this->input->post("billing_currency")
         );
-        $info["createdby"] = $this->session->userdata("UserInfo")['userid'];
-        $info["createdon"] = date("Y-m-d H:i:s");
-        $info["isactive"] = "Y";
-        $resdata['error_code'] = $this->ProductSubscriptions_model->saveBillConfigDetails($info);
+        
+        if ($billing_configid == "") {
+            $info["createdby"] = $this->session->userdata("UserInfo")['userid'];
+            $info["createdon"] = date("Y-m-d H:i:s");
+            $info["isactive"] = "Y";
+            $resdata['error_code'] = $this->ProductSubscriptions_model->saveBillConfigDetails($info);
+        } else {
+            $info["updatedby"] = $this->session->userdata("UserInfo")['userid'];
+            $info["updatedon"] = date("Y-m-d H:i:s");
+            $info["isactive"] = "Y";
+            $resdata['error_code'] = $this->ProductSubscriptions_model->updateBillConfigDetails($info,$billing_configid);
+        }
         $resdata['message'] = getErrorMessages("ProductSubscriptions", "saveBillConfigDetails", $resdata['error_code']);
-        $resdata['isError'] = $resdata['error_code'] > 1 ? "Y" : "N";
+        $resdata['isError'] = $resdata['error_code'] > 2 ? "Y" : "N";
         echo json_encode($resdata);
     }
 

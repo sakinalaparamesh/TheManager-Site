@@ -35,7 +35,7 @@ var subscriptionGridJS = (function () {
                 {"data": "subscriptions_code", "orderable": true},
                 {"data": "subscriptions_company_name", "orderable": true},
                 {"data": "productname", "orderable": true},
-                {
+             /*   {
                     mRender: function (data, type, row) {
                         var status = "";
                         if (row.isactive == 'Y') {
@@ -44,7 +44,7 @@ var subscriptionGridJS = (function () {
                             status = "<span class='text-warning'>In-active</span>"
                         }
                         return status;
-                    }, orderable: false},
+                    }, orderable: false},*/
             ],
             "fnRowCallback": function (nRow, aData, iDisplayIndex) {
                 //console.log("Hello");

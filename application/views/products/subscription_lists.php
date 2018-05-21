@@ -26,7 +26,7 @@
                                     <th data-priority="3">Subscription Code </th>
                                     <th data-priority="4">Company Name</th>
                                     <th data-priority="3">Product Name </th>
-                                    <th data-priority="5">Status</th>
+                                    <!--<th data-priority="5">Status</th>-->
 
                                 </tr>
                             </thead>

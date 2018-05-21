@@ -40,7 +40,7 @@
                     </div>
                 </div>-->
                 <div class="form-group row">
-                    <label for="recurring_duration" class="col-md-4">Billing Recurring Duration </label>
+                    <label for="recurring_duration" class="col-md-4">Billing Recurring Duration <span class="text-danger">*</span></label>
                     <div class="col-md-8">
                     <div class="radio form-check-inline">
                         <input type="radio" name="recurring_duration" id="recurring_duration_yearly" value="1" <?php if($details->sub_billing_recurrign_duration == 1){ echo 'checked'; } ?>>

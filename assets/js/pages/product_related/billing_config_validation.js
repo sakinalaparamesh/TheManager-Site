@@ -69,7 +69,7 @@ var billingConfigJS = (function () {
 
         var formData = new FormData();
 
-        formData.append('subscription_id', _subscription_id.val());
+        formData.append('subscriptions_id', _subscription_id.val());
         formData.append('billing_configid', _billing_configid.val());
         formData.append('company_name', _company_name.val());
         formData.append('measuring_unit', _measuring_unit.val());
