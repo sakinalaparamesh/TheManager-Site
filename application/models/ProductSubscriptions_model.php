@@ -52,9 +52,11 @@ class ProductSubscriptions_model extends CI_Model {
     }
 
     public function getSubscriptionDetails($sub_id) {
-        $this->db->select("pd.productname,sb.subscriptions_id,sb.subscriptions_code,sb.subscriptions_company_name,sb.isactive");
+        $this->db->select("bl.*,ad.*,pd.productname,sb.subscriptions_id,sb.subscriptions_code,sb.subscriptions_company_name,sb.isactive");
         $this->db->from("tbl_mng_subscriptions as sb");
-        $this->db->join("tbl_mng_productmaster as pd", "pd.productid=sb.subscriptions_prd_id");
+        $this->db->join("tbl_mng_productmaster as pd", "pd.productid=sb.subscriptions_prd_id","left");
+        $this->db->join("tbl_mng_subscription_ad as ad", "ad.scrb_id=sb.subscriptions_id && ad.isactive='Y'","left");
+        $this->db->join("tbl_mng_subscription_billing as bl", "bl.bill_subscriptions_id=sb.subscriptions_id","left");
         $this->db->where("sb.subscriptions_id", $sub_id);
         $query = $this->db->get();
         return $query;
@@ -72,4 +74,8 @@ class ProductSubscriptions_model extends CI_Model {
         return 1;
     }
 
+    public function saveBillConfigDetails($data) {
+        $this->Model->insert("tbl_mng_subscription_billing",$data);
+        return 1;
+    }
 }

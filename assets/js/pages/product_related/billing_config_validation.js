@@ -89,7 +89,7 @@ var billingConfigJS = (function () {
             // alert("hello" + validator.isValid());
             $.ajax({
                 type: "POST",
-                url: _Url + 'billing/saveBillConfigDetails',
+                url: _Url + 'ProductSubscriptions/saveBillConfigDetails',
                 processData: false,
                 contentType: false,
                 data: formData,
@@ -102,7 +102,7 @@ var billingConfigJS = (function () {
                             type: "success"
                         },
                                 function () {
-                                    window.location.href = _Url + 'CompanyInfo';
+                                    window.location.href = _Url + 'ProductSubscriptions';
                                 });
                     } else {
                         $.LoadingOverlay("hide");

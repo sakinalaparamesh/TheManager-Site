@@ -408,5 +408,11 @@
         "ActionName": "deactivateSubscription",
         "ErrorCode": "1",
         "Message": "Successfully deactivated the subscription."
+    },
+    {
+        "controlname": "ProductSubscriptions",
+        "ActionName": "saveBillConfigDetails",
+        "ErrorCode": "1",
+        "Message": "Successfully saved the billing."
     }
 ]

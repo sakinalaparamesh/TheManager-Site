@@ -64,23 +64,26 @@ class Clients_model extends CI_model {
 //                $data['contactId'] = $_POST['contactId'];
                 
                 if($data['contactId']){
-                    $this->db->select("CD.personname as PersonName,CD.designation as Designation,CD.mobilenumber as Mobile,CD.email as Email,C.clientname as ClientName,B.location as BranchName,B.address as BranchAddress, B.branchid as BranchId, CD.branchcontactid as ContactId");
+                    $this->db->select("CD.greetings,cm.configuration_name,CD.personname as PersonName,CD.designation as Designation,CD.mobilenumber as Mobile,CD.email as Email,C.clientname as ClientName,B.location as BranchName,B.address as BranchAddress, B.branchid as BranchId, CD.branchcontactid as ContactId");
                     $this->db->from("tbl_mng_clientmaster C");
+                    $this->db->join("tbl_mng_configuration_master cm","cm.configuration_id = C.client_type && cm.configuration_key='CLIENTTYPE'","LEFT");
                     $this->db->join("tbl_mng_clientbranchmaster B","B.clientid = C.clientid","LEFT");
                     $this->db->join("tbl_clientbranchcontactdetails CD","CD.clientbranchid = B.branchid","LEFT");
                     $this->db->where(array('CD.branchcontactid'=>$data['contactId']));
                     $query = $this->db->get();
                     return $query->result_array();
                 }else if($data['branchId']){
-                    $this->db->select("C.clientname as ClientName,B.location as BranchName,B.address as BranchAddress,B.email as Email");
+                    $this->db->select("cm.configuration_name,C.clientname as ClientName,B.location as BranchName,B.address as BranchAddress,B.email as Email");
                     $this->db->from("tbl_mng_clientmaster C");
                     $this->db->join("tbl_mng_clientbranchmaster B","B.clientid = C.clientid","LEFT");
+                    $this->db->join("tbl_mng_configuration_master cm","cm.configuration_id = C.client_type && cm.configuration_key='CLIENTTYPE'","LEFT");
                     $this->db->where(array('B.branchid'=>$data['branchId']));
                     $query = $this->db->get();
                     return $query->result_array();
                 }else{
-                    $this->db->select("C.clientname as ClientName");
+                    $this->db->select("C.clientname as ClientName,cm.configuration_name");
                     $this->db->from("tbl_mng_clientmaster C");
+                    $this->db->join("tbl_mng_configuration_master cm","cm.configuration_id = C.client_type && cm.configuration_key='CLIENTTYPE'","LEFT");
                     $this->db->where(array('C.clientid'=>$data['clientId']));
                     $query = $this->db->get();
                     return $query->result_array();

@@ -24,43 +24,39 @@
         <div class="col-md-12">
             <form role="form" id="billconfig_form">
                 
-                <input type="hidden" name="subscription_id" id="subscription_id"  value="<?= (isset($company_details['subscription_id'])) ? $company_details['subscription_id'] : "" ?>">
-                <input type="hidden" name="billing_configid" id="billing_configid"  value="<?php echo $config_info['billing_configid']; ?>">
+                <input type="hidden" name="scrb_id" id="subscription_id" value="<?= $subsrc_id ?>"/>
+                <input type="hidden" name="sub_billing_id" id="billing_configid"  value="<?php echo $details->sub_billing_id; ?>">
                 
                 <div class="form-group row">
                     <label for="company_name" class="col-md-4">Company Name<span class="text-danger">*</span></label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control input-sm" name="company_name" id="company_name" value="<?php echo $company_details['company_name']; ?>" placeholder="Company name" parsley-type="company_name"  readonly>
+                        <input type="text" class="form-control input-sm" name="company_name" id="company_name" value="<?php echo $details->subscriptions_company_name; ?>" placeholder="Company name" parsley-type="company_name"  readonly>
                     </div>
                 </div>
-                <div class="form-group row">
+<!--                <div class="form-group row">
                     <label for="measuring_unit" class="col-md-4">Measuring Unit<span class="text-danger">*</span></label>
                     <div class="col-md-8">
                         <input type="text" class="form-control input-sm" name="measuring_unit" id="measuring_unit" value="<?php echo $config_info['measuring_unit']; ?>" placeholder="Measuring unit" parsley-type="measuring_unit" readonly>
                     </div>
-                </div>
+                </div>-->
                 <div class="form-group row">
                     <label for="recurring_duration" class="col-md-4">Billing Recurring Duration </label>
                     <div class="col-md-8">
                     <div class="radio form-check-inline">
-                        <input type="radio" name="recurring_duration" id="recurring_duration_yearly" value="1" <?php if($config_info['recurring_duration'] == 1){ echo 'checked'; } ?>>
+                        <input type="radio" name="recurring_duration" id="recurring_duration_yearly" value="1" <?php if($details->sub_billing_recurrign_duration == 1){ echo 'checked'; } ?>>
                         <label for="recurring_duration_yearly"> Yearly</label>
                     </div>
                     <div class="radio form-check-inline">
-                        <input type="radio" name="recurring_duration" id="recurring_duration_monthly" value="2" <?php if($config_info['recurring_duration'] == 2){ echo 'checked'; } ?>>
+                        <input type="radio" name="recurring_duration" id="recurring_duration_monthly" value="2" <?php if($details->sub_billing_recurrign_duration == 2){ echo 'checked'; } ?>>
                         <label for="recurring_duration_monthly"> Monthly  </label>
                     </div>
                     </div>
                 </div> 
                 <div class="form-group row">
-                    <label for="" class="col-md-4 control-label lable-font"></label> 
-                    <div class="col-md-8">
-                         <div class="radio form-check-inline">
-                             <input type="radio" name="billing_type" id="billing_type_fixed" value="3" <?php if($config_info['billing_type'] == 3){ echo 'checked'; } ?>> <label>Fixed</label>
-                         </div>
-                         <div class="radio form-check-inline">
-                             <input type="radio" name="billing_type" id="billing_type_slab" value="4" <?php if($config_info['billing_type'] == 4){ echo 'checked'; } ?>> <label>Slab</label>
-                         </div>
+                    <label for="" class="col-md-3 control-label lable-font"></label> 
+                    <div class="col-md-5">
+                        <input type="radio" name="billing_type" id="billing_type_fixed" value="1" <?php if($details->sub_billing_type == 1){ echo 'checked'; } ?>> &nbsp; Fixed &nbsp;&nbsp;
+                        <input type="radio" name="billing_type" id="billing_type_slab" value="2" <?php if($details->sub_billing_type == 2){ echo 'checked'; }else{echo 'checked';} ?>> &nbsp;Slab
                     </div>
                 </div>
                 
@@ -68,9 +64,9 @@
                     <div class="form-group row">
                         <label for="fixed_bill_rate" class="col-md-4">Amount<span class="text-danger">*</span></label>
                         <div class="col-md-3">
-                            <input type="text" name="fixed_bill_rate" id="fixed_bill_rate" value="<?php echo $config_info['fixed_bill_rate']; ?>" placeholder="Enter Amount" class="form-control input-sm">
+                            <input type="text" name="fixed_bill_rate" id="fixed_bill_rate" value="<?php echo $details->sub_billing_amount; ?>" placeholder="Enter Amount" class="form-control input-sm">
                         </div>
-                        <div class="col-md-3">  /user/month</div>
+                        <div class="col-md-3">  /month</div>
                     </div>
                 </div>
                 
@@ -82,15 +78,17 @@
                         <div class="col-md-2 text-center">To</div>
                         <div class="col-md-3 text-center">Rate</div>
                         
-                        <?php if(count($slablist)>0){
+                        <?php 
+                        $slablist= json_decode($details->sub_billing_slabs,TRUE);
+                        if(count($slablist)>0){
                             $i=0;
                             foreach($slablist as $slb){ ?>
                             <div class="form-group row">
                                 <label class="col-md-3"></label>
                                 <div class="input col-md-9" >
-                                    <input class="col-md-2" type="text" name="slab_from[]" value="<?php echo $slb['slab_from']; ?>">
-                                    <span class="xyz"><input class="col-md-2" type="text" name="slab_to[]" value="<?php echo $slb['slab_to']; ?>"></span>
-                                    <span class="xyz"><input class="col-md-2" type="text" name="slab_rate[]" value="<?php echo $slb['slab_rate']; ?>"></span>
+                                    <input class="col-md-2" type="text" name="slab_from[]" value="<?php echo $slb['s_from']; ?>">
+                                    <span class="xyz"><input class="col-md-2" type="text" name="slab_to[]" value="<?php echo $slb['s_to']; ?>"></span>
+                                    <span class="xyz"><input class="col-md-2" type="text" name="slab_rate[]" value="<?php echo $slb['s_rate']; ?>"></span>
                                     <?php if($i == 0){ ?>
                                         <button class="add_field_button btn-success" style="margin-top:10px;">ADD</button>
                                     <?php }else{?>
@@ -126,13 +124,13 @@
                 <div class="form-group row">
                     <label for="effective_from" class="col-md-4">Effective from<span class="text-danger">*</span></label>
                     <div class="col-md-8">
-                        <input type="text" name="effective_from" id="effective_from" value="<?php echo $config_info['effective_from']; ?>" readonly="" placeholder="date" class="form-control input-sm">
+                        <input type="text" name="effective_from" id="effective_from" value="<?php echo date("Y-m-d", strtotime($details->sub_billing_effective_from)); ?>" placeholder="date" class="form-control input-sm">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="billing_currency" class="col-md-4">Billing Currency<span class="text-danger">*</span></label>
                     <div class="col-md-8">
-                        <input type="text" name="billing_currency" id="billing_currency" value="<?php echo $config_info['billing_currency']; ?>" readonly="" placeholder="Billing Currency" class="form-control input-sm">
+                        <input type="text" name="billing_currency" id="billing_currency" value="<?php echo $details->sub_billing_currency; ?>" placeholder="Billing Currency" class="form-control input-sm">
                     </div>
                 </div>
                 <div class="form-group row ">
@@ -192,7 +190,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         
-        <?php if($config_info['billing_type'] == 1){ ?>
+        <?php if($details->sub_billing_type == 1){ ?>
             $('#parent_form').show();
         <?php }else{ ?>
             $('#child_form').show();

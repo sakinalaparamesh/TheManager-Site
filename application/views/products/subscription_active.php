@@ -81,9 +81,9 @@
                         <button type="button" class="btn btn-default waves-effect waves-light btn-sm" id="btnSubmit">
                             SUBMIT
                         </button>
-                        <button type="reset" class="btn btn-inverse waves-effect m-l-5 btn-sm">
+<!--                        <button type="reset" class="btn btn-inverse waves-effect m-l-5 btn-sm">
                             CANCEL
-                        </button>
+                        </button>-->
                     </div>
                 </div>
             </form>
