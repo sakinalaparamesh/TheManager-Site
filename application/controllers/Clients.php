@@ -20,20 +20,21 @@ class Clients extends BaseController {
         //breadcrumbs
         $this->breadcrumbs->push('Administration', 'administration');
         $this->breadcrumbs->push('Clients', 'Clients');
-
+        $data['client_type'] = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "CLIENTTYPE"))->result();
         $this->layout->view('clients/clientsList', $data);
     }
 
     public function getAllClients() {
-
+//        echo "<pre>";
+//        print_r($this->input->post("columns")[3]["search"]["value"]);exit;
         $limit = $this->input->post('length');
         $start = $this->input->post('start');
         $order = $this->input->post('order')[0]['column'];
         $dir = $this->input->post('order')[0]['dir'];
         $search = $this->input->post('search')['value'];
         $search = (!empty($search)) ? $search : '';
-
-        $result = $this->clients_model->getAllClients($limit, $start, $search, $order, $dir);
+        $colum_s = $this->input->post("columns")[3]["search"]["value"];
+        $result = $this->clients_model->getAllClients($limit, $start, $search, $order, $dir,$colum_s);
         $totalFiltered = $totalData = $result['totalFiltered'];
         $data = $result['ResultData'];
         if (!empty($search))
@@ -47,7 +48,7 @@ class Clients extends BaseController {
             "limit" => $limit,
             "start" => $start,
         );
-
+//echo $this->db->last_query();
         echo json_encode($json_data);
     }
 

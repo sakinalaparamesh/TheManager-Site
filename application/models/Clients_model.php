@@ -3,19 +3,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Clients_model extends CI_model {
     
-    public function getAllClients($limit=10,$start=0,$search='',$order=null,$dir=null)
+    public function getAllClients($limit=10,$start=0,$search='',$order=null,$dir=null,$colum_s='')
     { 
         try{
                 $data = array();
                 $searchcols = "CONCAT(ifnull(CD.personname, ' '),' ',ifnull(C.clientname, ' '),' ',ifnull(B.location, ' '),' ',ifnull(CD.mobilenumber, ' '))";
-                $data['totalFiltered'] = $this->getAllClientsCount($search, $searchcols);
+                $data['totalFiltered'] = $this->getAllClientsCount($search, $searchcols,$colum_s);
                 //Filter records Data
                 //$this->db->select("C.clientid as clientid,CD.personname as PersonName,C.clientname as ClientName,B.location as BranchName,CD.mobilenumber as Mobile,DATE_FORMAT(C.createdon,'%d-%m-%Y') as CreatedOn,C.isactive as Status");
-                $this->db->select("C.clientid as ClientId,CD.personname as PersonName,C.clientname as ClientName,B.location as BranchName,CD.mobilenumber as Mobile, B.branchid as BranchId, CD.branchcontactid as ContactId");
+                $this->db->select("cm.configuration_name,C.clientid as ClientId,CD.personname as PersonName,C.clientname as ClientName,B.location as BranchName,CD.mobilenumber as Mobile, B.branchid as BranchId, CD.branchcontactid as ContactId");
                 $this->db->from("tbl_mng_clientmaster C");
+                $this->db->join("tbl_mng_configuration_master cm","cm.configuration_id = C.client_type && cm.configuration_key='CLIENTTYPE'","LEFT");
                 $this->db->join("tbl_mng_clientbranchmaster B","B.clientid = C.clientid","LEFT");
                 $this->db->join("tbl_clientbranchcontactdetails CD","CD.clientbranchid = B.branchid","LEFT");
                 $this->db->where(array('C.isactive'=>'Y'));
+                if($colum_s!=""){
+                    $this->db->where_in('cm.configuration_id',$colum_s,false);
+                }
                 //Search
                 if($search){
                     $this->db->like(array($searchcols => $search));
@@ -152,16 +156,19 @@ class Clients_model extends CI_model {
         }
         return $error_code;
     }
-    public function getAllClientsCount($search='', $searchcols='')
+    public function getAllClientsCount($search='', $searchcols='',$colum_s='')
     { 
         try{
                 //Filtered Records Count
                 $this->db->select("*");
                 $this->db->from("tbl_mng_clientmaster C");
+                $this->db->join("tbl_mng_configuration_master cm","cm.configuration_id = C.client_type && cm.configuration_key='CLIENTTYPE'","LEFT");
                 $this->db->join("tbl_mng_clientbranchmaster B","B.clientid = C.clientid","LEFT");
                 $this->db->join("tbl_clientbranchcontactdetails CD","CD.clientbranchid = B.branchid","LEFT");
                 $this->db->where(array('C.isactive'=>'Y'));
-                
+                if($colum_s!=""){
+                    $this->db->where_in('cm.configuration_id',$colum_s,false);
+                }
                 if($search){
                     $this->db->like(array($searchcols => $search));
                 }
