@@ -8,12 +8,15 @@ class EmailTemplatesModel extends CI_model {
         try {
             $data = array();
             $searchcols = "CONCAT(ifnull(T.template_title, ' '), ' ', ifnull(T.subject, ' '), ' ', ifnull(T.createdby, ' '), ' ', ifnull(T.createdon, ' '))";
+
             $data['totalFiltered'] = $this->getAllTemplatesCount($search, $searchcols);
             //Filter records Data
             //$this->db->select("T.clientid as clientid,CD.personname as PersonName,T.clientname as ClientName,B.location as BranchName,CD.mobilenumber as Mobile,DATE_FORMAT(T.createdon,'%d-%m-%Y') as CreatedOn,T.isactive as Status");
             $this->db->select("T.id,DATE_FORMAT(T.createdon, '%d-%m-%Y') as date,T.template_title,T.subject,T.createdby");
             $this->db->from("tbl_email_templates T");
             $this->db->where(array('T.isactive' => 'Y'));
+            $this->db->where("(T.email_status<=100&&T.createdby=" . $this->session->userdata()['UserInfo']['userid'] . ")||T.email_status>100");
+
             //Search
             if ($search) {
                 $this->db->like(array($searchcols => $search));
@@ -47,6 +50,7 @@ class EmailTemplatesModel extends CI_model {
             $this->db->select("T.id,T.template_id,T.template_title,T.subject,T.message,T.template_type,T.productids,T.isactive,T.createdby,T.createdon");
             $this->db->from("tbl_email_templates T");
             $this->db->where('id', $id);
+
             $query = $this->db->get();
             return $query->result_array();
         } catch (Exception $e) {
@@ -111,7 +115,7 @@ class EmailTemplatesModel extends CI_model {
             }
             $data['template_title'] = trim($data['template_title']);
             $data['template_id'] = $data['template_id'];
-
+            $data['email_status'] = 101;
             if ($id == 0) {
                 $this->db->select("1")->where(array('isactive' => 'Y', 'template_title' => $data['template_title']));
             } else {
@@ -163,7 +167,7 @@ class EmailTemplatesModel extends CI_model {
             $this->db->select("*");
             $this->db->from("tbl_email_templates T");
             $this->db->where(array('T.isactive' => 'Y'));
-
+            $this->db->where("(T.email_status<=100&&T.createdby=" . $this->session->userdata()['UserInfo']['userid'] . ")||T.email_status>100");
             if ($search) {
                 $this->db->like(array($searchcols => $search));
             }
@@ -185,6 +189,20 @@ class EmailTemplatesModel extends CI_model {
         } catch (Exception $e) {
             log_message('error', $e->getMessage());
             return "ERROR: " . $e->getMessage();
+        }
+    }
+
+    public function generateEmailUnique() {
+        $check = $this->Model->check("tbl_email_templates", array("email_status<=" => 100, "createdby" => $this->session->userdata()['UserInfo']['userid']));
+        if ($check->num_rows() > 0) {
+            $data['template_id'] = $check->row()->template_id;
+            $data['id'] = $check->row()->id;
+            return $data;
+        } else {
+            $data['template_id'] = uniqid();
+            $this->Model->insert("tbl_email_templates", array("template_id" => $data['template_id'], "createdby" => $this->session->userdata()['UserInfo']['userid'], "createdon" => date('Y-m-d H:i:s'), "email_status" => 100));
+            $data['id'] = $this->db->insert_id();
+            return $data;
         }
     }
 

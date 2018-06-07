@@ -426,5 +426,17 @@
         "ActionName": "saveBillConfigDetails",
         "ErrorCode": "2",
         "Message": "Successfully updated the billing details."
+    },
+    {
+        "controlname": "ProductSubscriptions",
+        "ActionName": "saveSubscription",
+        "ErrorCode": "2",
+        "Message": "Something went wrong please try again."
+    },
+    {
+        "controlname": "ProductSubscriptions",
+        "ActionName": "saveSubscription",
+        "ErrorCode": "3",
+        "Message": "Company is already exists."
     }
 ]

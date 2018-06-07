@@ -9,6 +9,7 @@ class EmailTemplates extends BaseController {
         parent::__construct();
         $this->load->model('emailTemplatesModel');
         $this->load->model('productModel');
+        error_reporting(0);
     }
 
     public function index() {
@@ -44,7 +45,6 @@ class EmailTemplates extends BaseController {
             "limit" => $limit,
             "start" => $start,
         );
-
         echo json_encode($json_data);
     }
 
@@ -66,13 +66,13 @@ class EmailTemplates extends BaseController {
             $content = fread($file, filesize($fpath));
             fclose($file);
             $data['details'][0]['message'] = $content;
-            $data['gallery'] = $this->Model->check("tbl_mng_template_images", array("email_template_id" =>$id))->result_array();
+            $data['gallery'] = $this->Model->check("tbl_mng_template_images", array("email_template_id" => $id))->result_array();
         } else {
-            $data['template_id'] = uniqid();
-            $this->Model->insert("tbl_email_templates", array("template_id" => $data['template_id'], "createdby" => $this->session->userdata()['UserInfo']['userid'], "createdon" => date('Y-m-d H:i:s')));
-            $data['id'] = $this->db->insert_id();
 
 
+            $d_info = $this->emailTemplatesModel->generateEmailUnique();
+            $data['template_id'] = $d_info['template_id'];
+            $data['id'] = $d_info['id'];
             $data['details'][] = array('id' => $data['id'], 'template_id' => $data['template_id'], 'template_title' => '', 'subject' => '', 'message' => '', 'template_type' => '', 'productids' => '', 'isactive' => 'Y');
         }
 

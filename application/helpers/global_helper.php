@@ -116,7 +116,7 @@ if (!function_exists('sendEmail')) {
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
 // More headers
-        $headers .= 'From: <noreply@provalley.net>' . "\r\n";
+        $headers .= 'From: <info@provalley.net>' . "\r\n";
         //$headers .= 'Cc: myboss@example.com' . "\r\n";
 
         if (mail($to, $subject, $message, $headers)) {
@@ -151,6 +151,25 @@ if (!function_exists('genSubCode')) {
         $letters = preg_replace('/[^a-zA-Z]/', '', $str);
         $new_code = strtoupper($letters) . sprintf('%05d', (intval($numbers) + 1));
         return $new_code;
+    }
+
+}
+if (!function_exists('curlExec')) {
+
+    function curlExec($path, $post= NULL, $headers = NULL) {
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $path);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+        if (!empty($headers)) {
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        }
+        $res = curl_exec($ch);
+        curl_close($ch);
+
+        return $res;
     }
 
 }

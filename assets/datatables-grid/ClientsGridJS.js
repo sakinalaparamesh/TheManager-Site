@@ -80,7 +80,7 @@
         });
 
         $('.selectpicker').on('change', function () {
-            alert($(this).val());
+//            alert($(this).val());
             dt.columns([3])
                     .search($(this).val())
                     .draw();

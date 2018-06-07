@@ -50,7 +50,10 @@ class ProductSubscriptions extends BaseController {
         $this->breadcrumbs->push('Administration', 'Administration');
         $this->breadcrumbs->push('Add Subscription', 'Add Subscription');
 
-        $data['sub_id'] = $this->ProductSubscriptions_model->addSubscription();
+        $res_data= $this->ProductSubscriptions_model->addSubscription();
+        $data['sub_id'] =$res_data['sub_id'];
+        $data['sub_code'] =$res_data['sub_code'];
+        $data['dc_id'] = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "DC_ID"))->row();
         if ($data['sub_id'] != 0) {
             $data['Products'] = $this->Model->check("tbl_mng_productmaster", array("isactive" => 'Y'));
             $this->layout->view('products/add_subscription', $data);
@@ -63,9 +66,9 @@ class ProductSubscriptions extends BaseController {
 
     public function saveSubscription() {
         $data = $this->input->post();
-        $data["updatedby"] = $this->session->userdata("UserInfo")['userid'];
-        $data["updatedon"] = date("Y-m-d H:is");
-
+//        $data["updatedby"] = $this->session->userdata("UserInfo")['userid'];
+//        $data["updatedon"] = date("Y-m-d H:is");
+//        $data["filled_status"] = 101;
         $resdata['error_code'] = $this->ProductSubscriptions_model->saveSubscription($data);
         $resdata['message'] = getErrorMessages("ProductSubscriptions", "saveSubscription", $resdata['error_code']);
         $resdata['isError'] = $resdata['error_code'] > 1 ? "Y" : "N";
@@ -157,7 +160,7 @@ class ProductSubscriptions extends BaseController {
             "sub_billing_effective_from" => date("Y-m-d", strtotime($this->input->post("effective_from"))),
             "sub_billing_currency" => $this->input->post("billing_currency")
         );
-        
+
         if ($billing_configid == "") {
             $info["createdby"] = $this->session->userdata("UserInfo")['userid'];
             $info["createdon"] = date("Y-m-d H:i:s");
@@ -167,11 +170,15 @@ class ProductSubscriptions extends BaseController {
             $info["updatedby"] = $this->session->userdata("UserInfo")['userid'];
             $info["updatedon"] = date("Y-m-d H:i:s");
             $info["isactive"] = "Y";
-            $resdata['error_code'] = $this->ProductSubscriptions_model->updateBillConfigDetails($info,$billing_configid);
+            $resdata['error_code'] = $this->ProductSubscriptions_model->updateBillConfigDetails($info, $billing_configid);
         }
         $resdata['message'] = getErrorMessages("ProductSubscriptions", "saveBillConfigDetails", $resdata['error_code']);
         $resdata['isError'] = $resdata['error_code'] > 2 ? "Y" : "N";
         echo json_encode($resdata);
+    }
+    public function getCompanies() {
+        $result = $this->ProductSubscriptions_model->getCompanies()->result();
+        echo json_encode($result);
     }
 
 }

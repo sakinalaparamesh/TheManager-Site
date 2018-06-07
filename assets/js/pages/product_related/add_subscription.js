@@ -124,8 +124,14 @@ var subscription = (function () {
                             message: 'The Email  is not valid'
                         }
                     }
+                },
+                subscriptions_cmp_pc_pphone:{
+                    validators: {
+                        notEmpty: {
+                            message: 'The person phone number is required and cannot be empty'
+                        }
+                    }
                 }
-
             }
         });//bootstrapValidator
     }
