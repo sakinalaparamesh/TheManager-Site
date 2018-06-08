@@ -66,12 +66,15 @@ class ProductSubscriptions_model extends CI_Model {
     }
 
     public function saveSubscription($data) {
-        $check_data = array(
-            "company_name" => $data["subscriptions_company_name"],
+        $name_check_data = array(
+            "company_name" => $data["subscriptions_company_name"]
+        );
+        $em_check_data = array(
             "companies_email" => $data["subscriptions_cmp_email"]
         );
-        $check_res = $this->Model->check("tbl_mng_subscriptions_companies", $check_data);
-        if ($check_res->num_rows() > 0) {
+        $comp_check_res = $this->Model->check("tbl_mng_subscriptions_companies", $name_check_data);
+        $em_check_res = $this->Model->check("tbl_mng_subscriptions_companies", $em_check_data);
+        if ($comp_check_res->num_rows() == 0 && $em_check_res->num_rows() == 0) {
             $this->db->trans_begin();
             $subsciption_data = array(
 //            "subscriptions_code" => $data['subscriptions_code'],
@@ -124,9 +127,9 @@ class ProductSubscriptions_model extends CI_Model {
                 switch ($data['subscriptions_prd_id']) {
                     case $dc_id: $base_url = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "DC_URL"))->row()->configuration_name;
                         $head_data = array(
-                            "DigiCoAuth-Token" => $dc_key,
-                            "DigiCoAuthKey" => "TheManagerWebSite",
-                            "DigiCentralUserId" => null,
+                            'DigiCoAuth-Token:' . $dc_key,
+                            'DigiCoAuthKey:TheManagerWebSite',
+                            'DigiCentralUserId:1'
                         );
                         $post_data = array(
                             "ComapnyName" => $data["subscriptions_company_name"],
@@ -148,23 +151,30 @@ class ProductSubscriptions_model extends CI_Model {
                         );
                         $base_url .= "api/DGC_CompanySub/SaveCompany";
                         $response = curlExec($base_url, $post_data, $head_data);
-                        if ($response["errorCode"] != 0) {
-                            $error_data = array(
-                                "subscription_id" => $data["subscriptions_id"],
-                                "subscriptions_failures_created_on" => date("Y-m-d H:i:s")
+                        $filter = json_decode($response, TRUE);
+                        if ($filter["errorCode"] == 0) {
+                            $update_data = array(
+                                "subscriptions_central_code" => $filter['managerSubscriptionId'],
+                                "subscriptions_thirdcode" => $filter['managerSubscriptionCode']
                             );
-                            $this->Model->insert("tbl_mng_subscriptions_failures", $error_data);
+                            $this->Model->update("tbl_mng_subscriptions", array("subscriptions_id" => $data["subscriptions_id"]), $update_data);
+                        } else {
+                            $error_data = array(
+                                "subscriptions_third_failure_status" => 102,
+                                "updatedon" => date("Y-m-d H:i:s")
+                            );
+                            $this->Model->update("tbl_mng_subscriptions", array("subscriptions_id" => $data["subscriptions_id"]), $error_data);
                         }
                         break;
                     case $rems_id:$base_url = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "REMS_URL"))->row()->configuration_name;
                         $post_data = array(
-                            "subscription_code" => $data["subscriptions_code"],
+                            "mng_subscription_code" => $data["subscriptions_code"],
                             "company_name" => $data["subscriptions_company_name"],
                             "address" => $data["subscriptions_cmp_address"],
                             "registration_number" => $data["subscriptions_reg_number"],
                             "title" => $data["company_title"],
                             "cmp_type" => 1,
-                            "cmp_parent_id" => NULL,
+                            "cmp_parent_id" => "NULL",
                             "subscription_status" => 1,
                             "subscription_central_code" => $data["subscriptions_id"],
                             "subscription_created_by_name" => $this->session->userdata("UserInfo")['user_name'],
@@ -176,17 +186,28 @@ class ProductSubscriptions_model extends CI_Model {
                             "spoc_phone" => $data["subscriptions_cmp_pc_pphone"],
                             "created_by" => $this->session->userdata("UserInfo")['userid'],
                             "created_on" => date("Y-m-d H:i:s"),
-                            "subscriptions_created_by" => 1,
+                            "subscription_created_by" => 1,
                             "X-API-KEY" => $rems_key
                         );
-                        $response = curlExec($base_url, $post_data);
-                        if ($response["errorCode"] != 0) {
-                            $error_data = array(
-                                "subscription_id" => $data["subscriptions_id"],
-                                "subscriptions_failures_created_on" => date("Y-m-d H:i:s")
+
+                        $base_url .= "company/companyRegistration";
+                        $response = curlExec($base_url, $post_data, array());
+                        $filter = json_decode($response, TRUE);
+
+                        if ($filter["error_code"] == 0) {
+                            $update_data = array(
+                                "subscriptions_central_code" => $filter['rems_subscription_id'],
+                                "subscriptions_thirdcode" => $filter['rems_subscription_code']
                             );
-                            $this->Model->insert("tbl_mng_subscriptions_failures", $error_data);
+                            $this->Model->update("tbl_mng_subscriptions", array("subscriptions_id" => $data["subscriptions_id"]), $update_data);
+                        } else {
+                            $error_data = array(
+                                "subscriptions_third_failure_status" => 101,
+                                "updatedon" => date("Y-m-d H:i:s")
+                            );
+                            $this->Model->update("tbl_mng_subscriptions", array("subscriptions_id" => $data["subscriptions_id"]), $error_data);
                         }
+
                         break;
                 }
                 return 1;
@@ -212,7 +233,7 @@ class ProductSubscriptions_model extends CI_Model {
     }
 
     public function addSubscription() {
-        $sql="select * from tbl_mng_subscriptions where subscriptions_created_by='1' order by subscriptions_id desc limit 1";
+        $sql = "select * from tbl_mng_subscriptions order by subscriptions_id desc limit 1";
         $code = $this->db->query($sql)->row()->subscriptions_code;
         $sub_code = ($code != "") ? genSubCode($code) : "AAAAA00001";
         $sub_check = $this->Model->check("tbl_mng_subscriptions", array("subscriptions_code" => $sub_code))->num_rows();

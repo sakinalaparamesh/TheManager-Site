@@ -30,7 +30,7 @@
                         <div class="form-group row">
                             <label for="company_title" class="col-md-2">Title<span class="text-danger"></span></label>
                             <div class="col-md-4">
-                                <select id="company_title" class="form-control input-sm" name="company_title" required="">
+                                <select id="company_title" class="form-control input-sm" name="company_title">
                                     <option value="">select title</option>
                                     <option value="Mr">Mr</option>
                                     <option value="Ms">Ms</option>

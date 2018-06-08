@@ -156,16 +156,14 @@ if (!function_exists('genSubCode')) {
 }
 if (!function_exists('curlExec')) {
 
-    function curlExec($path, $post= NULL, $headers = NULL) {
+    function curlExec($path, $post = NULL, $headers = NULL) {
 
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, $path);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-        if (!empty($headers)) {
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        }
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         $res = curl_exec($ch);
         curl_close($ch);
 
