@@ -54,9 +54,10 @@ class ProductSubscriptions_model extends CI_Model {
     }
 
     public function getSubscriptionDetails($sub_id) {
-        $this->db->select("bl.*,ad.*,pd.productname,sb.subscriptions_id,sb.subscriptions_code,cm.company_name as subscriptions_company_name,sb.isactive");
+        $this->db->select("bl.*,ad.*,poc.*,pd.productname,sb.subscriptions_id,sb.subscriptions_status,sb.subscriptions_code,cm.company_name as subscriptions_company_name,sb.isactive");
         $this->db->from("tbl_mng_subscriptions as sb");
         $this->db->join("tbl_mng_productmaster as pd", "pd.productid=sb.subscriptions_prd_id", "left");
+        $this->db->join("tbl_mng_subscriptions_poc as poc", "poc.subscription_id=sb.subscriptions_id", "left");
         $this->db->join("tbl_mng_subscriptions_companies as cm", "cm.subscription_id=sb.subscriptions_id");
         $this->db->join("tbl_mng_subscription_ad as ad", "ad.scrb_id=sb.subscriptions_id && ad.isactive='Y'", "left");
         $this->db->join("tbl_mng_subscription_billing as bl", "bl.bill_subscriptions_id=sb.subscriptions_id", "left");
@@ -120,6 +121,10 @@ class ProductSubscriptions_model extends CI_Model {
                 return 2;
             } else {
                 $this->db->trans_commit();
+                $permission = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "API_FLAG"))->row()->configuration_name;
+                if ($permission == 0) {
+                    return 1;
+                }
                 $dc_id = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "DC_ID"))->row()->configuration_name;
                 $rems_id = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "REMS_ID"))->row()->configuration_name;
                 $dc_key = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "DC_KEY"))->row()->configuration_name;
@@ -218,8 +223,50 @@ class ProductSubscriptions_model extends CI_Model {
     }
 
     public function activateSubscription($data) {
-        $this->Model->insert("tbl_mng_subscription_ad", $data);
-        return 1;
+//        $check_point = $this->Model->check("tbl_mng_subscription_ad", array("scrb_id" => $data["scrb_id"]));
+        $subscriptions_status = $data["subscriptions_status"];
+        unset($data["subscriptions_status"]);
+        $this->db->trans_begin();
+        $this->Model->update("tbl_mng_subscriptions", array("subscriptions_id" => $data['scrb_id']), array("subscriptions_status" => $subscriptions_status));
+        $this->Model->update("tbl_mng_subscription_ad", array("scrb_id" => $data['scrb_id']), array("isactive" => "N"));
+        switch ($subscriptions_status) {
+            case "2":
+//                    $data['scrb_act_date'] = date("Y-m-d", strtotime($data['scrb_act_date']));
+                $data['scrb_act_or_de_paid_on'] = date("Y-m-d", strtotime($data['scrb_act_or_de_paid_on']));
+                $data["createdby"] = $this->session->userdata("UserInfo")['userid'];
+                $data["createdon"] = date("Y-m-d H:i:s");
+                $data["isactive"] = "Y";
+                $this->Model->insert("tbl_mng_subscription_ad", $data);
+                break;
+            case "3":
+                $data["createdby"] = $this->session->userdata("UserInfo")['userid'];
+                $data["createdon"] = date("Y-m-d H:i:s");
+                $data["isactive"] = "Y";
+                $this->Model->insert("tbl_mng_subscription_ad", $data);
+
+                break;
+            case "4":
+                $data["createdby"] = $this->session->userdata("UserInfo")['userid'];
+                $data["createdon"] = date("Y-m-d H:i:s");
+                $data["isactive"] = "Y";
+                $this->Model->insert("tbl_mng_subscription_ad", $data);
+
+                break;
+            case "5":
+                $data["createdby"] = $this->session->userdata("UserInfo")['userid'];
+                $data["createdon"] = date("Y-m-d H:i:s");
+                $data["isactive"] = "Y";
+                $this->Model->insert("tbl_mng_subscription_ad", $data);
+
+                break;
+        }
+        if ($this->db->trans_status() === FALSE) {
+            $this->db->trans_rollback();
+            return 2;
+        } else {
+            $this->db->trans_commit();
+            return 1;
+        }
     }
 
     public function deactivateSubscription($data) {
@@ -263,6 +310,22 @@ class ProductSubscriptions_model extends CI_Model {
     public function getCompanies() {
         $sql = "select * from tbl_mng_subscriptions_companies where subscriptions_cmp_innertype='1'";
         return $this->db->query($sql);
+    }
+    public function billingConfigSubscriptionUpdate($data) {
+        
+        if($data["billing_address_id"]==""){
+            unset($data["billing_address_id"]);
+            $data["isactive"]="Y";
+            $data["created_by"]=$this->session->userdata("UserInfo")['userid'];
+            $data["created_on"]=date("Y-m-d H:i:s");
+            $this->Model->insert("tbl_mng_subscription_billing_address",$data);
+        }else{
+            $data["isactive"]="Y";
+            $data["updated_by"]=$this->session->userdata("UserInfo")['userid'];
+            $data["updated_on"]=date("Y-m-d H:i:s");
+           $this->Model->update("tbl_mng_subscription_billing_address",array("billing_address_id"=>$data["billing_address_id"]),$data); 
+        }
+        return 1;
     }
 
 }

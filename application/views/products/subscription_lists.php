@@ -103,7 +103,7 @@
             url: "<?php echo base_url('ProductSubscriptions/activeSubscription') ?>",
             data: {"subsrc_id": subsrc_id},
             success: function (response) { //alert(response);
-                $('.modal-title').html('Active Subscription');
+                $('.modal-title').html('Subscription Status');
                 $('.modal-body').html(response);
                 //document.getElementByClass("modal-body").html(response);
                 $('#CommonModal').modal({show: true});
@@ -111,6 +111,40 @@
             }
         });//ajax
 
+    }
+    function billingAddressDetails(subsrc_id) {
+        $.LoadingOverlay("show");
+        $('.modal-title').html('');
+        $('.modal-body').html('');
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('ProductSubscriptions/billingAddressDetails') ?>",
+            data: {"subsrc_id": subsrc_id},
+            success: function (response) { //alert(response);
+                $('.modal-title').html('Billing Address Details');
+                $('.modal-body').html(response);
+                //document.getElementByClass("modal-body").html(response);
+                $('#CommonModal').modal({show: true});
+                $.LoadingOverlay("hide");
+            }
+        });//ajax
+    }
+    function pocDetails(subsrc_id) {
+        $.LoadingOverlay("show");
+        $('.modal-title').html('');
+        $('.modal-body').html('');
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('ProductSubscriptions/pocDetails') ?>",
+            data: {"subsrc_id": subsrc_id},
+            success: function (response) { //alert(response);
+                $('.modal-title').html('POC Details');
+                $('.modal-body').html(response);
+                //document.getElementByClass("modal-body").html(response);
+                $('#CommonModal').modal({show: true});
+                $.LoadingOverlay("hide");
+            }
+        });//ajax
     }
     function deactiveSubscription(subsrc_id) {
         $.LoadingOverlay("show");

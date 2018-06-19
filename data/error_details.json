@@ -438,5 +438,23 @@
         "ActionName": "saveSubscription",
         "ErrorCode": "3",
         "Message": "Company is already exists."
+    },
+    {
+        "controlname": "ProductSubscriptions",
+        "ActionName": "activateSubscription",
+        "ErrorCode": "2",
+        "Message": "Something went wrong please try again."
+    },
+    {
+        "controlname": "ProductSubscriptions",
+        "ActionName": "pocSubscriptionUpdate",
+        "ErrorCode": "1",
+        "Message": "POC details are successfully updated."
+    },
+    {
+        "controlname": "ProductSubscriptions",
+        "ActionName": "billingConfigSubscriptionUpdate",
+        "ErrorCode": "1",
+        "Message": "Billing details are successfully saved."
     }
 ]

@@ -50,9 +50,9 @@ class ProductSubscriptions extends BaseController {
         $this->breadcrumbs->push('Administration', 'Administration');
         $this->breadcrumbs->push('Add Subscription', 'Add Subscription');
 
-        $res_data= $this->ProductSubscriptions_model->addSubscription();
-        $data['sub_id'] =$res_data['sub_id'];
-        $data['sub_code'] =$res_data['sub_code'];
+        $res_data = $this->ProductSubscriptions_model->addSubscription();
+        $data['sub_id'] = $res_data['sub_id'];
+        $data['sub_code'] = $res_data['sub_code'];
         $data['dc_id'] = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "DC_ID"))->row();
         if ($data['sub_id'] != 0) {
             $data['Products'] = $this->Model->check("tbl_mng_productmaster", array("isactive" => 'Y'));
@@ -93,19 +93,15 @@ class ProductSubscriptions extends BaseController {
 
     public function activeSubscription() {
         $data['subsrc_id'] = $this->input->post('subsrc_id');
-        $data['company'] = $this->ProductSubscriptions_model->getSubscriptionDetails($data['subsrc_id'])->row()->subscriptions_company_name;
+        $data['company'] = $this->ProductSubscriptions_model->getSubscriptionDetails($data['subsrc_id'])->row();
         $this->load->view('products/subscription_active', $data);
     }
 
     public function activateSubscription() {
         $data = $this->input->post();
         unset($data['subscriptions_company_name']);
-        $data['scrb_act_or_de_state'] = 1;
-        $data['scrb_act_date'] = date("Y-m-d", strtotime($data['scrb_act_date']));
-        $data['scrb_act_or_de_paid_on'] = date("Y-m-d", strtotime($data['scrb_act_or_de_paid_on']));
-        $data["createdby"] = $this->session->userdata("UserInfo")['userid'];
-        $data["createdon"] = date("Y-m-d H:i:s");
-        $data["isactive"] = "Y";
+//        $data['scrb_act_or_de_state'] = 1;
+
         $resdata['error_code'] = $this->ProductSubscriptions_model->activateSubscription($data);
         $resdata['message'] = getErrorMessages("ProductSubscriptions", "activateSubscription", $resdata['error_code']);
         $resdata['isError'] = $resdata['error_code'] > 1 ? "Y" : "N";
@@ -176,9 +172,43 @@ class ProductSubscriptions extends BaseController {
         $resdata['isError'] = $resdata['error_code'] > 2 ? "Y" : "N";
         echo json_encode($resdata);
     }
+
     public function getCompanies() {
         $result = $this->ProductSubscriptions_model->getCompanies()->result();
         echo json_encode($result);
+    }
+
+    public function pocDetails() {
+        $data['title'] = "POC Detail";
+        $data['subsrc_id'] = $this->input->post('subsrc_id');
+        $data['details'] = $this->ProductSubscriptions_model->getSubscriptionDetails($data['subsrc_id'])->row();
+
+        $this->load->view('products/subscription_poc', $data);
+    }
+
+    public function pocSubscriptionUpdate() {
+        $data = $this->input->post();
+        $this->Model->update("tbl_mng_subscriptions_poc", array("poc_id" => $data["poc_id"]), $data);
+        $resdata['error_code'] = 1;
+        $resdata['message'] = getErrorMessages("ProductSubscriptions", "pocSubscriptionUpdate", $resdata['error_code']);
+        $resdata['isError'] = $resdata['error_code'] > 1 ? "Y" : "N";
+        echo json_encode($resdata);
+    }
+
+    public function billingAddressDetails() {
+        $data['title'] = "POC Detail";
+        $data['subsrc_id'] = $this->input->post('subsrc_id');
+        $data['details'] = $this->Model->check("tbl_mng_subscription_billing_address", array("subscription_id" => $data['subsrc_id'], "isactive" => "Y"))->row();
+        $data["currency_codes"] = $this->Model->check("tbl_currency_codes", array("isactive" => "Y"))->result();
+        $this->load->view('products/billing_addr_details', $data);
+    }
+
+    public function billingConfigSubscriptionUpdate() {
+        $data = $this->input->post();
+        $resdata['error_code'] = $this->ProductSubscriptions_model->billingConfigSubscriptionUpdate($data);
+        $resdata['message'] = getErrorMessages("ProductSubscriptions", "billingConfigSubscriptionUpdate", $resdata['error_code']);
+        $resdata['isError'] = $resdata['error_code'] > 1 ? "Y" : "N";
+        echo json_encode($resdata);
     }
 
 }
