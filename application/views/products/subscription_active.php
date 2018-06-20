@@ -8,21 +8,22 @@
     <div class="col-md-7">
         <select id="subscriptions_status_drop" class="form-control input-sm" name="subscriptions_status_drop">
             <option value="0">Please select status</option>
-            <?php if($company->subscriptions_status<2){ ?>
-            <option value="2">Paid Amount</option>
-            <?php }if($company->subscriptions_status<3){ ?>
-            <option value="3">Ready For Use</option>
-            <?php }if($company->subscriptions_status<4){ ?>
-            <option value="4">Active</option>
+            <?php if ($company->subscriptions_status < 2) { ?>
+                <option value="2">Paid Amount</option>
+            <?php }if ($company->subscriptions_status < 3) { ?>
+                <option value="3">Ready For Use</option>
+            <?php }if ($company->subscriptions_status < 4) { ?>
+                <option value="4">Active</option>
             <?php } ?>
             <option value="5">DeActive</option>
         </select>
     </div>
 </div>
-<div class="card-box">
-    <div class="row">
-        <div class="col-md-12">
-            <div id="act_2" style="display:none">
+
+<div id="act_2" style="display:none">
+    <div class="card-box">
+        <div class="row">
+            <div class="col-md-12">
                 <form role="form" id="frmsubscription2">
                     <input type="hidden" name="scrb_id" value="<?= $subsrc_id ?>"/>
                     <input type="hidden" name="subscriptions_status" value="2"/>
@@ -106,7 +107,13 @@
                     </div>
                 </form>
             </div>
-            <div id="act_3" style="display:none">
+        </div>
+    </div>
+</div>
+<div id="act_3" style="display:none">
+    <div class="card-box">
+        <div class="row">
+            <div class="col-md-12">
                 <form role="form" id="frmsubscription3">
                     <input type="hidden" name="scrb_id" value="<?= $subsrc_id ?>"/>
                     <input type="hidden" name="subscriptions_status" value="3"/>
@@ -134,7 +141,13 @@
                     </div>
                 </form>
             </div>
-            <div id="act_4" style="display:none">
+        </div>
+    </div>
+</div>
+<div id="act_4" style="display:none">
+    <div class="card-box">
+        <div class="row">
+            <div class="col-md-12">
                 <form role="form" id="frmsubscription4">
                     <input type="hidden" name="scrb_id" value="<?= $subsrc_id ?>"/>
                     <input type="hidden" name="subscriptions_status" value="4"/>
@@ -155,7 +168,13 @@
                     </div>
                 </form>
             </div>
-            <div id="act_5" style="display:none">
+        </div>
+    </div>
+</div>
+<div id="act_5" style="display:none">
+    <div class="card-box">
+        <div class="row">
+            <div class="col-md-12">
                 <form role="form" id="frmsubscription5">
                     <input type="hidden" name="scrb_id" value="<?= $subsrc_id ?>"/>
                     <input type="hidden" name="subscriptions_status" value="5"/>
@@ -182,11 +201,11 @@
 <script type="text/javascript">
     $(document).ready(function () {
         var _baseUrl = '<?php echo base_url(); ?>';
-//        var todaysDate = new Date();
+        //        var todaysDate = new Date();
         $('.datepicker_common').datepicker({
             autoclose: true,
             format: 'mm/dd/yyyy',
-//            endDate: todaysDate,
+            //            endDate: todaysDate,
             todayBtn: "linked",
             todayHighlight: true
         });

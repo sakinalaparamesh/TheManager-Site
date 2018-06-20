@@ -44,7 +44,7 @@
         <!-- end page title end breadcrumb -->
         <!--Common Modal -->
         <div class="modal fade content-wrapper modal-right" id="CommonModal" role="dialog">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">

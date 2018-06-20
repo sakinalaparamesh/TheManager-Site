@@ -172,6 +172,9 @@ class ProductSubscriptions_model extends CI_Model {
                         }
                         break;
                     case $rems_id:$base_url = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "REMS_URL"))->row()->configuration_name;
+                        $head_data = array(
+                            'X-API-KEY:' . $rems_key
+                        );
                         $post_data = array(
                             "mng_subscription_code" => $data["subscriptions_code"],
                             "company_name" => $data["subscriptions_company_name"],
@@ -191,12 +194,11 @@ class ProductSubscriptions_model extends CI_Model {
                             "spoc_phone" => $data["subscriptions_cmp_pc_pphone"],
                             "created_by" => $this->session->userdata("UserInfo")['userid'],
                             "created_on" => date("Y-m-d H:i:s"),
-                            "subscription_created_by" => 1,
-                            "X-API-KEY" => $rems_key
+                            "subscription_created_by" => 1
                         );
 
                         $base_url .= "company/companyRegistration";
-                        $response = curlExec($base_url, $post_data, array());
+                        $response = curlExec($base_url, $post_data, $head_data);
                         $filter = json_decode($response, TRUE);
 
                         if ($filter["error_code"] == 0) {
@@ -311,19 +313,20 @@ class ProductSubscriptions_model extends CI_Model {
         $sql = "select * from tbl_mng_subscriptions_companies where subscriptions_cmp_innertype='1'";
         return $this->db->query($sql);
     }
+
     public function billingConfigSubscriptionUpdate($data) {
-        
-        if($data["billing_address_id"]==""){
+
+        if ($data["billing_address_id"] == "") {
             unset($data["billing_address_id"]);
-            $data["isactive"]="Y";
-            $data["created_by"]=$this->session->userdata("UserInfo")['userid'];
-            $data["created_on"]=date("Y-m-d H:i:s");
-            $this->Model->insert("tbl_mng_subscription_billing_address",$data);
-        }else{
-            $data["isactive"]="Y";
-            $data["updated_by"]=$this->session->userdata("UserInfo")['userid'];
-            $data["updated_on"]=date("Y-m-d H:i:s");
-           $this->Model->update("tbl_mng_subscription_billing_address",array("billing_address_id"=>$data["billing_address_id"]),$data); 
+            $data["isactive"] = "Y";
+            $data["created_by"] = $this->session->userdata("UserInfo")['userid'];
+            $data["created_on"] = date("Y-m-d H:i:s");
+            $this->Model->insert("tbl_mng_subscription_billing_address", $data);
+        } else {
+            $data["isactive"] = "Y";
+            $data["updated_by"] = $this->session->userdata("UserInfo")['userid'];
+            $data["updated_on"] = date("Y-m-d H:i:s");
+            $this->Model->update("tbl_mng_subscription_billing_address", array("billing_address_id" => $data["billing_address_id"]), $data);
         }
         return 1;
     }
