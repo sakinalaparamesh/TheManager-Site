@@ -34,9 +34,9 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="scrb_act_date" class="col-md-5">Date of activation<span class="text-danger">*</span></label>
+                        <label for="scrb_act_or_de_pay_by" class="col-md-5">Paid By<span class="text-danger">*</span></label>
                         <div class="col-md-7">
-                            <input id="scrb_act_date" name="scrb_act_date" type="text" placeholder="Date of activation" required="" class="form-control input-sm datepicker_common" value="<?= @$product_info->scrb_act_date ?>">
+                            <input id="scrb_act_or_de_pay_by" name="scrb_act_or_de_pay_by" type="text" placeholder="Paid By" required="" class="form-control input-sm" value="<?= @$product_info->scrb_act_or_de_pay_by ?>">
                         </div>
                     </div>
 

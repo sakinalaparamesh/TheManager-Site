@@ -233,33 +233,34 @@ class ProductSubscriptions_model extends CI_Model {
         $this->Model->update("tbl_mng_subscription_ad", array("scrb_id" => $data['scrb_id']), array("isactive" => "N"));
         switch ($subscriptions_status) {
             case "2":
-//                    $data['scrb_act_date'] = date("Y-m-d", strtotime($data['scrb_act_date']));
+                $data['scrb_act_date'] = date("Y-m-d", strtotime($data['scrb_act_date']));
                 $data['scrb_act_or_de_paid_on'] = date("Y-m-d", strtotime($data['scrb_act_or_de_paid_on']));
                 $data["createdby"] = $this->session->userdata("UserInfo")['userid'];
                 $data["createdon"] = date("Y-m-d H:i:s");
                 $data["isactive"] = "Y";
                 $this->Model->insert("tbl_mng_subscription_ad", $data);
+                $this->callTirdpartyStateUpdate($data);
                 break;
             case "3":
                 $data["createdby"] = $this->session->userdata("UserInfo")['userid'];
                 $data["createdon"] = date("Y-m-d H:i:s");
                 $data["isactive"] = "Y";
                 $this->Model->insert("tbl_mng_subscription_ad", $data);
-
+                $this->callTirdpartyStateUpdate($data);
                 break;
             case "4":
                 $data["createdby"] = $this->session->userdata("UserInfo")['userid'];
                 $data["createdon"] = date("Y-m-d H:i:s");
                 $data["isactive"] = "Y";
                 $this->Model->insert("tbl_mng_subscription_ad", $data);
-
+                $this->callTirdpartyStateUpdate($data);
                 break;
             case "5":
                 $data["createdby"] = $this->session->userdata("UserInfo")['userid'];
                 $data["createdon"] = date("Y-m-d H:i:s");
                 $data["isactive"] = "Y";
                 $this->Model->insert("tbl_mng_subscription_ad", $data);
-
+                $this->callTirdpartyStateUpdate($data);
                 break;
         }
         if ($this->db->trans_status() === FALSE) {
@@ -328,7 +329,111 @@ class ProductSubscriptions_model extends CI_Model {
             $data["updated_on"] = date("Y-m-d H:i:s");
             $this->Model->update("tbl_mng_subscription_billing_address", array("billing_address_id" => $data["billing_address_id"]), $data);
         }
+        //-------------start third party---------------------->
+        $dc_id = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "DC_ID"))->row()->configuration_name;
+        $rems_id = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "REMS_ID"))->row()->configuration_name;
+//        $dc_key = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "DC_KEY"))->row()->configuration_name;
+        $rems_key = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "REMS_KEY"))->row()->configuration_name;
+        $subscriptions_details = $this->Model->check("tbl_mng_subscriptions", array("subscriptions_id" => $data["subscription_id"]))->row();
+        $company_id = $this->Model->check("tbl_mng_subscriptions_companies", array("subscription_id" => $data["subscription_id"]))->row()->companies_id;
+        switch ($subscriptions_details->subscriptions_prd_id) {
+            case $dc_id:
+                break;
+            case $rems_id:
+                $base_url = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "REMS_URL"))->row()->configuration_name;
+                $head_data = array(
+                    'X-API-KEY:' . $rems_key
+                );
+                $post_data = array(
+                    "subscription_id" => $data["subscription_id"],
+                    "company_id" => $company_id,
+                    "name" => $data["billing_address_contact_person"],
+                    "email" => $data["billing_address_contact_person_email"],
+                    "phone" => $data["billing_address_contact_person_mobile"],
+                    "address" => $data["billing_address"],
+                    "effective_from" => date("Y-m-d H:i:s"),
+                    "created_by" => $this->session->userdata("UserInfo")['userid'],
+                    "created_on" => date("Y-m-d H:i:s")
+                );
+
+                $base_url .= "company/saveBillingAddress";
+                $response = curlExec($base_url, $post_data, $head_data);
+                $filter = json_decode($response, TRUE);
+
+                if ($filter["error_code"] == 0) {
+                    
+                } else {
+                    
+                }
+
+                break;
+        }
+//-------------end third party---------------------->
         return 1;
+    }
+
+    public function callTirdpartyStateUpdate($data) {
+        $dc_id = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "DC_ID"))->row()->configuration_name;
+        $rems_id = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "REMS_ID"))->row()->configuration_name;
+//        $dc_key = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "DC_KEY"))->row()->configuration_name;
+        $rems_key = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "REMS_KEY"))->row()->configuration_name;
+        $subscriptions_details = $this->Model->check("tbl_mng_subscriptions", array("subscriptions_id" => $data["scrb_id"]))->row();
+        $company_id = $this->Model->check("tbl_mng_subscriptions_companies", array("subscription_id" => $data["scrb_id"]))->row()->companies_id;
+        switch ($subscriptions_details->subscriptions_prd_id) {
+            case $dc_id:
+                break;
+            case $rems_id:$base_url = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "REMS_URL"))->row()->configuration_name;
+                $head_data = array(
+                    'X-API-KEY:' . $rems_key
+                );
+                if ($subscriptions_details->subscriptions_status == "2") {
+                    $post_data = array(
+                        "subscription_id" => $data["scrb_id"],
+                        "company_id" => $company_id,
+                        "status_id" => $subscriptions_details->subscriptions_status,
+                        "paid_amount" => $data["scrb_act_or_de_paid_amt"],
+                        "action_taken_by" => $data["scrb_act_or_de_pay_by"],
+                        "payment_received_by" => $data["scrb_act_or_de_pay_received_by"],
+                        "received_on" => $data["scrb_act_or_de_paid_on"],
+                        "mode_of_payment" => $data["scrb_act_or_de_paymethod"],
+                        "bank_name" => $data["scrb_bank_name"],
+                        "cheque_number" => $data["scrb_cheque_no"],
+                        "online_reference_number" => $data["scrb_act_or_de_trn_ref_num"],
+                        "status_comments" => $data["scrb_act_or_de_comments"],
+                        "created_by" => $this->session->userdata("UserInfo")['userid'],
+                        "created_on" => date("Y-m-d H:i:s")
+                    );
+                } else {
+                    $post_data = array(
+                        "subscription_id" => $data["scrb_id"],
+                        "company_id" => $company_id,
+                        "status_id" => $subscriptions_details->subscriptions_status,
+                        "paid_amount" => "",
+                        "action_taken_by" => "",
+                        "payment_received_by" => "",
+                        "received_on" => "",
+                        "mode_of_payment" => "",
+                        "bank_name" => "",
+                        "cheque_number" => "",
+                        "online_reference_number" => "",
+                        "status_comments" => $data["scrb_act_or_de_comments"],
+                        "created_by" => $this->session->userdata("UserInfo")['userid'],
+                        "created_on" => date("Y-m-d H:i:s")
+                    );
+                }
+                $base_url .= "company/saveSubscriptionStatus";
+                $response = curlExec($base_url, $post_data, $head_data);
+                $filter = json_decode($response, TRUE);
+
+                if ($filter["error_code"] == 0) {
+                    
+                } else {
+                    
+                }
+
+                break;
+        }
+        return true;
     }
 
 }

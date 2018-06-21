@@ -175,10 +175,10 @@ var subscription = (function () {
                 validating: 'glyphicon glyphicon-refresh'
             },
             fields: {
-                scrb_act_date: {
+                scrb_act_or_de_pay_by: {
                     validators: {
                         notEmpty: {
-                            message: 'The Date of activation is required and cannot be empty'
+                            message: 'The paid by is required and cannot be empty'
                         }
                     }
                 },

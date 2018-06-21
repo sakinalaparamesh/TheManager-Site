@@ -189,6 +189,44 @@ class ProductSubscriptions extends BaseController {
     public function pocSubscriptionUpdate() {
         $data = $this->input->post();
         $this->Model->update("tbl_mng_subscriptions_poc", array("poc_id" => $data["poc_id"]), $data);
+//-------------start third party---------------------->
+        $dc_id = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "DC_ID"))->row()->configuration_name;
+        $rems_id = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "REMS_ID"))->row()->configuration_name;
+//        $dc_key = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "DC_KEY"))->row()->configuration_name;
+        $rems_key = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "REMS_KEY"))->row()->configuration_name;
+        $subscriptions_details = $this->Model->check("tbl_mng_subscriptions", array("subscriptions_id" => $data["subscription_id"]))->row();
+        $company_id = $this->Model->check("tbl_mng_subscriptions_companies", array("subscription_id" => $data["subscription_id"]))->row()->companies_id;
+        switch ($subscriptions_details->subscriptions_prd_id) {
+            case $dc_id:
+                break;
+            case $rems_id:
+                $base_url = $this->Model->check("tbl_mng_configuration_master", array("configuration_key" => "REMS_URL"))->row()->configuration_name;
+                $head_data = array(
+                    'X-API-KEY:' . $rems_key
+                );
+                $post_data = array(
+                    "subscription_id" => $data["subscription_id"],
+                    "company_id" => $company_id,
+                    "spoc_name" => $data["poc_name"],
+                    "spoc_email" => $data["poc_email"],
+                    "spoc_phone" => $data["poc_phone"],
+                    "created_by" => $this->session->userdata("UserInfo")['userid'],
+                    "created_on" => date("Y-m-d H:i:s")
+                );
+
+                $base_url .= "company/savePocDetails";
+                $response = curlExec($base_url, $post_data, $head_data);
+                $filter = json_decode($response, TRUE);
+
+                if ($filter["error_code"] == 0) {
+                    
+                } else {
+                    
+                }
+
+                break;
+        }
+//-------------end third party---------------------->
         $resdata['error_code'] = 1;
         $resdata['message'] = getErrorMessages("ProductSubscriptions", "pocSubscriptionUpdate", $resdata['error_code']);
         $resdata['isError'] = $resdata['error_code'] > 1 ? "Y" : "N";
@@ -196,7 +234,7 @@ class ProductSubscriptions extends BaseController {
     }
 
     public function billingAddressDetails() {
-        $data['title'] = "POC Detail";
+        $data['title'] = "Billing Address Detail";
         $data['subsrc_id'] = $this->input->post('subsrc_id');
         $data['details'] = $this->Model->check("tbl_mng_subscription_billing_address", array("subscription_id" => $data['subsrc_id'], "isactive" => "Y"))->row();
         $data["currency_codes"] = $this->Model->check("tbl_currency_codes", array("isactive" => "Y"))->result();

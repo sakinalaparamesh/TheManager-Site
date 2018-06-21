@@ -45,7 +45,7 @@
                         <input type="text" name="billing_address_currency_display" parsley-type="name" class="form-control input-sm" id="billing_address_currency_display" placeholder="Billing Currency Display" value="<?= @$details->billing_address_currency_display ?>">
                     </div>
                 </div>
-                <div class="form-group row">
+                <div class="form-group row" style="display: none">
                     <label for="" class="col-md-5 control-label lable-font">Billing Cycle <span class="text-danger">*</span></label> 
                     <div class="col-md-4">
                         <input type="radio" name="billing_address_billingcycle" value="1"  checked> &nbsp; Yearly &nbsp;&nbsp;
